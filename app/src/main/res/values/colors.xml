@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="baise">#FFF</color>
+    <color name="zhuse">#5576E2</color>
+    <color name="zhuse_ziti">#6A6A6A</color>
+
+    <color name="name_se">#333333</color>
+    <!--listview分割线-->
+    <color name="fengouxian">#F2F2F2</color>
+    <color name="fengouxian1">#FFD7D4D4</color>
+</resources>

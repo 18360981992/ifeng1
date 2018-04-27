@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.HomePageActivity"
+    android:background="@color/baise">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@color/zhuse"
+        >
+        <TextView
+            android:id="@+id/homepage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="存管系统"
+            android:textSize="@dimen/x15"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
+        
+        <ImageView
+            android:id="@+id/homepage_xiaoxi"
+            android:layout_width="@dimen/x13"
+            android:layout_height="@dimen/x15"
+            android:background="@drawable/lingdang"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginRight="@dimen/x8"
+            />
+        
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/homepage_FrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9">
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="@color/fengouxian1"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        >
+
+        <LinearLayout
+            android:id="@+id/shouye"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+            <ImageView
+                android:id="@+id/shouyeImg"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/shouyeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="首页"
+                android:textColor="@color/zhuse"
+                android:textSize="@dimen/x10"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/x4"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/jianding"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+            <ImageView
+                android:id="@+id/jiandingImg"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/jiandingName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="托管预约"
+                android:textColor="@color/zhuse_ziti"
+                android:textSize="@dimen/x10"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/x4"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/zhengji"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+            <ImageView
+                android:id="@+id/zhengjiImg"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/zhengjiName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="征集"
+                android:textColor="@color/zhuse_ziti"
+                android:textSize="@dimen/x10"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/x4"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/baoku"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+            <ImageView
+                android:id="@+id/baokuImg"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"/>
+
+            <TextView
+                android:id="@+id/baokuName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="宝库浏览器"
+                android:textColor="@color/zhuse_ziti"
+                android:textSize="@dimen/x10"
+                android:layout_marginTop="@dimen/x4"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wode"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="bottom"
+            >
+            <ImageView
+                android:id="@+id/wodeImg"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/wodeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="个人中心"
+                android:textColor="@color/zhuse_ziti"
+                android:textSize="@dimen/x10"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/x4"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+    
+
+</LinearLayout>

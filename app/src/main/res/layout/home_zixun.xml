@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/home_zixun_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/x4"
+        android:background="@color/baise">
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/x3"
+            android:layout_height="@dimen/x16"
+            android:background="@color/zhuse"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_centerVertical="true"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资讯"
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x15"
+            android:layout_marginLeft="@dimen/x8"
+            android:layout_toRightOf="@id/view"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x16"
+            android:background="@mipmap/ic_launcher"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x8"
+             />
+    </RelativeLayout>
+
+    <com.ifeng_tech.treasuryyitong.view.MyListView
+        android:id="@+id/home_zixun_MyListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></com.ifeng_tech.treasuryyitong.view.MyListView>
+</LinearLayout>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/home_zixun_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="标题"
+        android:textSize="@dimen/x12"
+        android:layout_marginTop="@dimen/x2"
+        android:layout_marginLeft="@dimen/x8"
+        />
+    <TextView
+        android:id="@+id/home_zixun_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="内容"
+        android:textSize="@dimen/x12"
+        android:layout_marginTop="@dimen/x2"
+        android:layout_marginLeft="@dimen/x8"/>
+    <TextView
+        android:id="@+id/home_zixun_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="时间"
+        android:textSize="@dimen/x10"
+        android:gravity="end"
+        android:layout_marginTop="@dimen/x2"
+        android:layout_marginRight="@dimen/x8"
+      />
+
+</LinearLayout>
