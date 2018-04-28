@@ -8,6 +8,7 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.fragmet.LoginFragment;
+import com.ifeng_tech.treasuryyitong.fragmet.RegisterFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 
 /**
@@ -38,33 +39,19 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity,MyPresenter<Log
         login_deng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                login_deng.setTextColor(getResources().getColor(R.color.name_se));
+                login_zhuce.setTextColor(getResources().getColor(R.color.zhuse_ziti));
                 getSupportFragmentManager().beginTransaction().replace(R.id.login_framelayout,new LoginFragment()).commit();
             }
         });
         login_zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                login_deng.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+                login_zhuce.setTextColor(getResources().getColor(R.color.name_se));
+                getSupportFragmentManager().beginTransaction().replace(R.id.login_framelayout,new RegisterFragment()).commit();
             }
         });
-
-
-
-//        final SlideUnlockView slideUnlockView = (SlideUnlockView) findViewById(R.id.slideUnlockView);
-//
-//        slideUnlockView.setOnUnLockListener(new SlideUnlockView.OnUnLockListener(){
-//
-//            @Override
-//            public void setUnLocked(boolean lock) {
-//                if(lock){
-//                    MyUtils.setToast("解锁成功");
-//                    slideUnlockView.setVisibility(View.GONE);
-//                }else{
-//                    MyUtils.setToast("解锁失败");
-//                }
-//            }
-//        });
 
 
     }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Process;
+import android.util.DisplayMetrics;
 
 import com.ifeng_tech.treasuryyitong.utils.CrashHandler;
 
@@ -19,6 +20,19 @@ public class DashApplication extends Application {
     public static boolean isLoginSuccess;//是否已经登录的状态
     private static DashApplication instance;
 
+    /**
+     * 屏幕宽度
+     */
+    public static int screenWidth;
+    /**
+     * 屏幕高度
+     */
+    public static int screenHeight;
+    /**
+     * 屏幕密度
+     */
+    public static float screenDensity;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,6 +44,8 @@ public class DashApplication extends Application {
         //主线程的id
         mainId = Process.myTid();
         CrashHandler.getInstance().init(getApplicationContext());
+
+        initScreenSize();
 
     }
 
@@ -61,5 +77,18 @@ public class DashApplication extends Application {
      */
     public static int getMainThreadId() {
         return mainId;
+    }
+
+
+
+    private void initScreenSize() {
+        DisplayMetrics curMetrics = getApplicationContext().getResources().getDisplayMetrics();
+
+        DisplayMetrics metrics = new DisplayMetrics();
+        // 取得窗口属性
+//        getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        screenWidth = curMetrics.widthPixels;
+        screenHeight = curMetrics.heightPixels;
+        screenDensity = curMetrics.density;
     }
 }

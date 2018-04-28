@@ -4,16 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="@dimen/x280"
-        android:layout_height="@dimen/x150"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        >
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/x280"
+            android:layout_height="@dimen/x30"
             android:background="@drawable/login_kuang"
+            android:layout_gravity="center"
             >
            <TextView
                android:layout_width="wrap_content"
@@ -40,6 +35,22 @@
                 android:textColor="#F89"
                 android:visibility="gone"/>
         </LinearLayout>
-    </LinearLayout>
+
+
+    <com.qdong.slide_to_unlock_view.CustomSlideToUnlockView
+        xmlns:chuck="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slide_to_unlock"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x40"
+        chuck:viewBackgroundResId="@drawable/huadong_bg"
+        chuck:slideImageViewWidth="@dimen/x20"
+        chuck:slideImageViewResId="@drawable/jiantou"
+        chuck:slideImageViewResIdAfter="@mipmap/xiao"
+        chuck:slideThreshold="0.85"
+        chuck:textSize="6"
+        chuck:textHint="滑动解锁"
+        chuck:textColorResId="@color/baise"
+        android:layout_margin="@dimen/x20"
+        ></com.qdong.slide_to_unlock_view.CustomSlideToUnlockView>
 
 </LinearLayout>

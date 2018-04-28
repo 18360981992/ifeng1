@@ -115,4 +115,11 @@ public class HomeFragmet extends Fragment {
     private void initView(View view) {
         shouye_RecyclerView = (RecyclerView) view.findViewById(R.id.shouye_RecyclerView);
     }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+
+    }
 }

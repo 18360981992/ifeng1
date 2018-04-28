@@ -1,6 +1,8 @@
 package com.ifeng_tech.treasuryyitong.adapter;
 
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
@@ -62,6 +64,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position)==0){
@@ -81,6 +84,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
                     MyUtils.setToast("=="+position);
                 }
             });
+
 
         }else if(getItemViewType(position)==1){  // 导航
             GridView home_gridView = ((HomeDaoHang) holder).home_gridView;

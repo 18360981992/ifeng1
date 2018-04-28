@@ -6,6 +6,8 @@
 
     <color name="baise">#FFF</color>
     <color name="hongse">#F00</color>
+    <color name="lvse">#00ff00</color>
+    <color name="touming">#00000000</color>
 
     <color name="zhuse">#5576E2</color>
     <color name="zhuse_ziti">#6A6A6A</color>
