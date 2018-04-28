@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
@@ -16,6 +17,7 @@ import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.TreasuryFragmet;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
@@ -44,7 +46,8 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     CollectFragmet collectFragmet = new CollectFragmet(); // 征集
     AuthenticateFragmet authenticateFragmet = new AuthenticateFragmet();  // 宝库
     MyFragmet myFragmet = new MyFragmet();  // 我的
-    private ImageView homepage_xiaoxi;
+    private RelativeLayout homepage_xiaoxi;
+    private View homepage_xiaoxi_dian;
 
     @Override
     public MyPresenter<HomePageActivity> initPresenter() {
@@ -77,6 +80,13 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 .hide(authenticateFragmet)
                 .hide(myFragmet)
                 .commit();
+
+        HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
+            @Override
+            public void hearbeatChuan(int num) {
+                homepage_xiaoxi_dian.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
@@ -224,6 +234,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         wodeImg = (ImageView) findViewById(R.id.wodeImg);
         wodeName = (TextView) findViewById(R.id.wodeName);
         wode = (LinearLayout) findViewById(R.id.wode);
-        homepage_xiaoxi = (ImageView) findViewById(R.id.homepage_xiaoxi);
+        homepage_xiaoxi = (RelativeLayout) findViewById(R.id.homepage_xiaoxi);
+        homepage_xiaoxi_dian = findViewById(R.id.homepage_xiaoxi_dian);
     }
 }

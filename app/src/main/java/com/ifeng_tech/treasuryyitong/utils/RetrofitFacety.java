@@ -1,7 +1,5 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
-import android.util.Log;
-
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.service.SearchApi;
 

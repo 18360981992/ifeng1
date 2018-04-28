@@ -119,6 +119,14 @@ public class HomeAdapter extends RecyclerView.Adapter{
                     MyUtils.setToast("点击了资讯。。。");
                 }
             });
+
+            home_zixun_myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    MyUtils.setToast("点击了资讯条目=="+position);
+                }
+            });
+
         }
     }
 

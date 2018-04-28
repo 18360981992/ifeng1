@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 import java.util.List;
 
@@ -34,11 +35,18 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
     }
 
     @Override
-    public void onBindViewHolder(HomeZhengJi holder, int position) {
+    public void onBindViewHolder(HomeZhengJi holder, final int position) {
         holder.home_zhengji_img.setImageResource(collectlist.get(position).getImg());
         holder.home_daohang_name.setText(collectlist.get(position).getName());
         holder.home_zhengji_title.setText(collectlist.get(position).getTitle());
         holder.home_zhengji_text.setText(collectlist.get(position).getText());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtils.setToast("点击条目==="+position);
+            }
+        });
 
     }
 

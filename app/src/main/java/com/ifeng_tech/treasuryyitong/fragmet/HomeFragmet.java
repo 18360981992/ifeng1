@@ -45,6 +45,7 @@ public class HomeFragmet extends Fragment {
         activity = (HomePageActivity) getActivity();
 
         shouye_RecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL,false));
+
         return view;
     }
 

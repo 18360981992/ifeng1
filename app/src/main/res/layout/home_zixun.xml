@@ -29,9 +29,9 @@
             />
 
         <ImageView
-            android:layout_width="@dimen/x10"
-            android:layout_height="@dimen/x16"
-            android:background="@mipmap/ic_launcher"
+            android:layout_width="@dimen/x8"
+            android:layout_height="@dimen/x12"
+            android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x8"

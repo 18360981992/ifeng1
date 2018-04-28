@@ -23,17 +23,29 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="@dimen/x8"
             android:layout_centerHorizontal="true"/>
-        
-        <ImageView
+        <RelativeLayout
             android:id="@+id/homepage_xiaoxi"
-            android:layout_width="@dimen/x13"
-            android:layout_height="@dimen/x15"
-            android:background="@drawable/lingdang"
+            android:layout_width="@dimen/x15"
+            android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/x8"
-            android:layout_marginRight="@dimen/x8"
-            />
+            android:layout_marginRight="@dimen/x8">
+            <ImageView
+                android:layout_width="@dimen/x13"
+                android:layout_height="@dimen/x15"
+                android:background="@drawable/lingdang"
+                />
+            <View
+                android:id="@+id/homepage_xiaoxi_dian"
+                android:layout_width="@dimen/x5"
+                android:layout_height="@dimen/x5"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/xiaoxi_dian"
+                />
+
+        </RelativeLayout>
+
         
     </RelativeLayout>
 
