@@ -3,14 +3,13 @@ package com.ifeng_tech.treasuryyitong.adapter;
 import android.content.Context;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -20,7 +19,6 @@ import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.List;
@@ -87,16 +85,18 @@ public class HomeAdapter extends RecyclerView.Adapter{
 
 
         }else if(getItemViewType(position)==1){  // 导航
-            GridView home_gridView = ((HomeDaoHang) holder).home_gridView;
+            RecyclerView home_gridView = ((HomeDaoHang) holder).home_gridView;
             final List<FirstGpsBean> gpslist = (List<FirstGpsBean>) list.get(position);
-            home_gridView.setAdapter(new HomeGPSAdapter(context,gpslist));
-            home_gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            home_gridView.setLayoutManager(new GridLayoutManager(context,5));
+            HomeGPSAdapter homeGPSAdapter = new HomeGPSAdapter(context, gpslist);
+
+            home_gridView.setAdapter(homeGPSAdapter);
+            homeGPSAdapter.setGpsAdapterJieKou(new HomeGPSAdapter.GPSAdapterJieKou() {
                 @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    MyUtils.setToast(gpslist.get(position).getName());
+                public void gpsChuan(int i) {
+                    MyUtils.setToast(gpslist.get(i).getName());
                 }
             });
-
 
         }else if(getItemViewType(position)==2){  // 征集
             RecyclerView home_zhengji_recyclerView = ((HomeZhengJi) holder).home_zhengji_recyclerView;
@@ -113,24 +113,27 @@ public class HomeAdapter extends RecyclerView.Adapter{
 
 
         }else{  // 资讯
-            MyListView home_zixun_myListView = ((HomeZiXun) holder).home_zixun_myListView;
+            RecyclerView home_zixun_myListView = ((HomeZiXun) holder).home_zixun_myListView;
             RelativeLayout home_zixun_relativeLayout = ((HomeZiXun) holder).home_zixun_relativeLayout;
             List<InformationBean> informationlist = (List<InformationBean>) list.get(position);
-            home_zixun_myListView.setAdapter(new HomeInformationAdapter(context,informationlist));
+            home_zixun_myListView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
+
+            HomeInformationAdapter homeInformationAdapter = new HomeInformationAdapter(context, informationlist);
+            home_zixun_myListView.setAdapter(homeInformationAdapter);
+
+            homeInformationAdapter.setZiXunAdapterJieKou(new HomeInformationAdapter.ZiXunAdapterJieKou() {
+                @Override
+                public void ZiXunChuan(int i) {
+                    MyUtils.setToast("点击了资讯条目=="+i);
+                }
+            });
+
             home_zixun_relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     MyUtils.setToast("点击了资讯。。。");
                 }
             });
-
-            home_zixun_myListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    MyUtils.setToast("点击了资讯条目=="+position);
-                }
-            });
-
         }
     }
 
@@ -172,7 +175,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
     // 首页导航
     class HomeDaoHang extends RecyclerView.ViewHolder{
 
-        public GridView home_gridView;
+        public RecyclerView home_gridView;
 
         public HomeDaoHang(View itemView) {
             super(itemView);
@@ -205,7 +208,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
     // 首页资讯
     class  HomeZiXun extends RecyclerView.ViewHolder{
 
-        public MyListView home_zixun_myListView;
+        public RecyclerView home_zixun_myListView;
         public RelativeLayout home_zixun_relativeLayout;
 
         public HomeZiXun(View itemView) {

@@ -38,9 +38,10 @@
              />
     </RelativeLayout>
 
-    <com.ifeng_tech.treasuryyitong.view.MyListView
+
+    <android.support.v7.widget.RecyclerView
         android:id="@+id/home_zixun_MyListView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        ></com.ifeng_tech.treasuryyitong.view.MyListView>
+        android:layout_height="match_parent"
+        ></android.support.v7.widget.RecyclerView>
 </LinearLayout>

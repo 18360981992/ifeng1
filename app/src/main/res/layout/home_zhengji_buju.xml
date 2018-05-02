@@ -4,7 +4,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginLeft="@dimen/x8"
-    android:background="@color/baise">
+    android:background="@drawable/item_bg"
+    >
 
    <ImageView
        android:id="@+id/home_zhengji_img"
