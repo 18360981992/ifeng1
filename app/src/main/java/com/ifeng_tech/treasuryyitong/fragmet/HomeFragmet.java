@@ -23,6 +23,9 @@ import java.util.List;
 
 /**
  * Created by zzt on 2018/4/27.
+ *
+ *  首页
+ *
  */
 
 public class HomeFragmet extends Fragment {
@@ -39,7 +42,7 @@ public class HomeFragmet extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.homefragmet, container, false);
+        View view = inflater.inflate(R.layout.home_fragmet, container, false);
         initView(view);
         initData();
         activity = (HomePageActivity) getActivity();
@@ -54,7 +57,7 @@ public class HomeFragmet extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        shouye_RecyclerView.setAdapter(new HomeAdapter(getActivity(),list));
+        shouye_RecyclerView.setAdapter(new HomeAdapter(activity,list));
     }
 
     // 仿数据
@@ -75,37 +78,33 @@ public class HomeFragmet extends Fragment {
 
         imgs = Arrays.asList(IMAGES);
         // 导航图
-        gpslist.add(new FirstGpsBean(R.drawable.zhuce,"注册"));
-        gpslist.add(new FirstGpsBean(R.drawable.cangpin,"藏品目录"));
-        gpslist.add(new FirstGpsBean(R.drawable.zixun,"资讯"));
-        gpslist.add(new FirstGpsBean(R.drawable.changchu,"智能仓储"));
-        gpslist.add(new FirstGpsBean(R.drawable.shimingrenzheng,"实名认证"));
+        gpslist.add(new FirstGpsBean(R.drawable.saoyisao,"扫一扫"));
+        gpslist.add(new FirstGpsBean(R.drawable.shouhuo,"收货"));
+        gpslist.add(new FirstGpsBean(R.drawable.zhuanzeng,"转赠"));
+        gpslist.add(new FirstGpsBean(R.drawable.jianding,"鉴定"));
 
         // 征集
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20"));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20"));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20"));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20"));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20"));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",R.drawable.dengdai));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",R.drawable.dengdai));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",R.drawable.dengdai));
 
         // 托管
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02"));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02"));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02"));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02"));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02"));
+        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",R.drawable.dengdai));
+        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",R.drawable.dengdai));
+        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",R.drawable.dengdai));
+
+
 
         // 资讯
-        informationlist.add(new InformationBean("文章标题","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
-        informationlist.add(new InformationBean("文章标题","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
-        informationlist.add(new InformationBean("文章标题","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
-        informationlist.add(new InformationBean("文章标题","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
-        informationlist.add(new InformationBean("文章标题","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
+        informationlist.add(new InformationBean("子栏目","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
+        informationlist.add(new InformationBean("子栏目","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
+        informationlist.add(new InformationBean("子栏目","这里是文章内容，这里是文章内容，这里是文章内容","2018-05-02"));
 
 
         list.add(imgs);
         list.add(gpslist);
         list.add(collectlist);
+        list.add("http://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F19%2F02%2F76%2F5672530f7d928_1024.jpg&thumburl=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D2176610467%2C2174515257%26fm%3D27%26gp%3D0.jpg");
         list.add(trusteeshiplist);
         list.add(informationlist);
     }
@@ -119,7 +118,5 @@ public class HomeFragmet extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-
-
     }
 }

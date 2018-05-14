@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/item_bg"
+    >
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="@color/fengouxian1"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x8"
+        />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x8"
+        >
+        <TextView
+            android:id="@+id/information_zi_fragment_buju_bottom_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="子栏目"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/zhuse"/>
+        <TextView
+            android:id="@+id/information_zi_fragment_buju_bottom_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\t\t\t\t这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/name_se"
+            android:lineSpacingMultiplier="1.1"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x95"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x8">
+        <ImageView
+            android:id="@+id/information_zi_fragment_buju_bottom_img1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+        <ImageView
+            android:id="@+id/information_zi_fragment_buju_bottom_img2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/x8"
+            android:layout_marginLeft="@dimen/x8"
+            />
+        <ImageView
+            android:id="@+id/information_zi_fragment_buju_bottom_img3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/information_zi_fragment_buju_bottom_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2018-05-02"
+        android:textSize="@dimen/x10"
+        android:textColor="@color/name_se"
+        android:layout_margin="@dimen/x8"
+        />
+
+</LinearLayout>

@@ -9,4 +9,24 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="TabLayoutTextStyle">
+        <item name="android:textSize">@dimen/x13</item>
+    </style>
+
+    <style name="TabLayoutTextStyle1">
+        <item name="android:textSize">@dimen/x15</item>
+    </style>
+
+    <!--错误提示-->
+    <style name="textview_error_hint">
+        <item name="android:drawableLeft">@drawable/ic_error</item>
+        <item name="android:layout_marginTop">@dimen/x10</item>
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:drawablePadding">@dimen/x8</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">invisible</item>
+        <item name="android:layout_marginLeft">@dimen/x10</item>
+        <item name="android:textColor">@color/xiaoxi_bg</item>
+    </style>
 </resources>

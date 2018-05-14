@@ -1,1 +1,2 @@
-include ':app', ':SlideToUnlockView'
+include ':app', ':SlideToUnlockView', ':xrecyclerview'
+include ':library'

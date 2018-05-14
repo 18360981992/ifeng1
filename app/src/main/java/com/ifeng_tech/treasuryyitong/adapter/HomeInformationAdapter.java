@@ -46,7 +46,7 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
     public void onBindViewHolder(ZiXunHolder holder, final int position) {
 
         holder.home_zixun_title.setText(informationlist.get(position).getTitle());
-        holder.home_zixun_text.setText(informationlist.get(position).getText());
+        holder.home_zixun_text.setText("\t\t\t\t\t"+informationlist.get(position).getText());
         holder.home_zixun_time.setText(informationlist.get(position).getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

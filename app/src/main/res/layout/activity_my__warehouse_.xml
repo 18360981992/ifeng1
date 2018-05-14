@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--我的仓库-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.My_Warehouse_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@drawable/zichan_jianbian"
+        >
+        <RelativeLayout
+            android:id="@+id/my_warehouse_Fan"
+            android:layout_width="@dimen/x30"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x14"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_back"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的仓库"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
+
+        <ImageView
+            android:id="@+id/my_warehouse_zhangdan"
+            android:layout_width="@dimen/x15"
+            android:layout_height="@dimen/x20"
+            android:background="@drawable/iv_news_normal"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginRight="@dimen/x10"
+            />
+
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/my_warehouse__XRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
+
+</LinearLayout>

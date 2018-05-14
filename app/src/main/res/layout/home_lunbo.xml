@@ -10,7 +10,6 @@
         android:layout_height="@dimen/x120"
         app:pointsPosition="CENTER"
         app:AutoPlayTime="1500"
-        android:layout_marginBottom="@dimen/x8"
         ></com.stx.xhb.xbanner.XBanner>
 
 </LinearLayout>

@@ -2,6 +2,8 @@ package com.ifeng_tech.treasuryyitong.bean;
 
 /**
  * Created by zzt on 2018/4/27.
+ *
+ * 资讯bean
  */
 
 public class InformationBean {

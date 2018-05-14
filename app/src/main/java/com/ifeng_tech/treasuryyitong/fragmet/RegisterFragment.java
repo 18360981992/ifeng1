@@ -11,6 +11,8 @@ import com.ifeng_tech.treasuryyitong.R;
 
 /**
  * Created by zzt on 2018/4/28.
+ *
+ * 注册
  */
 
 public class RegisterFragment extends Fragment {

@@ -44,7 +44,7 @@
         android:layout_height="@dimen/x40"
         chuck:viewBackgroundResId="@drawable/huadong_bg"
         chuck:slideImageViewWidth="@dimen/x20"
-        chuck:slideImageViewResId="@drawable/jiantou"
+        chuck:slideImageViewResId="@drawable/btn_back"
         chuck:slideImageViewResIdAfter="@mipmap/xiao"
         chuck:slideThreshold="0.85"
         chuck:textSize="6"

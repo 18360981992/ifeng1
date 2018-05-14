@@ -40,6 +40,7 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
         holder.home_daohang_name.setText(collectlist.get(position).getName());
         holder.home_zhengji_title.setText(collectlist.get(position).getTitle());
         holder.home_zhengji_text.setText(collectlist.get(position).getText());
+        holder.home_zhengji_imgflag.setImageResource(collectlist.get(position).getImgflag());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +62,7 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
         public TextView home_daohang_name;
         public TextView home_zhengji_title;
         public TextView home_zhengji_text;
+        public ImageView home_zhengji_imgflag;
 
         public HomeZhengJi(View itemView) {
             super(itemView);
@@ -68,6 +70,7 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
             home_daohang_name = itemView.findViewById(R.id.home_zhengji_name);
             home_zhengji_title = itemView.findViewById(R.id.home_zhengji_title);
             home_zhengji_text = itemView.findViewById(R.id.home_zhengji_text);
+            home_zhengji_imgflag = itemView.findViewById(R.id.home_zhengji_imgflag);
 
         }
     }

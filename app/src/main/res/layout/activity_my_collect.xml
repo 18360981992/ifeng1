@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--我的征集-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.MyCollectActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x50"
+        android:background="@drawable/zichan_jianbian"
+        >
+        <RelativeLayout
+            android:id="@+id/mycollect_Fan"
+            android:layout_width="@dimen/x30"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x14"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_back"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="我的征集"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/mycollect_xRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        ></com.jcodecraeer.xrecyclerview.XRecyclerView>
+</LinearLayout>

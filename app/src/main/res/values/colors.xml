@@ -8,12 +8,40 @@
     <color name="hongse">#F00</color>
     <color name="lvse">#00ff00</color>
     <color name="touming">#00000000</color>
+    <color name="touming1">#33000000</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_666666">#666666</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_ffffff">#ffffff</color>
+    <color name="color_c61a04">#c61a04</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_d81e06">#d81e06</color>
+    <color name="color_b0b8b2">#b0b8b2</color>
+    <color name="color_28d19d">#28d19d</color>
+    <color name="color_000000">#000000</color>
 
+
+    <!--项目主色调  充值-->
     <color name="zhuse">#5576E2</color>
     <color name="zhuse_ziti">#6A6A6A</color>
-
     <color name="name_se">#333333</color>
+    <color name="text_se">#FFB50D</color>
+
+    <!--仓库浅蓝-->
+    <color name="cangku_qianlan">#D5E8F2</color>
+
+    <!--消息数 颜色-->
+    <color name="xiaoxi_bg">#E55A57 </color>
+
+    <color name="weirenzheng">#F27B70</color>
+
     <!--listview分割线-->
     <color name="fengouxian">#F2F2F2</color>
     <color name="fengouxian1">#FFD7D4D4</color>
+    
+    <!--提现-->
+    <color name="tixian">#ADC0FF</color>
+
+
 </resources>

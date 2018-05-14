@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 我的-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x65">
+        <ImageView
+            android:id="@+id/wode_touxiang"
+            android:layout_width="@dimen/x50"
+            android:layout_height="@dimen/x50"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_centerVertical="true"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_toRightOf="@id/wode_touxiang"
+            android:layout_marginTop="@dimen/x15"
+            android:layout_marginLeft="@dimen/x8"
+            >
+            <TextView
+                android:id="@+id/wode_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="交易会员号"
+                android:textSize="@dimen/x12"
+                android:textColor="@color/name_se"/>
+            <TextView
+                android:id="@+id/wode_hao"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="6502289877"
+                android:textSize="@dimen/x12"
+                android:textColor="@color/name_se"
+                android:layout_marginTop="@dimen/x3"
+                />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/wode_weirenzheng"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="未认证"
+            android:textSize="@dimen/x10"
+            android:textColor="@color/baise"
+            android:background="@drawable/weirenzheng_bg"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x10"
+            />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/wode_listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x10"
+        ></ListView>
+
+
+
+
+
+</LinearLayout>

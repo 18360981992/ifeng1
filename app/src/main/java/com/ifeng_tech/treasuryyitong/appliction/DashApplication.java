@@ -6,8 +6,6 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.DisplayMetrics;
 
-import com.ifeng_tech.treasuryyitong.utils.CrashHandler;
-
 
 /**
  * Created by Dash on 2017/12/6.
@@ -43,7 +41,7 @@ public class DashApplication extends Application {
         handler = new Handler();
         //主线程的id
         mainId = Process.myTid();
-        CrashHandler.getInstance().init(getApplicationContext());
+//        CrashHandler.getInstance().init(getApplicationContext());
 
         initScreenSize();
 

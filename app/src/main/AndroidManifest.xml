@@ -14,20 +14,30 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <!-- 启动页 -->
         <activity android:name=".MainActivity" />
+
+        <!-- 首页展示 -->
         <activity android:name=".ui.HomePageActivity">
-
-        </activity>
-
-        <service android:name=".service.HeartbeatService" />
-
-        <activity android:name=".ui.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- 心跳服务 -->
+        <service android:name=".service.HeartbeatService" />
+
+        <!-- 登录/注册 -->
+        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.My_Property_Activity" />
+        <activity android:name=".ui.Stock_Removal_Activity" />
+        <activity android:name=".ui.Incoming_Test_Activity" />
+        <activity android:name=".ui.MyCollectActivity" />
+        <activity android:name=".ui.My_Warehouse_Activity" />
+        <activity android:name=".ui.Pick_up_goods_Activity"></activity>
     </application>
 
 </manifest>

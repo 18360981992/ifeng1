@@ -16,6 +16,8 @@ import com.qdong.slide_to_unlock_view.CustomSlideToUnlockView;
 
 /**
  * Created by zzt on 2018/4/28.
+ *
+ *  登录
  */
 
 public class LoginFragment extends Fragment {

@@ -3,25 +3,34 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/item_bg">
+    android:background="@drawable/item_bg"
+    android:paddingTop="@dimen/x8"
+    >
 
-    <TextView
-        android:id="@+id/home_zixun_title"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="标题"
-        android:textSize="@dimen/x12"
-        android:layout_marginTop="@dimen/x2"
-        android:layout_marginLeft="@dimen/x8"
-        />
-    <TextView
-        android:id="@+id/home_zixun_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="内容"
-        android:textSize="@dimen/x12"
-        android:layout_marginTop="@dimen/x2"
-        android:layout_marginLeft="@dimen/x8"/>
+        android:paddingLeft="@dimen/x8"
+        android:paddingRight="@dimen/x8"
+        >
+        <TextView
+            android:id="@+id/home_zixun_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="子栏目"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/zhuse"/>
+        <TextView
+            android:id="@+id/home_zixun_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="\t\t\t\t这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。"
+            android:textSize="@dimen/x12"
+            android:textColor="@color/name_se"
+            android:lineSpacingMultiplier="1.1"
+            />
+    </RelativeLayout>
+
     <TextView
         android:id="@+id/home_zixun_time"
         android:layout_width="match_parent"
@@ -29,14 +38,17 @@
         android:text="时间"
         android:textSize="@dimen/x10"
         android:gravity="end"
-        android:layout_marginTop="@dimen/x2"
+        android:layout_marginTop="@dimen/x4"
+        android:layout_marginBottom="@dimen/x8"
         android:layout_marginRight="@dimen/x8"
-        android:layout_marginBottom="@dimen/x2"
       />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x1"
-        android:background="@color/fengouxian1"/>
+        android:background="@color/fengouxian1"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x8"
+        />
 
 </LinearLayout>

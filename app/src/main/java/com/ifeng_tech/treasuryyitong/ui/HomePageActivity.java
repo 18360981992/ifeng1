@@ -2,6 +2,7 @@ package com.ifeng_tech.treasuryyitong.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -11,43 +12,44 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.fragmet.AuthenticateFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.CollectFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
+import com.ifeng_tech.treasuryyitong.fragmet.InformationFragmet;
+import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
-import com.ifeng_tech.treasuryyitong.fragmet.TreasuryFragmet;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
 
     private TextView homepage_title;
+    private RelativeLayout homepage_RelativeLayout;
+
     private FrameLayout homepage_FrameLayout;
     private ImageView shouyeImg;
     private TextView shouyeName;
     private LinearLayout shouye;
-    private ImageView jiandingImg;
-    private TextView jiandingName;
-    private LinearLayout jianding;
+    private ImageView zixunImg;
+    private TextView zixunName;
+    private LinearLayout zixun;
     private ImageView zhengjiImg;
     private TextView zhengjiName;
     private LinearLayout zhengji;
-    private ImageView baokuImg;
-    private TextView baokuName;
-    private LinearLayout baoku;
+    private ImageView xiaoxiImg;
+    private TextView xiaoxiName;
+    private LinearLayout xiaoxi;
     private ImageView wodeImg;
     private TextView wodeName;
     private LinearLayout wode;
     private FragmentManager fragmentManager;
 
     HomeFragmet homeFragmet = new HomeFragmet();  // 首页
-    TreasuryFragmet treasuryFragmet = new TreasuryFragmet();  // 鉴定
+    InformationFragmet treasuryFragmet = new InformationFragmet();  // 资讯
     CollectFragmet collectFragmet = new CollectFragmet(); // 征集
-    AuthenticateFragmet authenticateFragmet = new AuthenticateFragmet();  // 宝库
+    MessageFragmet authenticateFragmet = new MessageFragmet();  // 消息
     MyFragmet myFragmet = new MyFragmet();  // 我的
-    private RelativeLayout homepage_xiaoxi;
-    private View homepage_xiaoxi_dian;
+
+    long exitTim=0;
 
     @Override
     public MyPresenter<HomePageActivity> initPresenter() {
@@ -80,13 +82,6 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 .hide(authenticateFragmet)
                 .hide(myFragmet)
                 .commit();
-
-        HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
-            @Override
-            public void hearbeatChuan(int num) {
-                homepage_xiaoxi_dian.setVisibility(View.VISIBLE);
-            }
-        });
     }
 
     @Override
@@ -106,7 +101,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             }
         });
 
-        jianding.setOnClickListener(new View.OnClickListener() {
+        zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setBeiJing(false,true,false,false,false);
@@ -134,7 +129,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             }
         });
 
-        baoku.setOnClickListener(new View.OnClickListener() {
+        xiaoxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setBeiJing(false,false,false,true,false);
@@ -161,54 +156,47 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         .commit();
             }
         });
-
-        homepage_xiaoxi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyUtils.setToast("点击了消息。。。");
-            }
-        });
-
     }
 
     //主页面点击切换视图
-    public void setBeiJing(boolean syFlag, boolean jdFlag, boolean zjFlag,boolean bkFlag,boolean wdFlag) {
+    public void setBeiJing(boolean syFlag, boolean zxFlag, boolean zjFlag,boolean xxFlag,boolean wdFlag) {
         if (syFlag) {
             shouyeImg.setImageResource(R.drawable.shouye_lan);
             shouyeName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("存管系统");
+            homepage_RelativeLayout.setVisibility(View.GONE);
         } else {
             shouyeImg.setImageResource(R.drawable.shouye_hui);
             shouyeName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+            homepage_RelativeLayout.setVisibility(View.VISIBLE);
         }
-        if (jdFlag) {
-            jiandingImg.setImageResource(R.drawable.jianding_lan);
-            jiandingName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("托管预约");
+        if (zxFlag) {
+            zixunImg.setImageResource(R.drawable.zixun_lan);
+            zixunName.setTextColor(getResources().getColor(R.color.zhuse));
+            homepage_title.setText("资讯");
         } else {
-            jiandingImg.setImageResource(R.drawable.jianding_hui);
-            jiandingName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+            zixunImg.setImageResource(R.drawable.zixun_hui);
+            zixunName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
         if (zjFlag) {
             zhengjiImg.setImageResource(R.drawable.zhengji_lan);
             zhengjiName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("线上征集");
+            homepage_title.setText("征集");
         } else {
             zhengjiImg.setImageResource(R.drawable.zhengji_hui);
             zhengjiName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
-        if (bkFlag) {
-            baokuImg.setImageResource(R.drawable.baoku_lan);
-            baokuName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("宝库浏览器");
+        if (xxFlag) {
+            xiaoxiImg.setImageResource(R.drawable.xiaoxi_lan);
+            xiaoxiName.setTextColor(getResources().getColor(R.color.zhuse));
+            homepage_title.setText("消息");
         } else {
-            baokuImg.setImageResource(R.drawable.baoku_hui);
-            baokuName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+            xiaoxiImg.setImageResource(R.drawable.xiaoxi_hui);
+            xiaoxiName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
         if (wdFlag) {
             wodeImg.setImageResource(R.drawable.wode_lan);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("个人中心");
+            homepage_title.setText("我的");
         } else {
             wodeImg.setImageResource(R.drawable.wode_hui);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
@@ -218,23 +206,39 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     private void initView() {
         homepage_title = (TextView) findViewById(R.id.homepage_title);
+        homepage_RelativeLayout = (RelativeLayout) findViewById(R.id.homepage_RelativeLayout);
+
         homepage_FrameLayout = (FrameLayout) findViewById(R.id.homepage_FrameLayout);
         shouyeImg = (ImageView) findViewById(R.id.shouyeImg);
         shouyeName = (TextView) findViewById(R.id.shouyeName);
         shouye = (LinearLayout) findViewById(R.id.shouye);
-        jiandingImg = (ImageView) findViewById(R.id.jiandingImg);
-        jiandingName = (TextView) findViewById(R.id.jiandingName);
-        jianding = (LinearLayout) findViewById(R.id.jianding);
+        zixunImg = (ImageView) findViewById(R.id.zixunImg);
+        zixunName = (TextView) findViewById(R.id.zixunName);
+        zixun = (LinearLayout) findViewById(R.id.zixun);
         zhengjiImg = (ImageView) findViewById(R.id.zhengjiImg);
         zhengjiName = (TextView) findViewById(R.id.zhengjiName);
         zhengji = (LinearLayout) findViewById(R.id.zhengji);
-        baokuImg = (ImageView) findViewById(R.id.baokuImg);
-        baokuName = (TextView) findViewById(R.id.baokuName);
-        baoku = (LinearLayout) findViewById(R.id.baoku);
+        xiaoxiImg = (ImageView) findViewById(R.id.xiaoxiImg);
+        xiaoxiName = (TextView) findViewById(R.id.xiaoxiName);
+        xiaoxi = (LinearLayout) findViewById(R.id.xiaoxi);
         wodeImg = (ImageView) findViewById(R.id.wodeImg);
         wodeName = (TextView) findViewById(R.id.wodeName);
         wode = (LinearLayout) findViewById(R.id.wode);
-        homepage_xiaoxi = (RelativeLayout) findViewById(R.id.homepage_xiaoxi);
-        homepage_xiaoxi_dian = findViewById(R.id.homepage_xiaoxi_dian);
+
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            if ((System.currentTimeMillis() - exitTim) > 2000) {
+                MyUtils.setToast("再按一次退出程序");
+                exitTim = System.currentTimeMillis();
+            }else{
+                finish();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
