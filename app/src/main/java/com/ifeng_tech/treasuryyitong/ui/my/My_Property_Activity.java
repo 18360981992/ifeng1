@@ -1,4 +1,4 @@
-package com.ifeng_tech.treasuryyitong.ui;
+package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.os.Bundle;
 import android.view.View;

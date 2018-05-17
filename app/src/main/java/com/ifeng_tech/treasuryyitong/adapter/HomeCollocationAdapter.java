@@ -11,33 +11,33 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
-import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
+import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 import java.util.List;
 
 /**
- * Created by zzt on 2018/4/27.
+ * Created by zzt on 2018/5/16.
  */
 
-public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.HomeZhengJi> {
+public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocationAdapter.HomeTuoGuan> {
     Context context;
     List<CollectBean> collectlist;
 
-    public HomeCollectAdapter(Context context, List<CollectBean> collectlist) {
+    public HomeCollocationAdapter(Context context, List<CollectBean> collectlist) {
         this.context = context;
         this.collectlist = collectlist;
     }
 
     @Override
-    public HomeZhengJi onCreateViewHolder(ViewGroup parent, int viewType) {
+    public HomeTuoGuan onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.home_zhengji_buju, parent,false);
-        HomeZhengJi homeZhengJi = new HomeZhengJi(view);
-        return homeZhengJi;
+        HomeTuoGuan homeTuoGuan = new HomeTuoGuan(view);
+        return homeTuoGuan;
     }
 
     @Override
-    public void onBindViewHolder(HomeZhengJi holder, final int position) {
+    public void onBindViewHolder(HomeTuoGuan holder, final int position) {
         holder.home_zhengji_img.setImageResource(collectlist.get(position).getImg());
         holder.home_daohang_name.setText(collectlist.get(position).getName());
         holder.home_zhengji_title.setText(collectlist.get(position).getTitle());
@@ -49,17 +49,16 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
             holder.home_zhengji_imgflag.setImageResource(R.drawable.kaishi);
         }
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // 首页 中征集的点击
 
-                if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
-                    Intent intent = new Intent(context, Collect_Activity.class);
+                if(collectlist.get(position).getType()==0){ // 0==等待 1==未开始
+                    Intent intent = new Intent(context, Authenticate_Details_Activity.class);
                     intent.putExtra("CollectBean",collectlist.get(position));
                     context.startActivity(intent);
                 }else{
-                    MyUtils.setToast("该商品还未开始征集。。。");
+                    MyUtils.setToast("该商品还未开始托管。。。");
                 }
             }
         });
@@ -71,7 +70,7 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
         return collectlist.size();
     }
 
-    class HomeZhengJi extends RecyclerView.ViewHolder{
+    class HomeTuoGuan extends RecyclerView.ViewHolder{
 
         public ImageView home_zhengji_img;
         public TextView home_daohang_name;
@@ -79,7 +78,7 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
         public TextView home_zhengji_text;
         public ImageView home_zhengji_imgflag;
 
-        public HomeZhengJi(View itemView) {
+        public HomeTuoGuan(View itemView) {
             super(itemView);
             home_zhengji_img = itemView.findViewById(R.id.home_zhengji_img);
             home_daohang_name = itemView.findViewById(R.id.home_zhengji_name);

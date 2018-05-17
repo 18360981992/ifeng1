@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.os.Process;
 import android.util.DisplayMetrics;
 
+import java.text.DecimalFormat;
+
 
 /**
  * Created by Dash on 2017/12/6.
@@ -30,6 +32,7 @@ public class DashApplication extends Application {
      * 屏幕密度
      */
     public static float screenDensity;
+    public static DecimalFormat decimalFormat; // 全局为double设置精度
 
     @Override
     public void onCreate() {
@@ -42,6 +45,8 @@ public class DashApplication extends Application {
         //主线程的id
         mainId = Process.myTid();
 //        CrashHandler.getInstance().init(getApplicationContext());
+
+        decimalFormat = new DecimalFormat("0.00");// 全局为double设置精度
 
         initScreenSize();
 

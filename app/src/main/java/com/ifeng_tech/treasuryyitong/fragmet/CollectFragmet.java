@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.CollectAdapter;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
@@ -105,7 +107,14 @@ public class CollectFragmet extends Fragment {
         collect_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyUtils.setToast("点击了条目==》"+position);
+
+                if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
+                    Intent intent = new Intent(activity, Collect_Activity.class);
+                    intent.putExtra("CollectBean",collectlist.get(position));
+                    startActivity(intent);
+                }else{
+                    MyUtils.setToast("该商品还未开始征集。。。");
+                }
             }
         });
 
@@ -115,16 +124,19 @@ public class CollectFragmet extends Fragment {
         /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
         collect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
         ILoadingLayout Labels = collect_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("释放立即刷新...");
+        Labels.setPullLabel("用力拉...");
         Labels.setRefreshingLabel("释放立即刷新...");
-        Labels.setReleaseLabel("释放立即刷新...");
+        Labels.setReleaseLabel("正在刷新...");
     }
 
 
     private void initData() {
         // 征集
         for (int i = 0; i < 15; i++) {
-            collectlist.add(new CollectBean(R.drawable.guangao, "世博四连体", "福利特寄卖商城", "托管进度10/20", R.drawable.dengdai));
+            if(i%2==0)
+                collectlist.add(new CollectBean(R.drawable.guangao, "世博四连体", "福利特寄卖商城", "托管进度10/20",0));
+            else
+                collectlist.add(new CollectBean(R.drawable.guangao, "世博四连体", "福利特寄卖商城", "托管进度10/20", 1));
         }
 
         imgs = Arrays.asList(IMAGES);

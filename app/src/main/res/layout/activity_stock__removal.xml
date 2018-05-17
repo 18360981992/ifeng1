@@ -7,11 +7,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.Stock_Removal_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Stock_Removal_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x60"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout

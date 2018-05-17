@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F7F7F7"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/collect_ac_Fan"
+            android:layout_width="@dimen/x30"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x14"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:text="征集"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x16" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="转赠平台"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <EditText
+                    android:id="@+id/collect_ac_pingtai"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg"
+                    android:singleLine="true"
+                    android:text="福利特"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="转赠账户"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <EditText
+                    android:id="@+id/collect_ac_zhanghu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg"
+                    android:hint="账户为选择平台注册的账户"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="手机号"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <EditText
+                    android:id="@+id/collect_ac_shouji"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x57"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg"
+                    android:hint="手机号为转赠平台绑定手机号"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="藏品代码"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <EditText
+                    android:id="@+id/collect_ac_cword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg"
+                    android:hint="请输入藏品代码"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="藏品名称"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <EditText
+                    android:id="@+id/collect_ac_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg"
+                    android:hint="请输入藏品名称"
+                    android:singleLine="true"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x60"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="转赠数量"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x45"
+                    android:layout_marginRight="@dimen/x8"
+                    android:orientation="vertical">
+
+                    <EditText
+                        android:id="@+id/collect_ac_shuliang"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x35"
+                        android:background="@drawable/tihuo_ed_bg"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:text="1"
+                        android:textColor="@color/name_se"
+                        android:textSize="@dimen/x12" />
+
+                    <TextView
+                        android:id="@+id/collect_ac_shuliang_zuida"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/x2"
+                        android:text="最大转赠数量:1200"
+                        android:textColor="#E93438"
+                        android:textSize="@dimen/x10" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="转赠手续费"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <TextView
+                    android:id="@+id/collect_ac_daijia"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x35"
+                    android:text="￥0.00"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x50"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:text="手机验证码"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x12" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_marginLeft="@dimen/x33"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/tihuo_ed_bg">
+
+                    <EditText
+                        android:id="@+id/collect_ac_duan"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1.3"
+                        android:background="@null"
+                        android:hint="短信验证码"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:textColor="@color/name_se"
+                        android:textSize="@dimen/x12" />
+
+                    <View
+                        android:layout_width="@dimen/x1"
+                        android:layout_height="@dimen/x20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="@dimen/x2"
+                        android:background="@color/color_e5e5e5" />
+
+                    <TextView
+                        android:id="@+id/collect_ac_duan_btn"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:text="点击发送"
+                        android:textColor="@color/name_se"
+                        android:textSize="@dimen/x12" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Button
+                    android:id="@+id/collect_ac_tijiao"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x35"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginRight="@dimen/x8"
+                    android:background="@drawable/congzhi_bg"
+                    android:text="提交"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x14" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

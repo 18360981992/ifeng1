@@ -1,4 +1,4 @@
-package com.ifeng_tech.treasuryyitong.ui;
+package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -96,15 +96,17 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
 
         warehouse_adapter.setWarehouse_adapter_jieKou(new Warehouse_Adapter.Warehouse_Adapter_JieKou() {
             @Override
-            public void tihuo_chuan(int postion) {
+            public void tihuo_chuan(int postion) { // 跳转提货
                 Intent intent = new Intent(My_Warehouse_Activity.this, Pick_up_goods_Activity.class);
-
+                intent.putExtra("WarehouseBean",  warehouselist.get(postion));
                 startActivity(intent);
             }
 
             @Override
-            public void zhuanzeng_chuan(int postion) {
-
+            public void zhuanzeng_chuan(int postion) { // 跳转转赠
+                Intent intent = new Intent(My_Warehouse_Activity.this, Donation_Activity.class);
+                intent.putExtra("WarehouseBean",  warehouselist.get(postion));
+                startActivity(intent);
             }
         });
     }

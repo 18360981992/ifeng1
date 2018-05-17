@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/homepage_RelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x60"
         android:background="@drawable/zichan_jianbian"
         android:visibility="gone"
         >
@@ -53,8 +53,8 @@
             >
             <ImageView
                 android:id="@+id/shouyeImg"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/shouyeName"
@@ -154,8 +154,8 @@
             >
             <ImageView
                 android:id="@+id/wodeImg"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/wodeName"

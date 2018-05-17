@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.ui.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.rili_utils.DataUtils;
 import com.ifeng_tech.treasuryyitong.view.rili_view.DatePopupWindow;
@@ -27,6 +27,8 @@ import java.util.Date;
 
 /**
  * Created by zzt on 2018/5/14.
+ *
+ *  注册提货信息页
  */
 
 public class Pick_up_goods_Zhuce extends Fragment implements View.OnClickListener {

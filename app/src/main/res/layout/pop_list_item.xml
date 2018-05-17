@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/pop_list_text"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x30"
+        android:text="35686545568"
+        android:textSize="@dimen/x12"
+        android:textColor="@color/name_se"
+        android:gravity="center_vertical"
+        android:layout_marginLeft="@dimen/x8"/>
+</LinearLayout>

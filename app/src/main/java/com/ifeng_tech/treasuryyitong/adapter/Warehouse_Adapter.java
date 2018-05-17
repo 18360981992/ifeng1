@@ -68,7 +68,6 @@ public class Warehouse_Adapter extends RecyclerView.Adapter<Warehouse_Adapter.Wa
         holder.warehouse_zhuanzeng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了转赠。。。");
                 warehouse_adapter_jieKou.zhuanzeng_chuan(position);
             }
         });

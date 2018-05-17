@@ -5,11 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.Pick_up_goods_Activity">
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x60"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
@@ -23,7 +24,7 @@
                 android:layout_height="@dimen/x14"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginBottom="@dimen/x15"
                 android:layout_marginLeft="@dimen/x10"
                 />
         </RelativeLayout>
@@ -40,7 +41,7 @@
             app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:layout_toRightOf="@+id/up_goods_Fan"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x1"
+            android:layout_marginBottom="@dimen/x5"
             >
 
         </android.support.design.widget.TabLayout>

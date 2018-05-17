@@ -20,6 +20,7 @@
     <color name="color_b0b8b2">#b0b8b2</color>
     <color name="color_28d19d">#28d19d</color>
     <color name="color_000000">#000000</color>
+    <color name="color_e5e5e5">#e5e5e5</color>
 
 
     <!--项目主色调  充值-->
@@ -32,7 +33,7 @@
     <color name="cangku_qianlan">#D5E8F2</color>
 
     <!--消息数 颜色-->
-    <color name="xiaoxi_bg">#E55A57 </color>
+    <color name="xiaoxi_bg">#E55A57</color>
 
     <color name="weirenzheng">#F27B70</color>
 
@@ -43,5 +44,8 @@
     <!--提现-->
     <color name="tixian">#ADC0FF</color>
 
+    <!--上午/下午-->
+    <color name="color_5576E2">#5576E2</color>
+    <color name="color_F0AF31">#F0AF31</color>
 
 </resources>

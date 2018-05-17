@@ -7,11 +7,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.My_Warehouse_Activity">
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x60"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout

@@ -1,10 +1,12 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zzt on 2018/5/10.
  */
 
-public class WarehouseBean {
+public class WarehouseBean implements Serializable{
     String word;
     int img;
     String shopping_name;

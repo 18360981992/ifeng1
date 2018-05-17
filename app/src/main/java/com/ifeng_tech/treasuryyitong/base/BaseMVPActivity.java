@@ -20,6 +20,21 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+//            //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+//            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //状态栏透明颜色
+//            getWindow().setStatusBarColor(getResources().getColor(R.color.zhuse));
+//        }
+//        //为了设置全屏
+//        ViewGroup mContentView = (ViewGroup) findViewById(android.R.id.content);
+//        View mChildView = mContentView.getChildAt(0);
+//        if (mChildView != null) {
+//            //注意不是设置 ContentView 的 FitsSystemWindows, 而是设置 ContentView 的第一个子 View . 使其不为系统 View 预留空间.
+//            ViewCompat.setFitsSystemWindows(mChildView, true);
+//        }
+
         setContentView(R.layout.activity_base_mvp);
         myPresenter=initPresenter();
 

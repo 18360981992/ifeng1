@@ -51,6 +51,15 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     long exitTim=0;
 
+    public interface HomePageActivity_JieKou{
+        void chuan(int i);
+    }
+    public static HomePageActivity_JieKou homePageActivity_JieKou;
+
+    public void setHomePageActivity_JieKou(HomePageActivity_JieKou homePageActivity_JieKou) {
+        this.homePageActivity_JieKou = homePageActivity_JieKou;
+    }
+
     @Override
     public MyPresenter<HomePageActivity> initPresenter() {
         if(myPresenter==null) {
@@ -154,6 +163,40 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         .hide(authenticateFragmet)
                         .show(myFragmet)
                         .commit();
+            }
+        });
+
+        setHomePageActivity_JieKou(new HomePageActivity_JieKou() {
+            @Override
+            public void chuan(int i) {
+                switch (i){
+                    case 0:
+                        setBeiJing(false,false,true,false,false);
+                        fragmentManager.beginTransaction()
+                                .hide(homeFragmet)
+                                .hide(treasuryFragmet)
+                                .show(collectFragmet)
+                                .hide(authenticateFragmet)
+                                .hide(myFragmet)
+                                .commit();
+                        break;
+                    case 1:
+                        MyUtils.setToast("点击了广告。。。");
+                        break;
+                    case 2:
+                        MyUtils.setToast("点击了托管。。。");
+                        break;
+                    case 3:
+                        setBeiJing(false,true,false,false,false);
+                        fragmentManager.beginTransaction()
+                                .hide(homeFragmet)
+                                .show(treasuryFragmet)
+                                .hide(collectFragmet)
+                                .hide(authenticateFragmet)
+                                .hide(myFragmet)
+                                .commit();
+                        break;
+                }
             }
         });
     }

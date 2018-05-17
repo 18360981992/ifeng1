@@ -29,4 +29,18 @@
         <item name="android:layout_marginLeft">@dimen/x10</item>
         <item name="android:textColor">@color/xiaoxi_bg</item>
     </style>
+
+    <style name="dialog_setting" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item><!-- 无标题 -->
+        <item name="android:windowBackground">@color/touming</item>//背景设置为透明
+    </style>
+
+    <!--控制dialog进出动画-->
+    <style name="dialog_animation" parent="android:Animation">
+        <item name="@android:windowEnterAnimation">@anim/dialog_enter</item>
+        <!-- 进入时的动画 -->
+        <item name="@android:windowExitAnimation">@anim/dialog_exit</item>
+        <!-- 退出时的动画 -->
+    </style>
+
 </resources>

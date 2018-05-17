@@ -1,6 +1,7 @@
 package com.ifeng_tech.treasuryyitong.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.GridLayoutManager;
@@ -18,6 +19,8 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
+import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -35,7 +38,6 @@ public class HomeAdapter extends RecyclerView.Adapter{
         this.context = context;
         this.list = list;
     }
-
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -99,7 +101,23 @@ public class HomeAdapter extends RecyclerView.Adapter{
             homeGPSAdapter.setGpsAdapterJieKou(new HomeGPSAdapter.GPSAdapterJieKou() {
                 @Override
                 public void gpsChuan(int i) {
-                    MyUtils.setToast(gpslist.get(i).getName());
+                    switch (i){
+                        case 0:
+                            MyUtils.setToast("点击了扫一扫。。。");
+                            break;
+                        case 1:
+                            MyUtils.setToast("点击了收货。。。");
+                            break;
+                        case 2: // 转赠
+                            Intent intent = new Intent(context, Donation_Activity.class);
+                            context.startActivity(intent);
+                            break;
+                        case 3:
+                            MyUtils.setToast("点击了鉴定。。。");
+                            
+                            break;
+                    }
+
                 }
             });
 
@@ -114,7 +132,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
             home_zhengji_RelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MyUtils.setToast("点击了征集。。。");
+                    HomePageActivity.homePageActivity_JieKou.chuan(0); // 点击征集
                 }
             });
         }else if(getItemViewType(position)==3){
@@ -124,7 +142,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
             home_guanggao_img.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MyUtils.setToast("点击了广告。。。");
+                    HomePageActivity.homePageActivity_JieKou.chuan(1); // 点击广告
                 }
             });
 
@@ -135,12 +153,12 @@ public class HomeAdapter extends RecyclerView.Adapter{
 
             List<CollectBean> trusteeshiplist = (List<CollectBean>) list.get(position);
             home_tuoguan_recyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL,false));
-            home_tuoguan_recyclerView.setAdapter(new HomeCollectAdapter(context,trusteeshiplist));
+            home_tuoguan_recyclerView.setAdapter(new HomeCollocationAdapter(context,trusteeshiplist));
 
             home_tuoguan_RelativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MyUtils.setToast("点击了托管。。。");
+                    HomePageActivity.homePageActivity_JieKou.chuan(2);// 点击托管
                 }
             });
 
@@ -163,7 +181,8 @@ public class HomeAdapter extends RecyclerView.Adapter{
             home_zixun_relativeLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    MyUtils.setToast("点击了资讯。。。");
+
+                    HomePageActivity.homePageActivity_JieKou.chuan(3);// 点击资讯
                 }
             });
         }

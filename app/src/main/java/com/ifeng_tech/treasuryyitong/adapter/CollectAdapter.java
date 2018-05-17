@@ -56,7 +56,12 @@ public class CollectAdapter extends BaseAdapter{
         collect_name.setText(list.get(position).getName());
         collect_title.setText(list.get(position).getTitle());
         collect_text.setText(list.get(position).getText());
-        collect_imgflag.setImageResource(list.get(position).getImgflag());
+        if(list.get(position).getType()==0){ // 0==等待 1==未开始
+            collect_imgflag.setImageResource(R.drawable.dengdai);
+        }else{
+            collect_imgflag.setImageResource(R.drawable.kaishi);
+        }
+
         return view;
     }
 }

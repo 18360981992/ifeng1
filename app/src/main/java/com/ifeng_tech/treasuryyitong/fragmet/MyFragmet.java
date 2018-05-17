@@ -18,12 +18,12 @@ import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.Incoming_Test_Activity;
-import com.ifeng_tech.treasuryyitong.ui.MyCollectActivity;
-import com.ifeng_tech.treasuryyitong.ui.My_Property_Activity;
-import com.ifeng_tech.treasuryyitong.ui.My_Warehouse_Activity;
-import com.ifeng_tech.treasuryyitong.ui.Pick_up_goods_Activity;
-import com.ifeng_tech.treasuryyitong.ui.Stock_Removal_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Incoming_Test_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.MyCollectActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Stock_Removal_Activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -95,9 +95,8 @@ public class MyFragmet extends Fragment {
                     case 6:   // 我的仓库
                         intent = new Intent(activity, My_Warehouse_Activity.class);
                         activity.startActivity(intent);
-
                         break;
-                    case 7:   // 我的仓库
+                    case 7:   // 提货注册
                         intent = new Intent(activity, Pick_up_goods_Activity.class);
                         activity.startActivity(intent);
                         break;

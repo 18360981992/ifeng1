@@ -1,32 +1,34 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zzt on 2018/4/27.
  *
  * 征集bean
  */
 
-public class CollectBean {
+public class CollectBean implements Serializable{
     int img;
     String name;
     String title;
     String text;
-    int imgflag;
+    int type;
 
-    public CollectBean(int img, String name, String title, String text, int imgflag) {
+    public CollectBean(int img, String name, String title, String text, int type) {
         this.img = img;
         this.name = name;
         this.title = title;
         this.text = text;
-        this.imgflag = imgflag;
+        this.type = type;
     }
 
-    public int getImgflag() {
-        return imgflag;
+    public int getType() {
+        return type;
     }
 
-    public void setImgflag(int imgflag) {
-        this.imgflag = imgflag;
+    public void setType(int type) {
+        this.type = type;
     }
 
     public String getTitle() {
@@ -68,7 +70,7 @@ public class CollectBean {
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
-                ", imgflag=" + imgflag +
+                ", type=" + type +
                 '}';
     }
 }

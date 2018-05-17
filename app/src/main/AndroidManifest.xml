@@ -32,12 +32,15 @@
 
         <!-- 登录/注册 -->
         <activity android:name=".ui.LoginActivity" />
-        <activity android:name=".ui.My_Property_Activity" />
-        <activity android:name=".ui.Stock_Removal_Activity" />
-        <activity android:name=".ui.Incoming_Test_Activity" />
-        <activity android:name=".ui.MyCollectActivity" />
-        <activity android:name=".ui.My_Warehouse_Activity" />
-        <activity android:name=".ui.Pick_up_goods_Activity"></activity>
+        <activity android:name=".ui.my.My_Property_Activity" />
+        <activity android:name=".ui.my.Stock_Removal_Activity" />
+        <activity android:name=".ui.my.Incoming_Test_Activity" />
+        <activity android:name=".ui.my.MyCollectActivity" />
+        <activity android:name=".ui.my.My_Warehouse_Activity" />
+        <activity android:name=".ui.my.Pick_up_goods_Activity" />
+        <activity android:name=".ui.my.Donation_Activity" />
+        <activity android:name=".ui.my.Collect_Activity" />
+        <activity android:name=".ui.Authenticate_Details_Activity"></activity>
     </application>
 
 </manifest>
