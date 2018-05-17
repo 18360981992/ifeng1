@@ -10,6 +10,7 @@
     tools:context="com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity">
 
     <RelativeLayout
+        android:id="@+id/authenticate_Details_Toobar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x60"
         android:background="@drawable/zichan_jianbian"
@@ -41,6 +42,11 @@
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -227,4 +233,29 @@
                 ></com.ifeng_tech.treasuryyitong.view.MyListView>
         </LinearLayout>
     </ScrollView>
+        <LinearLayout
+            android:id="@+id/authenticate_Details_weitanchuan"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x30"
+            android:background="@drawable/zichan_jianbian"
+            android:gravity="center_vertical"
+            android:visibility="invisible"
+            >
+            <ImageView
+                android:id="@+id/authenticate_Details_weitanchuan_img"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x20"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <TextView
+                android:id="@+id/authenticate_Details_weitanchuan_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="转赠成功"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x14"
+                android:layout_marginLeft="@dimen/x8"/>
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

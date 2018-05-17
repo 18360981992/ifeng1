@@ -1,5 +1,7 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -9,8 +11,13 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
@@ -165,6 +172,11 @@ public class MyUtils {
 
     }
 
+    /**
+     *  成功页面
+     * @param context
+     * @param dialog
+     */
 //    public static void setSubccedIntent(Intent intent, String title, int img, String text, String btn) {
 //        intent.putExtra("title",title)
 //                .putExtra("img", img)
@@ -195,6 +207,24 @@ public class MyUtils {
         WindowManager.LayoutParams params = dialog.getWindow().getAttributes();
         params.width = (int) (display.getWidth());
         dialog.getWindow().setAttributes(params);
+    }
+
+    public static void setObjectAnimator(LinearLayout linearLayout, ImageView img, TextView text, int height, boolean flag){
+        if(flag){// 成功
+            img.setImageResource(R.drawable.chenggong_bai);
+            text.setText("转赠成功");
+        }else{  //  失败
+            img.setImageResource(R.drawable.shibai_bai);
+            text.setText("转赠失败");
+        }
+        linearLayout.setVisibility(View.VISIBLE);
+        ObjectAnimator animatorimg2 = ObjectAnimator.ofFloat(linearLayout, "translationY" ,0-height, 0);
+        ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
+        AnimatorSet animatorSetimg2 = new AnimatorSet();
+        animatorSetimg2.play(alphaimg2).with(animatorimg2);
+        animatorimg2.setDuration(3000);
+        animatorimg2.setInterpolator(new OvershootInterpolator(1));
+        animatorimg2.start();
     }
 
 }

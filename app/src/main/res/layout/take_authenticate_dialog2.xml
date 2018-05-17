@@ -10,51 +10,15 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/x10"
-        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="转赠数量:"
+            android:text="确认预约单"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x13"
-            android:layout_marginLeft="@dimen/x8"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x45"
-            android:layout_marginRight="@dimen/x8"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/take_Authenticate_Dialog1_shuliang"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x35"
-                android:background="@drawable/tihuo_ed_bg"
-                android:inputType="number"
-                android:singleLine="true"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x13"
-                android:hint="请输入数量"/>
-
-            <TextView
-                android:id="@+id/take_Authenticate_Dialog1_zuida"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/x2"
-                android:text="最大转赠数量:1200"
-                android:textColor="#E93438"
-                android:textSize="@dimen/x10"
-                android:inputType="number"
-                android:singleLine="true"/>
-        </LinearLayout>
-
-    </LinearLayout>
+            android:textSize="@dimen/x14"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/x8"
+            />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -64,21 +28,68 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="手续费:"
-            android:textColor="@color/name_se"
-            android:textSize="@dimen/x13"
+            android:text="鉴定时间:"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x12"
             android:layout_marginLeft="@dimen/x8"
             />
         <TextView
-            android:id="@+id/take_Authenticate_Dialog1_shouxufei"
+            android:id="@+id/take_Authenticate_Dialog2_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥100.00"
-            android:textColor="@color/name_se"
-            android:textSize="@dimen/x13"
-            android:layout_marginLeft="@dimen/x58"
+            android:text="2018-05-25 下午"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x12"
+            android:layout_marginLeft="@dimen/x5"
             />
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x15"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数量:"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/x12"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <TextView
+                android:id="@+id/take_Authenticate_Dialog2_shuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/x12"
+                android:layout_marginLeft="@dimen/x5"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x15"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="鉴定手续费:"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/x12"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <TextView
+                android:id="@+id/take_Authenticate_Dialog2_shouxufei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥100.00"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/x12"
+                android:layout_marginLeft="@dimen/x5"
+                />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -87,7 +98,7 @@
         android:layout_alignParentBottom="true"
         >
         <Button
-            android:id="@+id/take_Authenticate_Dialog1_queren"
+            android:id="@+id/take_Authenticate_Dialog2_queren"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/x35"
@@ -98,7 +109,7 @@
             android:background="@drawable/congzhi_bg"
             />
         <Button
-            android:id="@+id/take_Authenticate_Dialog1_quxiao"
+            android:id="@+id/take_Authenticate_Dialog2_quxiao"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/x35"

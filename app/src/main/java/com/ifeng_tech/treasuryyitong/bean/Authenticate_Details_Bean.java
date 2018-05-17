@@ -8,11 +8,22 @@ public class Authenticate_Details_Bean {
     long time;
     int AMsy;
     int PMsy;
+    double price;
 
-    public Authenticate_Details_Bean(long time, int AMsy, int PMsy) {
+    public Authenticate_Details_Bean(long time, int AMsy, int PMsy, double price) {
         this.time = time;
         this.AMsy = AMsy;
         this.PMsy = PMsy;
+        this.price = price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public double getPrice() {
+
+        return price;
     }
 
     public long getTime() {

@@ -45,7 +45,8 @@ public class Take_Authenticate_Dialog1 extends Dialog {
             @Override
             public void onClick(View v) {
                 if(take_authenticate_dialog1_shuliang.length()>0){
-                    take_Authenticate_Dialog1_JieKou.QuanRen();
+                    Integer num = Integer.valueOf(take_authenticate_dialog1_shuliang.getText().toString());
+                    take_Authenticate_Dialog1_JieKou.QuanRen(num);
                 }else{
                     MyUtils.setToast("数量不能为空。。。");
                 }
@@ -77,7 +78,11 @@ public class Take_Authenticate_Dialog1 extends Dialog {
     }
 
     public interface Take_Authenticate_Dialog1_JieKou{
-        void QuanRen();
+        /**
+         *
+         * @param num  第一次弹出框的数量
+         */
+        void QuanRen(int num);
     }
     Take_Authenticate_Dialog1_JieKou take_Authenticate_Dialog1_JieKou;
 
