@@ -19,6 +19,9 @@ import com.ifeng_tech.treasuryyitong.view.MyListView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  转赠列表
+ */
 public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activity,MyPresenter<My_Given_list_Activity>> {
 
     private RelativeLayout my_Given_Fan;

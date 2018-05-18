@@ -104,77 +104,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x34"
         >
-        <LinearLayout
-            android:id="@+id/my_given_list_zhuanchu_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/x8"
-            android:layout_centerVertical="true"
-            >
-            <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x15"
-                android:background="@drawable/zhuanchu"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="转出"
-                android:textSize="@dimen/x10"
-                android:textColor="#0FCE3F"
-                android:layout_marginLeft="@dimen/x5"
-                />
-        </LinearLayout>
-
-        <!-- 转入-->
-        <LinearLayout
-            android:id="@+id/my_given_list_zhuanru_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginLeft="@dimen/x8"
-            android:layout_centerVertical="true"
-            android:visibility="gone"
-            >
-            <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x15"
-                android:background="@drawable/zhuanru"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="转入"
-                android:textSize="@dimen/x10"
-                android:textColor="#5479EC"
-                android:layout_marginLeft="@dimen/x5"
-                />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:id="@+id/my_given_list_zhuanru_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"
-            android:visibility="gone"
-            >
-            <ImageView
-                android:id="@+id/my_given_list_jieshou"
-                android:layout_width="@dimen/x35"
-                android:layout_height="@dimen/x20"
-                android:background="@drawable/jieshou"/>
-            <ImageView
-                android:id="@+id/my_given_list_jujue"
-                android:layout_width="@dimen/x35"
-                android:layout_height="@dimen/x20"
-                android:background="@drawable/jujue"
-                android:layout_marginLeft="@dimen/x10"
-                />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/my_given_list_zhuanchu_btn"
@@ -191,7 +120,7 @@
                 android:layout_height="wrap_content"
                 android:text="等待确认"
                 android:textSize="@dimen/x10"
-                android:textColor="#FFB800"
+                android:textColor="@color/fengouxian1"
                 />
         </LinearLayout>
 

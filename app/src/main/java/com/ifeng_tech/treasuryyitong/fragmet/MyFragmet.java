@@ -19,8 +19,8 @@ import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.MyCollectActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
@@ -86,7 +86,7 @@ public class MyFragmet extends Fragment {
                         activity.startActivity(intent);
                         break;
                     case 2:  // 我的托管
-                        intent = new Intent(activity, Collocation_Subscribe_Activity.class);
+                        intent = new Intent(activity, My_Collocation_Activity.class);
                         startActivity(intent);
                         break;
                     case 3:  // 转赠列表
