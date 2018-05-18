@@ -11,16 +11,27 @@ import java.io.Serializable;
 public class CollectBean implements Serializable{
     int img;
     String name;
+    int cword;
     String title;
     String text;
     int type;
 
-    public CollectBean(int img, String name, String title, String text, int type) {
+    public CollectBean(int img, String name, int cword, String title, String text, int type) {
         this.img = img;
         this.name = name;
+        this.cword = cword;
         this.title = title;
         this.text = text;
         this.type = type;
+    }
+
+    public void setCword(int cword) {
+        this.cword = cword;
+    }
+
+    public int getCword() {
+
+        return cword;
     }
 
     public int getType() {
@@ -68,6 +79,7 @@ public class CollectBean implements Serializable{
         return "CollectBean{" +
                 "img=" + img +
                 ", name='" + name + '\'' +
+                ", cword=" + cword +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", type=" + type +

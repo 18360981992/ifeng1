@@ -15,7 +15,7 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Authenticate_Details_list_Adapter;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Bean;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
@@ -76,10 +76,10 @@ public class Authenticate_Details_Activity extends BaseMVPActivity<Authenticate_
 
         // 顶部的商品信息暂时是模拟的数据，有可能是查询，有可能是传递 先做成传递
         Intent intent = getIntent();
-        CollectBean collectBean = (CollectBean) intent.getSerializableExtra("CollectBean");
-        authenticate_Details_img.setImageResource(collectBean.getImg());
-        authenticate_Details_bianma.setText(""+235998647);
-        authenticate_Details_name.setText(collectBean.getName());
+        CollocationBean collocationBean = (CollocationBean) intent.getSerializableExtra("CollocationBean");
+        authenticate_Details_img.setImageResource(collocationBean.getImg());
+        authenticate_Details_bianma.setText(""+collocationBean.getCword());
+        authenticate_Details_name.setText(collocationBean.getName());
         authenticate_Details_danwei.setText("枚");
         authenticate_Details_jindu.setText("100/200");
         authenticate_Details_shuliang.setText(""+100);

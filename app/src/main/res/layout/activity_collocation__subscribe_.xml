@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity">
+
+    <RelativeLayout
+        android:id="@+id/authenticate_Details_Toobar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:background="@drawable/zichan_jianbian"
+        >
+        <RelativeLayout
+            android:id="@+id/collocation_Subscribe_Fan"
+            android:layout_width="@dimen/x30"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x14"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_back"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="托管预约"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/collocation_Subscribe_pulltoscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.stx.xhb.xbanner.XBanner
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/collocation_Subscribe_XBanner"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x150"
+                app:pointsPosition="CENTER"
+                app:AutoPlayTime="1500"
+                ></com.stx.xhb.xbanner.XBanner>
+
+            <com.ifeng_tech.treasuryyitong.view.MyListView
+                android:id="@+id/collocation_Subscribe_MyListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:layout_marginTop="@dimen/x8"
+                android:divider="@null"
+                ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
+
+</LinearLayout>

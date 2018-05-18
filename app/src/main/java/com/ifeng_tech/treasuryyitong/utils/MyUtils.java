@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
+import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -209,7 +210,7 @@ public class MyUtils {
         dialog.getWindow().setAttributes(params);
     }
 
-    public static void setObjectAnimator(LinearLayout linearLayout, ImageView img, TextView text, int height, boolean flag){
+    public static void setObjectAnimator(final LinearLayout linearLayout, ImageView img, TextView text, int height, boolean flag){
         if(flag){// 成功
             img.setImageResource(R.drawable.chenggong_bai);
             text.setText("转赠成功");
@@ -222,9 +223,43 @@ public class MyUtils {
         ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
         AnimatorSet animatorSetimg2 = new AnimatorSet();
         animatorSetimg2.play(alphaimg2).with(animatorimg2);
-        animatorimg2.setDuration(3000);
+        animatorimg2.setDuration(2000);
         animatorimg2.setInterpolator(new OvershootInterpolator(1));
         animatorimg2.start();
+
+        animatorimg2.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                DashApplication.getAppHanler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            linearLayout.setVisibility(View.INVISIBLE);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+
     }
 
 }

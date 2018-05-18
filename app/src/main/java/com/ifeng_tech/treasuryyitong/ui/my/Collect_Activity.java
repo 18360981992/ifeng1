@@ -1,15 +1,20 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,6 +59,10 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             }
         }
     };
+    private LinearLayout collect_ac_weitanchuan;
+    private ImageView collect_ac_weitanchuan_img;
+    private TextView collect_ac_weitanchuan_text;
+    private int weitanchuan_height;
 
     @Override
     public MyPresenter<Collect_Activity> initPresenter() {
@@ -145,6 +154,20 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         collect_ac_duan = (EditText) findViewById(R.id.collect_ac_duan);
         collect_ac_duan_btn = (TextView) findViewById(R.id.collect_ac_duan_btn);
         collect_ac_tijiao = (Button) findViewById(R.id.collect_ac_tijiao);
+        collect_ac_weitanchuan = (LinearLayout) findViewById(R.id.collect_ac_weitanchuan);
+        collect_ac_weitanchuan_img = (ImageView) findViewById(R.id.collect_ac_weitanchuan_img);
+        collect_ac_weitanchuan_text = (TextView) findViewById(R.id.collect_ac_weitanchuan_text);
+
+        //通过设置监听来获取 微弹窗 控件的高度
+        collect_ac_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onGlobalLayout() {
+                collect_ac_weitanchuan.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //获取ImageView控件的初始高度  用来图片回弹时
+                weitanchuan_height = collect_ac_weitanchuan.getMeasuredHeight();
+            }
+        });
 
         collect_ac_tijiao.setOnClickListener(this);
     }
@@ -216,6 +239,11 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             public void QuanRen() { // 点击确认
                 MyUtils.setToast("正在请求网络。。。");
                 dialog.dismiss();
+                MyUtils.setObjectAnimator(collect_ac_weitanchuan,
+                                        collect_ac_weitanchuan_img,
+                                        collect_ac_weitanchuan_text,
+                                        weitanchuan_height,
+                                        true);
             }
 
             @Override

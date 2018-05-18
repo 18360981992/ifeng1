@@ -124,9 +124,9 @@ public class CollectFragmet extends Fragment {
         /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
         collect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
         ILoadingLayout Labels = collect_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("用力拉...");
-        Labels.setRefreshingLabel("释放立即刷新...");
-        Labels.setReleaseLabel("正在刷新...");
+        Labels.setPullLabel("下拉刷新...");
+        Labels.setRefreshingLabel("正在刷新...");
+        Labels.setReleaseLabel("放开刷新...");
     }
 
 
@@ -134,9 +134,9 @@ public class CollectFragmet extends Fragment {
         // 征集
         for (int i = 0; i < 15; i++) {
             if(i%2==0)
-                collectlist.add(new CollectBean(R.drawable.guangao, "世博四连体", "福利特寄卖商城", "托管进度10/20",0));
+                collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",0));
             else
-                collectlist.add(new CollectBean(R.drawable.guangao, "世博四连体", "福利特寄卖商城", "托管进度10/20", 1));
+                collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",1));
         }
 
         imgs = Arrays.asList(IMAGES);

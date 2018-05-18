@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!--资讯详情 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +16,7 @@
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
-            android:id="@+id/up_goods_Fan"
+            android:id="@+id/information_Details_Fan"
             android:layout_width="@dimen/x30"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
@@ -29,29 +31,28 @@
                 />
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/up_goods_TabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x35"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/baise"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/baise"
-            app:tabTextColor="@color/fengouxian"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
-            android:layout_toRightOf="@+id/up_goods_Fan"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="资讯详情"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x5"
-            >
-
-        </android.support.design.widget.TabLayout>
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/up_goods_FrameLayout"
+    <ProgressBar
+        android:visibility="invisible"
+        android:id="@+id/information_Details_ProgressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <WebView
+        android:id="@+id/information_Details_WebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></FrameLayout>
+        ></WebView>
+
 
 </LinearLayout>

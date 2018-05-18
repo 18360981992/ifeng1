@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.HomeAdapter;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
@@ -34,7 +35,7 @@ public class HomeFragmet extends Fragment {
     List<Object> list = new ArrayList<>();
     List<FirstGpsBean> gpslist=new ArrayList<>();
     List<CollectBean> collectlist=new ArrayList<>();
-    List<CollectBean> trusteeshiplist=new ArrayList<>();
+    List<CollocationBean> trusteeshiplist=new ArrayList<>();
     List<InformationBean> informationlist=new ArrayList<>();
     List<String> imgs;
     private HomePageActivity activity;
@@ -78,14 +79,14 @@ public class HomeFragmet extends Fragment {
         gpslist.add(new FirstGpsBean(R.drawable.jianding,"鉴定"));
 
         // 征集
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",0));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",1));
-        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","托管进度10/20",0));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",0));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",1));
+        collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",0));
 
         // 托管
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",0));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",1));
-        trusteeshiplist.add(new CollectBean(R.drawable.guangao,"世博四连体","福利特寄卖商城","截止时间:18/05/02",0));
+        trusteeshiplist.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",0));
+        trusteeshiplist.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",1));
+        trusteeshiplist.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",0));
 
 
 

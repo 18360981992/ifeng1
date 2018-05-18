@@ -1,12 +1,14 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zzt on 2018/4/27.
  *
  * 资讯bean
  */
 
-public class InformationBean {
+public class InformationBean implements Serializable{
     String title;
     String text;
     String time;

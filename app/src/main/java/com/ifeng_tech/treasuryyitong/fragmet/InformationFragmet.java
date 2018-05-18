@@ -11,6 +11,7 @@ import android.widget.FrameLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Information_zi_Fragment;
+import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.view.MyTabLayout;
 
 /**
@@ -23,12 +24,15 @@ public class InformationFragmet extends Fragment {
     private TabLayout zixun_TabLayout;
     private FrameLayout zixun_FrameLayout;
     String[] title={"全部","热门","关注","栏目1","栏目2","栏目3","栏目4","栏目5","栏目6","栏目7","栏目8"};
+    private HomePageActivity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_fragmet, container, false);
         initView(view);
+
+        activity = (HomePageActivity) getActivity();
 
         //设置tablayout的横杆器的长度
         zixun_TabLayout.post(new Runnable() {

@@ -5,12 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/fengouxian"
     >
     
     <RelativeLayout
         android:id="@+id/message_xitong"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x50"
+        android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_xitong_img"
@@ -53,10 +55,18 @@
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x5"
+        android:background="@color/fengouxian"
+       />
+
     <RelativeLayout
         android:id="@+id/message_congzhi"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x50"
+        android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_congzhi_img"
@@ -99,10 +109,17 @@
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x5"
+        android:background="@color/fengouxian"
+        />
+
     <RelativeLayout
         android:id="@+id/message_anquan"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x50"
+        android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_anquan_img"

@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Arrays;
  *  首页中的资讯 bean
  */
 
-public class Information_Zi_Bean {
+public class Information_Zi_Bean implements Serializable{
     String[] imags;
     String top;
     String text;

@@ -17,9 +17,11 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.stx.xhb.xbanner.XBanner;
@@ -151,7 +153,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
             RecyclerView home_tuoguan_recyclerView = ((HomeTuoGuan) holder).home_tuoguan_recyclerView;
             RelativeLayout home_tuoguan_RelativeLayout = ((HomeTuoGuan) holder).home_tuoguan_RelativeLayout;
 
-            List<CollectBean> trusteeshiplist = (List<CollectBean>) list.get(position);
+            List<CollocationBean> trusteeshiplist = (List<CollocationBean>) list.get(position);
             home_tuoguan_recyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL,false));
             home_tuoguan_recyclerView.setAdapter(new HomeCollocationAdapter(context,trusteeshiplist));
 
@@ -165,7 +167,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
         }else{  // 资讯
             RecyclerView home_zixun_myListView = ((HomeZiXun) holder).home_zixun_myListView;
             RelativeLayout home_zixun_relativeLayout = ((HomeZiXun) holder).home_zixun_relativeLayout;
-            List<InformationBean> informationlist = (List<InformationBean>) list.get(position);
+            final List<InformationBean> informationlist = (List<InformationBean>) list.get(position);
             home_zixun_myListView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
             HomeInformationAdapter homeInformationAdapter = new HomeInformationAdapter(context, informationlist);
@@ -174,7 +176,11 @@ public class HomeAdapter extends RecyclerView.Adapter{
             homeInformationAdapter.setZiXunAdapterJieKou(new HomeInformationAdapter.ZiXunAdapterJieKou() {
                 @Override
                 public void ZiXunChuan(int i) {
-                    MyUtils.setToast("点击了资讯条目=="+i);
+//                    MyUtils.setToast("点击了资讯条目=="+i);
+                    Intent intent = new Intent(context, Information_Details_Activity.class);
+//                    intent.putExtra("InformationBean",informationlist.get(i));
+                    context.startActivity(intent);
+
                 }
             });
 

@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,11 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     private TextView donation_zuidae;
 
     int time=60;
+    private LinearLayout donation_weitanchuan;
+    private ImageView donation_weitanchuan_img;
+    private TextView donation_weitanchuan_text;
+    private int weitanchuan_height;
+
     @Override
     public MyPresenter<Donation_Activity> initPresenter() {
         if(myPresenter==null) {
@@ -184,12 +191,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 }
             }
         });
-
-
-
-
-
-
     }
 
 
@@ -203,6 +204,11 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                     @Override
                     public void chuan(int postion) {
                         MyUtils.setToast("请做回显操作。。。");
+                        // 模拟数据
+                        donation_cangpin_wrod.setText(list.get(postion)+"");
+                        donation_name.setText("两只老虎");
+                        donation_danjia.setText("￥"+DashApplication.decimalFormat.format(120)); // 价格会从请求的数据来获取
+                        donation_zuidae.setText("最大转赠数量:"+120);
                     }
                 });
             }
@@ -226,6 +232,9 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         donation_duan_btn = (TextView) findViewById(R.id.donation_duan_btn);
         donation_zuidae = (TextView) findViewById(R.id.donation_zuidae);
         donation_tijiao = (Button) findViewById(R.id.donation_tijiao);
+        donation_weitanchuan = (LinearLayout) findViewById(R.id.donation_weitanchuan);
+        donation_weitanchuan_img = (ImageView) findViewById(R.id.donation_weitanchuan_img);
+        donation_weitanchuan_text = (TextView) findViewById(R.id.donation_weitanchuan_text);
 
         donation_tijiao.setOnClickListener(this);
 
@@ -237,6 +246,17 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 donation_cangpin_wrod.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 //获取ImageView控件的初始高度  用来图片回弹时
                 measuredWidth = donation_cangpin_wrod.getMeasuredWidth();
+            }
+        });
+
+        //通过设置监听来获取 微弹窗 控件的高度
+        donation_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onGlobalLayout() {
+                donation_weitanchuan.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //获取ImageView控件的初始高度  用来图片回弹时
+                weitanchuan_height = donation_weitanchuan.getMeasuredHeight();
             }
         });
 
@@ -303,6 +323,13 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             public void QuanRen() { // 点击确认
                 MyUtils.setToast("正在请求网络。。。");
                 dialog.dismiss();
+                MyUtils.setObjectAnimator(donation_weitanchuan,
+                        donation_weitanchuan_img,
+                        donation_weitanchuan_text,
+                        weitanchuan_height,
+                        true);
+
+
             }
 
             @Override

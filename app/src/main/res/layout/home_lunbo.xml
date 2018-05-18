@@ -7,7 +7,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/home_XBanner"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x120"
+        android:layout_height="@dimen/x150"
         app:pointsPosition="CENTER"
         app:AutoPlayTime="1500"
         ></com.stx.xhb.xbanner.XBanner>

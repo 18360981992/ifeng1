@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.fragmet.zi_fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,7 +14,7 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Information_zi_Adapter;
 import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
@@ -45,6 +46,7 @@ public class Information_zi_Fragment extends Fragment {
         initView(view);
 
         activity = (HomePageActivity) getActivity();
+
         information_zi_fragment_xRecyclerView.setLayoutManager(new LinearLayoutManager(activity, OrientationHelper.VERTICAL,false));
 
 
@@ -65,7 +67,12 @@ public class Information_zi_Fragment extends Fragment {
         information_zi_adapter.setInformation_zi_Adapter_JieKou(new Information_zi_Adapter.Information_zi_Adapter_JieKou() {
             @Override
             public void chuan(int postion) {
-                MyUtils.setToast("点击了=="+topList.get(postion).getTop()+"的第"+postion+"条");
+//                MyUtils.setToast("点击了=="+topList.get(postion).getTop()+"的第"+postion+"条");
+
+                Intent intent = new Intent(activity, Information_Details_Activity.class);
+//                intent.putExtra("InformationBean",topList.get(postion));
+                activity.startActivity(intent);
+
             }
         });
 

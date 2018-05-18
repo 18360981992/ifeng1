@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.view.KeyEvent;
@@ -18,6 +19,7 @@ import com.ifeng_tech.treasuryyitong.fragmet.InformationFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
@@ -170,7 +172,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             @Override
             public void chuan(int i) {
                 switch (i){
-                    case 0:
+                    case 0: // 跳转 征集列表
                         setBeiJing(false,false,true,false,false);
                         fragmentManager.beginTransaction()
                                 .hide(homeFragmet)
@@ -183,10 +185,11 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                     case 1:
                         MyUtils.setToast("点击了广告。。。");
                         break;
-                    case 2:
-                        MyUtils.setToast("点击了托管。。。");
+                    case 2:  // 跳转 托管预约列表
+                        Intent intent = new Intent(HomePageActivity.this, Collocation_Subscribe_Activity.class);
+                        startActivity(intent);
                         break;
-                    case 3:
+                    case 3:  // 跳转 资讯列表
                         setBeiJing(false,true,false,false,false);
                         fragmentManager.beginTransaction()
                                 .hide(homeFragmet)

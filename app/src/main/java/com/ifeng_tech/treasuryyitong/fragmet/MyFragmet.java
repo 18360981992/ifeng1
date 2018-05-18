@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,12 +19,14 @@ import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.my.Incoming_Test_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.MyCollectActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Stock_Removal_Activity;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,10 +44,12 @@ public class MyFragmet extends Fragment {
     private TextView wode_name;
     private TextView wode_hao;
     private TextView wode_weirenzheng;
-    private ListView wode_listview;
+    private ListView wode_MyListView;
     List<MyListBean> myListBeen = new ArrayList<>();
     private HomePageActivity activity;
     private Intent intent;
+    private RelativeLayout wode_anquanbaohu;
+    private RelativeLayout wode_shezhi;
 
     @Nullable
     @Override
@@ -66,9 +71,9 @@ public class MyFragmet extends Fragment {
                 .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
                 .into(wode_touxiang);
 
-        wode_listview.setAdapter(new MyListAdapter(activity,myListBeen));
+        wode_MyListView.setAdapter(new MyListAdapter(activity,myListBeen));
 
-        wode_listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        wode_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position){
@@ -81,31 +86,46 @@ public class MyFragmet extends Fragment {
                         activity.startActivity(intent);
                         break;
                     case 2:  // 我的托管
+                        intent = new Intent(activity, Collocation_Subscribe_Activity.class);
+                        startActivity(intent);
                         break;
                     case 3:  // 转赠列表
+                        intent = new Intent(activity, My_Given_list_Activity.class);
+                        startActivity(intent);
                         break;
-                    case 4:  //  入库管理
-                        intent = new Intent(activity, Incoming_Test_Activity.class);
-                        activity.startActivity(intent);
-                        break;
-                    case 5:  // 出库管理
-                        intent = new Intent(activity, Stock_Removal_Activity.class);
-                        activity.startActivity(intent);
-                        break;
-                    case 6:   // 我的仓库
+//                    case 4:  //  入库管理
+//                        intent = new Intent(activity, Incoming_Test_Activity.class);
+//                        activity.startActivity(intent);
+//                        break;
+//                    case 5:  // 出库管理
+//                        intent = new Intent(activity, Stock_Removal_Activity.class);
+//                        activity.startActivity(intent);
+//                        break;
+                    case 4:   // 我的仓库
                         intent = new Intent(activity, My_Warehouse_Activity.class);
                         activity.startActivity(intent);
                         break;
-                    case 7:   // 提货注册
+                    case 5:   // 提货注册
                         intent = new Intent(activity, Pick_up_goods_Activity.class);
                         activity.startActivity(intent);
                         break;
-                    case 8:  // 安全保护
-                        break;
-                    case 9:  // 设置
-                        break;
 
                 }
+            }
+        });
+        // 安全保护 点击
+        wode_anquanbaohu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtils.setToast("安全保护...");
+            }
+        });
+
+        // 设置 点击
+        wode_shezhi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyUtils.setToast("设置...");
             }
         });
     }
@@ -115,7 +135,9 @@ public class MyFragmet extends Fragment {
         wode_name = (TextView) view.findViewById(R.id.wode_name);
         wode_hao = (TextView) view.findViewById(R.id.wode_hao);
         wode_weirenzheng = (TextView) view.findViewById(R.id.wode_weirenzheng);
-        wode_listview = (ListView) view.findViewById(R.id.wode_listview);
+        wode_MyListView = (MyListView) view.findViewById(R.id.wode_MyListView);
+        wode_anquanbaohu = view.findViewById(R.id.wode_anquanbaohu);
+        wode_shezhi = view.findViewById(R.id.wode_shezhi);
 
         initData();
     }
@@ -125,12 +147,9 @@ public class MyFragmet extends Fragment {
         myListBeen.add(new MyListBean(R.drawable.wode_zhengji,"我的征集"));
         myListBeen.add(new MyListBean(R.drawable.wode_tuoguan,"我的托管"));
         myListBeen.add(new MyListBean(R.drawable.wode_zhuanzeng,"转赠列表"));
-        myListBeen.add(new MyListBean(R.drawable.wode_ruku,"入库管理"));
-        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"出库管理"));
+//        myListBeen.add(new MyListBean(R.drawable.wode_ruku,"入库管理"));
+//        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"出库管理"));
         myListBeen.add(new MyListBean(R.drawable.wode_cangku,"我的仓库"));
         myListBeen.add(new MyListBean(R.drawable.wode_chuku,"提货查询"));
-        myListBeen.add(new MyListBean(R.drawable.wode_anquan,"安全保护"));
-        myListBeen.add(new MyListBean(R.drawable.wode_shezhi,"设置"));
-
     }
 }

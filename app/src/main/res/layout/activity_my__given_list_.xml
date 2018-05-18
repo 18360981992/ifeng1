@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,7 +14,7 @@
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
-            android:id="@+id/up_goods_Fan"
+            android:id="@+id/my_Given_Fan"
             android:layout_width="@dimen/x30"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
@@ -29,29 +29,39 @@
                 />
         </RelativeLayout>
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/up_goods_TabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x35"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/baise"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/baise"
-            app:tabTextColor="@color/fengouxian"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
-            android:layout_toRightOf="@+id/up_goods_Fan"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="转赠列表"
+            android:textSize="@dimen/x16"
+            android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x5"
-            >
-
-        </android.support.design.widget.TabLayout>
+            android:layout_marginBottom="@dimen/x8"
+            android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
 
-    <FrameLayout
-        android:id="@+id/up_goods_FrameLayout"
+    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+        android:id="@+id/my_Given_pulltoscroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></FrameLayout>
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.ifeng_tech.treasuryyitong.view.MyListView
+                android:id="@+id/my_Given_MyListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:divider="@null"
+                ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+        </LinearLayout>
+    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+
 
 </LinearLayout>
