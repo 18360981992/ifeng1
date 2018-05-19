@@ -87,11 +87,11 @@ public class MyFragmet extends Fragment {
                         break;
                     case 2:  // 我的托管
                         intent = new Intent(activity, My_Collocation_Activity.class);
-                        startActivity(intent);
+                        activity.startActivity(intent);
                         break;
                     case 3:  // 转赠列表
                         intent = new Intent(activity, My_Given_list_Activity.class);
-                        startActivity(intent);
+                        activity.startActivity(intent);
                         break;
 //                    case 4:  //  入库管理
 //                        intent = new Intent(activity, Incoming_Test_Activity.class);

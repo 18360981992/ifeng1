@@ -1,10 +1,12 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zzt on 2018/5/18.
  */
 
-public class Collocation_list_Bean {
+public class Collocation_list_Bean implements Serializable{
     String dword;
     int cword;
     String name;

@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -260,6 +261,19 @@ public class MyUtils {
         });
 
 
+    }
+
+    /**
+     *  计算 下一年的时间
+     * @param date
+     * @return
+     */
+    public static Date getNextDay(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.YEAR, +1);//+1今天的时间加一年
+        date = calendar.getTime();
+        return date;
     }
 
 }
