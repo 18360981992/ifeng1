@@ -1,10 +1,12 @@
 package com.ifeng_tech.treasuryyitong.base;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.NetWorkUtil;
 
 
 /**
@@ -38,6 +40,10 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
         setContentView(R.layout.activity_base_mvp);
         myPresenter=initPresenter();
 
+        boolean conn = NetWorkUtil.isConn((Context) this);
+        if(!conn){
+            NetWorkUtil.showNoNetWorkDlg((Context) this);
+        }
     }
 
     //在获取焦点是将当前对象与p层绑定

@@ -211,14 +211,22 @@ public class MyUtils {
         dialog.getWindow().setAttributes(params);
     }
 
-    public static void setObjectAnimator(final LinearLayout linearLayout, ImageView img, TextView text, int height, boolean flag){
+    /**
+     * 转赠等页面专用的微弹窗
+     * @param linearLayout
+     * @param img
+     * @param text
+     * @param height
+     * @param flag
+     * @param ss
+     */
+    public static void setObjectAnimator(final LinearLayout linearLayout, ImageView img, TextView text, int height, boolean flag, String ss){
         if(flag){// 成功
             img.setImageResource(R.drawable.chenggong_bai);
-            text.setText("转赠成功");
         }else{  //  失败
             img.setImageResource(R.drawable.shibai_bai);
-            text.setText("转赠失败");
         }
+        text.setText(ss);
         linearLayout.setVisibility(View.VISIBLE);
         ObjectAnimator animatorimg2 = ObjectAnimator.ofFloat(linearLayout, "translationY" ,0-height, 0);
         ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
@@ -259,8 +267,76 @@ public class MyUtils {
 
             }
         });
+    }
 
+    /**
+     *  安全保护中专用的微弹窗
+     * @param linearLayout
+     * @param img
+     * @param text
+     * @param height
+     * @param flag
+     * @param ss
+     */
+    public static void setObjectAnimator_anquan(final LinearLayout linearLayout, ImageView img, TextView text, int height, final boolean flag, String ss){
+        if(flag){// 成功
+            img.setImageResource(R.drawable.chenggong_bai);
+        }else{  //  失败
+            img.setImageResource(R.drawable.shibai_bai);
+        }
+        text.setText(ss);
+        linearLayout.setVisibility(View.VISIBLE);
+        ObjectAnimator animatorimg2 = ObjectAnimator.ofFloat(linearLayout, "translationY" ,0-height, 0);
+        ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
+        AnimatorSet animatorSetimg2 = new AnimatorSet();
+        animatorSetimg2.play(alphaimg2).with(animatorimg2);
+        animatorimg2.setDuration(2000);
+        animatorimg2.setInterpolator(new OvershootInterpolator(1));
+        animatorimg2.start();
 
+        animatorimg2.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                DashApplication.getAppHanler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(2000);
+                            linearLayout.setVisibility(View.INVISIBLE);
+                            if(flag){ // 成功的时候将当前页面销毁
+                                myUtils_jieKou.chuan();
+                            }
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    public interface MyUtils_JieKou{
+        void chuan();
+    }
+    public static MyUtils_JieKou myUtils_jieKou;
+
+    public static void setMyUtils_jieKou(MyUtils_JieKou myUtils_jieKou) {
+        MyUtils.myUtils_jieKou = myUtils_jieKou;
     }
 
     /**

@@ -127,7 +127,7 @@ public class Authenticate_Details_Activity extends BaseMVPActivity<Authenticate_
                                         authenticate_details_weitanchuan_img,
                                         authenticate_details_weitanchuan_text,
                                         weitanchuan_height,
-                                        false);
+                                        false,"转赠失败!");
                             }
                         });
 
@@ -167,7 +167,7 @@ public class Authenticate_Details_Activity extends BaseMVPActivity<Authenticate_
                                                         authenticate_details_weitanchuan_img,
                                                         authenticate_details_weitanchuan_text,
                                                         weitanchuan_height,
-                                                        true);
+                                                        true,"转赠成功!");
 
                             }
                         });

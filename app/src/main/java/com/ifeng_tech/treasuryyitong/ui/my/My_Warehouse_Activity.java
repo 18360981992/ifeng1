@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
@@ -20,6 +21,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ifeng_tech.treasuryyitong.R.id.my_Given_pulltoscroll;
 import static com.ifeng_tech.treasuryyitong.R.id.my_warehouse__XRecyclerView;
 
 /**
@@ -33,8 +35,9 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
     private ImageView my_warehouse_zhangdan;
     private XRecyclerView my_warehouse_XRecyclerView;
 
-    List<WarehouseBean> warehouselist = new ArrayList<WarehouseBean>();
+    List<WarehouseBean> list = new ArrayList<WarehouseBean>();
     private Warehouse_Adapter warehouse_adapter;
+    private LinearLayout my_warehouse_null;
 
     @Override
     public MyPresenter<My_Warehouse_Activity> initPresenter() {
@@ -71,7 +74,16 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
     protected void onResume() {
         super.onResume();
 
-        setAdapter();
+        if(list.size()>0){
+            my_warehouse_null.setVisibility(View.GONE);
+            my_warehouse_XRecyclerView.setVisibility(View.VISIBLE);
+            // 初始化数据 与适配器
+            setAdapter();
+        }else{
+            my_warehouse_null.setVisibility(View.VISIBLE);
+            my_warehouse_XRecyclerView.setVisibility(View.GONE);
+        }
+
 
         my_warehouse_XRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -88,7 +100,7 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
 
     public void setAdapter(){
         if (warehouse_adapter==null){
-            warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity.this, warehouselist);
+            warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity.this, list);
             my_warehouse_XRecyclerView.setAdapter(warehouse_adapter);
         }else{
             warehouse_adapter.notifyDataSetChanged();
@@ -98,14 +110,14 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
             @Override
             public void tihuo_chuan(int postion) { // 跳转提货
                 Intent intent = new Intent(My_Warehouse_Activity.this, Pick_up_goods_Activity.class);
-                intent.putExtra("WarehouseBean",  warehouselist.get(postion));
+                intent.putExtra("WarehouseBean",  list.get(postion));
                 startActivity(intent);
             }
 
             @Override
             public void zhuanzeng_chuan(int postion) { // 跳转转赠
                 Intent intent = new Intent(My_Warehouse_Activity.this, Donation_Activity.class);
-                intent.putExtra("WarehouseBean",  warehouselist.get(postion));
+                intent.putExtra("WarehouseBean",  list.get(postion));
                 startActivity(intent);
             }
         });
@@ -115,16 +127,19 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         my_warehouse_Fan = (RelativeLayout) findViewById(R.id.my_warehouse_Fan);
         my_warehouse_zhangdan = (ImageView) findViewById(R.id.my_warehouse_zhangdan);
         my_warehouse_XRecyclerView = (XRecyclerView) findViewById(my_warehouse__XRecyclerView);
+        my_warehouse_null = (LinearLayout) findViewById(R.id.my_warehouse_null);
 
         my_warehouse_XRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         my_warehouse_XRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
+
+
         initData();
     }
 
     public void initData(){
 
         for (int i=0;i<20;i++){
-            warehouselist.add(new WarehouseBean("655286224",R.drawable.guangao,"世博四连体",2000,1000));
+            list.add(new WarehouseBean("655286224",R.drawable.guangao,"世博四连体",2000,1000));
         }
     }
 }

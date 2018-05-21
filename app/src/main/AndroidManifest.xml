@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".appliction.DashApplication"
@@ -46,7 +47,13 @@
         <activity android:name=".ui.my.My_Given_list_Activity" />
         <activity android:name=".ui.Information_Details_Activity" />
         <activity android:name=".ui.my.My_Collocation_Activity" />
-        <activity android:name=".ui.my.My_Collocation_Detail_Activity"></activity>
+        <activity android:name=".ui.my.My_Collocation_Detail_Activity" />
+        <activity android:name=".ui.my.Setting_Activity" />
+        <activity android:name=".ui.my.Safe_Activity" />
+        <activity android:name=".ui.my.Reset_Activity" />
+        <activity android:name=".ui.my.Retrieve_Activity" />
+        <activity android:name=".ui.my.Change_Activity" />
+        <activity android:name=".ui.my.Forget_Activity"></activity>
     </application>
 
 </manifest>

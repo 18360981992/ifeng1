@@ -25,7 +25,8 @@ import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import java.util.ArrayList;
@@ -117,7 +118,8 @@ public class MyFragmet extends Fragment {
         wode_anquanbaohu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("安全保护...");
+                intent = new Intent(activity, Safe_Activity.class);
+                activity.startActivity(intent);
             }
         });
 
@@ -125,7 +127,8 @@ public class MyFragmet extends Fragment {
         wode_shezhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("设置...");
+                intent = new Intent(activity, Setting_Activity.class);
+                activity.startActivity(intent);
             }
         });
     }

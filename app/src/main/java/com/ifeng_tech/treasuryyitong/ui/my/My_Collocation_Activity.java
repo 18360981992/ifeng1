@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -31,6 +32,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
     private PullToRefreshScrollView my_collocation_pulltoscroll;
     List<Collocation_list_Bean> list = new ArrayList<>();
     private My_Collocation_list_Adapter my_collocation_adapter;
+    private LinearLayout my_collocation_null;
 
     @Override
     public MyPresenter<My_Collocation_Activity> initPresenter() {
@@ -63,8 +65,16 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
     protected void onResume() {
         super.onResume();
 
-        // 初始化数据 与适配器
-        setMy_Collocation_list_Adapter();
+        if(list.size()>0){
+            my_collocation_null.setVisibility(View.GONE);
+            my_collocation_pulltoscroll.setVisibility(View.VISIBLE);
+            // 初始化数据 与适配器
+            setMy_Collocation_list_Adapter();
+        }else{
+            my_collocation_null.setVisibility(View.VISIBLE);
+            my_collocation_pulltoscroll.setVisibility(View.GONE);
+        }
+
 
         my_collocation_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -114,6 +124,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         my_collocation_Fan = (RelativeLayout) findViewById(R.id.my_collocation_Fan);
         my_collocation_MyListView = (MyListView) findViewById(R.id.my_collocation_MyListView);
         my_collocation_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.my_collocation_pulltoscroll);
+        my_collocation_null = (LinearLayout) findViewById(R.id.my_collocation_null);
     }
 
     private void initData() {

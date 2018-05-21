@@ -15,6 +15,9 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ *  托管详情
+ */
 public class My_Collocation_Detail_Activity extends AppCompatActivity {
 
     private RelativeLayout my_collocation_detail_Fan;

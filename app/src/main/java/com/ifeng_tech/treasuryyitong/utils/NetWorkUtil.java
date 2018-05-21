@@ -15,6 +15,7 @@ import com.ifeng_tech.treasuryyitong.R;
  */
 
 public class NetWorkUtil {
+
     public static boolean isConn(Context context){
         boolean bisConnFlag=false;
         //1.获取网络连接的管理对象
@@ -38,10 +39,6 @@ public class NetWorkUtil {
         builder.setIcon(R.mipmap.ic_launcher)         //
                 .setTitle("警告")            //
                 .setMessage("当前无网络,是否去设置?").setPositiveButton("设置", new DialogInterface.OnClickListener() {
-
-
-
-
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 // 跳转到系统的网络设置界面

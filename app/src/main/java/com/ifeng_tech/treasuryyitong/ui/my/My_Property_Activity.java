@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
     private Button property_congzhi;
 
     List<DetailBean> detailList = new ArrayList<>();
+    private LinearLayout my_property_null;
 
     @Override
     public MyPresenter<My_Property_Activity> initPresenter() {
@@ -67,7 +69,16 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
     @Override
     protected void onResume() {
         super.onResume();
-        property_ListView.setAdapter(new PropertyListAdapter(My_Property_Activity.this,detailList));
+
+        if(detailList.size()>0){
+            my_property_null.setVisibility(View.GONE);
+            property_ListView.setVisibility(View.VISIBLE);
+            property_ListView.setAdapter(new PropertyListAdapter(My_Property_Activity.this,detailList));
+        }else{
+            my_property_null.setVisibility(View.VISIBLE);
+            property_ListView.setVisibility(View.GONE);
+        }
+
     }
 
     private void initView() {
@@ -80,6 +91,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
         property_ListView = (ListView) findViewById(R.id.property_ListView);
         property_tixian = (Button) findViewById(R.id.property_tixian);
         property_congzhi = (Button) findViewById(R.id.property_congzhi);
+        my_property_null = (LinearLayout) findViewById(R.id.my_property_null);
 
         property_tixian.setOnClickListener(this);
         property_congzhi.setOnClickListener(this);
@@ -89,13 +101,11 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
 
 
     public void initData(){
-
         detailList.add(new DetailBean("充值","2018-05-09","+1000"));
         detailList.add(new DetailBean("缴费","2018-05-09","-1000"));
         detailList.add(new DetailBean("提现","2018-05-09","-1000"));
         detailList.add(new DetailBean("充值","2018-05-09","+1000"));
         detailList.add(new DetailBean("提现","2018-05-09","-1000"));
-
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -30,6 +31,7 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
 
     List<Give_List_Bean> list = new ArrayList<>();
     private My_Given_list_Adapter my_given_list_adapter;
+    private LinearLayout my_given_null;
 
     @Override
     public MyPresenter<My_Given_list_Activity> initPresenter() {
@@ -61,8 +63,15 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
     protected void onResume() {
         super.onResume();
 
-        // 初始化数据 与适配器
-        setMy_Given_list_Adapter();
+        if(list.size()>0){
+            my_given_null.setVisibility(View.GONE);
+            my_Given_pulltoscroll.setVisibility(View.VISIBLE);
+            // 初始化数据 与适配器
+            setMy_Given_list_Adapter();
+        }else{
+            my_given_null.setVisibility(View.VISIBLE);
+            my_Given_pulltoscroll.setVisibility(View.GONE);
+        }
 
         my_Given_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -117,6 +126,7 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
         my_Given_Fan = (RelativeLayout) findViewById(R.id.my_Given_Fan);
         my_Given_MyListView = (MyListView) findViewById(R.id.my_Given_MyListView);
         my_Given_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.my_Given_pulltoscroll);
+        my_given_null = (LinearLayout) findViewById(R.id.my_Given_null);
 
         initData();
     }

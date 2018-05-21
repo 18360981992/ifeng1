@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
 import com.bumptech.glide.Glide;
@@ -49,6 +50,8 @@ public class CollectFragmet extends Fragment {
             "http://img.wdjimg.com/mms/icon/v1/8/10/1b26d9f0a258255b0431c03a21c0d108_512_512.png",
             "http://img.wdjimg.com/mms/icon/v1/3/89/9f5f869c0b6a14d5132550176c761893_512_512.png",
     };
+    private LinearLayout collect_null;
+    private CollectAdapter collectAdapter;
 
 
     @Nullable
@@ -92,16 +95,25 @@ public class CollectFragmet extends Fragment {
         });
 
 
-        collect_XBanner.setData(imgs,null);//设置数据源
-        collect_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
-            @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Glide.with(activity).load(imgs.get(position)).into((ImageView) view);
-            }
-        });
 
-        CollectAdapter collectAdapter = new CollectAdapter(activity, collectlist);
-        collect_MyListView.setAdapter(collectAdapter);
+
+        if(imgs.size()<=0||collectlist.size()<=0){
+            collect_null.setVisibility(View.VISIBLE);
+            collect_pulltoscroll.setVisibility(View.GONE);
+        }else{
+            collect_null.setVisibility(View.GONE);
+            collect_pulltoscroll.setVisibility(View.VISIBLE);
+
+            collect_XBanner.setData(imgs,null);//设置数据源
+            collect_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
+                @Override
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    Glide.with(activity).load(imgs.get(position)).into((ImageView) view);
+                }
+            });
+            setCollectAdapter();
+        }
+
 
 
         collect_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -117,6 +129,16 @@ public class CollectFragmet extends Fragment {
                 }
             }
         });
+
+    }
+
+    private void setCollectAdapter() {
+        if(collectAdapter==null){
+            collectAdapter = new CollectAdapter(activity, collectlist);
+            collect_MyListView.setAdapter(collectAdapter);
+        }else{
+            collectAdapter.notifyDataSetChanged();
+        }
 
     }
 
@@ -146,6 +168,7 @@ public class CollectFragmet extends Fragment {
         collect_MyListView = (MyListView) view.findViewById(R.id.collect_MyListView);
         collect_XBanner = view.findViewById(R.id.collect_XBanner);
         collect_pulltoscroll = (PullToRefreshScrollView) view.findViewById(R.id.collect_pulltoscroll);
+        collect_null = view.findViewById(R.id.collect_null);
 
         initData();
     }

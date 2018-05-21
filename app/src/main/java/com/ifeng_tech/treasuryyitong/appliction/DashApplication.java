@@ -34,6 +34,10 @@ public class DashApplication extends Application {
     public static float screenDensity;
     public static DecimalFormat decimalFormat; // 全局为double设置精度
 
+    public static int RETRIEVE_TO_FORGET_req=100;
+    public static int RETRIEVE_TO_FORGET_res=101;
+
+
     @Override
     public void onCreate() {
         super.onCreate();

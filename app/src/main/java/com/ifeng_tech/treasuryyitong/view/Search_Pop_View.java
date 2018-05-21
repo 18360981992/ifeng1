@@ -54,10 +54,10 @@ public class Search_Pop_View extends PopupWindow {
         // 设置SelectPicPopupWindow弹出窗体的宽
         this.setWidth(width);
         // 设置SelectPicPopupWindow弹出窗体的高
-        this.setHeight(LinearLayout.LayoutParams.MATCH_PARENT);
-        // 设置SelectPicPopupWindow弹出窗体可点击
+        this.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
+        // 设置SelectPicPopupWindow弹出窗体可点击,  还有一个作用可以使pop框不抢占焦点
         this.setFocusable(false);
-        this.setOutsideTouchable(true);
+        this.setOutsideTouchable(false);
         // 刷新状态
         this.update();
         // 实例化一个ColorDrawable颜色为半透明
@@ -70,7 +70,10 @@ public class Search_Pop_View extends PopupWindow {
 
     }
 
-
+    /**
+     * 更新pop框中的数据源
+     * @param list
+     */
     public void setPopShuJu(List<String> list) {
 
         search_pop_listview.setAdapter(new MyPopList_Atapter(context,list));

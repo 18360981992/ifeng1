@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
@@ -47,6 +48,7 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
 
     List<CollocationBean> list = new ArrayList<>();
     private Collocation_Subscribe_list_Adapter collocation_subscribe_list_adapter;
+    private LinearLayout collocation_subscribe_null;
 
     @Override
     public MyPresenter<Collocation_Subscribe_Activity> initPresenter() {
@@ -85,8 +87,27 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
     @Override
     protected void onResume() {
         super.onResume();
-        // 初始数据
-        setCollocation_sub_list_Adapter();
+
+        if(imgs.size()<=0||list.size()<=0){
+            collocation_subscribe_null.setVisibility(View.VISIBLE);
+            collocation_Subscribe_pulltoscroll.setVisibility(View.GONE);
+        }else{
+            collocation_subscribe_null.setVisibility(View.GONE);
+            collocation_Subscribe_pulltoscroll.setVisibility(View.VISIBLE);
+
+            collocation_Subscribe_XBanner.setData(imgs,null);//设置数据源
+            collocation_Subscribe_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
+                @Override
+                public void loadBanner(XBanner banner, Object model, View view, int position) {
+                    Glide.with(Collocation_Subscribe_Activity.this).load(imgs.get(position)).into((ImageView) view);
+                }
+            });
+            // 初始数据
+            setCollocation_sub_list_Adapter();
+
+        }
+
+
 
         collocation_Subscribe_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
@@ -102,15 +123,6 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
                 collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
             }
         });
-
-        collocation_Subscribe_XBanner.setData(imgs,null);//设置数据源
-        collocation_Subscribe_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
-            @Override
-            public void loadBanner(XBanner banner, Object model, View view, int position) {
-                Glide.with(Collocation_Subscribe_Activity.this).load(imgs.get(position)).into((ImageView) view);
-            }
-        });
-
 
         collocation_Subscribe_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -154,6 +166,8 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
         collocation_Subscribe_XBanner = (XBanner) findViewById(R.id.collocation_Subscribe_XBanner);
         collocation_Subscribe_MyListView = (MyListView) findViewById(R.id.collocation_Subscribe_MyListView);
         collocation_Subscribe_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.collocation_Subscribe_pulltoscroll);
+        collocation_subscribe_null = (LinearLayout) findViewById(R.id.collocation_Subscribe_null);
+
         initData();
     }
 

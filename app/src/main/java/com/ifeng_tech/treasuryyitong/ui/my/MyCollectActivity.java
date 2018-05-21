@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
@@ -28,6 +29,8 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity,MyPrese
 
     List<Incoming_bean> incominglist = new ArrayList<>();
     private Incoming_Test_Adapter incoming_test_adapter;
+    private LinearLayout mycollect_null;
+    private LinearLayout mycollect_null1;
 
     @Override
     public MyPresenter<MyCollectActivity> initPresenter() {
@@ -56,7 +59,16 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity,MyPrese
     @Override
     protected void onResume() {
         super.onResume();
-        setAdapter();
+
+        if(incominglist.size()>0){
+            mycollect_null1.setVisibility(View.GONE);
+            mycollect_xRecyclerView.setVisibility(View.VISIBLE);
+            setAdapter();
+        }else{
+            mycollect_null1.setVisibility(View.VISIBLE);
+            mycollect_xRecyclerView.setVisibility(View.GONE);
+        }
+
 
         mycollect_xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
             @Override
@@ -71,12 +83,17 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity,MyPrese
         });
     }
 
+
     private void initView() {
         mycollect_Fan = (RelativeLayout) findViewById(R.id.mycollect_Fan);
         mycollect_xRecyclerView = (XRecyclerView) findViewById(R.id.mycollect_xRecyclerView);
 
+        mycollect_null1 = (LinearLayout) findViewById(R.id.mycollect_null);
+
         mycollect_xRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         mycollect_xRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
+
+
         initData();
     }
 

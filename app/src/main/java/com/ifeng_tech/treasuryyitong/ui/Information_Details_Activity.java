@@ -47,21 +47,7 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information__details_);
         initView();
-        webView.loadUrl(url);//加载本地路径文件，，url
 
-        //加载进度条
-        webView.setWebChromeClient(new WebChromeClient() {
-            @Override
-            public void onProgressChanged(WebView view, int newProgress) {
-                super.onProgressChanged(view, newProgress);
-                if (newProgress == 100) {
-                    information_Details_ProgressBar.setVisibility(View.INVISIBLE);
-                } else {
-                    information_Details_ProgressBar.setVisibility(View.VISIBLE);
-                    information_Details_ProgressBar.setProgress(newProgress);
-                }
-            }
-        });
 
         information_Details_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,7 +56,7 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
             }
         });
 
-
+        webView.loadUrl(url);//加载本地路径文件，，url
     }
 
     @Override
@@ -94,6 +80,20 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
         settings.setSupportZoom(true);//支持缩放网页
 
         webView.setWebChromeClient(new WebChromeClient());//使安卓支持网页的弹出框
+
+        //加载进度条
+        webView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                super.onProgressChanged(view, newProgress);
+                if (newProgress == 100) {
+                    information_Details_ProgressBar.setVisibility(View.INVISIBLE);
+                } else {
+                    information_Details_ProgressBar.setVisibility(View.VISIBLE);
+                    information_Details_ProgressBar.setProgress(newProgress);
+                }
+            }
+        });
 
         // 设置JavascriptInterface
         // javainterface实际就是一个普通的java类，里面是我们本地实现的java代码

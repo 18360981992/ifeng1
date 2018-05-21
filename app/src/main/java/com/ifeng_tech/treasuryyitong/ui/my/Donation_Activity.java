@@ -188,6 +188,10 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                         donation_Pop_JieKou.chuan();
                     }
 
+                }else{
+                    if(search_pop_view!=null){
+                        search_pop_view.dismiss();
+                    }
                 }
             }
         });
@@ -206,6 +210,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                         MyUtils.setToast("请做回显操作。。。");
                         // 模拟数据
                         donation_cangpin_wrod.setText(list.get(postion)+"");
+                        donation_cangpin_wrod.setSelection(list.get(postion).length());
                         donation_name.setText("两只老虎");
                         donation_danjia.setText("￥"+DashApplication.decimalFormat.format(120)); // 价格会从请求的数据来获取
                         donation_zuidae.setText("最大转赠数量:"+120);
@@ -327,9 +332,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                         donation_weitanchuan_img,
                         donation_weitanchuan_text,
                         weitanchuan_height,
-                        true);
-
-
+                        true,"转赠成功");
             }
 
             @Override

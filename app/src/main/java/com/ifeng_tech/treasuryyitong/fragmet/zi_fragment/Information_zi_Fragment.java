@@ -9,6 +9,7 @@ import android.support.v7.widget.OrientationHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Information_zi_Adapter;
@@ -37,6 +38,7 @@ public class Information_zi_Fragment extends Fragment {
     List<Information_Zi_Bean> arr3 = new ArrayList<>();
     List<Information_Zi_Bean> arr4 = new ArrayList<>();
     private Information_zi_Adapter information_zi_adapter;
+    private LinearLayout information_zi_null;
 
 
     @Nullable
@@ -61,20 +63,14 @@ public class Information_zi_Fragment extends Fragment {
         String top = getArguments().getString("top");
 
         final List<Information_Zi_Bean> topList = getTopList(top);
-
-        setAdapter(topList);
-
-        information_zi_adapter.setInformation_zi_Adapter_JieKou(new Information_zi_Adapter.Information_zi_Adapter_JieKou() {
-            @Override
-            public void chuan(int postion) {
-//                MyUtils.setToast("点击了=="+topList.get(postion).getTop()+"的第"+postion+"条");
-
-                Intent intent = new Intent(activity, Information_Details_Activity.class);
-//                intent.putExtra("InformationBean",topList.get(postion));
-                activity.startActivity(intent);
-
-            }
-        });
+        if(topList!=null){
+            information_zi_fragment_xRecyclerView.setVisibility(View.VISIBLE);
+            information_zi_null.setVisibility(View.GONE);
+            setAdapter(topList);
+        }else{
+            information_zi_fragment_xRecyclerView.setVisibility(View.GONE);
+            information_zi_null.setVisibility(View.VISIBLE);
+        }
 
 
         information_zi_fragment_xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
@@ -92,6 +88,7 @@ public class Information_zi_Fragment extends Fragment {
     }
 
     private void setAdapter(List<Information_Zi_Bean> topList) {
+
         if(information_zi_adapter==null){
             information_zi_adapter = new Information_zi_Adapter(activity, topList);
             information_zi_fragment_xRecyclerView.setAdapter(information_zi_adapter);
@@ -99,6 +96,17 @@ public class Information_zi_Fragment extends Fragment {
             information_zi_adapter.notifyDataSetChanged();
         }
 
+        information_zi_adapter.setInformation_zi_Adapter_JieKou(new Information_zi_Adapter.Information_zi_Adapter_JieKou() {
+            @Override
+            public void chuan(int postion) {
+//                MyUtils.setToast("点击了=="+topList.get(postion).getTop()+"的第"+postion+"条");
+
+                Intent intent = new Intent(activity, Information_Details_Activity.class);
+//                intent.putExtra("InformationBean",topList.get(postion));
+                activity.startActivity(intent);
+
+            }
+        });
     }
 
 
@@ -115,7 +123,7 @@ public class Information_zi_Fragment extends Fragment {
         }else if(top.equals("栏目2")){
             return arr4;
         }else{
-            return arrs;
+            return null;
         }
     }
 
@@ -166,7 +174,7 @@ public class Information_zi_Fragment extends Fragment {
 
     private void initView(View view) {
         information_zi_fragment_xRecyclerView = (XRecyclerView) view.findViewById(R.id.information_zi_fragment_xRecyclerView);
-
+        information_zi_null = view.findViewById(R.id.information_zi_null);
         information_zi_fragment_xRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         information_zi_fragment_xRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.SemiCircleSpin);
 

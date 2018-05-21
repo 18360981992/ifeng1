@@ -243,7 +243,9 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
                                         collect_ac_weitanchuan_img,
                                         collect_ac_weitanchuan_text,
                                         weitanchuan_height,
-                                        true);
+                                        true,
+                                         "转赠成功！"
+                        );
             }
 
             @Override
