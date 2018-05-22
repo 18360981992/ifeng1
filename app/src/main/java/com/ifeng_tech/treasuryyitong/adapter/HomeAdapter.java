@@ -22,7 +22,9 @@ import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.stx.xhb.xbanner.XBanner;
 
@@ -108,15 +110,18 @@ public class HomeAdapter extends RecyclerView.Adapter{
                             MyUtils.setToast("点击了扫一扫。。。");
                             break;
                         case 1:
-                            MyUtils.setToast("点击了收货。。。");
+//                            MyUtils.setToast("点击了收货。。。");
+                            Intent intent1 = new Intent(context, My_Given_list_Activity.class);
+                            context.startActivity(intent1);
                             break;
                         case 2: // 转赠
                             Intent intent = new Intent(context, Donation_Activity.class);
                             context.startActivity(intent);
                             break;
                         case 3:
-                            MyUtils.setToast("点击了鉴定。。。");
-                            
+//                            MyUtils.setToast("点击了鉴定。。。");
+                            Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
+                            context.startActivity(intent2);
                             break;
                     }
 

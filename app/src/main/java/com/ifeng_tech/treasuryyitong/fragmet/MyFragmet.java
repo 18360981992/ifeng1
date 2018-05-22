@@ -19,6 +19,7 @@ import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.my.Certification_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.MyCollectActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
@@ -59,6 +60,14 @@ public class MyFragmet extends Fragment {
         initView(view);
 
         activity = (HomePageActivity) getActivity();
+
+        wode_weirenzheng.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, Certification_Activity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }
@@ -143,6 +152,8 @@ public class MyFragmet extends Fragment {
         wode_shezhi = view.findViewById(R.id.wode_shezhi);
 
         initData();
+
+
     }
 
     public void initData(){

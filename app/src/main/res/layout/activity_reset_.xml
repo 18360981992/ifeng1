@@ -40,6 +40,7 @@
 
     </RelativeLayout>
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -48,119 +49,123 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
-        android:gravity="center_vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="原登录密码"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x40"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="原登录密码"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <EditText
+                android:id="@+id/reset_old"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/x15"
+                android:maxLength="10"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:hint="原登录密码"
+                android:textColorHint="@color/color_999999"
+                android:layout_marginRight="@dimen/x8"
+                android:singleLine="true"
+                />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/fengouxian1"
+            android:layout_marginRight="@dimen/x8"
             android:layout_marginLeft="@dimen/x8"
             />
-        <EditText
-            android:id="@+id/reset_old"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:layout_marginLeft="@dimen/x15"
-            android:maxLength="10"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
-            android:hint="原登录密码"
-            android:textColorHint="@color/color_999999"
-            android:layout_marginRight="@dimen/x8"
-            />
-    </LinearLayout>
+            android:layout_height="@dimen/x40"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新登录密码"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <EditText
+                android:id="@+id/reset_new"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/x15"
+                android:maxLength="10"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:hint="新登录密码"
+                android:textColorHint="@color/color_999999"
+                android:layout_marginRight="@dimen/x8"
+                android:singleLine="true"
+                />
+        </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:background="@color/fengouxian1"
-        android:layout_marginRight="@dimen/x8"
-        android:layout_marginLeft="@dimen/x8"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
-        android:gravity="center_vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="新登录密码"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/fengouxian1"
+            android:layout_marginRight="@dimen/x8"
             android:layout_marginLeft="@dimen/x8"
             />
-        <EditText
-            android:id="@+id/reset_new"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:layout_marginLeft="@dimen/x15"
-            android:maxLength="10"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
-            android:hint="新登录密码"
-            android:textColorHint="@color/color_999999"
-            android:layout_marginRight="@dimen/x8"
-            />
-    </LinearLayout>
+            android:layout_height="@dimen/x40"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确认新密码"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:layout_marginLeft="@dimen/x8"
+                />
+            <EditText
+                android:id="@+id/reset_queren"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@null"
+                android:layout_marginLeft="@dimen/x15"
+                android:maxLength="10"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:hint="确认新密码"
+                android:textColorHint="@color/color_999999"
+                android:layout_marginRight="@dimen/x8"
+                android:singleLine="true"
+                />
+        </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:background="@color/fengouxian1"
-        android:layout_marginRight="@dimen/x8"
-        android:layout_marginLeft="@dimen/x8"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x40"
-        android:gravity="center_vertical"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确认新密码"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/fengouxian1"
+            android:layout_marginRight="@dimen/x8"
             android:layout_marginLeft="@dimen/x8"
             />
-        <EditText
-            android:id="@+id/reset_queren"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@null"
-            android:layout_marginLeft="@dimen/x15"
-            android:maxLength="10"
-            android:textSize="@dimen/x13"
-            android:textColor="@color/name_se"
-            android:hint="确认新密码"
-            android:textColorHint="@color/color_999999"
-            android:layout_marginRight="@dimen/x8"
-            />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
-        android:background="@color/fengouxian1"
-        android:layout_marginRight="@dimen/x8"
-        android:layout_marginLeft="@dimen/x8"
-        />
 
         </LinearLayout>
 
+        <!--微弹窗-->
         <LinearLayout
             android:id="@+id/reset_weitanchuan"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x30"
-            android:background="@color/color_5576E2"
+            android:background="@color/weitanchuang"
             android:gravity="center_vertical"
             android:visibility="invisible"
             >
@@ -193,7 +198,7 @@
             android:text="修改"
             android:textColor="@color/baise"
             android:textSize="@dimen/x14" />
-    </RelativeLayout>
 
+    </RelativeLayout>
 
 </LinearLayout>

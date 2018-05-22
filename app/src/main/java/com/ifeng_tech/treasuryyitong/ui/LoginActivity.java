@@ -1,28 +1,48 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.FrameLayout;
+import android.view.ViewTreeObserver;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.fragmet.LoginFragment;
-import com.ifeng_tech.treasuryyitong.fragmet.RegisterFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.qdong.slide_to_unlock_view.CustomSlideToUnlockView;
 
 /**
  * 登录
  */
-public class LoginActivity extends BaseMVPActivity<LoginActivity,MyPresenter<LoginActivity>> {
+public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<LoginActivity>> {
 
-    private TextView login_deng;
-    private TextView login_zhuce;
-    private FrameLayout login_FrameLayout;
+
+    private RelativeLayout login_Fan;
+    private EditText logo_name;
+    private EditText logo_pass;
+    private CustomSlideToUnlockView logo_to_unlock;
+    private TextView login_regist;
+    private TextView login_forgetpwd;
+    private ImageView login_weitanchuan_img;
+    private TextView login_weitanchuan_text;
+    private LinearLayout login_weitanchuan;
+    private int weitanchuan_height;
 
     @Override
     public MyPresenter<LoginActivity> initPresenter() {
-        if(myPresenter==null) {
+        if (myPresenter == null) {
             myPresenter = new MyPresenter();
         }
         return myPresenter;
@@ -34,32 +54,126 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity,MyPresenter<Log
         setContentView(R.layout.activity_login);
         initView();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.login_framelayout,new LoginFragment()).commit();
+        // 自动登录
+        boolean isLogin = DashApplication.sp.getBoolean("isLogin", false);
+        if(isLogin){
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
-        login_deng.setOnClickListener(new View.OnClickListener() {
+        login_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login_deng.setTextColor(getResources().getColor(R.color.name_se));
-                login_zhuce.setTextColor(getResources().getColor(R.color.zhuse_ziti));
-                getSupportFragmentManager().beginTransaction().replace(R.id.login_framelayout,new LoginFragment()).commit();
-            }
-        });
-        login_zhuce.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login_deng.setTextColor(getResources().getColor(R.color.zhuse_ziti));
-                login_zhuce.setTextColor(getResources().getColor(R.color.name_se));
-                getSupportFragmentManager().beginTransaction().replace(R.id.login_framelayout,new RegisterFragment()).commit();
+                finish();
             }
         });
 
+        // 点击跳到注册
+        login_regist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, Login_Register_Activity.class);
+                startActivityForResult(intent, DashApplication.LOGIN_TO_REGISTER_req);
+            }
+        });
 
+        // 点击跳到忘记密码
+        login_forgetpwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, Retrieve_Activity.class);
+                intent.putExtra("type",1);  // 用于手机验证页面的下次跳转识别码
+                intent.putExtra("select",1);   //  用于手机验证页面中的手机号的隐藏/显示
+                startActivity(intent);
+            }
+        });
+
+        // 滑动解锁的监听
+        logo_to_unlock.setmCallBack(new CustomSlideToUnlockView.CallBack() {
+            @Override
+            public void onSlide(int distance) {
+
+            }
+
+            @Override
+            public void onUnlocked() {
+                MyUtils.setToast("请求网络，登录成功。。。");
+                submit();
+            }
+        });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == DashApplication.LOGIN_TO_REGISTER_req && resultCode == DashApplication.LOGIN_TO_REGISTER_res) {
+//            MyUtils.setToast("注册成功后的回显。。。");
+            logo_name.setText(data.getStringExtra("name"));
+            logo_pass.setText(data.getStringExtra("pass"));
+        }
+    }
 
     private void initView() {
-        login_deng = (TextView) findViewById(R.id.login_deng);
-        login_zhuce = (TextView) findViewById(R.id.login_zhuce);
-        login_FrameLayout = (FrameLayout) findViewById(R.id.login_framelayout);
+        login_Fan = (RelativeLayout) findViewById(R.id.login_Fan);
+        logo_name = (EditText) findViewById(R.id.logo_name);
+        logo_pass = (EditText) findViewById(R.id.logo_pass);
+        logo_to_unlock = (CustomSlideToUnlockView) findViewById(R.id.logo_to_unlock);
+        login_regist = (TextView) findViewById(R.id.login_regist);
+        login_forgetpwd = (TextView) findViewById(R.id.login_forgetpwd);
+        login_weitanchuan_img = (ImageView) findViewById(R.id.login_weitanchuan_img);
+        login_weitanchuan_text = (TextView) findViewById(R.id.login_weitanchuan_text);
+        login_weitanchuan = (LinearLayout) findViewById(R.id.login_weitanchuan);
+
+        SoftHideKeyBoardUtil.assistActivity(this);
+
+        //通过设置监听来获取 微弹窗 控件的高度
+        login_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+            @Override
+            public void onGlobalLayout() {
+                login_weitanchuan.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                //获取ImageView控件的初始高度  用来图片回弹时
+                weitanchuan_height = login_weitanchuan.getMeasuredHeight();
+            }
+        });
+    }
+
+    private void submit() {
+        // validate
+        String name = logo_name.getText().toString().trim();
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show();
+            logo_to_unlock.resetView();   // 将滑动条重置
+            return;
+        }
+
+        String pass = logo_pass.getText().toString().trim();
+        if (TextUtils.isEmpty(pass)) {
+            Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
+            logo_to_unlock.resetView();  // 将滑动条重置
+            return;
+        }
+
+        // TODO validate success, do something
+        if (true) {
+            logo_to_unlock.setVisibility(View.GONE);
+            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+            startActivity(intent);
+            DashApplication.edit.putString("shouji", name)
+                                .putBoolean("isLogin",true)
+                                .putString("uid","0")
+                                .commit();
+
+            finish();
+        } else {
+            logo_to_unlock.resetView();  // 将滑动条重置
+            MyUtils.setObjectAnimator(login_weitanchuan,
+                    login_weitanchuan_img,
+                    login_weitanchuan_text,
+                    weitanchuan_height,
+                    false, "登录失败!");
+        }
+
     }
 }

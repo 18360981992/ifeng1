@@ -48,4 +48,6 @@
     <color name="color_5576E2">#5576E2</color>
     <color name="color_F0AF31">#F0AF31</color>
 
+    <!--微弹窗-->
+    <color name="weitanchuang">#ee5576E2</color>
 </resources>

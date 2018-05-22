@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.ADVP_R_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/advp_r_Fan"
+            android:layout_width="@dimen/x30"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x8"
+                android:layout_height="@dimen/x14"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginLeft="@dimen/x10"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x8"
+            android:text="实名认证结果"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x16" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/advp_r_zhong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:visibility="gone"
+            >
+            <ImageView
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:background="@drawable/renzheng_zhong"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="认证中"
+                android:textColor="#999999"
+                android:textSize="@dimen/x15"
+                android:layout_marginTop="@dimen/x5"
+                />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/advp_r_shibai"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:visibility="visible"
+                >
+                <ImageView
+                    android:layout_width="@dimen/x80"
+                    android:layout_height="@dimen/x80"
+                    android:background="@drawable/renzheng_shibai"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="认证失败"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/x15"
+                    android:layout_marginTop="@dimen/x5"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="请重新提交实名认证申请"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/x12"
+                    android:layout_marginTop="@dimen/x2"
+                    />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/advp_r_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x35"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x8"
+                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginRight="@dimen/x8"
+                android:background="@drawable/congzhi_bg"
+                android:text="重新认证"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x14" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</LinearLayout>

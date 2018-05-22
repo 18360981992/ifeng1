@@ -2,6 +2,7 @@ package com.ifeng_tech.treasuryyitong.appliction;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Process;
 import android.util.DisplayMetrics;
@@ -37,6 +38,20 @@ public class DashApplication extends Application {
     public static int RETRIEVE_TO_FORGET_req=100;
     public static int RETRIEVE_TO_FORGET_res=101;
 
+    public static int RETRIEVE_TO_CHANGE_req=100;
+    public static int RETRIEVE_TO_CHANGE_res=101;
+
+    public static int CERTIFICATION_TO_ADVP_req=100;
+    public static int CERTIFICATION_TO_ADVP_res=101;
+
+    public static int LOGIN_TO_REGISTER_req=100;
+    public static int LOGIN_TO_REGISTER_res=101;
+
+
+    public static  int ANQUAN_TYPE_ZHAOHUI=1;
+    public static  int ANQUAN_TYPE_GENGGAI=2;
+    public static SharedPreferences sp;
+    public static SharedPreferences.Editor edit;
 
     @Override
     public void onCreate() {
@@ -53,6 +68,9 @@ public class DashApplication extends Application {
         decimalFormat = new DecimalFormat("0.00");// 全局为double设置精度
 
         initScreenSize();
+
+        sp = getSharedPreferences("ifeng", MODE_PRIVATE);
+        edit = sp.edit();
 
     }
 

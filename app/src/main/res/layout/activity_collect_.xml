@@ -330,7 +330,7 @@
             android:id="@+id/collect_ac_weitanchuan"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x30"
-            android:background="@color/color_5576E2"
+            android:background="@color/weitanchuang"
             android:gravity="center_vertical"
             android:visibility="invisible"
             >

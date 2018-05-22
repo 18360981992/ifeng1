@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,10 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
+import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.Recharge_Message_Activity;
+import com.ifeng_tech.treasuryyitong.ui.Safety_Message_Activity;
+import com.ifeng_tech.treasuryyitong.ui.System_Message_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 /**
@@ -33,6 +38,7 @@ public class MessageFragmet extends Fragment {
     private TextView message_congzhi_shumu;
     private ImageView anquan_jiantou;
     private TextView message_anquan_shumu;
+    private HomePageActivity activity;
 
     @Nullable
     @Override
@@ -40,6 +46,8 @@ public class MessageFragmet extends Fragment {
         View view = inflater.inflate(R.layout.message_fragmet, container, false);
 
         initView(view);
+
+        activity = (HomePageActivity) getActivity();
 
         // 心跳监听回调
         HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
@@ -55,21 +63,27 @@ public class MessageFragmet extends Fragment {
         message_xitong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了系统消息。。。");
+//                MyUtils.setToast("点击了系统消息。。。");
+                Intent intent = new Intent(activity, System_Message_Activity.class);
+                activity.startActivity(intent);
             }
         });
 
         message_congzhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了充值消息。。。");
+//                MyUtils.setToast("点击了充值消息。。。");
+                Intent intent = new Intent(activity, Recharge_Message_Activity.class);
+                activity.startActivity(intent);
             }
         });
 
         message_anquan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了安全消息。。。");
+//                MyUtils.setToast("点击了安全消息。。。");
+                Intent intent = new Intent(activity, Safety_Message_Activity.class);
+                activity.startActivity(intent);
             }
         });
         return view;

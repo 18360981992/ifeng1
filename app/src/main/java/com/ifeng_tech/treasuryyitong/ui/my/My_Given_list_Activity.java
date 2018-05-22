@@ -54,8 +54,7 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
             }
         });
 
-        // 设置刷新
-        initRefreshListView();
+
 
     }
 
@@ -127,7 +126,8 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
         my_Given_MyListView = (MyListView) findViewById(R.id.my_Given_MyListView);
         my_Given_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.my_Given_pulltoscroll);
         my_given_null = (LinearLayout) findViewById(R.id.my_Given_null);
-
+        // 设置刷新
+        initRefreshListView();
         initData();
     }
 

@@ -11,9 +11,9 @@
     <application
         android:name=".appliction.DashApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -21,19 +21,21 @@
         <activity android:name=".MainActivity" />
 
         <!-- 首页展示 -->
-        <activity android:name=".ui.HomePageActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".ui.HomePageActivity" >
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <!-- 心跳服务 -->
         <service android:name=".service.HeartbeatService" />
 
         <!-- 登录/注册 -->
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".ui.my.My_Property_Activity" />
         <activity android:name=".ui.my.Stock_Removal_Activity" />
         <activity android:name=".ui.my.Incoming_Test_Activity" />
@@ -53,7 +55,14 @@
         <activity android:name=".ui.my.Reset_Activity" />
         <activity android:name=".ui.my.Retrieve_Activity" />
         <activity android:name=".ui.my.Change_Activity" />
-        <activity android:name=".ui.my.Forget_Activity"></activity>
+        <activity android:name=".ui.my.Forget_Activity" />
+        <activity android:name=".ui.my.Certification_Activity" />
+        <activity android:name=".ui.my.ADVP_R_Activity" />
+        <activity android:name=".ui.System_Message_Activity" />
+        <activity android:name=".ui.Recharge_Message_Activity" />
+        <activity android:name=".ui.Safety_Message_Activity" />
+        <activity android:name=".ui.Login_Register_Activity" />
+        <activity android:name=".ui.Login_Forget_Activity"></activity>
     </application>
 
 </manifest>

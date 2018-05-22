@@ -2,6 +2,9 @@ package com.ifeng_tech.treasuryyitong.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,8 +48,12 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
     @Override
     public void onBindViewHolder(ZiXunHolder holder, final int position) {
 
-        holder.home_zixun_title.setText(informationlist.get(position).getTitle());
-        holder.home_zixun_text.setText("\t\t\t\t\t"+informationlist.get(position).getText());
+        String text=informationlist.get(position).getTitle()+"\t"+informationlist.get(position).getText();
+        SpannableStringBuilder builder = new SpannableStringBuilder(text);
+        // 设置textview 的富文本颜色
+        ForegroundColorSpan span = new ForegroundColorSpan(context.getResources().getColor(R.color.zhuse));
+        builder.setSpan(span, 0, informationlist.get(position).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        holder.home_zixun_text.setText(builder);
         holder.home_zixun_time.setText(informationlist.get(position).getTime());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,13 +72,11 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
 
     class ZiXunHolder extends RecyclerView.ViewHolder{
 
-        public TextView home_zixun_title;
         public TextView home_zixun_text;
         public TextView home_zixun_time;
 
         public ZiXunHolder(View itemView) {
             super(itemView);
-            home_zixun_title = itemView.findViewById(R.id.home_zixun_title);
             home_zixun_text = itemView.findViewById(R.id.home_zixun_text);
             home_zixun_time = itemView.findViewById(R.id.home_zixun_time);
         }

@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 
@@ -58,6 +59,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             public void onClick(View v) {
 //                MyUtils.setToast("点击找回。。。");
                 Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
+                intent.putExtra("type", DashApplication.ANQUAN_TYPE_ZHAOHUI);
                 startActivity(intent);
             }
         });
@@ -66,7 +68,8 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             @Override
             public void onClick(View v) {
 //                MyUtils.setToast("点击更改。。。");
-                Intent intent = new Intent(Safe_Activity.this, Change_Activity.class);
+                Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
+                intent.putExtra("type", DashApplication.ANQUAN_TYPE_GENGGAI);
                 startActivity(intent);
             }
         });

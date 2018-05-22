@@ -212,7 +212,7 @@ public class MyUtils {
     }
 
     /**
-     * 转赠等页面专用的微弹窗
+     * 转赠等页面专用的微弹窗   只消失微弹窗
      * @param linearLayout
      * @param img
      * @param text
@@ -270,7 +270,7 @@ public class MyUtils {
     }
 
     /**
-     *  安全保护中专用的微弹窗
+     *  安全保护中专用的微弹窗  2秒以后微弹窗消失，当前页面也消失
      * @param linearLayout
      * @param img
      * @param text

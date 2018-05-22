@@ -13,6 +13,7 @@
         android:layout_height="@dimen/x30"
         android:layout_centerInParent="true"
         android:layout_margin="@dimen/x2"
+        android:gravity="center"
         >
         <TextView
             android:id="@+id/data"
@@ -27,7 +28,7 @@
             android:id="@+id/luna"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x8"
             android:textColor="@color/name_se"
             android:text="初二"
             android:layout_below="@+id/data"

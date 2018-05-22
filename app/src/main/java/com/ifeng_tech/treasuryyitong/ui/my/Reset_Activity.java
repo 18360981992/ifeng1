@@ -134,4 +134,5 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         }
 
     }
+
 }
