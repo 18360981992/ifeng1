@@ -14,14 +14,12 @@ import com.ifeng_tech.treasuryyitong.adapter.Warehouse_Adapter;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.ifeng_tech.treasuryyitong.R.id.my_Given_pulltoscroll;
 import static com.ifeng_tech.treasuryyitong.R.id.my_warehouse__XRecyclerView;
 
 /**
@@ -63,7 +61,7 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         my_warehouse_zhangdan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了账单。。。");
+//                MyUtils.setToast("点击了账单。。。");
             }
         });
 
@@ -112,6 +110,7 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
                 Intent intent = new Intent(My_Warehouse_Activity.this, Pick_up_goods_Activity.class);
                 intent.putExtra("WarehouseBean",  list.get(postion));
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
 
             @Override
@@ -119,6 +118,7 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
                 Intent intent = new Intent(My_Warehouse_Activity.this, Donation_Activity.class);
                 intent.putExtra("WarehouseBean",  list.get(postion));
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }
@@ -132,7 +132,6 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         my_warehouse_XRecyclerView.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
         my_warehouse_XRecyclerView.setLoadingMoreProgressStyle(ProgressStyle.Pacman);
 
-
         initData();
     }
 
@@ -141,5 +140,11 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         for (int i=0;i<20;i++){
             list.add(new WarehouseBean("655286224",R.drawable.guangao,"世博四连体",2000,1000));
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

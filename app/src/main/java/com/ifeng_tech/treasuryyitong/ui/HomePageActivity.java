@@ -73,9 +73,10 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
-        initView();
 
+        setContentView(R.layout.activity_home_page);
+
+        initView();
 
         setBeiJing(true,false,false,false,false);
 
@@ -181,13 +182,18 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                                 .hide(authenticateFragmet)
                                 .hide(myFragmet)
                                 .commit();
+
                         break;
                     case 1:
-                        MyUtils.setToast("点击了广告。。。");
+//                        MyUtils.setToast("点击了广告。。。");
+                        Intent intent1 = new Intent(HomePageActivity.this, Collection_directory_Activity.class);
+                        startActivity(intent1);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 2:  // 跳转 托管预约列表
                         Intent intent = new Intent(HomePageActivity.this, Collocation_Subscribe_Activity.class);
                         startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 3:  // 跳转 资讯列表
                         setBeiJing(false,true,false,false,false);
@@ -242,7 +248,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         if (wdFlag) {
             wodeImg.setImageResource(R.drawable.wode_lan);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("我的");
+            homepage_title.setText("个人中心");
         } else {
             wodeImg.setImageResource(R.drawable.wode_hui);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse_ziti));

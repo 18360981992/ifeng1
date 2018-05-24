@@ -33,6 +33,7 @@ public class ADVP_R_Activity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View v) {
                 setResult(DashApplication.CERTIFICATION_TO_ADVP_res);
                 finish();
+                overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
             }
         });
 
@@ -46,7 +47,6 @@ public class ADVP_R_Activity extends AppCompatActivity implements View.OnClickLi
             advp_r_zhong.setVisibility(View.GONE);
             advp_r_shibai.setVisibility(View.VISIBLE);
         }
-
     }
 
     private void initView() {
@@ -64,6 +64,7 @@ public class ADVP_R_Activity extends AppCompatActivity implements View.OnClickLi
             case R.id.advp_r_btn:
                 Intent intent1 = new Intent(ADVP_R_Activity.this, Certification_Activity.class);
                 startActivity(intent1);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 finish();
                 break;
         }

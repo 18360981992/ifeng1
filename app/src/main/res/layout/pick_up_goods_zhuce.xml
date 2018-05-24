@@ -8,7 +8,9 @@
     >
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -66,6 +68,7 @@
             android:background="@drawable/tihuo_ed_bg"
             android:inputType="number"
             android:singleLine="true"
+            android:maxLength="10"
             />
 
     </LinearLayout>
@@ -102,19 +105,18 @@
                 />
             <LinearLayout
                 android:id="@+id/up_goods_zhuce_cangku_img"
-                android:layout_width="@dimen/x20"
+                android:layout_width="@dimen/x30"
                 android:layout_height="@dimen/x33"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/item_bg"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/x1"
+                android:gravity="center"
                 >
                 <ImageView
                     android:layout_width="@dimen/x10"
                     android:layout_height="@dimen/x8"
                     android:background="@drawable/xia_jiantou"
-                    android:layout_marginRight="@dimen/x20"
-                    android:layout_gravity="center_vertical"
                     />
             </LinearLayout>
 

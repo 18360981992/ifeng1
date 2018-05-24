@@ -71,6 +71,7 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
         }else{
             my_collocation_list_type.setText("未过期");
         }
+
         return convertView;
     }
 }

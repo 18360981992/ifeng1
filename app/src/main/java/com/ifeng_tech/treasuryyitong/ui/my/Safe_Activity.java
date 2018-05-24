@@ -51,6 +51,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
 //                MyUtils.setToast("点击重置。。。");
                 Intent intent = new Intent(Safe_Activity.this, Reset_Activity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -61,6 +62,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
                 Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
                 intent.putExtra("type", DashApplication.ANQUAN_TYPE_ZHAOHUI);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -71,6 +73,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
                 Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
                 intent.putExtra("type", DashApplication.ANQUAN_TYPE_GENGGAI);
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -84,5 +87,11 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
         safe_zhaohui = (RelativeLayout) findViewById(R.id.safe_zhaohui);
         img3 = (ImageView) findViewById(R.id.img3);
         safe_geng_shouji = (RelativeLayout) findViewById(R.id.safe_geng_shouji);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

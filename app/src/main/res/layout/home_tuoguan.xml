@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="托管"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x14"
+            android:textSize="@dimen/x15"
             android:layout_marginLeft="@dimen/x8"
             android:layout_toRightOf="@id/view"
             android:layout_centerVertical="true"
@@ -47,6 +47,6 @@
         ></android.support.v7.widget.RecyclerView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
+        android:layout_height="@dimen/x8"
         android:background="@color/fengouxian"/>
 </LinearLayout>

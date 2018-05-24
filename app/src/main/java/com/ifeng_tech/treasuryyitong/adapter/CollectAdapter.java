@@ -48,12 +48,15 @@ public class CollectAdapter extends BaseAdapter{
         }
         ImageView collect_img = view.findViewById(R.id.collect_img);
         TextView collect_name = view.findViewById(R.id.collect_name);
+        TextView collect_cword = view.findViewById(R.id.collect_cword);
         TextView collect_title = view.findViewById(R.id.collect_title);
         TextView collect_text = view.findViewById(R.id.collect_text);
         ImageView collect_imgflag = view.findViewById(R.id.collect_imgflag);
 
         collect_img.setImageResource(list.get(position).getImg());
         collect_name.setText(list.get(position).getName());
+        collect_cword.setText(""+list.get(position).getCword());
+
         collect_title.setText(list.get(position).getTitle());
         collect_text.setText(list.get(position).getText());
         if(list.get(position).getType()==0){ // 0==等待 1==未开始

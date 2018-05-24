@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -44,31 +42,14 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     private EditText donation_name;
     private EditText donation_shuliang;
     private TextView donation_danjia;
-    private EditText donation_duanxin;
-    private TextView donation_duan_btn;
+    private EditText donation_yewu_pass;
     private Button donation_tijiao;
 
     private int measuredWidth;
     private Search_Pop_View search_pop_view;
 
-    Handler h=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            time--;
-            if(time==0){
-                time=60;
-                donation_duan_btn.setText("点击发送");
-                donation_duan_btn.setEnabled(true);
-            }else{
-                donation_duan_btn.setText("重新发送"+time+"(s)");
-                h.sendEmptyMessageDelayed(0,1000);
-            }
-        }
-    };
     private TextView donation_zuidae;
 
-    int time=60;
     private LinearLayout donation_weitanchuan;
     private ImageView donation_weitanchuan_img;
     private TextView donation_weitanchuan_text;
@@ -86,8 +67,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_);
-        // 解决键盘挡住输入框
-        SoftHideKeyBoardUtil.assistActivity(this);
+
 
         initView();
 
@@ -142,17 +122,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             }
         });
 
-        // 短信发送
-        donation_duan_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                donation_duan_btn.setText("重新发送"+time+"(s)");
-                donation_duan_btn.setEnabled(false);
-                h.sendEmptyMessageDelayed(0,1000);
-
-                MyUtils.setToast("请求网络。。。");
-            }
-        });
 
         // 藏品代码输入监听  弹出pop框
         donation_cangpin_wrod.addTextChangedListener(new TextWatcher() {
@@ -223,7 +192,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        h.removeMessages(0);
     }
 
     private void initView() {
@@ -233,8 +201,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         donation_name = (EditText) findViewById(R.id.donation_name);
         donation_shuliang = (EditText) findViewById(R.id.donation_shuliang);
         donation_danjia = (TextView) findViewById(R.id.donation_danjia);
-        donation_duanxin = (EditText) findViewById(R.id.donation_duanxin);
-        donation_duan_btn = (TextView) findViewById(R.id.donation_duan_btn);
+        donation_yewu_pass = (EditText) findViewById(R.id.donation_yewu_pass);
         donation_zuidae = (TextView) findViewById(R.id.donation_zuidae);
         donation_tijiao = (Button) findViewById(R.id.donation_tijiao);
         donation_weitanchuan = (LinearLayout) findViewById(R.id.donation_weitanchuan);
@@ -242,6 +209,9 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         donation_weitanchuan_text = (TextView) findViewById(R.id.donation_weitanchuan_text);
 
         donation_tijiao.setOnClickListener(this);
+
+        // 解决键盘挡住输入框
+        SoftHideKeyBoardUtil.assistActivity(this);
 
         //通过设置监听来获取控件的高度
         donation_cangpin_wrod.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -267,8 +237,8 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
 
         initData();
     }
-    List<String> list = new ArrayList<>();
 
+    List<String> list = new ArrayList<>();
     public void initData(){
         for (int i=0;i<15;i++){
             list.add("2365894==");
@@ -310,9 +280,9 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             return;
         }
 
-        String duanxin = donation_duanxin.getText().toString().trim();
-        if (TextUtils.isEmpty(duanxin)) {
-            Toast.makeText(this, "请输入短信验证码", Toast.LENGTH_SHORT).show();
+        String yewu_pass = donation_yewu_pass.getText().toString().trim();
+        if (TextUtils.isEmpty(yewu_pass)) {
+            Toast.makeText(this, "请输入业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -320,6 +290,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         final TakeDonation_Dialog dialog = new TakeDonation_Dialog(this, R.style.dialog_setting);
         MyUtils.getDiaLogDiBu(this,dialog); // 设置dialog弹出框弹出时的动画
         dialog.setTitle("确认转赠信息");
+        dialog.setFeiName("手续费");
         dialog.setWord(word);
         dialog.setShuLiang(Integer.valueOf(shuliang));
         dialog.setZongJia(donation_danjia.getText().toString());
@@ -343,6 +314,11 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
 
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 
     /**
      *  这个接口回调用于输入藏品代码的pop的弹出

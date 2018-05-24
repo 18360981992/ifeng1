@@ -33,6 +33,7 @@
                 android:layout_height="match_parent"
                 android:scrollbars="none"
                 android:layout_marginTop="@dimen/x8"
+                android:divider="@null"
                 ></com.ifeng_tech.treasuryyitong.view.MyListView>
 
         </LinearLayout>
@@ -47,7 +48,7 @@
         android:visibility="gone"
         >
         <ImageView
-            android:layout_width="@dimen/x60"
+            android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x60"
             android:background="@drawable/zanwu_shuju"/>
         <TextView

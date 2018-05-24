@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x88"
+    android:layout_height="@dimen/x93"
     android:background="@drawable/item_bg"
     android:paddingTop="@dimen/x8"
     >
 
    <ImageView
        android:id="@+id/home_tuoguan_img"
-       android:layout_width="@dimen/x70"
-       android:layout_height="@dimen/x70"
+       android:layout_width="@dimen/x75"
+       android:layout_height="@dimen/x75"
        android:layout_marginLeft="@dimen/x8"
        />
     <LinearLayout
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:text="世博四连体"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x12"
+            android:textSize="@dimen/x13"
             android:layout_marginTop="@dimen/x2"
             />
         <TextView
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="开始时间:2018-05-18"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x11"
             android:textColor="@color/text_se"
             android:layout_marginTop="@dimen/x8"
             />
@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="托管进度10/20"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x11"
             android:textColor="@color/zhuse_ziti"
             android:layout_marginTop="@dimen/x2"
             />
@@ -54,7 +54,7 @@
     <ImageView
         android:id="@+id/home_tuoguan_imgflag"
         android:layout_width="@dimen/x45"
-        android:layout_height="@dimen/x18"
+        android:layout_height="@dimen/x20"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/x10"
@@ -64,7 +64,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x1"
-        android:background="@color/fengouxian1"
+        android:background="@color/fengouxian"
         android:layout_alignParentBottom="true"
         android:layout_marginTop="@dimen/x8"
         android:layout_marginRight="@dimen/x8"

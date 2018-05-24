@@ -61,7 +61,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
         property_zhangdan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了账单。。。");
+//                MyUtils.setToast("点击了账单。。。");
             }
         });
     }
@@ -118,5 +118,11 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
                 MyUtils.setToast("点击了充值。。。");
                 break;
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

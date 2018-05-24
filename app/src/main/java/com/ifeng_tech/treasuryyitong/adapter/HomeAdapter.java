@@ -37,10 +37,13 @@ import java.util.List;
 public class HomeAdapter extends RecyclerView.Adapter{
     Context context;
     List<Object> list;
+    private final HomePageActivity activity;
 
     public HomeAdapter(Context context, List<Object> list) {
         this.context = context;
         this.list = list;
+
+        activity = (HomePageActivity) context;
     }
 
     @Override
@@ -78,13 +81,14 @@ public class HomeAdapter extends RecyclerView.Adapter{
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position)==0){
             XBanner home_xBanner = ((HomeLunBo) holder).home_xBanner;
-            final List<String> imgs = (List<String>) list.get(position);
+            final List<Integer> imgs = (List<Integer>) list.get(position);
 
             home_xBanner.setData(imgs,null);//设置数据源
             home_xBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    Glide.with(context).load(imgs.get(position)).into((ImageView) view);
+                    ((ImageView) view).setImageResource(imgs.get(position));
+//                    Glide.with(context).load(imgs.get(position)).into((ImageView) view);
                 }
             });
             home_xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
@@ -113,15 +117,19 @@ public class HomeAdapter extends RecyclerView.Adapter{
 //                            MyUtils.setToast("点击了收货。。。");
                             Intent intent1 = new Intent(context, My_Given_list_Activity.class);
                             context.startActivity(intent1);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+
                             break;
                         case 2: // 转赠
                             Intent intent = new Intent(context, Donation_Activity.class);
                             context.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
                         case 3:
 //                            MyUtils.setToast("点击了鉴定。。。");
                             Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
                             context.startActivity(intent2);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
                     }
 
@@ -144,7 +152,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
             });
         }else if(getItemViewType(position)==3){
             ImageView home_guanggao_img = ((HomeGuangGao) holder).home_guanggao_img;
-            String imguri = (String) list.get(position);
+            Integer imguri = (Integer) list.get(position);
             Glide.with(context).load(imguri).into(home_guanggao_img);
             home_guanggao_img.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -185,7 +193,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
                     Intent intent = new Intent(context, Information_Details_Activity.class);
 //                    intent.putExtra("InformationBean",informationlist.get(i));
                     context.startActivity(intent);
-
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
             });
 
@@ -232,7 +240,6 @@ public class HomeAdapter extends RecyclerView.Adapter{
         public HomeLunBo(View itemView) {
             super(itemView);
             home_xBanner = itemView.findViewById(R.id.home_XBanner);
-
         }
     }
 

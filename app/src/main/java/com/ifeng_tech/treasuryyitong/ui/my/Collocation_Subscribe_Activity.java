@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
-import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -24,7 +23,6 @@ import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -38,13 +36,7 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
     private MyListView collocation_Subscribe_MyListView;
     private PullToRefreshScrollView collocation_Subscribe_pulltoscroll;
 
-    private List<String> imgs;
-    String[] IMAGES = {
-            "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/3/2d/dc14dd1e40b8e561eae91584432262d3_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/8/10/1b26d9f0a258255b0431c03a21c0d108_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/3/89/9f5f869c0b6a14d5132550176c761893_512_512.png",
-    };
+    List<Integer> imgs = new ArrayList<>();
 
     List<CollocationBean> list = new ArrayList<>();
     private Collocation_Subscribe_list_Adapter collocation_subscribe_list_adapter;
@@ -99,7 +91,8 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
             collocation_Subscribe_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    Glide.with(Collocation_Subscribe_Activity.this).load(imgs.get(position)).into((ImageView) view);
+                    ((ImageView) view).setImageResource(imgs.get(position));
+//                    Glide.with(Collocation_Subscribe_Activity.this).load(imgs.get(position)).into((ImageView) view);
                 }
             });
             // 初始数据
@@ -173,6 +166,8 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
 
 
     private void initData() {
+        imgs.add(R.mipmap.band1);
+        imgs.add(R.mipmap.band2);
 
         // 托管预约
         for (int i = 0; i < 15; i++) {
@@ -182,6 +177,12 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
                 list.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",1));
         }
 
-        imgs = Arrays.asList(IMAGES);
+    }
+
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai,R.anim.xiao_out_kuai);
     }
 }

@@ -50,6 +50,7 @@ public class DashApplication extends Application {
 
     public static  int ANQUAN_TYPE_ZHAOHUI=1;
     public static  int ANQUAN_TYPE_GENGGAI=2;
+
     public static SharedPreferences sp;
     public static SharedPreferences.Editor edit;
 
@@ -59,6 +60,7 @@ public class DashApplication extends Application {
         //引用图片
         //关于context----http://blog.csdn.net/lmj623565791/article/details/40481055
         context = getApplicationContext();
+
         //初始化handler
         handler = new Handler();
         //主线程的id

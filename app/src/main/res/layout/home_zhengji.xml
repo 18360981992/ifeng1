@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="征集"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x14"
+            android:textSize="@dimen/x15"
             android:layout_marginLeft="@dimen/x8"
             android:layout_toRightOf="@id/view"
             android:layout_centerVertical="true"

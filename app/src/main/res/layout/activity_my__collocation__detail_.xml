@@ -43,15 +43,17 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/x70"
         android:layout_marginTop="@dimen/x8"
+        android:layout_marginBottom="@dimen/x8"
         >
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1.2"
+            android:layout_weight="1.7"
             android:layout_height="match_parent"
             android:orientation="vertical"
+            android:gravity="center_vertical"
             >
             <LinearLayout
                 android:layout_width="match_parent"
@@ -62,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品名称:"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     />
                 <TextView
@@ -70,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="世博四连体"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x10"
                     />
@@ -80,13 +82,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginTop="@dimen/x9"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品代码:"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x12"
                     android:textColor="@color/color_999999"
                     />
                 <TextView
@@ -94,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3258947836"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x12"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x20"
                     />
@@ -105,13 +107,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/x3"
+                android:layout_marginTop="@dimen/x5"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="计件单位:"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x12"
                     android:textColor="@color/color_999999"
                     />
                 <TextView
@@ -119,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="枚"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x12"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x20"
                     />
@@ -128,7 +130,7 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="0dp"
             android:layout_weight="1.6"
             android:layout_height="match_parent"
@@ -144,26 +146,27 @@
                 android:text="商品详情"
                 android:textColor="@color/zhuse"
                 android:textSize="@dimen/x10"
-                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
                 />
             <TextView
                 android:id="@+id/my_collocation_detail_zong_time"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="2018.05.17 / 2019.05.26"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/color_999999"
                 android:layout_marginRight="@dimen/x10"
-                android:gravity="bottom|end"
+                android:layout_marginTop="@dimen/x50"
+                android:layout_alignParentRight="true"
                 />
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x5"
         android:background="@color/fengouxian"
-        android:layout_marginTop="@dimen/x8"
+
         />
 
     <LinearLayout
@@ -182,17 +185,17 @@
                 android:layout_marginLeft="@dimen/x10"
                 android:text="鉴定费(元/件)"
                 android:textColor="@color/color_999999"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                  />
 
             <TextView
                 android:id="@+id/my_collocation_detail_jiandingfei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x24"
+                android:layout_marginLeft="@dimen/x30"
                 android:text="5.00"
                 android:textColor="@color/name_se"
-                android:textSize="@dimen/x11" />
+                android:textSize="@dimen/x12" />
         </LinearLayout>
 
         <LinearLayout
@@ -204,7 +207,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="预收仓储费天数"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -213,9 +216,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="10"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x15"
+                android:layout_marginLeft="@dimen/x20"
                 />
         </LinearLayout>
 
@@ -228,7 +231,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -237,9 +240,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="等待鉴定"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginLeft="@dimen/x80"
                 />
         </LinearLayout>
 
@@ -252,7 +255,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="托管时间"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -261,9 +264,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="100"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginLeft="@dimen/x55"
                 />
         </LinearLayout>
 
@@ -278,7 +281,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="鉴定地址"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -287,9 +290,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="北京市西城区黄寺大街德胜置业大厦\n2号楼2层"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginLeft="@dimen/x55"
                 />
         </LinearLayout>
 

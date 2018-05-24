@@ -136,4 +136,10 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
         }
 
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

@@ -203,7 +203,7 @@
             android:visibility="visible"
             >
             <ImageView
-                android:layout_width="@dimen/x50"
+                android:layout_width="@dimen/x70"
                 android:layout_height="@dimen/x50"
                 android:background="@drawable/zanwu_shuju"/>
             <TextView

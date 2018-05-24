@@ -110,4 +110,10 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
         Labels.setRefreshingLabel("正在刷新...");
         Labels.setReleaseLabel("放开刷新...");
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

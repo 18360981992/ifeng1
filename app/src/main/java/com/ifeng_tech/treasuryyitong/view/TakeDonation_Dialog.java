@@ -24,6 +24,7 @@ public class TakeDonation_Dialog extends Dialog {
     private TextView donation_dialog_zongjia;
     private Button donation_dialog_queren;
     private Button donation_dialog_quxiao;
+    private TextView donation_dialog_feiname;
 
     public TakeDonation_Dialog(Context context) {
         super(context);
@@ -63,8 +64,12 @@ public class TakeDonation_Dialog extends Dialog {
         donation_dialog_zongjia=findViewById(R.id.donation_dialog_zongjia);
         donation_dialog_queren=findViewById(R.id.donation_dialog_queren);
         donation_dialog_quxiao=findViewById(R.id.donation_dialog_quxiao);
+        donation_dialog_feiname = findViewById(R.id.donation_dialog_feiname);
     }
 
+    public void setFeiName(String feiname){
+        donation_dialog_feiname.setText(feiname);
+    }
     public void setTitle(String title){
         donation_dialog_title.setText(title);
     }

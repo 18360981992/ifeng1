@@ -122,9 +122,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.change_btn:
-
                 submit();
-
                 break;
         }
     }
@@ -169,5 +167,11 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                     weitanchuan_height,
                     false,"手机号绑定失败!");
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

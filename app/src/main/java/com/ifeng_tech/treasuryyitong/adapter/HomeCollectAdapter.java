@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
@@ -23,10 +24,13 @@ import java.util.List;
 public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.HomeZhengJi> {
     Context context;
     List<CollectBean> collectlist;
+    private final HomePageActivity activity;
 
     public HomeCollectAdapter(Context context, List<CollectBean> collectlist) {
         this.context = context;
         this.collectlist = collectlist;
+
+        activity = (HomePageActivity) context;
     }
 
     @Override
@@ -58,12 +62,12 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
                     Intent intent = new Intent(context, Collect_Activity.class);
                     intent.putExtra("CollectBean",collectlist.get(position));
                     context.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
                     MyUtils.setToast("该商品还未开始征集。。。");
                 }
             }
         });
-
     }
 
     @Override

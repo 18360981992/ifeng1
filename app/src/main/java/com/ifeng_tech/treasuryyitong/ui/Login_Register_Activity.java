@@ -216,4 +216,10 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         super.onDestroy();
         h.removeMessages(0);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

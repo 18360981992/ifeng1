@@ -21,7 +21,7 @@
         <activity android:name=".MainActivity" />
 
         <!-- 首页展示 -->
-        <activity android:name=".ui.HomePageActivity" >
+        <activity android:name=".ui.HomePageActivity">
 
         </activity>
 
@@ -29,7 +29,7 @@
         <service android:name=".service.HeartbeatService" />
 
         <!-- 登录/注册 -->
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -62,7 +62,10 @@
         <activity android:name=".ui.Recharge_Message_Activity" />
         <activity android:name=".ui.Safety_Message_Activity" />
         <activity android:name=".ui.Login_Register_Activity" />
-        <activity android:name=".ui.Login_Forget_Activity"></activity>
+        <activity android:name=".ui.Login_Forget_Activity" />
+        <activity android:name=".ui.my.Pick_Up_Goods_Detail_Activity" />
+        <activity android:name=".ui.Collection_directory_Activity" />
+        <activity android:name=".ui.Collection_Directory_Detail_Activity"></activity>
     </application>
 
 </manifest>

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/baise"
+    android:background="@drawable/item_bg"
     >
 
     <LinearLayout
@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2568974156334342342423"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x12"
             android:textColor="@color/name_se"
             android:layout_marginLeft="@dimen/x8"
             />

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -57,8 +56,8 @@ public class My_Given_list_Adapter extends BaseAdapter {
         LinearLayout my_given_list_zhuanchu_img = convertView.findViewById(R.id.my_given_list_zhuanchu_img);
         LinearLayout my_given_list_zhuanru_img = convertView.findViewById(R.id.my_given_list_zhuanru_img);
         LinearLayout my_given_list_zhuanchu_btn = convertView.findViewById(R.id.my_given_list_zhuanchu_btn);
-        final ImageView my_given_list_jieshou = convertView.findViewById(R.id.my_given_list_jieshou);
-        ImageView my_given_list_jujue = convertView.findViewById(R.id.my_given_list_jujue);
+        final TextView my_given_list_jieshou = convertView.findViewById(R.id.my_given_list_jieshou);
+        TextView my_given_list_jujue = convertView.findViewById(R.id.my_given_list_jujue);
         LinearLayout my_given_list_zhuanru_btn = convertView.findViewById(R.id.my_given_list_zhuanru_btn);
         TextView my_given_list_zhuanru_text = convertView.findViewById(R.id.my_given_list_zhuanru_text);
 
@@ -80,6 +79,7 @@ public class My_Given_list_Adapter extends BaseAdapter {
             my_given_list_zhuanru_img.setVisibility(View.VISIBLE); my_given_list_zhuanru_btn.setVisibility(View.VISIBLE);
         }
 
+        // 接收的点击事件
         my_given_list_jieshou.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,6 +87,7 @@ public class My_Given_list_Adapter extends BaseAdapter {
             }
         });
 
+        // 拒绝的点击事件
         my_given_list_jujue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

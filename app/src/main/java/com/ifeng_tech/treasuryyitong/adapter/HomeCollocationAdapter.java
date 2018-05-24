@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
 import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
+import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 import java.text.SimpleDateFormat;
@@ -25,10 +26,12 @@ import java.util.List;
 public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocationAdapter.HomeTuoGuan> {
     Context context;
     List<CollocationBean> list;
+    private final HomePageActivity activity;
 
     public HomeCollocationAdapter(Context context, List<CollocationBean> list) {
         this.context = context;
         this.list = list;
+        activity = (HomePageActivity) context;
     }
 
     @Override
@@ -67,6 +70,7 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
                     Intent intent = new Intent(context, Authenticate_Details_Activity.class);
                     intent.putExtra("CollocationBean",list.get(position));
                     context.startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
                     MyUtils.setToast("该商品还未开始托管。。。");
                 }

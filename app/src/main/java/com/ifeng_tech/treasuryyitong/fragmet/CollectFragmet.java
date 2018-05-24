@@ -12,7 +12,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
-import com.bumptech.glide.Glide;
 import com.handmark.pulltorefresh.library.ILoadingLayout;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshScrollView;
@@ -26,7 +25,6 @@ import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -42,7 +40,7 @@ public class CollectFragmet extends Fragment {
     private PullToRefreshScrollView collect_pulltoscroll;
     private XBanner collect_XBanner;
 
-    private List<String> imgs;
+    List<Integer> imgs = new ArrayList<>();
     List<CollectBean> collectlist = new ArrayList<>();
     String[] IMAGES = {
             "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
@@ -68,9 +66,6 @@ public class CollectFragmet extends Fragment {
         collect_XBanner.setFocusable(true);
         collect_XBanner.setFocusableInTouchMode(true);
         collect_XBanner.requestFocus();
-
-        // 设置刷新
-        initRefreshListView();
 
         return view;
     }
@@ -108,13 +103,12 @@ public class CollectFragmet extends Fragment {
             collect_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
                 @Override
                 public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    Glide.with(activity).load(imgs.get(position)).into((ImageView) view);
+                    ((ImageView) view).setImageResource(imgs.get(position));
+//                    Glide.with(activity).load(imgs.get(position)).into((ImageView) view);
                 }
             });
             setCollectAdapter();
         }
-
-
 
         collect_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -124,6 +118,7 @@ public class CollectFragmet extends Fragment {
                     Intent intent = new Intent(activity, Collect_Activity.class);
                     intent.putExtra("CollectBean",collectlist.get(position));
                     startActivity(intent);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
                     MyUtils.setToast("该商品还未开始征集。。。");
                 }
@@ -132,6 +127,9 @@ public class CollectFragmet extends Fragment {
 
     }
 
+    /**
+     *  初始化适配器
+     */
     private void setCollectAdapter() {
         if(collectAdapter==null){
             collectAdapter = new CollectAdapter(activity, collectlist);
@@ -153,6 +151,9 @@ public class CollectFragmet extends Fragment {
 
 
     private void initData() {
+
+        imgs.add(R.mipmap.band1);
+        imgs.add(R.mipmap.band2);
         // 征集
         for (int i = 0; i < 15; i++) {
             if(i%2==0)
@@ -161,7 +162,6 @@ public class CollectFragmet extends Fragment {
                 collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",1));
         }
 
-        imgs = Arrays.asList(IMAGES);
     }
 
     private void initView(View view) {
@@ -169,6 +169,9 @@ public class CollectFragmet extends Fragment {
         collect_XBanner = view.findViewById(R.id.collect_XBanner);
         collect_pulltoscroll = (PullToRefreshScrollView) view.findViewById(R.id.collect_pulltoscroll);
         collect_null = view.findViewById(R.id.collect_null);
+
+        // 设置刷新
+        initRefreshListView();
 
         initData();
     }

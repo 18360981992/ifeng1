@@ -64,7 +64,7 @@
         android:visibility="gone"
         >
         <ImageView
-            android:layout_width="@dimen/x60"
+            android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x60"
             android:background="@drawable/zanwu_shuju"/>
         <TextView

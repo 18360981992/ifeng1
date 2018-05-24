@@ -135,4 +135,9 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
 
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

@@ -1,6 +1,8 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Rect;
 import android.os.Build;
 import android.view.View;
@@ -41,6 +43,22 @@ public class SoftHideKeyBoardUtil {
         });
         //6､获取到Activity的xml布局的放置参数
         frameLayoutParams = (FrameLayout.LayoutParams) mChildOfContent.getLayoutParams();
+
+        statusBarHeight = getStatusBarHeight(activity);
+
+//        LogUtils.i("jiba","==="+statusBarHeight);
+    }
+
+
+    // 获取状态栏高度
+    private int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = res.getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
     }
 
     // 获取界面可用高度，如果软键盘弹起后，Activity的xml布局可用高度需要减去键盘高度
@@ -57,9 +75,9 @@ public class SoftHideKeyBoardUtil {
             if (heightDifference > (usableHeightSansKeyboard/4)) {
                 // 6､键盘弹出了，Activity的xml布局高度应当减去键盘高度
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference + statusBarHeight;
+                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference +statusBarHeight;
                 } else {
-                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
+                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference ;
                 }
             } else {
                 frameLayoutParams.height = contentHeight;

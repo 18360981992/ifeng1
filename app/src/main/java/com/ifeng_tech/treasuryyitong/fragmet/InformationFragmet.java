@@ -47,8 +47,6 @@ public class InformationFragmet extends Fragment {
             zixun_TabLayout.addTab(zixun_TabLayout.newTab().setText(title[i]));
         }
 
-        //设置传值，，将title的值穿走，，默认展示“全部”
-        setSelected(title[0]);
 
         //设置tab的点击监听器
         zixun_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -71,6 +69,12 @@ public class InformationFragmet extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        //设置传值，，将title的值穿走，，默认展示“全部”
+        setSelected(title[0]);
+    }
 
     //设置传值方法
     private void setSelected(String value) {

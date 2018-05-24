@@ -41,7 +41,7 @@ public class RetrofitFacety {
             .build();
     //使全局就一个Retrofit对象,设置基础Url
     public static SearchApi apiService = new Retrofit.Builder()
-            .baseUrl(APIs.lineUrl)
+            .baseUrl(APIs.debugApi)
             //使我们能高度自定义转化器
             .addConverterFactory(ScalarsConverterFactory.create())
             .client(okHttpClient)

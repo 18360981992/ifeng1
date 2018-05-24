@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/collection_mulu_item_bg"
+    android:paddingTop="@dimen/x8"
+    android:paddingBottom="@dimen/x5"
+    >
+
+    <ImageView
+        android:id="@+id/collection_mulu_item_img"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x80"
+        android:background="@drawable/guangao"
+        android:layout_marginLeft="@dimen/x8"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/x80"
+        android:layout_marginLeft="@dimen/x8"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            >
+            <TextView
+                android:id="@+id/collection_mulu_item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2007-7《扬州园林》特种邮票"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                />
+            <TextView
+                android:id="@+id/collection_mulu_item_cword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="123456789876"
+                android:textSize="@dimen/x13"
+                android:textColor="@color/name_se"
+                android:layout_marginTop="@dimen/x10"
+                />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="@dimen/x10"
+            android:layout_height="@dimen/x15"
+            android:background="@drawable/jiantou"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x8"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x1"
+            android:background="@color/fengouxian1"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+    
+</LinearLayout>

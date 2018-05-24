@@ -64,7 +64,7 @@
                     android:layout_marginLeft="@dimen/x8"
                     android:text="手机号码:"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x13" />
+                    android:textSize="@dimen/x14" />
 
                 <TextView
                     android:id="@+id/retrieve_shoujihao"
@@ -73,7 +73,7 @@
                     android:layout_marginLeft="@dimen/x15"
                     android:text="183*****992"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x14"
                     android:visibility="gone"
                     />
                 <EditText
@@ -81,7 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x30"
                     android:hint="请输入手机号"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x15"
                     android:layout_marginRight="@dimen/x8"
@@ -107,7 +107,7 @@
                     android:layout_marginLeft="@dimen/x8"
                     android:text="验证码:"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x13" />
+                    android:textSize="@dimen/x14" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -127,7 +127,7 @@
                         android:maxLength="6"
                         android:singleLine="true"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x12" />
+                        android:textSize="@dimen/x14" />
 
                     <View
                         android:layout_width="@dimen/x1"
@@ -144,7 +144,7 @@
                         android:gravity="center"
                         android:text="点击发送"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x12" />
+                        android:textSize="@dimen/x13" />
                 </LinearLayout>
             </LinearLayout>
 

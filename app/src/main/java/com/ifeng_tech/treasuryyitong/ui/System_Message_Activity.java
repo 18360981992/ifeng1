@@ -64,7 +64,6 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
             system_null.setVisibility(View.GONE);
             system_pulltoscroll.setVisibility(View.VISIBLE);
             setMessageAdapter();
-
         }else{
             system_null.setVisibility(View.VISIBLE);
             system_pulltoscroll.setVisibility(View.GONE);
@@ -120,5 +119,11 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
         for (int i=0;i<15;i++){
             list.add(new Message_Lists_Bean(1255689741,"版本更新提醒","系统1.1.1已经更新"));
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

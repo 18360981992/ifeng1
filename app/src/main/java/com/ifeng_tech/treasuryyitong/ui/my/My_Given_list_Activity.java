@@ -53,9 +53,6 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
                 finish();
             }
         });
-
-
-
     }
 
     @Override
@@ -142,4 +139,9 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

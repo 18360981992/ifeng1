@@ -110,6 +110,12 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
         information_Details_ProgressBar = (ProgressBar) findViewById(R.id.information_Details_ProgressBar);
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
+
     /**
      * Js调用的JavascriptInterface
      */

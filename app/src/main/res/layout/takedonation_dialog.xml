@@ -88,9 +88,10 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x35">
         <TextView
+            android:id="@+id/donation_dialog_feiname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="上盘费"
+            android:text="手续费"
             android:textSize="@dimen/x12"
             android:textColor="@color/color_666666"
             android:layout_centerVertical="true"

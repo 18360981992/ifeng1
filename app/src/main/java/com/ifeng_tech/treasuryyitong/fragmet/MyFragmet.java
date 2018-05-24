@@ -61,11 +61,16 @@ public class MyFragmet extends Fragment {
 
         activity = (HomePageActivity) getActivity();
 
+        /**
+         * 点击认证按钮需要判断当前状态
+         */
         wode_weirenzheng.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent = new Intent(activity, Certification_Activity.class);
                 startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -90,22 +95,27 @@ public class MyFragmet extends Fragment {
                     case 0:  // 我的资产
                         intent = new Intent(activity, My_Property_Activity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 1: // 我的征集
                         intent = new Intent(activity, MyCollectActivity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 2:  // 我的托管
                         intent = new Intent(activity, My_Collocation_Activity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 3:  // 转赠列表
                         intent = new Intent(activity, My_Given_list_Activity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
 //                    case 4:  //  入库管理
 //                        intent = new Intent(activity, Incoming_Test_Activity.class);
 //                        activity.startActivity(intent);
+//                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
 //                        break;
 //                    case 5:  // 出库管理
 //                        intent = new Intent(activity, Stock_Removal_Activity.class);
@@ -114,10 +124,12 @@ public class MyFragmet extends Fragment {
                     case 4:   // 我的仓库
                         intent = new Intent(activity, My_Warehouse_Activity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 5:   // 提货注册
                         intent = new Intent(activity, Pick_up_goods_Activity.class);
                         activity.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
 
                 }
@@ -129,6 +141,7 @@ public class MyFragmet extends Fragment {
             public void onClick(View v) {
                 intent = new Intent(activity, Safe_Activity.class);
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -138,6 +151,7 @@ public class MyFragmet extends Fragment {
             public void onClick(View v) {
                 intent = new Intent(activity, Setting_Activity.class);
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }
@@ -157,13 +171,13 @@ public class MyFragmet extends Fragment {
     }
 
     public void initData(){
-        myListBeen.add(new MyListBean(R.drawable.wode_zichan,"我的资产"));
+        myListBeen.add(new MyListBean(R.drawable.wode_zican,"我的资产"));
         myListBeen.add(new MyListBean(R.drawable.wode_zhengji,"我的征集"));
         myListBeen.add(new MyListBean(R.drawable.wode_tuoguan,"我的托管"));
         myListBeen.add(new MyListBean(R.drawable.wode_zhuanzeng,"转赠列表"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_ruku,"入库管理"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"出库管理"));
         myListBeen.add(new MyListBean(R.drawable.wode_cangku,"我的仓库"));
-        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"提货查询"));
+        myListBeen.add(new MyListBean(R.drawable.wode_tihuo,"提货查询"));
     }
 }

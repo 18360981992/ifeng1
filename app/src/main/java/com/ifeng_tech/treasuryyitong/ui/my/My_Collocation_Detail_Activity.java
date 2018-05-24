@@ -86,4 +86,10 @@ public class My_Collocation_Detail_Activity extends AppCompatActivity {
         my_collocation_detail_kaishi_time = (TextView) findViewById(R.id.my_collocation_detail_kaishi_time);
         my_collocation_detail_dizhi = (TextView) findViewById(R.id.my_collocation_detail_dizhi);
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

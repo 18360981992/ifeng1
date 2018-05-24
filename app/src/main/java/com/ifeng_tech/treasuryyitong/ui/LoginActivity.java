@@ -23,6 +23,8 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.qdong.slide_to_unlock_view.CustomSlideToUnlockView;
 
+import java.util.HashMap;
+
 /**
  * 登录
  */
@@ -75,6 +77,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, Login_Register_Activity.class);
                 startActivityForResult(intent, DashApplication.LOGIN_TO_REGISTER_req);
+
             }
         });
 
@@ -98,7 +101,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
 
             @Override
             public void onUnlocked() {
-                MyUtils.setToast("请求网络，登录成功。。。");
+//                MyUtils.setToast("请求网络，开始登陆。。。");
                 submit();
             }
         });
@@ -141,7 +144,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
 
     private void submit() {
         // validate
-        String name = logo_name.getText().toString().trim();
+        final String name = logo_name.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show();
             logo_to_unlock.resetView();   // 将滑动条重置
@@ -156,15 +159,49 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         }
 
         // TODO validate success, do something
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userName",name);
+        map.put("password",pass);
+        map.put("loginType","0");
+
+
+//        myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
+//            @Override
+//            public void chenggong(String json) {
+////                LogUtils.i("wc","===="+json);
+//                logo_to_unlock.setVisibility(View.GONE);
+//                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//                finish();
+//
+//                DashApplication.edit.putString("shouji", name)
+//                        .putBoolean("isLogin",true)
+//                        .putString("uid","0")
+//                        .commit();
+//            }
+//
+//            @Override
+//            public void shibai(String ss) {
+//                logo_to_unlock.resetView();  // 将滑动条重置
+//                MyUtils.setObjectAnimator(login_weitanchuan,
+//                        login_weitanchuan_img,
+//                        login_weitanchuan_text,
+//                        weitanchuan_height,
+//                        false, "登录失败!");
+//            }
+//        });
+
         if (true) {
             logo_to_unlock.setVisibility(View.GONE);
+            DashApplication.edit.putString("shouji", name)
+                    .putBoolean("isLogin",true)
+                    .putString("uid","0")
+                    .commit();
+
             Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
             startActivity(intent);
-            DashApplication.edit.putString("shouji", name)
-                                .putBoolean("isLogin",true)
-                                .putString("uid","0")
-                                .commit();
-
+            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             finish();
         } else {
             logo_to_unlock.resetView();  // 将滑动条重置
@@ -175,5 +212,11 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
                     false, "登录失败!");
         }
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

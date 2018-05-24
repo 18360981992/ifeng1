@@ -66,6 +66,7 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了系统消息。。。");
                 Intent intent = new Intent(activity, System_Message_Activity.class);
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -75,6 +76,7 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了充值消息。。。");
                 Intent intent = new Intent(activity, Recharge_Message_Activity.class);
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -84,6 +86,7 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了安全消息。。。");
                 Intent intent = new Intent(activity, Safety_Message_Activity.class);
                 activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
         return view;

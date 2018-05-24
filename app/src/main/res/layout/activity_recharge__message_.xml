@@ -45,6 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:visibility="visible"
         >
         <com.ifeng_tech.treasuryyitong.view.MyListView
             android:id="@+id/recharge_MyListView"
@@ -64,7 +65,7 @@
         android:visibility="gone"
         >
         <ImageView
-            android:layout_width="@dimen/x60"
+            android:layout_width="@dimen/x80"
             android:layout_height="@dimen/x60"
             android:background="@drawable/zanwu_shuju"/>
         <TextView

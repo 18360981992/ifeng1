@@ -234,4 +234,10 @@ public class Authenticate_Details_Activity extends BaseMVPActivity<Authenticate_
             list.add(new Authenticate_Details_Bean(125689453,60,80,99.99));
         }
     }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

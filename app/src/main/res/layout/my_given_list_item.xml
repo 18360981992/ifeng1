@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2568974156334342342423"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x12"
             android:textColor="@color/name_se"
             android:layout_marginLeft="@dimen/x8"
             />
@@ -102,7 +102,9 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x34"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/x10"
+        android:paddingBottom="@dimen/x10"
         >
         <LinearLayout
             android:id="@+id/my_given_list_zhuanchu_img"
@@ -113,15 +115,15 @@
             android:layout_centerVertical="true"
             >
             <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x23"
+                android:layout_height="@dimen/x18"
                 android:background="@drawable/zhuanchu"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="转出"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="#0FCE3F"
                 android:layout_marginLeft="@dimen/x5"
                 />
@@ -138,15 +140,15 @@
             android:visibility="gone"
             >
             <ImageView
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x23"
+                android:layout_height="@dimen/x18"
                 android:background="@drawable/zhuanru"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="转入"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="#5479EC"
                 android:layout_marginLeft="@dimen/x5"
                 />
@@ -162,17 +164,26 @@
             android:layout_marginRight="@dimen/x8"
             android:visibility="gone"
             >
-            <ImageView
+            <TextView
                 android:id="@+id/my_given_list_jieshou"
-                android:layout_width="@dimen/x35"
-                android:layout_height="@dimen/x20"
-                android:background="@drawable/jieshou"/>
-            <ImageView
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x25"
+                android:text="接收"
+                android:textSize="@dimen/x11"
+                android:textColor="@color/zhuse"
+                android:gravity="center"
+                android:background="@drawable/jieshou_kuang"
+                />
+            <TextView
                 android:id="@+id/my_given_list_jujue"
-                android:layout_width="@dimen/x35"
-                android:layout_height="@dimen/x20"
-                android:background="@drawable/jujue"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x25"
+                android:text="拒绝"
+                android:textSize="@dimen/x11"
+                android:textColor="@color/color_999999"
+                android:gravity="center"
                 android:layout_marginLeft="@dimen/x10"
+                android:background="@drawable/jujue_kuang"
                 />
         </LinearLayout>
 
@@ -190,7 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="等待确认"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x12"
                 android:textColor="#FFB800"
                 />
         </LinearLayout>

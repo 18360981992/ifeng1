@@ -2,6 +2,7 @@ package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.RelativeLayout;
 
@@ -22,7 +23,10 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
     String[] tabtitle = {"提货单注册", "提货单查询"};
     private RelativeLayout up_goods_Fan;
     private TabLayout up_goods_TabLayout;
-
+    private int position=0;
+    private FragmentManager fragmentManager;
+    Pick_up_goods_Zhuce pick_up_goods_zhuce = new Pick_up_goods_Zhuce();
+    Pick_up_goods_ChaXun pick_up_goods_chaXun = new Pick_up_goods_ChaXun();
 
     @Override
     public MyPresenter<Pick_up_goods_Activity> initPresenter() {
@@ -65,7 +69,8 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
         up_goods_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                setSelected(tab.getText().toString());
+                position = tab.getPosition();
+                setSelected(position);
             }
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
@@ -77,30 +82,56 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
 
             }
         });
+
+
+        fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.up_goods_FrameLayout,pick_up_goods_zhuce)
+                .add(R.id.up_goods_FrameLayout,pick_up_goods_chaXun)
+                .show(pick_up_goods_zhuce)
+                .hide(pick_up_goods_chaXun)
+                .commit();
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
-        setSelected(tabtitle[0]);
+        // 根据状态值做显示  状态值在查询的时候回用到
+        if(position==0){
+            setSelected(0);
+        }else{
+            setSelected(1);
+        }
     }
 
-    //设置传值方法
-    private void setSelected(String value) {
-       if(value.equals(tabtitle[0])){
-           getSupportFragmentManager().beginTransaction()
-                   .replace(R.id.up_goods_FrameLayout, new Pick_up_goods_Zhuce()).commit();
-       }else{
-           getSupportFragmentManager().beginTransaction()
-                   .replace(R.id.up_goods_FrameLayout, new Pick_up_goods_ChaXun()).commit();
-       }
 
+    //设置传值方法
+    private void setSelected(int value) {
+
+       if("提货单注册".equals(tabtitle[value])){
+           fragmentManager.beginTransaction()
+                   .show(pick_up_goods_zhuce)
+                   .hide(pick_up_goods_chaXun)
+                   .commit();
+       }else{
+           fragmentManager.beginTransaction()
+                   .hide(pick_up_goods_zhuce)
+                   .show(pick_up_goods_chaXun)
+                   .commit();
+       }
     }
 
     private void initView() {
 
         up_goods_Fan = (RelativeLayout) findViewById(R.id.up_goods_Fan);
         up_goods_TabLayout = (TabLayout) findViewById(R.id.up_goods_TabLayout);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

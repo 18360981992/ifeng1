@@ -1,14 +1,20 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.HomeAdapter;
@@ -19,7 +25,6 @@ import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -37,22 +42,50 @@ public class HomeFragmet extends Fragment {
     List<CollectBean> collectlist=new ArrayList<>();
     List<CollocationBean> trusteeshiplist=new ArrayList<>();
     List<InformationBean> informationlist=new ArrayList<>();
-    List<String> imgs;
+    List<Integer> imgs = new ArrayList<>();
     private HomePageActivity activity;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.home_fragmet, container, false);
+
+        activity = (HomePageActivity) getActivity();
+
+        // 设置状态栏
+        setActionBar();
+
         initView(view);
         initData();
-        activity = (HomePageActivity) getActivity();
 
         shouye_RecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL,false));
 
         return view;
     }
-
+    // 设置状态栏
+    private void setActionBar() {
+        Window window = activity.getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+        View statusBarView = new View(window.getContext());
+        int statusBarHeight = getStatusBarHeight(window.getContext());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+        params.gravity = Gravity.TOP;
+        statusBarView.setLayoutParams(params);
+        statusBarView.setBackground(getResources().getDrawable(R.drawable.zichan_jianbian));
+        decorViewGroup.addView(statusBarView);
+    }
+    // 获取状态栏高度
+    private int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = res.getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
 
 
     @Override
@@ -63,15 +96,9 @@ public class HomeFragmet extends Fragment {
 
     // 仿数据
     private void initData(){
-        String[] IMAGES = {
-                "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
-                "http://img.wdjimg.com/mms/icon/v1/3/2d/dc14dd1e40b8e561eae91584432262d3_512_512.png",
-                "http://img.wdjimg.com/mms/icon/v1/8/10/1b26d9f0a258255b0431c03a21c0d108_512_512.png",
-                "http://img.wdjimg.com/mms/icon/v1/3/89/9f5f869c0b6a14d5132550176c761893_512_512.png",
-                "http://img.wdjimg.com/mms/icon/v1/d/29/dc596253e9e80f28ddc84fe6e52b929d_512_512.png"
-        };
 
-        imgs = Arrays.asList(IMAGES);
+        imgs.add(R.mipmap.band1);
+        imgs.add(R.mipmap.band2);
         // 导航图
         gpslist.add(new FirstGpsBean(R.drawable.saoyisao,"扫一扫"));
         gpslist.add(new FirstGpsBean(R.drawable.shouhuo,"收货"));
@@ -99,7 +126,7 @@ public class HomeFragmet extends Fragment {
         list.add(imgs);
         list.add(gpslist);
         list.add(collectlist);
-        list.add("http://image.baidu.com/search/down?tn=download&word=download&ie=utf8&fr=detail&url=http%3A%2F%2Fpic.qiantucdn.com%2F58pic%2F19%2F02%2F76%2F5672530f7d928_1024.jpg&thumburl=http%3A%2F%2Fimg0.imgtn.bdimg.com%2Fit%2Fu%3D2176610467%2C2174515257%26fm%3D27%26gp%3D0.jpg");
+        list.add(R.drawable.cangpinmulu);
         list.add(trusteeshiplist);
         list.add(informationlist);
     }

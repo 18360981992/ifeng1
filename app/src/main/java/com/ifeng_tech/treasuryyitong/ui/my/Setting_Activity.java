@@ -10,6 +10,9 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
+/**
+ *  设置
+ */
 public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresenter<Setting_Activity>> implements View.OnClickListener {
 
     private RelativeLayout setting_Fan;
@@ -38,17 +41,19 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
             }
         });
 
+        // 点击关于我们
         setting_guanyu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("点击了关于我们。。。");
+//                MyUtils.setToast("点击了关于我们。。。");
             }
         });
 
+        // 检索版本
         setting_banben.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("检索版本。。。");
+//                MyUtils.setToast("检索版本。。。");
             }
         });
     }
@@ -69,5 +74,11 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
                 MyUtils.setToast("退出登录。。。");
                 break;
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

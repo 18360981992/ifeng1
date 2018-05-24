@@ -46,7 +46,10 @@
         android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -56,6 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/x50"
             android:gravity="center"
+            android:layout_marginTop="@dimen/x15"
             >
             <TextView
                 android:layout_width="wrap_content"
@@ -180,7 +184,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="转赠手续费"
+                android:text="手续费"
                 android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x8"/>
@@ -192,7 +196,7 @@
                 android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
                 android:textStyle="bold"
-                android:layout_marginLeft="@dimen/x48"
+                android:layout_marginLeft="@dimen/x71"
                 />
         </LinearLayout>
 
@@ -204,51 +208,30 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="手机验证码"
+                android:text="业务密码"
                 android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x8"/>
-            <LinearLayout
+            <EditText
+                android:id="@+id/donation_yewu_pass"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x35"
-                android:background="@drawable/tihuo_ed_bg"
-                android:layout_marginLeft="@dimen/x46"
+                android:layout_marginLeft="@dimen/x58"
                 android:layout_marginRight="@dimen/x8"
-                >
-                <EditText
-                    android:id="@+id/donation_duanxin"
-                    android:layout_width="0dp"
-                    android:layout_weight="1.3"
-                    android:layout_height="match_parent"
-                    android:background="@null"
-                    android:hint="短信验证码"
-                    android:textSize="@dimen/x12"
-                    android:textColor="@color/name_se"
-                    android:inputType="number"
-                    android:singleLine="true"
-                    />
-                <View
-                    android:layout_width="@dimen/x1"
-                    android:layout_height="@dimen/x20"
-                    android:layout_margin="@dimen/x2"
-                    android:background="@color/color_e5e5e5"
-                    android:layout_gravity="center_vertical"
-                    />
-                <TextView
-                    android:id="@+id/donation_duan_btn"
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="match_parent"
-                    android:text="点击发送"
-                    android:textSize="@dimen/x12"
-                    android:textColor="@color/name_se"
-                    android:gravity="center"/>
-            </LinearLayout>
+                android:background="@drawable/tihuo_ed_bg"
+                android:hint="请输入业务密码"
+                android:inputType="textPassword"
+                android:singleLine="true"
+                android:textColor="@color/name_se"
+                android:textSize="@dimen/x12"
+                android:maxLength="10"
+                />
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
             <Button
                 android:id="@+id/donation_tijiao"
                 android:layout_width="match_parent"

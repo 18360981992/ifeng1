@@ -10,13 +10,13 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x65"
+        android:layout_height="@dimen/x80"
         android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/wode_touxiang"
-            android:layout_width="@dimen/x50"
-            android:layout_height="@dimen/x50"
+            android:layout_width="@dimen/x60"
+            android:layout_height="@dimen/x60"
             android:layout_marginLeft="@dimen/x10"
             android:layout_centerVertical="true"
             />
@@ -33,14 +33,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="交易会员号"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x13"
                 android:textColor="@color/name_se"/>
             <TextView
                 android:id="@+id/wode_hao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6502289877"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x13"
                 android:textColor="@color/name_se"
                 android:layout_marginTop="@dimen/x3"
                 />
@@ -51,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未认证"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x12"
             android:textColor="@color/baise"
             android:background="@drawable/weirenzheng_bg"
             android:layout_alignParentRight="true"
@@ -63,7 +63,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
+        android:layout_height="@dimen/x8"
         android:background="@color/fengouxian"/>
 
     <com.ifeng_tech.treasuryyitong.view.MyListView
@@ -72,14 +72,16 @@
         android:layout_height="wrap_content"
         android:scrollbars="none"
         android:background="@color/baise"
+        android:divider="@null"
         ></com.ifeng_tech.treasuryyitong.view.MyListView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
+        android:layout_height="@dimen/x8"
         android:background="@color/fengouxian"/>
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
+        android:layout_height="@dimen/x90"
         android:orientation="vertical"
         >
         <RelativeLayout
@@ -91,8 +93,8 @@
             >
             <ImageView
                 android:id="@+id/an"
-                android:layout_width="@dimen/x18"
-                android:layout_height="@dimen/x18"
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x13"
                 android:background="@drawable/wode_anquan"
@@ -101,13 +103,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x40"
                 android:text="安全保护"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x13"
                 android:textColor="@color/name_se"
-                android:layout_toRightOf="@id/an"
-                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x10"
                 android:gravity="center"
-                />
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/an"
+                android:layout_marginStart="13dp" />
 
             <ImageView
                 android:layout_width="@dimen/x8"
@@ -120,7 +122,7 @@
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x5"
+            android:layout_height="@dimen/x8"
             android:background="@color/fengouxian"/>
         <RelativeLayout
             android:id="@+id/wode_shezhi"
@@ -131,8 +133,8 @@
             >
             <ImageView
                 android:id="@+id/she"
-                android:layout_width="@dimen/x18"
-                android:layout_height="@dimen/x18"
+                android:layout_width="@dimen/x15"
+                android:layout_height="@dimen/x15"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/x13"
                 android:background="@drawable/wode_shezhi"
@@ -141,7 +143,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/x40"
                 android:text="设置"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x13"
                 android:textColor="@color/name_se"
                 android:layout_toRightOf="@id/she"
                 android:layout_centerVertical="true"

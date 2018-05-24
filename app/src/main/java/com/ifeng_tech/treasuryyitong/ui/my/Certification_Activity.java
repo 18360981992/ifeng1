@@ -258,6 +258,9 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
 
         // TODO validate success, do something
 
+        /**
+         *  从这里的入口永远也不会进到失败的页面，所以不需要
+         */
         MyUtils.setToast("请求网络，进行认证。。。");
 
         if(true){
@@ -265,11 +268,15 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
             intent.putExtra("rengzheng_type",1);
             startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
-        }else{
-            Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
-            intent.putExtra("rengzheng_type",2);
-            startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
+            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
         }
+
+//        else{
+//            Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
+//            intent.putExtra("rengzheng_type",2);
+//            startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
+//            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//        }
 
     }
 
@@ -312,6 +319,12 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
                 dialog.dismiss();
             }
         });
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 
     public interface BuyerJieKou{

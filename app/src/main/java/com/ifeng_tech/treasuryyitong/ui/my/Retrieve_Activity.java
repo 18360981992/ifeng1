@@ -201,9 +201,11 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
                 Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
                 startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             } else {
                 Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
                 startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
 
         } else {
@@ -216,4 +218,9 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

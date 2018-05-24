@@ -3,8 +3,6 @@ package com.ifeng_tech.treasuryyitong.ui.my;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -28,6 +26,11 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
 
+/**
+ *
+ *  征集
+ *
+ */
 public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresenter<Collect_Activity>> implements View.OnClickListener {
 
     private RelativeLayout collect_ac_Fan;
@@ -39,30 +42,13 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
     private EditText collect_ac_shuliang;
     private TextView collect_ac_shuliang_zuida;
     private TextView collect_ac_daijia;
-    private EditText collect_ac_duan;
-    private TextView collect_ac_duan_btn;
     private Button collect_ac_tijiao;
 
-    int time=60;
-    Handler h=new Handler(){
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            time--;
-            if(time==0){
-                time=60;
-                collect_ac_duan_btn.setText("点击发送");
-                collect_ac_duan_btn.setEnabled(true);
-            }else{
-                collect_ac_duan_btn.setText("重新发送"+time+"(s)");
-                h.sendEmptyMessageDelayed(0,1000);
-            }
-        }
-    };
     private LinearLayout collect_ac_weitanchuan;
     private ImageView collect_ac_weitanchuan_img;
     private TextView collect_ac_weitanchuan_text;
     private int weitanchuan_height;
+    private EditText collect_ac_yewu_pass;
 
     @Override
     public MyPresenter<Collect_Activity> initPresenter() {
@@ -99,17 +85,6 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
                 finish();
             }
         });
-        // 短信发送
-        collect_ac_duan_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                collect_ac_duan_btn.setText("重新发送"+time+"(s)");
-                collect_ac_duan_btn.setEnabled(false);
-                h.sendEmptyMessageDelayed(0,1000);
-
-                MyUtils.setToast("请求网络。。。");
-            }
-        });
         // 数量输入的监听
         collect_ac_shuliang.addTextChangedListener(new TextWatcher() {
             @Override
@@ -128,9 +103,9 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
                 if(s1.length()>0){
                     Integer integer = new Integer(s1);
                     if(integer<=0){
-                        collect_ac_daijia.setText("￥0.00");  // 这里的单价是从bean类中直接获取
+                        collect_ac_daijia.setText("￥0.00");
                     }else{
-                        String format = DashApplication.decimalFormat.format(integer * 120);
+                        String format = DashApplication.decimalFormat.format(integer * 120);// 这里的单价是从bean类中直接获取
                         collect_ac_daijia.setText("￥"+format);
                     }
                 }else{
@@ -151,8 +126,8 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         collect_ac_shuliang = (EditText) findViewById(R.id.collect_ac_shuliang);
         collect_ac_shuliang_zuida = (TextView) findViewById(R.id.collect_ac_shuliang_zuida);
         collect_ac_daijia = (TextView) findViewById(R.id.collect_ac_daijia);
-        collect_ac_duan = (EditText) findViewById(R.id.collect_ac_duan);
-        collect_ac_duan_btn = (TextView) findViewById(R.id.collect_ac_duan_btn);
+        collect_ac_yewu_pass = (EditText) findViewById(R.id.collect_ac_yewu_pass);
+
         collect_ac_tijiao = (Button) findViewById(R.id.collect_ac_tijiao);
         collect_ac_weitanchuan = (LinearLayout) findViewById(R.id.collect_ac_weitanchuan);
         collect_ac_weitanchuan_img = (ImageView) findViewById(R.id.collect_ac_weitanchuan_img);
@@ -219,9 +194,9 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             return;
         }
 
-        String duan = collect_ac_duan.getText().toString().trim();
-        if (TextUtils.isEmpty(duan)) {
-            Toast.makeText(this, "请输入短信验证码", Toast.LENGTH_SHORT).show();
+        String yewu_pass = collect_ac_yewu_pass.getText().toString().trim();
+        if (TextUtils.isEmpty(yewu_pass)) {
+            Toast.makeText(this, "请输入业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -231,6 +206,7 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         final TakeDonation_Dialog dialog = new TakeDonation_Dialog(this, R.style.dialog_setting);
         MyUtils.getDiaLogDiBu(this,dialog);
         dialog.setTitle("确认转赠信息");
+        dialog.setFeiName("上盘费");
         dialog.setWord(zhanghu);
         dialog.setShuLiang(Integer.valueOf(shuliang));
         dialog.setZongJia(collect_ac_daijia.getText().toString());
@@ -254,5 +230,11 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             }
         });
 
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }

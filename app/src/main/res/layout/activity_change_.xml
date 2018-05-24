@@ -56,8 +56,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="输入新手机号"
-                    android:textSize="@dimen/x12"
+                    android:text="输入新手机号:"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x8"/>
                 <EditText
@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x30"
                     android:hint="输入新手机号"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x20"
                     android:layout_marginRight="@dimen/x8"
@@ -86,14 +86,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="验证码:"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x14"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x8"
                     />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x30"
-                    android:layout_marginLeft="@dimen/x50"
+                    android:layout_marginLeft="@dimen/x62"
                     android:layout_marginRight="@dimen/x8"
                     android:background="@drawable/tihuo_ed_bg">
 
@@ -107,7 +107,7 @@
                         android:inputType="number"
                         android:singleLine="true"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x12"
+                        android:textSize="@dimen/x14"
                         android:maxLength="6"
                         />
 
@@ -126,7 +126,7 @@
                         android:gravity="center"
                         android:text="点击发送"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x12" />
+                        android:textSize="@dimen/x13" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

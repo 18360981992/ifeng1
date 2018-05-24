@@ -56,8 +56,6 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
             }
         });
 
-        // 设置刷新
-        initRefreshListView();
 
     }
 
@@ -97,6 +95,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
                 Intent intent = new Intent(My_Collocation_Activity.this, My_Collocation_Detail_Activity.class);
                 intent.putExtra("Collocation_list_Bean",list.get(position));
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }
@@ -125,6 +124,9 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         my_collocation_MyListView = (MyListView) findViewById(R.id.my_collocation_MyListView);
         my_collocation_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.my_collocation_pulltoscroll);
         my_collocation_null = (LinearLayout) findViewById(R.id.my_collocation_null);
+
+        // 设置刷新
+        initRefreshListView();
     }
 
     private void initData() {
@@ -135,5 +137,11 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
             else
                 list.add(new Collocation_list_Bean("36987569448952",689715675,"世博四连体",20,99.99,1564897425,1));
         }
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
     }
 }
