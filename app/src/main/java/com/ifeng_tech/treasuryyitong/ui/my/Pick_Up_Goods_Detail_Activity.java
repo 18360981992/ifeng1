@@ -13,6 +13,7 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Pick_Up_Goods_Bean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,7 +21,7 @@ import java.util.Date;
 /**
  *  提货单详情
  */
-public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods_Detail_Activity, MyPresenter<Pick_Up_Goods_Detail_Activity>> implements View.OnClickListener {
+public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods_Detail_Activity, MyPresenter<Pick_Up_Goods_Detail_Activity>> {
 
     private RelativeLayout pick_up_goods_detail_Fan;
     private TextView pick_up_goods_detail_name;
@@ -57,6 +58,20 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
             public void onClick(View v) {
 //                setResult(DashApplication.PICK_TO_DETAILS_res);
                 finish();
+            }
+        });
+
+
+        pick_up_goods_detail_zhuxiao.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                MyUtils.setToast("点击注销。。。");
+            }
+        });
+        pick_up_goods_detail_xiazai.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                MyUtils.setToast("点击下载。。。");
             }
         });
 
@@ -106,19 +121,8 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         pick_up_goods_detail_zhuxiao = (Button) findViewById(R.id.pick_up_goods_detail_zhuxiao);
         pick_up_goods_detail_xiazai = (Button) findViewById(R.id.pick_up_goods_detail_xiazai);
 
-        pick_up_goods_detail_zhuxiao.setOnClickListener(this);
-        pick_up_goods_detail_xiazai.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.pick_up_goods_detail_zhuxiao:
-                MyUtils.setToast("点击注销。。。");
-                break;
-            case R.id.pick_up_goods_detail_xiazai:
-                MyUtils.setToast("点击下载。。。");
-                break;
-        }
-    }
+
 }

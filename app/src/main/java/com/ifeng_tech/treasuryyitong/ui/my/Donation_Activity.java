@@ -25,6 +25,7 @@ import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.Search_Pop_View;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
 
@@ -34,7 +35,7 @@ import java.util.List;
 /**
  *  转赠
  */
-public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPresenter<Donation_Activity>> implements View.OnClickListener {
+public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPresenter<Donation_Activity>> {
 
     private RelativeLayout donation_Fan;
     private EditText donation_huiyuan_word;
@@ -164,6 +165,14 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 }
             }
         });
+
+
+        donation_tijiao.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                submit();
+            }
+        });
     }
 
 
@@ -208,7 +217,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         donation_weitanchuan_img = (ImageView) findViewById(R.id.donation_weitanchuan_img);
         donation_weitanchuan_text = (TextView) findViewById(R.id.donation_weitanchuan_text);
 
-        donation_tijiao.setOnClickListener(this);
+
 
         // 解决键盘挡住输入框
         SoftHideKeyBoardUtil.assistActivity(this);
@@ -245,14 +254,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.donation_tijiao:
-                submit();
-                break;
-        }
-    }
 
     private void submit() {
         // validate

@@ -10,19 +10,19 @@ import java.util.Arrays;
  */
 
 public class Information_Zi_Bean implements Serializable{
-    String[] imags;
+    int[] imags;
     String top;
     String text;
     String time;
 
-    public Information_Zi_Bean(String[] imags, String top, String text, String time) {
+    public Information_Zi_Bean(int[] imags, String top, String text, String time) {
         this.imags = imags;
         this.top = top;
         this.text = text;
         this.time = time;
     }
 
-    public String[] getImags() {
+    public int[] getImags() {
         return imags;
     }
 
@@ -38,7 +38,7 @@ public class Information_Zi_Bean implements Serializable{
         return time;
     }
 
-    public void setImags(String[] imags) {
+    public void setImags(int[] imags) {
         this.imags = imags;
     }
 

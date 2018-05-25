@@ -25,7 +25,7 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 /**
  * 更改手机
  */
-public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter<Change_Activity>> implements View.OnClickListener {
+public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter<Change_Activity>> {
 
     private RelativeLayout change_Fan;
     private EditText change_new_phone;
@@ -86,6 +86,12 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
             }
         });
 
+        change_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
     }
 
     @Override
@@ -104,7 +110,6 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
         change_weitanchuan = (LinearLayout) findViewById(R.id.change_weitanchuan);
         change_btn = (Button) findViewById(R.id.change_btn);
 
-        change_btn.setOnClickListener(this);
 
         //通过设置监听来获取 微弹窗 控件的高度
         change_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -118,20 +123,17 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.change_btn:
-                submit();
-                break;
-        }
-    }
 
     private void submit() {
         // validate
         String phone = change_new_phone.getText().toString().trim();
         if (TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "输入新手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(MyUtils.isPhoneNumber(phone)==false){
+            Toast.makeText(this, "输入正确的手机号", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -151,7 +153,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                     change_weitanchuan_img,
                     change_weitanchuan_text,
                     weitanchuan_height,
-                    true,"手机号绑定成功!");
+                    true,"手机号绑定成功,2秒跳回...");
             MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                 @Override
                 public void chuan() {

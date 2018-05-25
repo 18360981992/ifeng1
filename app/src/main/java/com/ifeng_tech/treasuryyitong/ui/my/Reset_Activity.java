@@ -18,11 +18,12 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 /**
  * 重置密码
  */
-public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<Reset_Activity>> implements View.OnClickListener {
+public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<Reset_Activity>> {
 
     private RelativeLayout reset_Fan;
     private EditText reset_old;
@@ -54,6 +55,13 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
                 finish();
             }
         });
+
+        reset_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                submit();
+            }
+        });
     }
 
     private void initView() {
@@ -63,7 +71,6 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         reset_queren = (EditText) findViewById(R.id.reset_queren);
         reset_btn = (Button) findViewById(R.id.reset_btn);
 
-        reset_btn.setOnClickListener(this);
         reset_weitanchuan_img = (ImageView) findViewById(R.id.reset_weitanchuan_img);
         reset_weitanchuan_text = (TextView) findViewById(R.id.reset_weitanchuan_text);
         reset_weitanchuan = (LinearLayout) findViewById(R.id.reset_weitanchuan);
@@ -80,14 +87,6 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.reset_btn:
-                submit();
-                break;
-        }
-    }
 
     private void submit() {
         // validate
@@ -117,7 +116,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
                     reset_weitanchuan_img,
                     reset_weitanchuan_text,
                     weitanchuan_height,
-                    true,"修改成功!");
+                    true,"修改成功.2秒跳回...");
             MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                 @Override
                 public void chuan() {

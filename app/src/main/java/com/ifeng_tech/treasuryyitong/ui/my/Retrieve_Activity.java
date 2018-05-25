@@ -23,11 +23,13 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 /**
  * 手机验证页面 用于 找回密码 与 更改绑定手机
  */
-public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPresenter<Retrieve_Activity>> implements View.OnClickListener {
+public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPresenter<Retrieve_Activity>> {
 
     private RelativeLayout retrieve_Fan;
     private EditText retrieve_duan;
@@ -80,7 +82,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
          *  因为这个页面被重复使用了3次  所以逻辑要。。。
          */
         type = intent.getIntExtra("type", 0); // 用于识别是哪个验证  分为找回密码==1，更改手机==2
-        // 用于判断手机号的隐藏/显示
+        // 用于判断手机号码的输入框 的隐藏/显示
         select = intent.getIntExtra("select", 0);
 
         if (select == 1) {
@@ -92,7 +94,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             retrieve_shoujihao.setVisibility(View.VISIBLE);
             retrieve_shoujihao_shuru.setVisibility(View.GONE);
 
-            String shouji = DashApplication.sp.getString("shouji", "");
+            String shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
 
             // 模拟一个手机号
             shouji = "18360981992";
@@ -109,6 +111,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             }
         });
 
+        // 短信 点击
         retrieve_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,6 +120,14 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                 h.sendEmptyMessageDelayed(0, 1000);
 
                 MyUtils.setToast("请求网络。。。");
+            }
+        });
+
+        // 下一步 点击
+        retrieve_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                submit();
             }
         });
 
@@ -135,7 +146,6 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         retrieve_duan_btn = (TextView) findViewById(R.id.retrieve_duan_btn);
         retrieve_btn = (Button) findViewById(R.id.retrieve_btn);
 
-        retrieve_btn.setOnClickListener(this);
         retrieve_shoujihao = (TextView) findViewById(R.id.retrieve_shoujihao);
         retrieve_weitanchuan_img = (ImageView) findViewById(R.id.retrieve_weitanchuan_img);
         retrieve_weitanchuan_text = (TextView) findViewById(R.id.retrieve_weitanchuan_text);
@@ -165,17 +175,6 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.retrieve_btn:
-
-                submit();
-
-                break;
-        }
-    }
-
     private void submit() {
         // validate
 
@@ -183,6 +182,11 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             String shuru = retrieve_shoujihao_shuru.getText().toString().trim();
             if (TextUtils.isEmpty(shuru)) {
                 Toast.makeText(this, "请输入手机号", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            if(MyUtils.isPhoneNumber(shuru)==false){
+                Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_SHORT).show();
                 return;
             }
         }

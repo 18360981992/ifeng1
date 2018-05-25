@@ -64,7 +64,7 @@ public class Pick_up_goods_ChaXun extends Fragment {
             pick_up_goods_cha_pulltoscroll.setVisibility(View.GONE);
         }
 
-
+        // 刷新 加载
         pick_up_goods_cha_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
@@ -80,6 +80,7 @@ public class Pick_up_goods_ChaXun extends Fragment {
             }
         });
 
+        // 条目点击跳到详情
         pick_up_goods_cha_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

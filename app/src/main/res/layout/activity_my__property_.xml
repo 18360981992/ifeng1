@@ -233,7 +233,7 @@
             android:textSize="@dimen/x14"
             android:textColor="@color/baise"
             android:layout_marginLeft="@dimen/x10"
-            android:background="@drawable/tixian_bg"
+            android:background="@drawable/congzhi_bg"
             />
         <Button
             android:id="@+id/property_congzhi"

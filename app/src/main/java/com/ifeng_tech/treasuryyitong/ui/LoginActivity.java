@@ -18,8 +18,10 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.qdong.slide_to_unlock_view.CustomSlideToUnlockView;
 
@@ -56,13 +58,16 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         setContentView(R.layout.activity_login);
         initView();
 
-        // 自动登录
-        boolean isLogin = DashApplication.sp.getBoolean("isLogin", false);
-        if(isLogin){
-            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            startActivity(intent);
-            finish();
-        }
+//        // 自动登录
+//        boolean isLogin = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
+//        if(isLogin){
+//            LogUtils.i("jiba","isLogin==="+isLogin);
+//            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
+//            startActivity(intent);
+//
+//            startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
+//            finish();
+//        }
 
         login_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +156,12 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             return;
         }
 
+        if(MyUtils.isPhoneNumber(name)==false){
+            Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_SHORT).show();
+            logo_to_unlock.resetView();   // 将滑动条重置
+            return;
+        }
+
         String pass = logo_pass.getText().toString().trim();
         if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
@@ -194,14 +205,13 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
 
         if (true) {
             logo_to_unlock.setVisibility(View.GONE);
-            DashApplication.edit.putString("shouji", name)
-                    .putBoolean("isLogin",true)
-                    .putString("uid","0")
+            DashApplication.edit.putString(SP_String.SHOUJI, name)
+                    .putBoolean(SP_String.ISLOGIN,true)
+                    .putString(SP_String.UID,"0")
+                    .putInt(SP_String.NEWS_NUM,0)
                     .commit();
+            startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
 
-            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-            startActivity(intent);
-            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             finish();
         } else {
             logo_to_unlock.resetView();  // 将滑动条重置

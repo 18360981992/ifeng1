@@ -16,16 +16,19 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
 import com.ifeng_tech.treasuryyitong.bean.InformationBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
+import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.List;
@@ -38,12 +41,15 @@ public class HomeAdapter extends RecyclerView.Adapter{
     Context context;
     List<Object> list;
     private final HomePageActivity activity;
+    private final boolean aBoolean;
 
     public HomeAdapter(Context context, List<Object> list) {
         this.context = context;
         this.list = list;
 
         activity = (HomePageActivity) context;
+
+        aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
     }
 
     @Override
@@ -115,21 +121,38 @@ public class HomeAdapter extends RecyclerView.Adapter{
                             break;
                         case 1:
 //                            MyUtils.setToast("点击了收货。。。");
-                            Intent intent1 = new Intent(context, My_Given_list_Activity.class);
-                            context.startActivity(intent1);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-
+                            if(aBoolean){
+                                Intent intent1 = new Intent(context, My_Given_list_Activity.class);
+                                context.startActivity(intent1);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }else{
+                                Intent intent1 = new Intent(context, LoginActivity.class);
+                                context.startActivity(intent1);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }
                             break;
                         case 2: // 转赠
-                            Intent intent = new Intent(context, Donation_Activity.class);
-                            context.startActivity(intent);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            if(aBoolean){
+                                Intent intent = new Intent(context, Donation_Activity.class);
+                                context.startActivity(intent);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }else{
+                                Intent intent1 = new Intent(context, LoginActivity.class);
+                                context.startActivity(intent1);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }
                             break;
                         case 3:
 //                            MyUtils.setToast("点击了鉴定。。。");
-                            Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
-                            context.startActivity(intent2);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            if(aBoolean){
+                                Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
+                                context.startActivity(intent2);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }else{
+                                Intent intent1 = new Intent(context, LoginActivity.class);
+                                context.startActivity(intent1);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }
                             break;
                     }
 

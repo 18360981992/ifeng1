@@ -10,10 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import java.util.List;
 
@@ -25,12 +28,16 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
     Context context;
     List<CollectBean> collectlist;
     private final HomePageActivity activity;
+    private final boolean aBoolean;
 
     public HomeCollectAdapter(Context context, List<CollectBean> collectlist) {
         this.context = context;
         this.collectlist = collectlist;
 
         activity = (HomePageActivity) context;
+
+        aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
+
     }
 
     @Override
@@ -58,14 +65,21 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
             @Override
             public void onClick(View v) { // 首页 中征集的点击
 
-                if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
-                    Intent intent = new Intent(context, Collect_Activity.class);
-                    intent.putExtra("CollectBean",collectlist.get(position));
-                    context.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                if(aBoolean){
+                    if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
+                        Intent intent = new Intent(context, Collect_Activity.class);
+                        intent.putExtra("CollectBean",collectlist.get(position));
+                        context.startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    }else{
+                        MyUtils.setToast("该商品还未开始征集。。。");
+                    }
                 }else{
-                    MyUtils.setToast("该商品还未开始征集。。。");
+                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    activity.startActivity(intent1);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
+
             }
         });
     }

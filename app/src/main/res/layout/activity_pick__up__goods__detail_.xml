@@ -45,7 +45,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x8"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginBottom="@dimen/x10"
         >
 
         <LinearLayout
@@ -63,7 +64,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品名称:"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x13"
                     android:textColor="@color/name_se"
                     />
                 <TextView
@@ -71,7 +72,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="世博四连体"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x13"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x10"
                     />
@@ -87,7 +88,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="订单号:"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x11"
                     android:textColor="@color/color_999999"
                     />
                 <TextView
@@ -95,7 +96,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3258947836343"
-                    android:textSize="@dimen/x10"
+                    android:textSize="@dimen/x11"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x30"
                     />
@@ -132,7 +133,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x5"
         android:background="@color/fengouxian"
-        android:layout_marginTop="@dimen/x8"
         />
 
     <LinearLayout
@@ -151,17 +151,17 @@
                 android:layout_marginLeft="@dimen/x10"
                 android:text="藏品代码"
                 android:textColor="@color/color_999999"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 />
 
             <TextView
                 android:id="@+id/pick_up_goods_detail_cword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginLeft="@dimen/x48"
                 android:text="3568974561"
                 android:textColor="@color/name_se"
-                android:textSize="@dimen/x11" />
+                android:textSize="@dimen/x12" />
         </LinearLayout>
 
         <LinearLayout
@@ -173,7 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="仓库"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -182,9 +182,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="福丽特仓库 "
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginLeft="@dimen/x70"
                 />
         </LinearLayout>
 
@@ -197,7 +197,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注册日期"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -206,9 +206,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017.12.3"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginLeft="@dimen/x48"
                 />
         </LinearLayout>
 
@@ -221,7 +221,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="提货日期"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -230,9 +230,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017.12.3"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x45"
+                android:layout_marginLeft="@dimen/x48"
                 />
         </LinearLayout>
 
@@ -247,7 +247,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="件数"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -256,9 +256,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginLeft="@dimen/x70"
                 />
         </LinearLayout>
 
@@ -271,7 +271,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="数量"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -280,9 +280,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginLeft="@dimen/x70"
                 />
         </LinearLayout>
 
@@ -295,7 +295,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="手续费"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -304,9 +304,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥100.00"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x55"
+                android:layout_marginLeft="@dimen/x58"
                 />
         </LinearLayout>
 
@@ -319,7 +319,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="预计仓储费用"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -328,7 +328,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥300.00"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x25"
                 />
@@ -343,7 +343,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x11"
                 android:textColor="@color/color_999999"
                 android:layout_marginLeft="@dimen/x10"
                 />
@@ -352,9 +352,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已逾期"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x12"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x65"
+                android:layout_marginLeft="@dimen/x70"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -389,7 +389,7 @@
                 android:textSize="@dimen/x14"
                 android:textColor="@color/baise"
                 android:layout_marginRight="@dimen/x10"
-                android:background="@drawable/tixian_bg"
+                android:background="@drawable/congzhi_bg"
                 android:layout_marginLeft="@dimen/x8"
                 />
         </LinearLayout>

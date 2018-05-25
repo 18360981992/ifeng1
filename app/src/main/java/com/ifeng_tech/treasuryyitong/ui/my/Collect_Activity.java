@@ -24,6 +24,7 @@ import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
 
 /**
@@ -31,7 +32,7 @@ import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
  *  征集
  *
  */
-public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresenter<Collect_Activity>> implements View.OnClickListener {
+public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresenter<Collect_Activity>> {
 
     private RelativeLayout collect_ac_Fan;
     private EditText collect_ac_pingtai;
@@ -114,6 +115,15 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             }
         });
 
+
+        // 征集提交按钮
+        collect_ac_tijiao.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                submit();
+            }
+        });
+
     }
 
     private void initView() {
@@ -144,17 +154,10 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             }
         });
 
-        collect_ac_tijiao.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.collect_ac_tijiao:
-                submit();
-                break;
-        }
-    }
+
 
     private void submit() {
         // validate
@@ -173,6 +176,11 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         String shouji = collect_ac_shouji.getText().toString().trim();
         if (TextUtils.isEmpty(shouji)) {
             Toast.makeText(this, "手机号为转赠平台绑定手机号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(MyUtils.isPhoneNumber(shouji)==false){
+            Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
             return;
         }
 

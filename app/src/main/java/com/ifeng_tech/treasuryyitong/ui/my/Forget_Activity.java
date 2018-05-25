@@ -23,7 +23,7 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 /**
  *  找回密码
  */
-public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter<Forget_Activity>> implements View.OnClickListener {
+public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter<Forget_Activity>>  {
 
     private RelativeLayout forget_Fan;
     private EditText forget_new;
@@ -54,6 +54,13 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
                 finish();
             }
         });
+
+        forget_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                submit();
+            }
+        });
     }
 
     @Override
@@ -71,7 +78,6 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
         forget_weitanchuan = (LinearLayout) findViewById(R.id.forget_weitanchuan);
         forget_btn = (Button) findViewById(R.id.forget_btn);
 
-        forget_btn.setOnClickListener(this);
 
         //通过设置监听来获取 微弹窗 控件的高度
         forget_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -83,16 +89,9 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
                 weitanchuan_height = forget_weitanchuan.getMeasuredHeight();
             }
         });
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.forget_btn:
-                submit();
-                break;
-        }
-    }
 
     private void submit() {
         // validate
@@ -117,7 +116,7 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
                     forget_weitanchuan_img,
                     forget_weitanchuan_text,
                     weitanchuan_height,
-                    true, "找回密码成功!");
+                    true, "找回密码成功,2秒跳回...");
 
             // 微弹窗消失后的接口回调
             MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {

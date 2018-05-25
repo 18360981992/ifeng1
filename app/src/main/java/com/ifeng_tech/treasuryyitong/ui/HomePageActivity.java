@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.fragmet.CollectFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
@@ -19,8 +20,10 @@ import com.ifeng_tech.treasuryyitong.fragmet.InformationFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
 
@@ -94,6 +97,13 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 .hide(authenticateFragmet)
                 .hide(myFragmet)
                 .commit();
+
+        boolean aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
+
+        if(aBoolean){
+            startService(new Intent(HomePageActivity.this, HeartbeatService.class));  // 启动心跳
+        }
+
     }
 
     @Override
@@ -186,6 +196,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         break;
                     case 1:
 //                        MyUtils.setToast("点击了广告。。。");
+
                         Intent intent1 = new Intent(HomePageActivity.this, Collection_directory_Activity.class);
                         startActivity(intent1);
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);

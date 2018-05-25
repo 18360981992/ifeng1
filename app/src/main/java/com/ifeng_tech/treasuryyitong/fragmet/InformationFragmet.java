@@ -34,6 +34,7 @@ public class InformationFragmet extends Fragment {
 
         activity = (HomePageActivity) getActivity();
 
+
         //设置tablayout的横杆器的长度
         zixun_TabLayout.post(new Runnable() {
             @Override

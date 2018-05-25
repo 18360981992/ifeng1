@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -80,17 +81,18 @@ public class My_Given_list_Adapter extends BaseAdapter {
         }
 
         // 接收的点击事件
-        my_given_list_jieshou.setOnClickListener(new View.OnClickListener() {
+        my_given_list_jieshou.setOnClickListener(new ForbidClickListener() {
+
             @Override
-            public void onClick(View v) {
+            public void forbidClick(View v) {
                 my_given_list_adapter_jieKou.jieShou(position);
             }
         });
 
         // 拒绝的点击事件
-        my_given_list_jujue.setOnClickListener(new View.OnClickListener() {
+        my_given_list_jujue.setOnClickListener(new ForbidClickListener() {
             @Override
-            public void onClick(View v) {
+            public void forbidClick(View v) {
                 my_given_list_adapter_jieKou.juJue(position);
             }
         });

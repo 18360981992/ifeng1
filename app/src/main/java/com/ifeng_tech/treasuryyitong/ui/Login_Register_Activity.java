@@ -23,11 +23,12 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 /**
  * 注册
  */
-public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Activity, MyPresenter<Login_Register_Activity>> implements View.OnClickListener {
+public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Activity, MyPresenter<Login_Register_Activity>>  {
 
     private RelativeLayout register_Fan;
     private EditText register_name;
@@ -127,7 +128,12 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         login_register_weitanchuan_text = (TextView) findViewById(R.id.login_register_weitanchuan_text);
         login_register_weitanchuan = (LinearLayout) findViewById(R.id.login_register_weitanchuan);
 
-        register_btn.setOnClickListener(this);
+        register_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                submit();
+            }
+        });
 
         SoftHideKeyBoardUtil.assistActivity(this);
 
@@ -145,16 +151,6 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.register_btn:
-
-                submit();
-
-                break;
-        }
-    }
 
     private void submit() {
         // validate
@@ -164,6 +160,10 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
             return;
         }
 
+        if(MyUtils.isPhoneNumber(name)==false){
+            Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_SHORT).show();
+            return;
+        }
         String duan = register_duan.getText().toString().trim();
         if (TextUtils.isEmpty(duan)) {
             Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();

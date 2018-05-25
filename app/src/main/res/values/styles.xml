@@ -10,7 +10,7 @@
     </style>
 
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/x14</item>
+        <item name="android:textSize">@dimen/x13</item>
     </style>
 
     <style name="TabLayoutTextStyle1">

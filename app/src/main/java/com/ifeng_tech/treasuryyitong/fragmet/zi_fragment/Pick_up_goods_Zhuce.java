@@ -20,6 +20,7 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.rili_utils.DataUtils;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.rili_view.DatePopupWindow;
 
 import java.text.SimpleDateFormat;
@@ -31,7 +32,7 @@ import java.util.Date;
  *  注册提货信息页
  */
 
-public class Pick_up_goods_Zhuce extends Fragment implements View.OnClickListener {
+public class Pick_up_goods_Zhuce extends Fragment  {
     public LinearLayout fu;
     private EditText up_goods_zhuce_name;
     private EditText up_goods_zhuce_word;
@@ -73,6 +74,19 @@ public class Pick_up_goods_Zhuce extends Fragment implements View.OnClickListene
                 showPopupWindow(up_goods_zhuce_rili_img);
             }
         });
+
+        up_goods_tijiao.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                MyUtils.setToast("点击提交。。。");
+            }
+        });
+        up_goods_chongzhi.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                MyUtils.setToast("点击充值。。。");
+            }
+        });
         return view;
     }
 
@@ -93,21 +107,9 @@ public class Pick_up_goods_Zhuce extends Fragment implements View.OnClickListene
         up_goods_tijiao = (Button) view.findViewById(R.id.up_goods_tijiao);
         up_goods_chongzhi = (Button) view.findViewById(R.id.up_goods_chongzhi);
 
-        up_goods_tijiao.setOnClickListener(this);
-        up_goods_chongzhi.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.up_goods_tijiao:
-
-                break;
-            case R.id.up_goods_chongzhi:
-
-                break;
-        }
-    }
 
     // 弹出日历的pop框
     private void showPopupWindow(View v) {

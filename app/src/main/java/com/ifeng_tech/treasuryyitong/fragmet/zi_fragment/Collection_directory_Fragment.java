@@ -91,7 +91,7 @@ public class Collection_directory_Fragment extends Fragment {
         collection_mulu_fragment_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                MyUtils.setToast("点击了藏品目录条目==="+position);
+//                MyUtils.setToast("点击了藏品目录条目==="+position);
                 Intent intent = new Intent(activity, Collection_Directory_Detail_Activity.class);
                 intent.putExtra("Collection_directory_Bean",topList.get(position));
                 activity.startActivity(intent);

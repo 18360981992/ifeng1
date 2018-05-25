@@ -135,10 +135,10 @@ public class Information_zi_Fragment extends Fragment {
     }
 
 
-    String[] img = {"http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png"};
-    String[] imgs = {"http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png"};
+    int[] img = {R.drawable.guangao};
+    int[] imgs = {R.drawable.guangao,
+            R.drawable.guangao,
+            R.drawable.guangao};
 
     // 模拟数据
     private void initData() {

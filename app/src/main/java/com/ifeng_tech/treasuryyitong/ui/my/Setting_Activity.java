@@ -9,11 +9,12 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 /**
  *  设置
  */
-public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresenter<Setting_Activity>> implements View.OnClickListener {
+public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresenter<Setting_Activity>>  {
 
     private RelativeLayout setting_Fan;
     private RelativeLayout setting_guanyu;
@@ -56,6 +57,13 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
 //                MyUtils.setToast("检索版本。。。");
             }
         });
+
+        setting_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                MyUtils.setToast("退出登录。。。");
+            }
+        });
     }
 
     private void initView() {
@@ -64,17 +72,9 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
         setting_banben = (RelativeLayout) findViewById(R.id.setting_banben);
         setting_btn = (Button) findViewById(R.id.setting_btn);
 
-        setting_btn.setOnClickListener(this);
+
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.setting_btn:
-                MyUtils.setToast("退出登录。。。");
-                break;
-        }
-    }
 
     @Override
     public void finish() {

@@ -167,7 +167,6 @@
                     android:layout_marginLeft="@dimen/x35"
                     android:layout_marginRight="@dimen/x8"
                     android:background="@drawable/tihuo_ed_bg"
-                    android:inputType="number"
                     android:singleLine="true"
                     android:textColorHint="@color/color_999999"
                     />
@@ -307,14 +306,23 @@
                         android:layout_margin="@dimen/x2"
                         android:background="@color/color_e5e5e5" />
 
-                    <ImageView
-                        android:id="@+id/certification_tu_yan_btn"
+                    <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:background="@drawable/tu_yan"
-                        />
+                        android:paddingBottom="@dimen/x3"
+                        android:paddingTop="@dimen/x3"
+                        android:paddingLeft="@dimen/x6"
+                        android:paddingRight="@dimen/x6"
+                        >
+                        <ImageView
+                            android:id="@+id/certification_tu_yan_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:background="@drawable/tu_yan"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 

@@ -22,6 +22,7 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.ImageUtils;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.TakePhotosDialog;
@@ -241,6 +242,12 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         String shenfenzheng = certification_shenfenzheng.getText().toString().trim();
         if (TextUtils.isEmpty(shenfenzheng)) {
             Toast.makeText(this, "输入您的身份证号", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        LogUtils.i("jiba","==="+MyUtils.isIDCard(shenfenzheng));
+        if(MyUtils.isIDCard(shenfenzheng)==false){
+            Toast.makeText(this, "输入的身份证号有误", Toast.LENGTH_SHORT).show();
             return;
         }
 

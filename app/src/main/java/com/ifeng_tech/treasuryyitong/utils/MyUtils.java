@@ -77,6 +77,14 @@ public class MyUtils {
         return false;
     }
 
+    //邮箱验证
+    public static boolean isEmail(String email) {
+        String str = "^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$";
+        Pattern p = Pattern.compile(str);
+        Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
     /**
      * 判断密码的格式 6-20位字母，数字组合密码
      * @param input
@@ -87,17 +95,13 @@ public class MyUtils {
         return matches;
     }
 
-    // 简单的判断字符串是否是数字且是15-18位
-    public static boolean isShenFengZheng(String ss){
-        Pattern pattern = Pattern.compile("[0-9]*");
-        int length = ss.length();
-        if(pattern.matcher(ss).matches()&length>=15){
-            //数字
-            return true;
-        } else {
-            //非数字
-            return false;
+    // 判断是否符合身份证号码的规范
+    public static boolean isIDCard(String IDCard) {
+        if (IDCard != null) {
+            String IDCardRegex = "(^\\d{15}$)|(^\\d{18}$)|(^\\d{17}(\\d|X|x|Y|y)$)";
+            return IDCard.matches(IDCardRegex);
         }
+        return false;
     }
 
 
@@ -232,7 +236,7 @@ public class MyUtils {
         ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
         AnimatorSet animatorSetimg2 = new AnimatorSet();
         animatorSetimg2.play(alphaimg2).with(animatorimg2);
-        animatorimg2.setDuration(2000);
+        animatorimg2.setDuration(1500);
         animatorimg2.setInterpolator(new OvershootInterpolator(1));
         animatorimg2.start();
 
@@ -248,7 +252,7 @@ public class MyUtils {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(1500);
                             linearLayout.setVisibility(View.INVISIBLE);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
@@ -290,7 +294,7 @@ public class MyUtils {
         ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
         AnimatorSet animatorSetimg2 = new AnimatorSet();
         animatorSetimg2.play(alphaimg2).with(animatorimg2);
-        animatorimg2.setDuration(2000);
+        animatorimg2.setDuration(1500);
         animatorimg2.setInterpolator(new OvershootInterpolator(1));
         animatorimg2.start();
 
@@ -306,7 +310,7 @@ public class MyUtils {
                     @Override
                     public void run() {
                         try {
-                            Thread.sleep(2000);
+                            Thread.sleep(1500);
                             linearLayout.setVisibility(View.INVISIBLE);
                             if(flag){ // 成功的时候将当前页面销毁
                                 myUtils_jieKou.chuan();

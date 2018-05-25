@@ -1,6 +1,7 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,13 +20,18 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.CollectAdapter;
 import com.ifeng_tech.treasuryyitong.bean.CollectBean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 /**
  * Created by zzt on 2018/4/27.
@@ -42,14 +48,11 @@ public class CollectFragmet extends Fragment {
 
     List<Integer> imgs = new ArrayList<>();
     List<CollectBean> collectlist = new ArrayList<>();
-    String[] IMAGES = {
-            "http://img.wdjimg.com/mms/icon/v1/d/f1/1c8ebc9ca51390cf67d1c3c3d3298f1d_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/3/2d/dc14dd1e40b8e561eae91584432262d3_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/8/10/1b26d9f0a258255b0431c03a21c0d108_512_512.png",
-            "http://img.wdjimg.com/mms/icon/v1/3/89/9f5f869c0b6a14d5132550176c761893_512_512.png",
-    };
+
     private LinearLayout collect_null;
     private CollectAdapter collectAdapter;
+    private boolean aBoolean;
+    private SharedPreferences.Editor edit;
 
 
     @Nullable
@@ -57,9 +60,7 @@ public class CollectFragmet extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.collect_fragmet, container, false);
         initView(view);
-
         activity = (HomePageActivity) getActivity();
-
         /**
          * 解决scrollview 显示不在顶部问题
          */
@@ -73,24 +74,9 @@ public class CollectFragmet extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-
-
-        collect_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
-            @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
-        });
-
-
-
+        sp = activity.getSharedPreferences("ifeng", MODE_PRIVATE);
+        edit = sp.edit();
+        aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
 
         if(imgs.size()<=0||collectlist.size()<=0){
             collect_null.setVisibility(View.VISIBLE);
@@ -110,18 +96,39 @@ public class CollectFragmet extends Fragment {
             setCollectAdapter();
         }
 
+        collect_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+            @Override
+            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
+
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+
         collect_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
-                    Intent intent = new Intent(activity, Collect_Activity.class);
-                    intent.putExtra("CollectBean",collectlist.get(position));
-                    startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                if(aBoolean){
+                    if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
+                        Intent intent = new Intent(activity, Collect_Activity.class);
+                        intent.putExtra("CollectBean",collectlist.get(position));
+                        startActivity(intent);
+                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    }else{
+                        MyUtils.setToast("该商品还未开始征集。。。");
+                    }
                 }else{
-                    MyUtils.setToast("该商品还未开始征集。。。");
+                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    activity.startActivity(intent1);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
+
             }
         });
 

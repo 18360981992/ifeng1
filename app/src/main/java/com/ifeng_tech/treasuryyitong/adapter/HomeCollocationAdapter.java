@@ -65,15 +65,15 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // 首页 中征集的点击
+            if(list.get(position).getType()==0){ // 0==等待 1==未开始
+                Intent intent = new Intent(context, Authenticate_Details_Activity.class);
+                intent.putExtra("CollocationBean",list.get(position));
+                context.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }else{
+                MyUtils.setToast("该商品还未开始托管。。。");
+            }
 
-                if(list.get(position).getType()==0){ // 0==等待 1==未开始
-                    Intent intent = new Intent(context, Authenticate_Details_Activity.class);
-                    intent.putExtra("CollocationBean",list.get(position));
-                    context.startActivity(intent);
-                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                }else{
-                    MyUtils.setToast("该商品还未开始托管。。。");
-                }
             }
         });
 

@@ -66,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="藏品名称: 特6-2007《中国探月首飞成功纪念》邮票"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x13"
                 android:textColor="@color/name_se"
                 android:lineSpacingExtra="@dimen/x2"
                 />

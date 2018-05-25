@@ -1,6 +1,7 @@
 package com.ifeng_tech.treasuryyitong.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -8,7 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Bean;
+import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
+import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,10 +26,15 @@ import java.util.List;
 public class Authenticate_Details_list_Adapter extends BaseAdapter {
     Context context;
     List<Authenticate_Details_Bean> list;
+    private final boolean aBoolean;
+    private final Authenticate_Details_Activity activity;
 
     public Authenticate_Details_list_Adapter(Context context, List<Authenticate_Details_Bean> list) {
         this.context = context;
         this.list = list;
+
+        activity = (Authenticate_Details_Activity) context;
+        aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
     }
 
     @Override
@@ -64,14 +74,27 @@ public class Authenticate_Details_list_Adapter extends BaseAdapter {
         authenticate_Details_list_shangwu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authenticate_details_list_jieKou.shangWu(position);
+                if(aBoolean){
+                    authenticate_details_list_jieKou.shangWu(position);
+                }else{
+                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    activity.startActivity(intent1);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                }
+
             }
         });
 
         authenticate_Details_list_xiawu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                authenticate_details_list_jieKou.xiaWu(position);
+                if(aBoolean){
+                    authenticate_details_list_jieKou.xiaWu(position);
+                }else{
+                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    activity.startActivity(intent1);
+                    activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                }
             }
         });
         return convertView;

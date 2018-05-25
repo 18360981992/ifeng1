@@ -2,241 +2,136 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:background="@drawable/item_bg"
     >
 
-    <!--信息主体-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/x4"
+        android:paddingBottom="@dimen/x4"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="藏品代码："
+            android:textSize="@dimen/x13"
+            android:textColor="@color/name_se"
+            android:layout_marginLeft="@dimen/x8"
+            />
+        <TextView
+            android:id="@+id/warehouse_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6225898234"
+            android:textSize="@dimen/x13"
+            android:textColor="@color/name_se"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x80"
         android:orientation="vertical"
         >
 
+
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x110"
-            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             >
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/cangku_qianlan"
-                android:paddingTop="@dimen/x4"
-                android:paddingBottom="@dimen/x4"
-                >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2.7"
-                    android:layout_height="match_parent"
-                    >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="藏品代码："
-                        android:textSize="@dimen/x12"
-                        android:textColor="@color/name_se"
-                        android:layout_marginLeft="@dimen/x8"
-                        />
-                    <TextView
-                        android:id="@+id/warehouse_word"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="6225898234"
-                        android:textSize="@dimen/x12"
-                        android:textColor="@color/name_se"
-                        />
-                </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="match_parent"
-                    >
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="可用数量"
-                            android:textSize="@dimen/x12"
-                            android:textColor="@color/name_se"
-                            />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="冻结数量"
-                            android:textSize="@dimen/x12"
-                            android:textColor="@color/name_se"
-                            />
-                    </LinearLayout>
-                </LinearLayout>
-
-            </LinearLayout>
+            <ImageView
+                android:id="@+id/warehouse_img"
+                android:layout_width="@dimen/x60"
+                android:layout_height="@dimen/x60"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="@dimen/x8"
                 >
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="2.7"
-                    android:layout_height="match_parent"
-                    >
+                <TextView
+                    android:id="@+id/warehouse_shopping_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="世博四连体"
+                    android:textSize="@dimen/x13"
+                    android:textColor="@color/name_se"
+                   />
 
-                    <ImageView
-                        android:id="@+id/warehouse_img"
-                        android:layout_width="@dimen/x60"
-                        android:layout_height="@dimen/x60"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x8"
-                        />
+                <TextView
+                    android:id="@+id/warehouse_keyong_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="可用数量：10000"
+                    android:textSize="@dimen/x11"
+                    android:textColor="@color/color_999999"
+                    android:layout_marginTop="@dimen/x12"
+                   />
 
-                    <TextView
-                        android:id="@+id/warehouse_shopping_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="世博四连体"
-                        android:textSize="@dimen/x12"
-                        android:textColor="@color/name_se"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/x8"/>
-                </LinearLayout>
-                <View
-                    android:layout_width="@dimen/x1"
-                    android:layout_height="match_parent"
-                    android:background="@color/fengouxian1"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_weight="3"
-                    android:layout_height="match_parent"
-                    >
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        >
-                        <TextView
-                            android:id="@+id/warehouse_keyong_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1000"
-                            android:textSize="@dimen/x12"
-                            android:textColor="@color/name_se"
-                            android:textStyle="bold"
-                            android:layout_centerInParent="true"/>
-                    </RelativeLayout>
-                    <View
-                        android:layout_width="@dimen/x1"
-                        android:layout_height="match_parent"
-                        android:background="@color/fengouxian1"/>
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="match_parent"
-                        >
-                        <TextView
-                            android:id="@+id/warehouse_dongjie_num"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1000"
-                            android:textSize="@dimen/x12"
-                            android:textColor="@color/name_se"
-                            android:textStyle="bold"
-                            android:layout_centerInParent="true"/>
-                    </RelativeLayout>
-
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/warehouse_dongjie_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="冻结数量：10000"
+                    android:textSize="@dimen/x11"
+                    android:textColor="@color/color_999999"
+                    android:layout_marginTop="@dimen/x3"
+                    />
             </LinearLayout>
 
         </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x8"
-            android:background="@color/baise"/>
-    </LinearLayout>
 
-    <!--滑动显示按钮-->
-    <LinearLayout
-        android:layout_width="@dimen/x80"
-        android:layout_height="match_parent"
-        >
-
-        <RelativeLayout
-            android:id="@+id/warehouse_zhuanzeng"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@color/xiaoxi_bg"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/x8"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
             >
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="转"
-                    android:textColor="@color/baise"
-                    android:textSize="@dimen/x13"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="赠"
-                    android:textColor="@color/baise"
-                    android:textSize="@dimen/x13"
-                    android:layout_marginTop="@dimen/x8"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
-        <RelativeLayout
-            android:id="@+id/warehouse_tihuo"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:background="@drawable/tihuo_kuang"
-            >
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:orientation="vertical"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="提"
-                    android:textColor="@color/xiaoxi_bg"
-                    android:textSize="@dimen/x13"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="货"
-                    android:textColor="@color/xiaoxi_bg"
-                    android:textSize="@dimen/x13"
-                    android:layout_marginTop="@dimen/x8"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
-
-    </LinearLayout>
+            <TextView
+                android:id="@+id/warehouse_zhuanzeng"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x25"
+                android:text="转赠"
+                android:textSize="@dimen/x11"
+                android:textColor="@color/zhuse"
+                android:gravity="center"
+                android:background="@drawable/jieshou_kuang"
+                />
+            <TextView
+                android:id="@+id/warehouse_tihuo"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x25"
+                android:text="提货"
+                android:textSize="@dimen/x11"
+                android:textColor="@color/color_999999"
+                android:gravity="center"
+                android:background="@drawable/jujue_kuang"
+                android:layout_marginLeft="@dimen/x10"
+                />
 
 
+        </LinearLayout>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x1"
+        android:background="@color/fengouxian"
+        android:layout_marginTop="@dimen/x10"
+        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x8"
+        android:layout_marginBottom="@dimen/x10"
+        />
 </LinearLayout>
+

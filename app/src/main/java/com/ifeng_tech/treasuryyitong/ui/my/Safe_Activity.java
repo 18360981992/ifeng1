@@ -23,6 +23,8 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
     private RelativeLayout safe_zhaohui;
     private ImageView img3;
     private RelativeLayout safe_geng_shouji;
+    private RelativeLayout safe_yewu_pass;
+    private RelativeLayout safe_bind_youxiang;
 
     @Override
     public MyPresenter<Safe_Activity> initPresenter() {
@@ -69,7 +71,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
         safe_geng_shouji.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                MyUtils.setToast("点击更改。。。");
+//                MyUtils.setToast("点击更改手机。。。");
                 Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
                 intent.putExtra("type", DashApplication.ANQUAN_TYPE_GENGGAI);
                 startActivity(intent);
@@ -77,6 +79,25 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             }
         });
 
+        safe_yewu_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                MyUtils.setToast("点击业务密码设置。。。");
+                Intent intent = new Intent(Safe_Activity.this, Business_Pass_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
+
+        safe_bind_youxiang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                MyUtils.setToast("点击绑定邮箱设置。。。");
+                Intent intent = new Intent(Safe_Activity.this, Bind_Email_Activity1.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
     }
 
     private void initView() {
@@ -87,6 +108,8 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
         safe_zhaohui = (RelativeLayout) findViewById(R.id.safe_zhaohui);
         img3 = (ImageView) findViewById(R.id.img3);
         safe_geng_shouji = (RelativeLayout) findViewById(R.id.safe_geng_shouji);
+        safe_yewu_pass = (RelativeLayout) findViewById(R.id.safe_yewu_pass);
+        safe_bind_youxiang = (RelativeLayout) findViewById(R.id.safe_bind_youxiang);
     }
 
     @Override

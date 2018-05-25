@@ -18,8 +18,8 @@ public class DashApplication extends Application {
     private static Context context;
     private static Handler handler;
     private static int mainId;
-    public static boolean isLoginSuccess;//是否已经登录的状态
     private static DashApplication instance;
+
 
     /**
      * 屏幕宽度
@@ -47,12 +47,16 @@ public class DashApplication extends Application {
     public static int LOGIN_TO_REGISTER_req=100;
     public static int LOGIN_TO_REGISTER_res=101;
 
+    public static int EMAIL1_TO_EMAIL2_req=100;
+    public static int EMAIL1_TO_EMAIL2_res=101;
 
     public static  int ANQUAN_TYPE_ZHAOHUI=1;
     public static  int ANQUAN_TYPE_GENGGAI=2;
 
     public static SharedPreferences sp;
     public static SharedPreferences.Editor edit;
+
+
 
     @Override
     public void onCreate() {
