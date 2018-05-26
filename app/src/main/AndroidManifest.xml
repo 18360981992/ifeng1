@@ -73,6 +73,25 @@
         <activity android:name=".ui.my.Business_Pass_Activity" android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.Bind_Email_Activity1" android:screenOrientation="portrait"/>
         <activity android:name=".ui.my.Bind_Email_Activity2" android:screenOrientation="portrait"/>
+
+        <!-- Bugly升级SDK配置开始 -->
+        <activity
+            android:name="com.tencent.bugly.beta.ui.BetaActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize|locale"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <!-- API 24以上配置  以下代码是为了适配android7.0 apk无法自动安装问题-->
+
+        <!--android:authorities="com.example.dell.legutinker.fileprovider"  这句话是个bug 千万要注意，文档有坑-->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="com.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
     </application>
 
 </manifest>

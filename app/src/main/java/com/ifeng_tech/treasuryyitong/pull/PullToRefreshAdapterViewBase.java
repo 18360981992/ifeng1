@@ -33,8 +33,8 @@ import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.internal.EmptyViewMethodAccessor;
-import com.ifeng_tech.treasuryyitong.internal.IndicatorLayout;
+import com.ifeng_tech.treasuryyitong.pull.internal.EmptyViewMethodAccessor;
+import com.ifeng_tech.treasuryyitong.pull.internal.IndicatorLayout;
 
 public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extends PullToRefreshBase<T> implements
 		OnScrollListener {
@@ -60,8 +60,8 @@ public abstract class PullToRefreshAdapterViewBase<T extends AbsListView> extend
 	private PullToRefreshBase.OnLastItemVisibleListener mOnLastItemVisibleListener;
 	private View mEmptyView;
 
-	private com.ifeng_tech.treasuryyitong.internal.IndicatorLayout mIndicatorIvTop;
-	private com.ifeng_tech.treasuryyitong.internal.IndicatorLayout mIndicatorIvBottom;
+	private com.ifeng_tech.treasuryyitong.pull.internal.IndicatorLayout mIndicatorIvTop;
+	private com.ifeng_tech.treasuryyitong.pull.internal.IndicatorLayout mIndicatorIvBottom;
 
 	private boolean mShowIndicator;
 	private boolean mScrollEmptyView = true;

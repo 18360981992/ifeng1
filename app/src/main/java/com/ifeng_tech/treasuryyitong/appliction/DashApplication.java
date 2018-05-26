@@ -17,11 +17,6 @@ import java.text.DecimalFormat;
  */
 public class DashApplication extends TinkerApplication {
 
-    public DashApplication() {
-            super(ShareConstants.TINKER_ENABLE_ALL, "com.ifeng_tech.treasuryyitong.appliction.SampleApplicationLike",
-                    "com.tencent.tinker.loader.TinkerLoader", false);
-    }
-
     private static Context context;
     private static Handler handler;
     private static int mainId;
@@ -64,6 +59,10 @@ public class DashApplication extends TinkerApplication {
     public static SharedPreferences.Editor edit;
 
 
+    public DashApplication() {
+        super(ShareConstants.TINKER_ENABLE_ALL, "com.ifeng_tech.treasuryyitong.appliction.SampleApplicationLike",
+                "com.tencent.tinker.loader.TinkerLoader", false);
+    }
 
     @Override
     public void onCreate() {

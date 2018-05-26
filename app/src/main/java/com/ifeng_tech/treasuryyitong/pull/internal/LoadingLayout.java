@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  *******************************************************************************/
-package com.ifeng_tech.treasuryyitong.internal;
+package com.ifeng_tech.treasuryyitong.pull.internal;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -154,7 +154,6 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableStart)) {
 					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableStart);
 				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableTop)) {
-					Utils.warnDeprecation("ptrDrawableTop", "ptrDrawableStart");
 					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableTop);
 				}
 				break;
@@ -163,7 +162,6 @@ public abstract class LoadingLayout extends FrameLayout implements ILoadingLayou
 				if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableEnd)) {
 					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableEnd);
 				} else if (attrs.hasValue(R.styleable.PullToRefresh_ptrDrawableBottom)) {
-					Utils.warnDeprecation("ptrDrawableBottom", "ptrDrawableEnd");
 					imageDrawable = attrs.getDrawable(R.styleable.PullToRefresh_ptrDrawableBottom);
 				}
 				break;

@@ -35,11 +35,10 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.internal.FlipLoadingLayout;
-import com.ifeng_tech.treasuryyitong.internal.LoadingLayout;
-import com.ifeng_tech.treasuryyitong.internal.RotateLoadingLayout;
-import com.ifeng_tech.treasuryyitong.internal.Utils;
-import com.ifeng_tech.treasuryyitong.internal.ViewCompat;
+import com.ifeng_tech.treasuryyitong.pull.internal.FlipLoadingLayout;
+import com.ifeng_tech.treasuryyitong.pull.internal.LoadingLayout;
+import com.ifeng_tech.treasuryyitong.pull.internal.RotateLoadingLayout;
+import com.ifeng_tech.treasuryyitong.pull.internal.ViewCompat;
 
 public abstract class PullToRefreshBase<T extends View> extends LinearLayout implements IPullToRefresh<T> {
 
@@ -91,8 +90,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 	private Interpolator mScrollAnimationInterpolator;
 	private AnimationStyle mLoadingAnimationStyle = AnimationStyle.getDefault();
 
-	private com.ifeng_tech.treasuryyitong.internal.LoadingLayout mHeaderLayout;
-	private com.ifeng_tech.treasuryyitong.internal.LoadingLayout mFooterLayout;
+	private com.ifeng_tech.treasuryyitong.pull.internal.LoadingLayout mHeaderLayout;
+	private com.ifeng_tech.treasuryyitong.pull.internal.LoadingLayout mFooterLayout;
 
 	private OnRefreshListener<T> mOnRefreshListener;
 	private OnRefreshListener2<T> mOnRefreshListener2;
@@ -585,8 +584,8 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 		super.addView(child, -1, params);
 	}
 
-	protected com.ifeng_tech.treasuryyitong.internal.LoadingLayout createLoadingLayout(Context context, Mode mode, TypedArray attrs) {
-		com.ifeng_tech.treasuryyitong.internal.LoadingLayout layout = mLoadingAnimationStyle.createLoadingLayout(context, mode,
+	protected com.ifeng_tech.treasuryyitong.pull.internal.LoadingLayout createLoadingLayout(Context context, Mode mode, TypedArray attrs) {
+		com.ifeng_tech.treasuryyitong.pull.internal.LoadingLayout layout = mLoadingAnimationStyle.createLoadingLayout(context, mode,
 				getPullToRefreshScrollDirection(), attrs);
 		layout.setVisibility(View.INVISIBLE);
 		return layout;
@@ -973,7 +972,7 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 			 * all. We don't use them on the Header/Footer Views as they change
 			 * often, which would negate any HW layer performance boost.
 			 */
-			com.ifeng_tech.treasuryyitong.internal.ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
+			com.ifeng_tech.treasuryyitong.pull.internal.ViewCompat.setLayerType(mRefreshableViewWrapper, value != 0 ? View.LAYER_TYPE_HARDWARE
 					: View.LAYER_TYPE_NONE);
 		}
 
@@ -1119,7 +1118,6 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 				mRefreshableView.setBackgroundDrawable(background);
 			}
 		} else if (a.hasValue(R.styleable.PullToRefresh_ptrAdapterViewBackground)) {
-			Utils.warnDeprecation("ptrAdapterViewBackground", "ptrRefreshableViewBackground");
 			Drawable background = a.getDrawable(R.styleable.PullToRefresh_ptrAdapterViewBackground);
 			if (null != background) {
 				mRefreshableView.setBackgroundDrawable(background);
