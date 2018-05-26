@@ -23,7 +23,7 @@ import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
-import com.qdong.slide_to_unlock_view.CustomSlideToUnlockView;
+import com.ifeng_tech.treasuryyitong.view.hua_dong.CustomSlideToUnlockView;
 
 import java.util.HashMap;
 

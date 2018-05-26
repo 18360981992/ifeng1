@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
-import static com.qdong.slide_to_unlock_view.DensityUtil.dip2px;
+import static com.ifeng_tech.treasuryyitong.view.hua_dong.DensityUtil.dip2px;
+
 
 /**
  * Created by mypc on 2018/1/28.

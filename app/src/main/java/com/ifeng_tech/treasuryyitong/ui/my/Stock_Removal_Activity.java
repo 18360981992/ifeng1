@@ -23,9 +23,9 @@ import java.util.List;
 public class Stock_Removal_Activity extends BaseMVPActivity<Stock_Removal_Activity,MyPresenter<Stock_Removal_Activity>> {
 
     private RelativeLayout stock_Fan;
-    private XRecyclerView stock_xRecyclerView;
     List<Stock_Removal_Bean> stocklist = new ArrayList<>();
     private Stock_Adapter stock_adapter;
+    private XRecyclerView stock_xRecyclerView;
 
     @Override
     public MyPresenter<Stock_Removal_Activity> initPresenter() {

@@ -5,7 +5,7 @@
     android:orientation="vertical"
     >
 
-    <com.handmark.pulltorefresh.library.PullToRefreshScrollView
+    <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
         android:id="@+id/collection_mulu_fragment_pulltoscroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,7 +25,7 @@
                 ></com.ifeng_tech.treasuryyitong.view.MyListView>
 
         </LinearLayout>
-    </com.handmark.pulltorefresh.library.PullToRefreshScrollView>
+    </com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView>
 
     <LinearLayout
         android:id="@+id/collection_mulu_null"

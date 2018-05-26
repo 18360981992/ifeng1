@@ -117,7 +117,7 @@
                     android:layout_marginRight="@dimen/x8"/>
             </LinearLayout>
 
-            <com.qdong.slide_to_unlock_view.CustomSlideToUnlockView
+            <com.ifeng_tech.treasuryyitong.view.hua_dong.CustomSlideToUnlockView
                 xmlns:chuck="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/logo_to_unlock"
                 android:layout_width="match_parent"
@@ -127,16 +127,16 @@
                 chuck:slideImageViewResIdAfter="@drawable/logo_kuai"
                 chuck:slideThreshold="0.75"
                 chuck:textColorResId="@color/zhuse"
-                android:layout_marginTop="@dimen/x15"
+                android:layout_marginTop="@dimen/x25"
                 android:layout_marginLeft="@dimen/x15"
                 android:layout_marginRight="@dimen/x15"
-                ></com.qdong.slide_to_unlock_view.CustomSlideToUnlockView>
+                ></com.ifeng_tech.treasuryyitong.view.hua_dong.CustomSlideToUnlockView>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x40"
+                android:layout_marginTop="@dimen/x50"
                 >
                 <TextView
                     android:id="@+id/login_regist"

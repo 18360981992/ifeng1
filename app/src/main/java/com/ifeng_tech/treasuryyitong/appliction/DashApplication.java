@@ -1,11 +1,13 @@
 package com.ifeng_tech.treasuryyitong.appliction;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Process;
 import android.util.DisplayMetrics;
+
+import com.tencent.tinker.loader.app.TinkerApplication;
+import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 import java.text.DecimalFormat;
 
@@ -13,7 +15,12 @@ import java.text.DecimalFormat;
 /**
  * Created by Dash on 2017/12/6.
  */
-public class DashApplication extends Application {
+public class DashApplication extends TinkerApplication {
+
+    public DashApplication() {
+            super(ShareConstants.TINKER_ENABLE_ALL, "com.ifeng_tech.treasuryyitong.appliction.SampleApplicationLike",
+                    "com.tencent.tinker.loader.TinkerLoader", false);
+    }
 
     private static Context context;
     private static Handler handler;
