@@ -1,11 +1,9 @@
 package com.ifeng_tech.treasuryyitong.fragmet.zi_fragment;
 
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,12 +17,8 @@ import android.widget.Toast;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.utils.rili_utils.DataUtils;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
-import com.ifeng_tech.treasuryyitong.view.rili_view.DatePopupWindow;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import com.ifeng_tech.treasuryyitong.view.rili_view.TakeCalendar_Dialog;
 
 /**
  * Created by zzt on 2018/5/14.
@@ -50,7 +44,6 @@ public class Pick_up_goods_Zhuce extends Fragment  {
     private Button up_goods_chongzhi;
     private Pick_up_goods_Activity activity;
 
-    private DatePopupWindow popupWindow;
     private String dataFormate = "yyyy-MM-dd" ;
     @Nullable
     @Override
@@ -107,26 +100,20 @@ public class Pick_up_goods_Zhuce extends Fragment  {
         up_goods_tijiao = (Button) view.findViewById(R.id.up_goods_tijiao);
         up_goods_chongzhi = (Button) view.findViewById(R.id.up_goods_chongzhi);
 
-
     }
 
 
     // 弹出日历的pop框
     private void showPopupWindow(View v) {
 
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String format = simpleDateFormat.format(date);
+        final TakeCalendar_Dialog dialog = new TakeCalendar_Dialog(activity, R.style.dialog_setting);
+        MyUtils.getDiaLogDiBu(activity,dialog);
 
-        popupWindow = new DatePopupWindow(activity, format);
-        popupWindow.setFocusable(true);
-        popupWindow.setOutsideTouchable(true);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());
-        popupWindow.showAtLocation(fu, Gravity.CENTER, 0, 0);
-        popupWindow.setOnItemClick(new DatePopupWindow.OnItemClick() {
+        dialog.setOnItemClick(new TakeCalendar_Dialog.OnItemClick() {
             @Override
             public void onItemClick(String date) {
-                up_goods_zhuce_rili.setText(""+DataUtils.formatDate(date,dataFormate));
+                MyUtils.setToast("点击了：" + date);
+                up_goods_zhuce_rili.setText(date);
             }
         });
 

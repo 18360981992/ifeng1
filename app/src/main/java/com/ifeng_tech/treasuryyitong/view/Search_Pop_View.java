@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.adapter.rili_adapter.MyPopList_Atapter;
+import com.ifeng_tech.treasuryyitong.adapter.MyPopList_Atapter;
 
 import java.util.List;
 

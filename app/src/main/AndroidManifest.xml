@@ -15,23 +15,25 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        >
+        android:theme="@style/AppTheme">
 
         <!-- 启动页 -->
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
 
         <!-- 首页展示 -->
-        <activity android:name=".ui.HomePageActivity" android:screenOrientation="portrait"
-            >
-
+        <activity
+            android:name=".ui.HomePageActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"
-                    android:screenOrientation="portrait"
-                    />
+                <action
+                    android:name="android.intent.action.MAIN"
+                    android:screenOrientation="portrait" />
 
-                <category android:name="android.intent.category.LAUNCHER" android:screenOrientation="portrait"/>
+                <category
+                    android:name="android.intent.category.LAUNCHER"
+                    android:screenOrientation="portrait" />
             </intent-filter>
         </activity>
 
@@ -39,40 +41,108 @@
         <service android:name=".service.HeartbeatService" />
 
         <!-- 登录/注册 -->
-        <activity android:name=".ui.LoginActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.My_Property_Activity"  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Stock_Removal_Activity"  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Incoming_Test_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.MyCollectActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.My_Warehouse_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Pick_up_goods_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Donation_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Collect_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Authenticate_Details_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Collocation_Subscribe_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.My_Given_list_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Information_Details_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.My_Collocation_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.My_Collocation_Detail_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Setting_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Safe_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Reset_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Retrieve_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Change_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Forget_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Certification_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.ADVP_R_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.System_Message_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Recharge_Message_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Safety_Message_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Login_Register_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Login_Forget_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Pick_Up_Goods_Detail_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Collection_directory_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.Collection_Directory_Detail_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Business_Pass_Activity" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Bind_Email_Activity1" android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.Bind_Email_Activity2" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.My_Property_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Stock_Removal_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Incoming_Test_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.MyCollectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.My_Warehouse_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Pick_up_goods_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Donation_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Collect_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Authenticate_Details_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Collocation_Subscribe_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.My_Given_list_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Information_Details_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.My_Collocation_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.My_Collocation_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Setting_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Safe_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Reset_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Retrieve_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Change_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Forget_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Certification_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.ADVP_R_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.System_Message_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Recharge_Message_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Safety_Message_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Login_Register_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Login_Forget_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Pick_Up_Goods_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Collection_directory_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.Collection_Directory_Detail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Business_Pass_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Bind_Email_Activity1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.Bind_Email_Activity2"
+            android:screenOrientation="portrait" />
 
         <!-- Bugly升级SDK配置开始 -->
         <activity
@@ -80,18 +150,23 @@
             android:configChanges="keyboardHidden|orientation|screenSize|locale"
             android:theme="@android:style/Theme.Translucent" />
 
-        <!-- API 24以上配置  以下代码是为了适配android7.0 apk无法自动安装问题-->
+        <!-- API 24以上配置  以下代码是为了适配android7.0 apk无法自动安装问题 -->
 
-        <!--android:authorities="com.example.dell.legutinker.fileprovider"  这句话是个bug 千万要注意，文档有坑-->
+
+        <!-- android:authorities="com.example.dell.legutinker.fileprovider"  这句话是个bug 千万要注意，文档有坑 -->
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.fileprovider"
+            android:authorities="com.example.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
+
+        <activity android:name=".ui.my.My_Warehouse_Datail_Activity" />
+        <activity android:name=".ui.my.My_Given_Datail_Activity" />
+        <activity android:name=".ui.Information_Activity"></activity>
     </application>
 
 </manifest>

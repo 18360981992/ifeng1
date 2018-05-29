@@ -350,7 +350,7 @@
                 android:textSize="@dimen/x14"
                 android:textColor="@color/baise"
                 android:layout_marginRight="@dimen/x10"
-                android:background="@drawable/tixian_bg"
+                android:background="@drawable/congzhi_bg"
                 android:layout_marginLeft="@dimen/x8"
                 />
         </LinearLayout>

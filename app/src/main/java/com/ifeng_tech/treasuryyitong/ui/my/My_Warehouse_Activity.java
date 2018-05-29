@@ -3,6 +3,7 @@ package com.ifeng_tech.treasuryyitong.ui.my;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -13,6 +14,7 @@ import com.ifeng_tech.treasuryyitong.adapter.Warehouse_Adapter;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
@@ -95,6 +97,16 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
             }
         });
 
+        my_warehouse_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(My_Warehouse_Activity.this, My_Warehouse_Datail_Activity.class);
+                intent.putExtra("WarehouseBean", list.get(position));
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
+
     }
 
     public void setAdapter() {
@@ -104,24 +116,6 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         } else {
             warehouse_adapter.notifyDataSetChanged();
         }
-
-        warehouse_adapter.setWarehouse_adapter_jieKou(new Warehouse_Adapter.Warehouse_Adapter_JieKou() {
-            @Override
-            public void tihuo_chuan(int postion) { // 跳转提货
-                Intent intent = new Intent(My_Warehouse_Activity.this, Pick_up_goods_Activity.class);
-                intent.putExtra("WarehouseBean", list.get(postion));
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-            }
-
-            @Override
-            public void zhuanzeng_chuan(int postion) { // 跳转转赠
-                Intent intent = new Intent(My_Warehouse_Activity.this, Donation_Activity.class);
-                intent.putExtra("WarehouseBean", list.get(postion));
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-            }
-        });
     }
 
     private void initView() {
@@ -138,9 +132,19 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         viewById.setFocusableInTouchMode(true);
         viewById.requestFocus();
 
+        initRefreshListView();
 
         initData();
 
+    }
+
+    private void initRefreshListView() {
+        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
+        my_warehouse_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
+        ILoadingLayout Labels = my_warehouse_pulltoscroll.getLoadingLayoutProxy(true, false);
+        Labels.setPullLabel("下拉刷新...");
+        Labels.setRefreshingLabel("正在刷新...");
+        Labels.setReleaseLabel("放开刷新...");
     }
 
     public void initData() {

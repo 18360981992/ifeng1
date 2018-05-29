@@ -16,9 +16,9 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.fragmet.CollectFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
-import com.ifeng_tech.treasuryyitong.fragmet.InformationFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
+import com.ifeng_tech.treasuryyitong.fragmet.WarehouseFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
@@ -49,7 +49,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     private FragmentManager fragmentManager;
 
     HomeFragmet homeFragmet = new HomeFragmet();  // 首页
-    InformationFragmet treasuryFragmet = new InformationFragmet();  // 资讯
+    WarehouseFragment treasuryFragmet = new WarehouseFragment();  // 仓库
     CollectFragmet collectFragmet = new CollectFragmet(); // 征集
     MessageFragmet authenticateFragmet = new MessageFragmet();  // 消息
     MyFragmet myFragmet = new MyFragmet();  // 我的
@@ -207,14 +207,9 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 3:  // 跳转 资讯列表
-                        setBeiJing(false,true,false,false,false);
-                        fragmentManager.beginTransaction()
-                                .hide(homeFragmet)
-                                .show(treasuryFragmet)
-                                .hide(collectFragmet)
-                                .hide(authenticateFragmet)
-                                .hide(myFragmet)
-                                .commit();
+                        Intent intent2 = new Intent(HomePageActivity.this, Information_Activity.class);
+                        startActivity(intent2);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                 }
             }
@@ -233,11 +228,11 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             homepage_RelativeLayout.setVisibility(View.VISIBLE);
         }
         if (zxFlag) {
-            zixunImg.setImageResource(R.drawable.zixun_lan);
+            zixunImg.setImageResource(R.drawable.cangku_lan);
             zixunName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("资讯");
+            homepage_title.setText("仓库");
         } else {
-            zixunImg.setImageResource(R.drawable.zixun_hui);
+            zixunImg.setImageResource(R.drawable.cangku_hui);
             zixunName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
         if (zjFlag) {

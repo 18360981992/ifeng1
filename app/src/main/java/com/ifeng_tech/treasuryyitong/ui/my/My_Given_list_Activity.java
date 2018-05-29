@@ -1,41 +1,33 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.adapter.My_Given_list_Adapter;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
+import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.My_Given_Change_into_Fragment;
+import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.My_Given_Turn_out_Fragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
-import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
-import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.view.MyListView;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.ifeng_tech.treasuryyitong.view.MyTabLayout;
 
 /**
- *  转赠列表
+ * 转赠列表
  */
-public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activity,MyPresenter<My_Given_list_Activity>> {
+public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activity, MyPresenter<My_Given_list_Activity>> {
 
     private RelativeLayout my_Given_Fan;
-    private MyListView my_Given_MyListView;
-    private PullToRefreshScrollView my_Given_pulltoscroll;
-
-    List<Give_List_Bean> list = new ArrayList<>();
-    private My_Given_list_Adapter my_given_list_adapter;
-    private LinearLayout my_given_null;
-
+    String[] tabtitle = {"转入", "转出"};
+    private TabLayout my_Given_TabLayout;
+    private int position;
+    private FragmentManager fragmentManager;
+    My_Given_Change_into_Fragment my_given_change_into_fragment=new My_Given_Change_into_Fragment();
+    My_Given_Turn_out_Fragment my_given_turn_out_fragment =new My_Given_Turn_out_Fragment();
     @Override
     public MyPresenter<My_Given_list_Activity> initPresenter() {
-        if(myPresenter==null) {
+        if (myPresenter == null) {
             myPresenter = new MyPresenter();
         }
         return myPresenter;
@@ -53,90 +45,72 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
                 finish();
             }
         });
-    }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-
-        if(list.size()>0){
-            my_given_null.setVisibility(View.GONE);
-            my_Given_pulltoscroll.setVisibility(View.VISIBLE);
-            // 初始化数据 与适配器
-            setMy_Given_list_Adapter();
-        }else{
-            my_given_null.setVisibility(View.VISIBLE);
-            my_Given_pulltoscroll.setVisibility(View.GONE);
-        }
-
-        my_Given_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
+        //设置tablayout的横杆器的长度
+        my_Given_TabLayout.post(new Runnable() {
             @Override
-            public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                my_Given_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
-
-            @Override
-            public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                my_Given_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
-        });
-    }
-
-    // 初始化数据 与适配器
-
-    private void setMy_Given_list_Adapter() {
-        if(my_given_list_adapter==null){
-            my_given_list_adapter = new My_Given_list_Adapter(My_Given_list_Activity.this, list);
-            my_Given_MyListView.setAdapter(my_given_list_adapter);
-        }else{
-            my_given_list_adapter.notifyDataSetChanged();
-        }
-
-        my_given_list_adapter.setMy_given_list_adapter_jieKou(new My_Given_list_Adapter.My_Given_list_Adapter_JieKou() {
-            @Override
-            public void jieShou(int postion) {
-                MyUtils.setToast("点击了接收=="+postion);
-            }
-
-            @Override
-            public void juJue(int postion) {
-                MyUtils.setToast("点击了拒绝=="+postion);
+            public void run() {
+                MyTabLayout.setIndicator(my_Given_TabLayout, 40, 40);
             }
         });
 
+        for (int i = 0; i < tabtitle.length; i++) {
+            //添加tab
+            my_Given_TabLayout.addTab(my_Given_TabLayout.newTab().setText(tabtitle[i]));
+        }
+
+
+        //设置tab的点击监听器
+        my_Given_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                position = tab.getPosition();
+                setSelected(position);
+            }
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+
+
+        fragmentManager = getSupportFragmentManager();
+
+        fragmentManager.beginTransaction()
+                .add(R.id.my_Given_FrameLayout,my_given_change_into_fragment)
+                .add(R.id.my_Given_FrameLayout,my_given_turn_out_fragment)
+                .show(my_given_change_into_fragment)
+                .hide(my_given_turn_out_fragment)
+                .commit();
+
     }
 
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        my_Given_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = my_Given_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
+    //设置传值方法
+    private void setSelected(int value) {
+
+        if("转入".equals(tabtitle[value])){
+            fragmentManager.beginTransaction()
+                    .show(my_given_change_into_fragment)
+                    .hide(my_given_turn_out_fragment)
+                    .commit();
+        }else{
+            fragmentManager.beginTransaction()
+                    .hide(my_given_change_into_fragment)
+                    .show(my_given_turn_out_fragment)
+                    .commit();
+        }
     }
+
 
     private void initView() {
         my_Given_Fan = (RelativeLayout) findViewById(R.id.my_Given_Fan);
-        my_Given_MyListView = (MyListView) findViewById(R.id.my_Given_MyListView);
-        my_Given_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.my_Given_pulltoscroll);
-        my_given_null = (LinearLayout) findViewById(R.id.my_Given_null);
-        // 设置刷新
-        initRefreshListView();
-        initData();
-    }
-
-
-    private void initData() {
-        // 征集
-        for (int i = 0; i < 15; i++) {
-            if(i%2==0)  // type==0 转出状态
-                list.add(new Give_List_Bean("68947594615661",689715675,"世博四连体",20,5689,1025689468,0));
-            else
-                list.add(new Give_List_Bean("36987569448952",689715675,"世博四连体",20,5568,1564897425,1));
-        }
+        my_Given_TabLayout = (TabLayout) findViewById(R.id.my_Given_TabLayout);
     }
 
     @Override

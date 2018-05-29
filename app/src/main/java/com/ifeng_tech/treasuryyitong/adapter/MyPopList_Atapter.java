@@ -1,4 +1,4 @@
-package com.ifeng_tech.treasuryyitong.adapter.rili_adapter;
+package com.ifeng_tech.treasuryyitong.adapter;
 
 import android.content.Context;
 import android.view.View;

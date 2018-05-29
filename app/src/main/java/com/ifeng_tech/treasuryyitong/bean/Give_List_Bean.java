@@ -1,10 +1,12 @@
 package com.ifeng_tech.treasuryyitong.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by zzt on 2018/5/18.
  */
 
-public class Give_List_Bean {
+public class Give_List_Bean implements Serializable{
 
     String danhao;
     int cword;

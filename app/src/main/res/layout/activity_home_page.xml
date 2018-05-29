@@ -39,8 +39,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.8"
+        android:layout_height="@dimen/x45"
         >
 
         <LinearLayout
@@ -49,7 +48,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="center"
             >
             <ImageView
                 android:id="@+id/shouyeImg"
@@ -74,18 +73,18 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="center"
             >
             <ImageView
                 android:id="@+id/zixunImg"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_width="@dimen/x18"
+                android:layout_height="@dimen/x18"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/zixunName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="资讯"
+                android:text="仓库"
                 android:textColor="@color/zhuse_ziti"
                 android:textSize="@dimen/x10"
                 android:gravity="center"
@@ -99,7 +98,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="center"
             >
             <ImageView
                 android:id="@+id/zhengjiImg"
@@ -124,7 +123,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="center"
             >
             <ImageView
                 android:id="@+id/xiaoxiImg"
@@ -150,7 +149,7 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:layout_height="match_parent"
-            android:gravity="bottom"
+            android:gravity="center"
             >
             <ImageView
                 android:id="@+id/wodeImg"

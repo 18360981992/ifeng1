@@ -10,9 +10,6 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Collection_directory_Bean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 /**
  * 藏品详情
  */
@@ -22,7 +19,6 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
     private TextView collocation_mulu_detail_guige;
     private TextView collocation_mulu_detail_shoujia;
     private TextView collocation_mulu_detail_faxingliang;
-    private TextView collocation_mulu_detail_time;
     private TextView collocation_mulu_detail_jianjie;
     private TextView collocation_mulu_detail_name;
     private TextView collocation_mulu_detail_cword;
@@ -68,11 +64,6 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
         collocation_mulu_detail_shoujia.setText(collection_directory_bean.getPrice()+"元");
         collocation_mulu_detail_faxingliang.setText(collection_directory_bean.getNum()+"枚");
         collocation_mulu_detail_jianjie.setText("2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株");
-
-        Date date = new Date(collection_directory_bean.getTime());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        collocation_mulu_detail_time.setText(simpleDateFormat.format(date));
-
     }
 
     private void initView() {
@@ -82,7 +73,6 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
         collocation_mulu_detail_guige = (TextView) findViewById(R.id.collocation_mulu_detail_guige);
         collocation_mulu_detail_shoujia = (TextView) findViewById(R.id.collocation_mulu_detail_shoujia);
         collocation_mulu_detail_faxingliang = (TextView) findViewById(R.id.collocation_mulu_detail_faxingliang);
-        collocation_mulu_detail_time = (TextView) findViewById(R.id.collocation_mulu_detail_time);
         collocation_mulu_detail_jianjie = (TextView) findViewById(R.id.collocation_mulu_detail_jianjie);
 
     }

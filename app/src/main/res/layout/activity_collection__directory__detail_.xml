@@ -182,30 +182,6 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x12">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
-                android:text="提货日期"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x12"
-                />
-
-            <TextView
-                android:id="@+id/collocation_mulu_detail_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x35"
-                android:text="2017.12.13"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x12" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x12"
             android:layout_marginRight="@dimen/x8"
             >

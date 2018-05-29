@@ -54,47 +54,16 @@ public class Warehouse_Adapter extends BaseAdapter{
         if(convertView==null){
             convertView=View.inflate(context,R.layout.warehouse_xrecycle_item,null);
         }
-        warehouse_word = convertView.findViewById(R.id.warehouse_word);
-        warehouse_img = convertView.findViewById(R.id.warehouse_img);
         warehouse_shopping_name = convertView.findViewById(R.id.warehouse_shopping_name);
         warehouse_keyong_num = convertView.findViewById(R.id.warehouse_keyong_num);
         warehouse_dongjie_num = convertView.findViewById(R.id.warehouse_dongjie_num);
 
-        warehouse_zhuanzeng = convertView.findViewById(R.id.warehouse_zhuanzeng);
-        warehouse_tihuo = convertView.findViewById(R.id.warehouse_tihuo);
 
-        warehouse_word.setText(warehouselist.get(position).getWord());
-        warehouse_img.setImageResource(warehouselist.get(position).getImg());
         warehouse_shopping_name.setText(warehouselist.get(position).getShopping_name());
-        warehouse_keyong_num.setText("可用数量："+warehouselist.get(position).getKeyong_num());
-        warehouse_dongjie_num.setText("冻结数量："+warehouselist.get(position).getDongjie_num());
-
-
-        warehouse_zhuanzeng.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                warehouse_adapter_jieKou.zhuanzeng_chuan(position);
-            }
-        });
-
-        warehouse_tihuo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                warehouse_adapter_jieKou.tihuo_chuan(position);
-            }
-        });
+        warehouse_keyong_num.setText(""+warehouselist.get(position).getKeyong_num());
+        warehouse_dongjie_num.setText(""+warehouselist.get(position).getDongjie_num());
 
         return convertView;
     }
 
-
-    public interface Warehouse_Adapter_JieKou{
-        void tihuo_chuan(int postion);
-        void zhuanzeng_chuan(int postion);
-    }
-    Warehouse_Adapter_JieKou warehouse_adapter_jieKou;
-
-    public void setWarehouse_adapter_jieKou(Warehouse_Adapter_JieKou warehouse_adapter_jieKou) {
-        this.warehouse_adapter_jieKou = warehouse_adapter_jieKou;
-    }
 }

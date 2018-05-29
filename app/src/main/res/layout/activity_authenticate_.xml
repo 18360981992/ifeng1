@@ -23,10 +23,10 @@
             >
             <ImageView
                 android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_height="@dimen/x12"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x10"
+                android:layout_marginBottom="@dimen/x8"
                 android:layout_marginLeft="@dimen/x10"
                 />
         </RelativeLayout>

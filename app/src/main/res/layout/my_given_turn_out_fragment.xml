@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/baise"
+    >
+
+    <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
+        android:id="@+id/my_Given_Turn_out_pulltoscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.ifeng_tech.treasuryyitong.view.MyListView
+                android:id="@+id/my_Given_Turn_out_MyListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:divider="@null"
+                ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+        </LinearLayout>
+    </com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView>
+    <LinearLayout
+        android:id="@+id/my_Given_Turn_out_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="@dimen/x80"
+            android:layout_height="@dimen/x60"
+            android:background="@drawable/zanwu_shuju"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无数据"
+            android:textColor="#999999"
+            android:textSize="@dimen/x15"
+            android:layout_marginTop="@dimen/x5"
+            />
+    </LinearLayout>
+
+</LinearLayout>

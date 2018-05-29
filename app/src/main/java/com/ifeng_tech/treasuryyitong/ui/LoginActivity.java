@@ -23,6 +23,7 @@ import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.hua_dong.CustomSlideToUnlockView;
 
 import java.util.HashMap;
@@ -203,7 +204,13 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
 //            }
 //        });
 
+        //  进度框
+        AniDialog aniDialog = new AniDialog(LoginActivity.this, null);
+        aniDialog.show();
+
+
         if (true) {
+            aniDialog.dismiss();
             logo_to_unlock.setVisibility(View.GONE);
             DashApplication.edit.putString(SP_String.SHOUJI, name)
                     .putBoolean(SP_String.ISLOGIN,true)
@@ -214,6 +221,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
 
             finish();
         } else {
+            aniDialog.dismiss();
             logo_to_unlock.resetView();  // 将滑动条重置
             MyUtils.setObjectAnimator(login_weitanchuan,
                     login_weitanchuan_img,
