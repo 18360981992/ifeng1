@@ -11,46 +11,46 @@
     <RelativeLayout
         android:id="@+id/message_xitong"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x100"
         android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_xitong_img"
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/x32"
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/x64"
             android:layout_centerVertical="true"
             android:background="@drawable/xitong"
-            android:layout_margin="@dimen/x8"/>
+            android:layout_margin="@dimen/x16"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="系统消息"
             android:layout_toRightOf="@+id/message_xitong_img"
-            android:textSize="@dimen/x14"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"/>
 
         <ImageView
             android:id="@+id/xitong_jiantou"
-            android:layout_width="@dimen/x8"
-            android:layout_height="@dimen/x12"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
             />
 
         <TextView
             android:id="@+id/message_xitong_shumu"
-            android:layout_width="@dimen/x15"
-            android:layout_height="@dimen/x15"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
             android:text="56"
             android:textColor="#FFF"
-            android:textSize="@dimen/x7"
+            android:textSize="@dimen/x14"
             android:background="@drawable/xiaoxi_dian"
             android:visibility="gone"
             android:gravity="center"
-            android:layout_margin="@dimen/x8"
+            android:layout_margin="@dimen/x16"
             android:layout_toLeftOf="@+id/xitong_jiantou"
             android:layout_centerVertical="true"
             />
@@ -58,106 +58,106 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"
        />
 
     <RelativeLayout
         android:id="@+id/message_congzhi"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x100"
         android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_congzhi_img"
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/x32"
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/x64"
             android:layout_centerVertical="true"
             android:background="@drawable/congzhi"
-            android:layout_margin="@dimen/x8"/>
+            android:layout_margin="@dimen/x16"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="充值提醒"
             android:layout_toRightOf="@+id/message_congzhi_img"
-            android:textSize="@dimen/x14"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"/>
 
         <ImageView
             android:id="@+id/congzhi_jiantou"
-            android:layout_width="@dimen/x8"
-            android:layout_height="@dimen/x12"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
             />
 
         <TextView
             android:id="@+id/message_congzhi_shumu"
-            android:layout_width="@dimen/x15"
-            android:layout_height="@dimen/x15"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
             android:text="56"
             android:textColor="#FFF"
-            android:textSize="@dimen/x7"
+            android:textSize="@dimen/x14"
             android:background="@drawable/xiaoxi_dian"
             android:visibility="gone"
             android:gravity="center"
-            android:layout_margin="@dimen/x8"
+            android:layout_margin="@dimen/x16"
             android:layout_toLeftOf="@+id/congzhi_jiantou"
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"
         />
 
     <RelativeLayout
         android:id="@+id/message_anquan"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x50"
+        android:layout_height="@dimen/x100"
         android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/message_anquan_img"
-            android:layout_width="@dimen/x32"
-            android:layout_height="@dimen/x32"
+            android:layout_width="@dimen/x64"
+            android:layout_height="@dimen/x64"
             android:layout_centerVertical="true"
             android:background="@drawable/anquan"
-            android:layout_margin="@dimen/x8"/>
+            android:layout_margin="@dimen/x16"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:text="安全设置"
             android:layout_toRightOf="@+id/message_anquan_img"
-            android:textSize="@dimen/x14"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"/>
 
         <ImageView
             android:id="@+id/anquan_jiantou"
-            android:layout_width="@dimen/x8"
-            android:layout_height="@dimen/x12"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
             />
 
         <TextView
             android:id="@+id/message_anquan_shumu"
-            android:layout_width="@dimen/x15"
-            android:layout_height="@dimen/x15"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
             android:text="56"
             android:textColor="#FFF"
-            android:textSize="@dimen/x7"
+            android:textSize="@dimen/x14"
             android:background="@drawable/xiaoxi_dian"
             android:visibility="gone"
             android:gravity="center"
-            android:layout_margin="@dimen/x8"
+            android:layout_margin="@dimen/x16"
             android:layout_toLeftOf="@+id/anquan_jiantou"
             android:layout_centerVertical="true"
             />

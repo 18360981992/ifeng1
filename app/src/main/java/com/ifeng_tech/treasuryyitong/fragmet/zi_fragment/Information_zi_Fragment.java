@@ -17,7 +17,7 @@ import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
-import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.ui.Information_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
@@ -33,7 +33,7 @@ import java.util.List;
 
 public class Information_zi_Fragment extends Fragment {
 
-    private HomePageActivity activity;
+    private Information_Activity activity;
     private LinearLayout information_zi_null;
     private MyListView information_zi_fragment_MyListView;
     private PullToRefreshScrollView information_zi_fragment_pulltoscroll;
@@ -54,7 +54,7 @@ public class Information_zi_Fragment extends Fragment {
         initView(view);
         initData();
 
-        activity = (HomePageActivity) getActivity();
+        activity = (Information_Activity) getActivity();
         return view;
     }
 

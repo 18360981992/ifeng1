@@ -10,21 +10,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian">
 
         <RelativeLayout
             android:id="@+id/advp_r_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg">
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 android:background="@drawable/btn_back" />
         </RelativeLayout>
 
@@ -33,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:text="实名认证结果"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x16" />
+            android:textSize="@dimen/x32" />
 
     </RelativeLayout>
 
@@ -53,16 +53,16 @@
             android:visibility="gone"
             >
             <ImageView
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/x80"
+                android:layout_width="@dimen/x150"
+                android:layout_height="@dimen/x150"
                 android:background="@drawable/renzheng_zhong"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="认证中"
                 android:textColor="#999999"
-                android:textSize="@dimen/x15"
-                android:layout_marginTop="@dimen/x5"
+                android:textSize="@dimen/x30"
+                android:layout_marginTop="@dimen/x10"
                 />
         </LinearLayout>
 
@@ -79,39 +79,39 @@
                 android:visibility="visible"
                 >
                 <ImageView
-                    android:layout_width="@dimen/x80"
-                    android:layout_height="@dimen/x80"
+                    android:layout_width="@dimen/x150"
+                    android:layout_height="@dimen/x150"
                     android:background="@drawable/renzheng_shibai"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="认证失败"
                     android:textColor="#999999"
-                    android:textSize="@dimen/x15"
-                    android:layout_marginTop="@dimen/x5"
+                    android:textSize="@dimen/x30"
+                    android:layout_marginTop="@dimen/x10"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="请重新提交实名认证申请"
                     android:textColor="#999999"
-                    android:textSize="@dimen/x12"
-                    android:layout_marginTop="@dimen/x2"
+                    android:textSize="@dimen/x28"
+                    android:layout_marginTop="@dimen/x5"
                     />
             </LinearLayout>
 
             <Button
                 android:id="@+id/advp_r_btn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x8"
-                android:layout_marginLeft="@dimen/x8"
-                android:layout_marginRight="@dimen/x8"
+                android:layout_marginBottom="@dimen/x16"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
                 android:background="@drawable/congzhi_bg"
                 android:text="重新认证"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x14" />
+                android:textSize="@dimen/x28" />
         </RelativeLayout>
 
     </RelativeLayout>

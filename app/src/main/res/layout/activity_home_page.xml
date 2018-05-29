@@ -10,7 +10,7 @@
     <RelativeLayout
         android:id="@+id/homepage_RelativeLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian"
         android:visibility="gone"
         >
@@ -19,10 +19,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="首页"
-            android:textSize="@dimen/x16"
+            android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_centerHorizontal="true"/>
     </RelativeLayout>
     <FrameLayout
@@ -34,12 +34,12 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian1"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x45"
+        android:layout_height="@dimen/x90"
         >
 
         <LinearLayout
@@ -52,8 +52,8 @@
             >
             <ImageView
                 android:id="@+id/shouyeImg"
-                android:layout_width="@dimen/x18"
-                android:layout_height="@dimen/x18"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/shouyeName"
@@ -61,9 +61,9 @@
                 android:layout_height="wrap_content"
                 android:text="首页"
                 android:textColor="@color/zhuse"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x4"
+                android:layout_marginTop="@dimen/x8"
                 />
         </LinearLayout>
 
@@ -77,8 +77,8 @@
             >
             <ImageView
                 android:id="@+id/zixunImg"
-                android:layout_width="@dimen/x18"
-                android:layout_height="@dimen/x18"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/zixunName"
@@ -86,9 +86,9 @@
                 android:layout_height="wrap_content"
                 android:text="仓库"
                 android:textColor="@color/zhuse_ziti"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x4"
+                android:layout_marginTop="@dimen/x8"
                 />
         </LinearLayout>
 
@@ -102,8 +102,8 @@
             >
             <ImageView
                 android:id="@+id/zhengjiImg"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/zhengjiName"
@@ -111,9 +111,9 @@
                 android:layout_height="wrap_content"
                 android:text="征集"
                 android:textColor="@color/zhuse_ziti"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x4"
+                android:layout_marginTop="@dimen/x8"
                 />
         </LinearLayout>
 
@@ -127,8 +127,8 @@
             >
             <ImageView
                 android:id="@+id/xiaoxiImg"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
                 android:layout_gravity="center"/>
 
             <TextView
@@ -138,8 +138,8 @@
                 android:gravity="center"
                 android:text="消息"
                 android:textColor="@color/zhuse_ziti"
-                android:textSize="@dimen/x10"
-                android:layout_marginTop="@dimen/x4"
+                android:textSize="@dimen/x20"
+                android:layout_marginTop="@dimen/x8"
                 />
         </LinearLayout>
 
@@ -153,8 +153,8 @@
             >
             <ImageView
                 android:id="@+id/wodeImg"
-                android:layout_width="@dimen/x18"
-                android:layout_height="@dimen/x18"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
                 android:layout_gravity="center"/>
             <TextView
                 android:id="@+id/wodeName"
@@ -162,9 +162,9 @@
                 android:layout_height="wrap_content"
                 android:text="我的"
                 android:textColor="@color/zhuse_ziti"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x4"
+                android:layout_marginTop="@dimen/x8"
                 />
         </LinearLayout>
 

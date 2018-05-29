@@ -10,24 +10,24 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
             android:id="@+id/collection_mulu_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
             >
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/x25"
-                android:layout_marginBottom="@dimen/x8"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_height="@dimen/x50"
+                android:layout_marginBottom="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"
                 android:layout_alignParentBottom="true">
                 <ImageView
-                    android:layout_width="@dimen/x8"
-                    android:layout_height="@dimen/x14"
+                    android:layout_width="@dimen/x16"
+                    android:layout_height="@dimen/x28"
                     android:background="@drawable/btn_back"
                     android:layout_gravity="center_vertical"
                     />
@@ -38,12 +38,12 @@
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/x25"
+            android:layout_height="@dimen/x50"
             android:text="藏品目录"
-            android:textSize="@dimen/x15"
+            android:textSize="@dimen/x30"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_toRightOf="@+id/collection_mulu_Fan"
             android:gravity="center_vertical"
 
@@ -51,30 +51,30 @@
         <LinearLayout
             android:id="@+id/collection_mulu_sousuo"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x25"
+            android:layout_height="@dimen/x50"
             android:layout_toRightOf="@+id/title"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
-            android:layout_marginLeft="@dimen/x8"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
             android:background="@drawable/sousuo_kuang"
             >
 
             <ImageView
-                android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
                 android:background="@drawable/fangdajing"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x16"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="搜索"
                 android:textColor="#B1B1B1"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x16"
                 />
         </LinearLayout>
     </RelativeLayout>
@@ -83,7 +83,7 @@
         android:id="@+id/collection_mulu_TabLayout"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x30"
+        android:layout_height="@dimen/x60"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/zhuse"
         app:tabMode="scrollable"
@@ -96,7 +96,7 @@
         android:id="@+id/collection_mulu_FrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/x5"
+        android:layout_marginTop="@dimen/x10"
         ></FrameLayout>
 
 

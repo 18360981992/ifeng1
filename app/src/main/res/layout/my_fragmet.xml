@@ -10,14 +10,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80"
+        android:layout_height="@dimen/x160"
         android:background="@color/baise"
         >
         <ImageView
             android:id="@+id/wode_touxiang"
-            android:layout_width="@dimen/x60"
-            android:layout_height="@dimen/x60"
-            android:layout_marginLeft="@dimen/x10"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x120"
+            android:layout_marginLeft="@dimen/x20"
             android:layout_centerVertical="true"
             />
         <LinearLayout
@@ -26,8 +26,8 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_toRightOf="@id/wode_touxiang"
-            android:layout_marginTop="@dimen/x15"
-            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginTop="@dimen/x30"
+            android:layout_marginLeft="@dimen/x16"
             android:visibility="gone"
             >
             <TextView
@@ -35,16 +35,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="交易会员号"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"/>
             <TextView
                 android:id="@+id/wode_hao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6502289877"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginTop="@dimen/x3"
+                android:layout_marginTop="@dimen/x6"
                 />
         </LinearLayout>
 
@@ -53,26 +53,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/wode_touxiang"
-            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginLeft="@dimen/x16"
             android:gravity="center"
             android:layout_centerVertical="true"
             android:background="@drawable/item_bg"
-            android:paddingTop="@dimen/x3"
-            android:paddingBottom="@dimen/x3"
+            android:paddingTop="@dimen/x6"
+            android:paddingBottom="@dimen/x6"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="登录/注册"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
 
                 />
             <ImageView
-                android:layout_width="@dimen/x10"
-                android:layout_height="@dimen/x12"
+                android:layout_width="@dimen/x20"
+                android:layout_height="@dimen/x24"
                 android:background="@drawable/jiantou"
-                android:layout_marginLeft="@dimen/x5"
+                android:layout_marginLeft="@dimen/x10"
                 />
         </LinearLayout>
 
@@ -82,23 +82,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="未认证"
-            android:textSize="@dimen/x12"
+            android:textSize="@dimen/x24"
             android:textColor="@color/baise"
             android:background="@drawable/weirenzheng_bg"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_marginRight="@dimen/x20"
             android:visibility="gone"
             />
         
         <ImageView
             android:id="@+id/wode_yirenzheng"
-            android:layout_width="@dimen/x60"
-            android:layout_height="@dimen/x20"
+            android:layout_width="@dimen/x120"
+            android:layout_height="@dimen/x40"
             android:background="@drawable/wode_yirenzheng"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_marginRight="@dimen/x20"
             android:visibility="gone"
             />
 
@@ -106,7 +106,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"/>
 
     <com.ifeng_tech.treasuryyitong.view.MyListView
@@ -119,12 +119,12 @@
         ></com.ifeng_tech.treasuryyitong.view.MyListView>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
+        android:layout_height="@dimen/x180"
         android:orientation="vertical"
         >
         <RelativeLayout
@@ -136,36 +136,36 @@
             >
             <ImageView
                 android:id="@+id/an"
-                android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x13"
+                android:layout_marginLeft="@dimen/x26"
                 android:background="@drawable/wode_anquan"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/x40"
+                android:layout_height="@dimen/x80"
                 android:text="安全保护"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:gravity="center"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@+id/an"
-                android:layout_marginStart="13dp" />
+                />
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x12"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x24"
                 android:background="@drawable/jiantou"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"/>
+                android:layout_marginRight="@dimen/x20"/>
 
         </RelativeLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x8"
+            android:layout_height="@dimen/x16"
             android:background="@color/fengouxian"/>
         <RelativeLayout
             android:id="@+id/wode_shezhi"
@@ -176,31 +176,31 @@
             >
             <ImageView
                 android:id="@+id/she"
-                android:layout_width="@dimen/x15"
-                android:layout_height="@dimen/x15"
+                android:layout_width="@dimen/x30"
+                android:layout_height="@dimen/x30"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x13"
+                android:layout_marginLeft="@dimen/x26"
                 android:background="@drawable/wode_shezhi"
                 />
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/x40"
+                android:layout_height="@dimen/x80"
                 android:text="设置"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
                 android:layout_toRightOf="@id/she"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:gravity="center"
                 />
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x12"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x24"
                 android:background="@drawable/jiantou"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x10"/>
+                android:layout_marginRight="@dimen/x20"/>
         </RelativeLayout>
 
     </LinearLayout>

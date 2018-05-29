@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/home_daohang_img"
-        android:layout_width="@dimen/x40"
-        android:layout_height="@dimen/x40"
+        android:layout_width="@dimen/x80"
+        android:layout_height="@dimen/x80"
         />
     <TextView
         android:id="@+id/home_daohang_name"
@@ -18,8 +18,8 @@
         android:text="扫一扫"
         android:gravity="center"
         android:textColor="@color/zhuse_ziti"
-        android:textSize="@dimen/x11"
-        android:layout_marginTop="@dimen/x5"
+        android:textSize="@dimen/x22"
+        android:layout_marginTop="@dimen/x10"
         />
     
 </LinearLayout>

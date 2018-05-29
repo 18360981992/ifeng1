@@ -10,22 +10,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
             android:id="@+id/pick_up_goods_detail_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
             >
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 />
         </RelativeLayout>
 
@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="提货单详情"
-            android:textSize="@dimen/x16"
+            android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
@@ -45,8 +45,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x10"
-        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_marginBottom="@dimen/x20"
         >
 
         <LinearLayout
@@ -58,13 +58,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品名称:"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     />
                 <TextView
@@ -72,23 +72,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="世博四连体"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginLeft="@dimen/x20"
                     />
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/x16"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="订单号:"
-                    android:textSize="@dimen/x11"
+                    android:textSize="@dimen/x22"
                     android:textColor="@color/color_999999"
                     />
                 <TextView
@@ -96,9 +96,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3258947836343"
-                    android:textSize="@dimen/x11"
+                    android:textSize="@dimen/x22"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x60"
                     />
 
             </LinearLayout>
@@ -115,14 +115,14 @@
             >
             <TextView
                 android:id="@+id/pick_up_goods_detail_xiangqing"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x18"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x36"
+                android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/shangwu_kuang"
                 android:gravity="center"
                 android:text="商品详情"
                 android:textColor="@color/zhuse"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:layout_gravity="end"
                 />
 
@@ -131,7 +131,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"
         />
 
@@ -143,96 +143,96 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x12">
+            android:layout_marginTop="@dimen/x24">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:text="藏品代码"
                 android:textColor="@color/color_999999"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 />
 
             <TextView
                 android:id="@+id/pick_up_goods_detail_cword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x48"
+                android:layout_marginLeft="@dimen/x96"
                 android:text="3568974561"
                 android:textColor="@color/name_se"
-                android:textSize="@dimen/x12" />
+                android:textSize="@dimen/x24" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="仓库"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_cangku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="福丽特仓库 "
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="注册日期"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_zhuce_riqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017.12.3"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x48"
+                android:layout_marginLeft="@dimen/x96"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="提货日期"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_tihuo_riqi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017.12.3"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x48"
+                android:layout_marginLeft="@dimen/x96"
                 />
         </LinearLayout>
 
@@ -241,72 +241,72 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="件数"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_jianshu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="数量"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_shuliang"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="30"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="手续费"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_shouxufei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥100.00"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x58"
+                android:layout_marginLeft="@dimen/x116"
                 />
         </LinearLayout>
 
@@ -319,42 +319,42 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="预计仓储费用"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_cangchufei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥300.00"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x25"
+                android:layout_marginLeft="@dimen/x50"
                 />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/pick_up_goods_detail_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已逾期"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -366,31 +366,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_alignParentBottom="true"
             >
             <Button
                 android:id="@+id/pick_up_goods_detail_zhuxiao"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:text="注销"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
                 />
             <Button
                 android:id="@+id/pick_up_goods_detail_xiazai"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:text="下载提货单"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x16"
                 />
         </LinearLayout>
 

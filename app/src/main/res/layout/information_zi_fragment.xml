@@ -36,16 +36,16 @@
         android:visibility="gone"
         >
         <ImageView
-            android:layout_width="@dimen/x80"
-            android:layout_height="@dimen/x60"
+            android:layout_width="@dimen/x160"
+            android:layout_height="@dimen/x140"
             android:background="@drawable/zanwu_shuju"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="暂无数据"
             android:textColor="#999999"
-            android:textSize="@dimen/x15"
-            android:layout_marginTop="@dimen/x5"
+            android:textSize="@dimen/x30"
+            android:layout_marginTop="@dimen/x10"
             />
     </LinearLayout>
 

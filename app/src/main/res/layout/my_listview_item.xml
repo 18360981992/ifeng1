@@ -5,38 +5,38 @@
 
     <ImageView
         android:id="@+id/wode_list_img"
-        android:layout_width="@dimen/x15"
-        android:layout_height="@dimen/x15"
+        android:layout_width="@dimen/x30"
+        android:layout_height="@dimen/x30"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/x13"
+        android:layout_marginLeft="@dimen/x26"
         />
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/x42"
+        android:layout_height="@dimen/x84"
         android:layout_toRightOf="@id/wode_list_img"
-        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginLeft="@dimen/x20"
         >
         <TextView
             android:id="@+id/wode_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="我的资金"
-            android:textSize="@dimen/x13"
+            android:textSize="@dimen/x26"
             android:textColor="@color/name_se"
             android:layout_centerVertical="true"
             />
 
         <ImageView
-            android:layout_width="@dimen/x8"
-            android:layout_height="@dimen/x12"
+            android:layout_width="@dimen/x16"
+            android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"/>
+            android:layout_marginRight="@dimen/x20"/>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
+            android:layout_height="@dimen/x2"
             android:background="@color/fengouxian"
             android:layout_alignParentBottom="true"
             />

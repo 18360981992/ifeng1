@@ -10,21 +10,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian">
 
         <RelativeLayout
             android:id="@+id/collect_ac_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg">
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 android:background="@drawable/btn_back" />
         </RelativeLayout>
 
@@ -33,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:text="征集"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x16" />
+            android:textSize="@dimen/x32" />
 
     </RelativeLayout>
 
@@ -58,183 +58,187 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x10"
+                android:layout_marginTop="@dimen/x20"
                 >
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="转赠平台"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_pingtai"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:singleLine="true"
                     android:text="福利特"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="转赠账户"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_zhanghu"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="账户为选择平台注册的账户"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="手机号"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_shouji"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x57"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x114"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="手机号为转赠平台绑定手机号"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x26"
                     android:maxLength="11"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="藏品代码"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_cword"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="请输入藏品代码"
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x26"
                     android:maxLength="10"
                     />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="藏品名称"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_name"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="请输入藏品名称"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x60"
-                android:gravity="center">
+                android:layout_height="@dimen/x120"
+                >
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_height="@dimen/x80"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="转赠数量"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26"
+                    android:gravity="center_vertical"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
+                    android:orientation="vertical"
+                    android:layout_gravity="center"
+                    >
 
                     <EditText
                         android:id="@+id/collect_ac_shuliang"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x35"
+                        android:layout_height="@dimen/x70"
                         android:background="@drawable/tihuo_ed_bg"
                         android:inputType="number"
                         android:singleLine="true"
                         android:text="1"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x12" />
+                        android:textSize="@dimen/x26" />
 
                     <TextView
                         android:id="@+id/collect_ac_shuliang_zuida"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/x2"
+                        android:layout_marginTop="@dimen/x4"
                         android:text="最大转赠数量:1200"
                         android:textColor="#E93438"
-                        android:textSize="@dimen/x10" />
+                        android:textSize="@dimen/x20" />
                 </LinearLayout>
 
 
@@ -242,53 +246,53 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="上盘费"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <TextView
                     android:id="@+id/collect_ac_daijia"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x58"
+                    android:layout_marginLeft="@dimen/x116"
                     android:text="￥0.00"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x26"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
+                android:layout_height="@dimen/x90"
                 android:gravity="center_vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_marginLeft="@dimen/x16"
                     android:text="业务密码"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12" />
+                    android:textSize="@dimen/x26" />
 
                 <EditText
                     android:id="@+id/collect_ac_yewu_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
-                    android:layout_marginLeft="@dimen/x45"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_height="@dimen/x70"
+                    android:layout_marginLeft="@dimen/x90"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="请输入业务密码"
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x26"
                     android:maxLength="10"
                     />
             </LinearLayout>
@@ -300,15 +304,15 @@
                 <Button
                     android:id="@+id/collect_ac_tijiao"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
+                    android:layout_height="@dimen/x70"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/x8"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"
+                    android:layout_marginBottom="@dimen/x16"
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/congzhi_bg"
                     android:text="提交"
                     android:textColor="@color/baise"
-                    android:textSize="@dimen/x14" />
+                    android:textSize="@dimen/x28" />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>
@@ -316,16 +320,16 @@
         <LinearLayout
             android:id="@+id/collect_ac_weitanchuan"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x30"
+            android:layout_height="@dimen/x60"
             android:background="@color/weitanchuang"
             android:gravity="center_vertical"
             android:visibility="invisible"
             >
             <ImageView
                 android:id="@+id/collect_ac_weitanchuan_img"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x16"
                 />
             <TextView
                 android:id="@+id/collect_ac_weitanchuan_text"
@@ -333,8 +337,8 @@
                 android:layout_height="wrap_content"
                 android:text="转赠成功"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x14"
-                android:layout_marginLeft="@dimen/x8"/>
+                android:textSize="@dimen/x28"
+                android:layout_marginLeft="@dimen/x16"/>
 
         </LinearLayout>
     </RelativeLayout>

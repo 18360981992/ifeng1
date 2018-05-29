@@ -9,11 +9,11 @@
     <ImageView
         android:id="@+id/home_guanggao_img"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x73"
+        android:layout_height="@dimen/x146"
         android:scaleType="fitXY"
         />
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"/>
 </LinearLayout>

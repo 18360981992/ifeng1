@@ -10,21 +10,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian">
 
         <RelativeLayout
             android:id="@+id/register_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg">
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 android:background="@drawable/btn_back" />
         </RelativeLayout>
 
@@ -33,10 +33,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:text="注册"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x16" />
+            android:textSize="@dimen/x32" />
 
     </RelativeLayout>
 
@@ -56,36 +56,36 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/x15"
+                android:layout_marginTop="@dimen/x30"
                 android:gravity="center_vertical"
                 >
                 <EditText
                     android:id="@+id/register_name"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
+                    android:layout_height="@dimen/x70"
                     android:hint="请输入手机号码"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x14"
+                    android:textSize="@dimen/x28"
                     android:textColorHint="@color/color_999999"
                     android:background="@null"
-                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x60"
                     android:inputType="number"
                     android:maxLength="11"
                     android:singleLine="true"
                     />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x1"
+                    android:layout_height="@dimen/x2"
                     android:background="@color/fengouxian"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"/>
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginTop="@dimen/x16"
                 android:gravity="center_vertical"
                 >
                 <LinearLayout
@@ -95,23 +95,23 @@
                         android:id="@+id/register_duan"
                         android:layout_width="0dp"
                         android:layout_weight="3"
-                        android:layout_height="@dimen/x35"
+                        android:layout_height="@dimen/x70"
                         android:hint="请输入验证码"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x14"
+                        android:textSize="@dimen/x28"
                         android:textColorHint="@color/color_999999"
                         android:background="@null"
-                        android:layout_marginLeft="@dimen/x30"
+                        android:layout_marginLeft="@dimen/x60"
                         android:inputType="number"
                         android:maxLength="6"
                         android:singleLine="true"
                         />
                     <View
-                        android:layout_width="@dimen/x1"
+                        android:layout_width="@dimen/x2"
                         android:layout_height="match_parent"
                         android:background="@color/fengouxian"
-                        android:layout_marginBottom="@dimen/x3"
-                        android:layout_marginTop="@dimen/x3"
+                        android:layout_marginBottom="@dimen/x6"
+                        android:layout_marginTop="@dimen/x6"
                         />
 
                     <TextView
@@ -120,7 +120,7 @@
                         android:layout_weight="2"
                         android:layout_height="match_parent"
                         android:text="获取验证码"
-                        android:textSize="@dimen/x13"
+                        android:textSize="@dimen/x26"
                         android:textColor="@color/zhuse"
                         android:gravity="center"
                         />
@@ -128,91 +128,91 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x1"
+                    android:layout_height="@dimen/x2"
                     android:background="@color/fengouxian"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"/>
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginTop="@dimen/x16"
                 android:gravity="center_vertical"
                 >
                 <EditText
                     android:id="@+id/register_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
+                    android:layout_height="@dimen/x70"
                     android:hint="请输入密码"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x14"
+                    android:textSize="@dimen/x28"
                     android:textColorHint="@color/color_999999"
                     android:background="@null"
-                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x60"
                     android:maxLength="10"
                     android:singleLine="true"
                     />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x1"
+                    android:layout_height="@dimen/x2"
                     android:background="@color/fengouxian"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"/>
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginTop="@dimen/x16"
                 android:gravity="center_vertical"
                 >
                 <EditText
                     android:id="@+id/register_zaici_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x35"
+                    android:layout_height="@dimen/x70"
                     android:hint="请确认密码"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x14"
+                    android:textSize="@dimen/x28"
                     android:textColorHint="@color/color_999999"
                     android:background="@null"
-                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x60"
                     android:inputType="textPassword"
                     android:maxLength="10"
                     android:singleLine="true"
                     />
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x1"
+                    android:layout_height="@dimen/x2"
                     android:background="@color/fengouxian"
-                    android:layout_marginLeft="@dimen/x8"
-                    android:layout_marginRight="@dimen/x8"/>
+                    android:layout_marginLeft="@dimen/x16"
+                    android:layout_marginRight="@dimen/x16"/>
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:layout_marginTop="@dimen/x10"
-                android:paddingTop="@dimen/x3"
-                android:paddingBottom="@dimen/x3"
+                android:layout_marginTop="@dimen/x20"
+                android:paddingTop="@dimen/x6"
+                android:paddingBottom="@dimen/x6"
                 >
                 <ImageView
                     android:id="@+id/register_fuxuan"
-                    android:layout_width="@dimen/x14"
-                    android:layout_height="@dimen/x14"
+                    android:layout_width="@dimen/x28"
+                    android:layout_height="@dimen/x28"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginTop="@dimen/x1"
+                    android:layout_marginTop="@dimen/x2"
                     />
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我已阅读并同意"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x24"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x5"
+                    android:layout_marginLeft="@dimen/x10"
                     />
 
                 <TextView
@@ -220,41 +220,41 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="服务条款 免责声明 隐私保护"
-                    android:textSize="@dimen/x12"
+                    android:textSize="@dimen/x24"
                     android:textColor="@color/zhuse"
-                    android:layout_marginLeft="@dimen/x3"
+                    android:layout_marginLeft="@dimen/x6"
                     />
             </LinearLayout>
 
             <Button
                 android:id="@+id/register_btn"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x8"
-                android:layout_marginLeft="@dimen/x8"
-                android:layout_marginRight="@dimen/x8"
-                android:layout_marginTop="@dimen/x120"
+                android:layout_marginBottom="@dimen/x16"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:layout_marginTop="@dimen/x240"
                 android:background="@drawable/huadong_bg"
                 android:text="注册"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x28"
                 />
         </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/login_register_weitanchuan"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x30"
+                android:layout_height="@dimen/x60"
                 android:background="@color/weitanchuang"
                 android:gravity="center_vertical"
                 android:visibility="invisible"
                 >
                 <ImageView
                     android:id="@+id/login_register_weitanchuan_img"
-                    android:layout_width="@dimen/x20"
-                    android:layout_height="@dimen/x20"
-                    android:layout_marginLeft="@dimen/x8"
+                    android:layout_width="@dimen/x40"
+                    android:layout_height="@dimen/x40"
+                    android:layout_marginLeft="@dimen/x16"
                     />
                 <TextView
                     android:id="@+id/login_register_weitanchuan_text"
@@ -262,8 +262,8 @@
                     android:layout_height="wrap_content"
                     android:text="注册失败"
                     android:textColor="@color/baise"
-                    android:textSize="@dimen/x14"
-                    android:layout_marginLeft="@dimen/x8"/>
+                    android:textSize="@dimen/x28"
+                    android:layout_marginLeft="@dimen/x16"/>
 
             </LinearLayout>
         </RelativeLayout>

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x90"
+    android:layout_height="@dimen/x180"
     android:background="@drawable/item_bg"
     >
 
     <RelativeLayout
-        android:layout_width="@dimen/x220"
-        android:layout_height="@dimen/x70"
-        android:layout_margin="@dimen/x8"
+        android:layout_width="@dimen/x490"
+        android:layout_height="@dimen/x140"
+        android:layout_margin="@dimen/x16"
         android:orientation="vertical"
         >
 
@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="这是内容。这是内容。这是内容。这是内容。"
-            android:textSize="@dimen/x13"
+            android:textSize="@dimen/x26"
             android:textColor="@color/name_se"
             android:lineSpacingMultiplier="1.1"
             />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2018-05-02"
-            android:textSize="@dimen/x11"
+            android:textSize="@dimen/x22"
             android:textColor="@color/name_se"
             android:layout_alignParentBottom="true"
             />
@@ -36,18 +36,18 @@
 
     <ImageView
         android:id="@+id/information_zi_fragment_buju_right_img"
-        android:layout_width="@dimen/x75"
-        android:layout_height="@dimen/x75"
+        android:layout_width="@dimen/x150"
+        android:layout_height="@dimen/x150"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/x8"
+        android:layout_margin="@dimen/x16"
         />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian"
-        android:layout_marginLeft="@dimen/x8"
-        android:layout_marginRight="@dimen/x8"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16"
         />
 
 </RelativeLayout>

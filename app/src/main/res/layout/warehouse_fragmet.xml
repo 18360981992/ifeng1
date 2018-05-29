@@ -20,29 +20,29 @@
             android:layout_centerInParent="true"
             >
             <ImageView
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x130"
+                android:layout_width="@dimen/x200"
+                android:layout_height="@dimen/x260"
                 android:background="@drawable/cangku_null"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="登录后显示该页面"
-                android:textSize="@dimen/x18"
+                android:textSize="@dimen/x36"
                 android:textColor="@color/color_999999"
-                android:layout_marginTop="@dimen/x5"
+                android:layout_marginTop="@dimen/x10"
                 />
             <Button
                 android:id="@+id/warehouse_fra_btn"
-                android:layout_width="@dimen/x180"
-                android:layout_height="@dimen/x50"
+                android:layout_width="@dimen/x360"
+                android:layout_height="@dimen/x100"
                 android:text="确定登录"
-                android:textSize="@dimen/x21"
+                android:textSize="@dimen/x42"
                 android:textColor="@color/baise"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
-                android:layout_marginLeft="@dimen/x8"
-                android:layout_marginTop="@dimen/x10"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginTop="@dimen/x20"
                 />
         </LinearLayout>
     </RelativeLayout>
@@ -55,24 +55,24 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x35"
+            android:layout_height="@dimen/x70"
             >
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="名称"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="可用数量"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
                 android:gravity="center"
                 />
@@ -81,15 +81,15 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="冻结数量"
-                android:textSize="@dimen/x13"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
                 android:gravity="end|center_vertical"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="@dimen/x20"
                 />
         </LinearLayout>
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
+            android:layout_height="@dimen/x2"
             android:layout_alignParentBottom="true"
             android:background="@color/fengouxian" />
 
@@ -107,7 +107,7 @@
                 <View
                     android:id="@+id/wview"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x8"/>
+                    android:layout_height="@dimen/x10"/>
 
                 <com.ifeng_tech.treasuryyitong.view.MyListView
                     android:id="@+id/warehouse_fra_MyListView"
@@ -129,16 +129,16 @@
             android:visibility="gone"
             >
             <ImageView
-                android:layout_width="@dimen/x80"
-                android:layout_height="@dimen/x60"
+                android:layout_width="@dimen/x160"
+                android:layout_height="@dimen/x140"
                 android:background="@drawable/zanwu_shuju"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="暂无数据"
                 android:textColor="#999999"
-                android:textSize="@dimen/x15"
-                android:layout_marginTop="@dimen/x5"
+                android:textSize="@dimen/x30"
+                android:layout_marginTop="@dimen/x10"
                 />
         </LinearLayout>
 

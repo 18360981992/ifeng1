@@ -35,9 +35,9 @@
            android:textColor="@android:color/white"
            android:layout_centerVertical="true"
            android:text="@string/hint"
-           android:textSize="@dimen/x13"
+           android:textSize="@dimen/x26"
            android:gravity="center"
-           android:layout_marginRight="@dimen/x40"
+           android:layout_marginRight="@dimen/x80"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"/>
 

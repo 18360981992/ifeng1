@@ -12,22 +12,22 @@
     <RelativeLayout
         android:id="@+id/authenticate_Details_Toobar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
             android:id="@+id/authenticate_Details_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
             >
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x12"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x8"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 />
         </RelativeLayout>
 
@@ -35,10 +35,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="托管预约"
-            android:textSize="@dimen/x16"
+            android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
@@ -60,20 +60,20 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x120"
+                    android:layout_height="@dimen/x280"
                     android:gravity="center_vertical">
 
                     <ImageView
                         android:id="@+id/authenticate_Details_img"
-                        android:layout_width="@dimen/x80"
-                        android:layout_height="@dimen/x80"
-                        android:layout_marginLeft="@dimen/x8"
+                        android:layout_width="@dimen/x200"
+                        android:layout_height="@dimen/x200"
+                        android:layout_marginLeft="@dimen/x16"
                         android:background="@drawable/guangao" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x10"
+                        android:layout_marginLeft="@dimen/x20"
                         android:orientation="vertical">
 
                         <LinearLayout
@@ -85,126 +85,126 @@
                                 android:layout_height="wrap_content"
                                 android:text="藏品编码:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_bianma"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="325000158"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x3">
+                            android:layout_marginTop="@dimen/x5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="藏品名称:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="世博四连体"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x3">
+                            android:layout_marginTop="@dimen/x5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="计件单位:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_danwei"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="枚"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x3">
+                            android:layout_marginTop="@dimen/x5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="托管进度:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_jindu"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="100/200"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x3">
+                            android:layout_marginTop="@dimen/x5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="起征数量:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_shuliang"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="100"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/x3">
+                            android:layout_marginTop="@dimen/x5">
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="申请时间:"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
 
                             <TextView
                                 android:id="@+id/authenticate_Details_time"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginLeft="@dimen/x8"
+                                android:layout_marginLeft="@dimen/x16"
                                 android:text="2018-05-17"
                                 android:textColor="@color/name_se"
-                                android:textSize="@dimen/x11" />
+                                android:textSize="@dimen/x22" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -212,17 +212,17 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x30"
+                    android:layout_height="@dimen/x60"
                     android:background="@color/fengouxian"
                     android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x8"
+                        android:layout_marginLeft="@dimen/x16"
                         android:text="预约时间"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x13" />
+                        android:textSize="@dimen/x26" />
                 </LinearLayout>
 
                 <com.ifeng_tech.treasuryyitong.view.MyListView
@@ -241,25 +241,25 @@
         <LinearLayout
             android:id="@+id/authenticate_Details_weitanchuan"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x30"
+            android:layout_height="@dimen/x60"
             android:background="@color/color_5576E2"
             android:gravity="center_vertical"
             android:visibility="invisible">
 
             <ImageView
                 android:id="@+id/authenticate_Details_weitanchuan_img"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x20"
-                android:layout_marginLeft="@dimen/x8" />
+                android:layout_width="@dimen/x40"
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x16" />
 
             <TextView
                 android:id="@+id/authenticate_Details_weitanchuan_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x16"
                 android:text="转赠成功"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x14" />
+                android:textSize="@dimen/x28" />
 
         </LinearLayout>
     </RelativeLayout>

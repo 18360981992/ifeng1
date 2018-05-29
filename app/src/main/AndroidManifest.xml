@@ -154,15 +154,15 @@
 
 
         <!-- android:authorities="com.example.dell.legutinker.fileprovider"  这句话是个bug 千万要注意，文档有坑 -->
-        <provider
-            android:name="android.support.v4.content.FileProvider"
-            android:authorities="com.example.fileprovider"
-            android:exported="false"
-            android:grantUriPermissions="true">
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths" />
-        </provider>
+        <!--<provider-->
+            <!--android:name="android.support.v4.content.FileProvider"-->
+            <!--android:authorities="com.example.fileprovider"-->
+            <!--android:exported="false"-->
+            <!--android:grantUriPermissions="true">-->
+            <!--<meta-data-->
+                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
+                <!--android:resource="@xml/provider_paths" />-->
+        <!--</provider>-->
 
         <activity android:name=".ui.my.My_Warehouse_Datail_Activity" />
         <activity android:name=".ui.my.My_Given_Datail_Activity" />

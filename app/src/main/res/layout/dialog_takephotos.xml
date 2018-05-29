@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/x100"
+    android:layout_height="@dimen/x200"
     android:orientation="vertical">
 
     <Button
@@ -11,12 +11,12 @@
         android:layout_weight="1"
         android:background="#FFF"
         android:text="相册选择"
-        android:textSize="@dimen/x13"
+        android:textSize="@dimen/x26"
         android:textColor="@color/name_se"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian"/>
 
     <Button
@@ -26,12 +26,12 @@
         android:layout_weight="1"
         android:background="#FFF"
         android:text="拍照"
-        android:textSize="@dimen/x13"
+        android:textSize="@dimen/x26"
         android:textColor="@color/name_se"/>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian"/>
 
     <Button
@@ -41,6 +41,6 @@
         android:layout_weight="1"
         android:background="#FFF"
         android:text="取消"
-        android:textSize="@dimen/x13"
+        android:textSize="@dimen/x26"
         android:textColor="@color/name_se"/>
 </LinearLayout>

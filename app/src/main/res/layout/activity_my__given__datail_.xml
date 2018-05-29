@@ -10,22 +10,22 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
             android:id="@+id/my_Given_Datail_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg"
             >
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 />
         </RelativeLayout>
 
@@ -33,10 +33,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="转赠列表详情"
-            android:textSize="@dimen/x16"
+            android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
@@ -45,8 +45,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/x10"
-        android:layout_marginBottom="@dimen/x10"
+        android:layout_marginTop="@dimen/x20"
+        android:layout_marginBottom="@dimen/x20"
         >
 
         <LinearLayout
@@ -58,13 +58,13 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品名称:"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     />
                 <TextView
@@ -72,23 +72,23 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="世博四连体"
-                    android:textSize="@dimen/x13"
+                    android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginLeft="@dimen/x42"
                     />
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x10"
-                android:layout_marginTop="@dimen/x8"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/x16"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="藏品代码:"
-                    android:textSize="@dimen/x11"
+                    android:textSize="@dimen/x22"
                     android:textColor="@color/color_999999"
                     />
                 <TextView
@@ -96,9 +96,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="3258947836343"
-                    android:textSize="@dimen/x11"
+                    android:textSize="@dimen/x22"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x30"
+                    android:layout_marginLeft="@dimen/x60"
                     />
 
             </LinearLayout>
@@ -111,14 +111,14 @@
             >
             <TextView
                 android:id="@+id/my_Given_Datail_xiangqing"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x18"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_width="@dimen/x120"
+                android:layout_height="@dimen/x36"
+                android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/shangwu_kuang"
                 android:gravity="center"
                 android:text="商品详情"
                 android:textColor="@color/zhuse"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:layout_gravity="end"
                 />
 
@@ -127,7 +127,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x5"
+        android:layout_height="@dimen/x16"
         android:background="@color/fengouxian"
         />
 
@@ -139,116 +139,116 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x20"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="订单号"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_Given_Datail_dword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="65897489512"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x58"
+                android:layout_marginLeft="@dimen/x116"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="仓库"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_Given_Datail_cangku"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="福丽特仓库"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="手续费"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_Given_Datail_shouxufei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥100.00"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x58"
+                android:layout_marginLeft="@dimen/x116"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="类别"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_Given_Datail_leibie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="转入/转出"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x8"
+            android:layout_marginTop="@dimen/x16"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="状态"
-                android:textSize="@dimen/x11"
+                android:textSize="@dimen/x22"
                 android:textColor="@color/color_999999"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_Given_Datail_zhangtai"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="等待确认"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x70"
+                android:layout_marginLeft="@dimen/x140"
                 />
         </LinearLayout>
 
@@ -261,31 +261,31 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:layout_alignParentBottom="true"
             >
             <Button
                 android:id="@+id/my_Given_Datail_tongyi"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:text="同意"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginLeft="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
                 />
             <Button
                 android:id="@+id/my_Given_Datail_jujue"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="@dimen/x35"
+                android:layout_height="@dimen/x70"
                 android:text="拒绝"
-                android:textSize="@dimen/x14"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
-                android:layout_marginRight="@dimen/x10"
+                android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
-                android:layout_marginLeft="@dimen/x8"
+                android:layout_marginLeft="@dimen/x16"
                 />
         </LinearLayout>
 

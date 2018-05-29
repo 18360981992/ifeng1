@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
@@ -11,11 +12,12 @@ import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Information_zi_Fragment
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.view.MyTabLayout;
 
-public class Information_Activity extends BaseMVPActivity<Information_Activity,MyPresenter<Information_Activity>> {
+public class Information_Activity extends BaseMVPActivity<Information_Activity, MyPresenter<Information_Activity>> {
 
     private TabLayout zixun_TabLayout;
     private FrameLayout zixun_FrameLayout;
-    String[] title={"全部","热门","关注","栏目1","栏目2","栏目3","栏目4","栏目5","栏目6","栏目7","栏目8"};
+    String[] title = {"全部", "热门", "关注", "栏目1", "栏目2", "栏目3", "栏目4", "栏目5", "栏目6", "栏目7", "栏目8"};
+    private RelativeLayout zixun_Fan;
 
     @Override
     public MyPresenter<Information_Activity> initPresenter() {
@@ -29,6 +31,14 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity,M
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information_);
+        initView();
+
+        zixun_Fan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         //设置tablayout的横杆器的长度
         zixun_TabLayout.post(new Runnable() {
@@ -81,9 +91,10 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity,M
                 .replace(R.id.zixun_FrameLayout, information_zi_Fragment).commit();
     }
 
-    private void initView(View view) {
+    private void initView() {
         zixun_TabLayout = (TabLayout) findViewById(R.id.zixun_TabLayout);
         zixun_FrameLayout = (FrameLayout) findViewById(R.id.zixun_FrameLayout);
+        zixun_Fan = (RelativeLayout) findViewById(R.id.zixun_Fan);
     }
 
     @Override

@@ -9,61 +9,61 @@
         android:id="@+id/message_lists_item_time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/x8"
-        android:layout_marginTop="@dimen/x10"
+        android:layout_marginBottom="@dimen/x16"
+        android:layout_marginTop="@dimen/x20"
         android:gravity="center"
         android:text="05月21日"
         android:textColor="@color/color_999999"
-        android:textSize="@dimen/x10"
+        android:textSize="@dimen/x20"
         android:layout_gravity="center_horizontal"
         />
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/x10"
-        android:layout_marginRight="@dimen/x10"
-        android:layout_marginBottom="@dimen/x8">
+        android:layout_marginLeft="@dimen/x20"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginBottom="@dimen/x16">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/baise"
-        android:paddingLeft="@dimen/x8"
-        android:paddingRight="@dimen/x8"
-        android:paddingTop="@dimen/x10"
-        android:paddingBottom="@dimen/x10"
+        android:paddingLeft="@dimen/x16"
+        android:paddingRight="@dimen/x16"
+        android:paddingTop="@dimen/x20"
+        android:paddingBottom="@dimen/x20"
         android:orientation="vertical"
         >
         <TextView
             android:id="@+id/message_lists_item_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="@dimen/x2"
+            android:lineSpacingExtra="@dimen/x4"
             android:text="版本更新提醒"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x13"
+            android:textSize="@dimen/x26"
             />
         <TextView
             android:id="@+id/message_lists_item_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="@dimen/x2"
+            android:lineSpacingExtra="@dimen/x4"
             android:text="系统1.1.1已经更新"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x11"
-            android:layout_marginTop="@dimen/x4"
+            android:textSize="@dimen/x22"
+            android:layout_marginTop="@dimen/x8"
             />
 
     </LinearLayout>
 
         <ImageView
-            android:layout_width="@dimen/x10"
-            android:layout_height="@dimen/x12"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"/>
+            android:layout_marginRight="@dimen/x16"/>
 
     </RelativeLayout>
 

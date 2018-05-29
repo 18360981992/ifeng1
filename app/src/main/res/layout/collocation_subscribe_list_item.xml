@@ -7,21 +7,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:paddingTop="@dimen/x8"
+        android:layout_height="@dimen/x180"
+        android:paddingTop="@dimen/x16"
         >
 
    <ImageView
        android:id="@+id/collocation_Subscribe_list_img"
-       android:layout_width="@dimen/x70"
-       android:layout_height="@dimen/x70"
-       android:layout_marginLeft="@dimen/x8"
+       android:layout_width="@dimen/x140"
+       android:layout_height="@dimen/x140"
+       android:layout_marginLeft="@dimen/x16"
        />
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginLeft="@dimen/x10"
         android:layout_toRightOf="@+id/collocation_Subscribe_list_img"
         >
         <TextView
@@ -30,55 +30,55 @@
             android:layout_height="wrap_content"
             android:text="世博四连体"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x12"
-            android:layout_marginTop="@dimen/x2"
+            android:textSize="@dimen/x24"
+            android:layout_marginTop="@dimen/x4"
             />
         <TextView
             android:id="@+id/collocation_Subscribe_list_cword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="659874152"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x20"
             android:textColor="@color/zhuse_ziti"
-            android:layout_marginTop="@dimen/x5"
+            android:layout_marginTop="@dimen/x10"
             />
         <TextView
             android:id="@+id/collocation_Subscribe_list_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="开始时间:2018-05-18"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x20"
             android:textColor="@color/text_se"
-            android:layout_marginTop="@dimen/x2"
+            android:layout_marginTop="@dimen/x4"
             />
         <TextView
             android:id="@+id/collocation_Subscribe_list_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="托管进度10/20"
-            android:textSize="@dimen/x10"
+            android:textSize="@dimen/x20"
             android:textColor="@color/zhuse_ziti"
-            android:layout_marginTop="@dimen/x2"
+            android:layout_marginTop="@dimen/x4"
             />
     </LinearLayout>
 
     <ImageView
         android:id="@+id/collocation_Subscribe_list_imgflag"
-        android:layout_width="@dimen/x45"
-        android:layout_height="@dimen/x18"
+        android:layout_width="@dimen/x90"
+        android:layout_height="@dimen/x36"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="@dimen/x10"
-        android:layout_marginBottom="@dimen/x8"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginBottom="@dimen/x16"
         />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian1"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="@dimen/x8"
-        android:layout_marginLeft="@dimen/x8"
+        android:layout_marginRight="@dimen/x16"
+        android:layout_marginLeft="@dimen/x16"
         />
     </RelativeLayout>
 </RelativeLayout>

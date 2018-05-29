@@ -10,38 +10,38 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/fengouxian1"
-        android:paddingTop="@dimen/x3"
-        android:paddingBottom="@dimen/x3"
+        android:paddingTop="@dimen/x6"
+        android:paddingBottom="@dimen/x6"
         >
         <TextView
             android:id="@+id/my_collocation_list_danhao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2568974156334342342423"
-            android:textSize="@dimen/x12"
+            android:textSize="@dimen/x24"
             android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginLeft="@dimen/x16"
             />
     </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x70"
-        android:paddingBottom="@dimen/x5"
+        android:layout_height="@dimen/x140"
+        android:paddingBottom="@dimen/x10"
         >
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x8"
+            android:layout_marginLeft="@dimen/x16"
             >
             <TextView
                 android:id="@+id/my_collocation_list_cword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6589741568971"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
                 />
             <TextView
@@ -49,9 +49,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="世博四连体"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginTop="@dimen/x5"
+                android:layout_marginTop="@dimen/x10"
                 />
 
         </LinearLayout>
@@ -60,7 +60,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20"
-            android:textSize="@dimen/x12"
+            android:textSize="@dimen/x24"
             android:textColor="@color/name_se"
             android:layout_centerInParent="true"
             />
@@ -68,14 +68,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
             >
             <TextView
                 android:id="@+id/my_collocation_list_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="￥100.00"
-                android:textSize="@dimen/x12"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
                 android:layout_centerVertical="true"
                 android:layout_alignParentRight="true"
@@ -85,7 +85,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2018.05.23"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:textColor="@color/name_se"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
@@ -94,15 +94,15 @@
     </RelativeLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x1"
+        android:layout_height="@dimen/x2"
         android:background="@color/fengouxian1"
-        android:layout_marginLeft="@dimen/x8"
-        android:layout_marginRight="@dimen/x8"
+        android:layout_marginLeft="@dimen/x16"
+        android:layout_marginRight="@dimen/x16"
         android:layout_alignParentBottom="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x34"
+        android:layout_height="@dimen/x68"
         >
 
         <LinearLayout
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginRight="@dimen/x16"
             android:visibility="visible"
             >
             <TextView
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="已过期"
-                android:textSize="@dimen/x10"
+                android:textSize="@dimen/x20"
                 android:textColor="@color/fengouxian1"
                 />
         </LinearLayout>

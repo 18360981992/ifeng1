@@ -10,21 +10,21 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x120"
         android:background="@drawable/zichan_jianbian">
 
         <RelativeLayout
             android:id="@+id/setting_Fan"
-            android:layout_width="@dimen/x30"
+            android:layout_width="@dimen/x60"
             android:layout_height="match_parent"
             android:background="@drawable/fanhui_bg">
 
             <ImageView
-                android:layout_width="@dimen/x8"
-                android:layout_height="@dimen/x14"
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x10"
-                android:layout_marginLeft="@dimen/x10"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
                 android:background="@drawable/btn_back" />
         </RelativeLayout>
 
@@ -33,40 +33,40 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
             android:text="设置"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x16" />
+            android:textSize="@dimen/x32" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/setting_guanyu"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x40">
+        android:layout_height="@dimen/x80">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="关于我们"
-            android:textSize="@dimen/x13"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginLeft="@dimen/x20"
             android:layout_centerVertical="true"
             />
 
         <ImageView
-            android:layout_width="@dimen/x10"
-            android:layout_height="@dimen/x13"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x26"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_marginRight="@dimen/x20"
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
-            android:layout_marginLeft="@dimen/x10"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_height="@dimen/x2"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
             android:background="@color/fengouxian1"
             android:layout_alignParentBottom="true"
             />
@@ -76,30 +76,30 @@
     <RelativeLayout
         android:id="@+id/setting_banben"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x40">
+        android:layout_height="@dimen/x80">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="当前版本1.1"
-            android:textSize="@dimen/x13"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginLeft="@dimen/x20"
             android:layout_centerVertical="true"
             />
 
         <ImageView
-            android:layout_width="@dimen/x10"
-            android:layout_height="@dimen/x13"
+            android:layout_width="@dimen/x20"
+            android:layout_height="@dimen/x26"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_marginRight="@dimen/x20"
             />
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x1"
-            android:layout_marginLeft="@dimen/x10"
-            android:layout_marginRight="@dimen/x10"
+            android:layout_height="@dimen/x2"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
             android:background="@color/fengouxian1"
             android:layout_alignParentBottom="true"
             />
@@ -113,15 +113,15 @@
         <Button
             android:id="@+id/setting_btn"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x35"
+            android:layout_height="@dimen/x70"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x8"
-            android:layout_marginLeft="@dimen/x8"
-            android:layout_marginRight="@dimen/x8"
+            android:layout_marginBottom="@dimen/x16"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
             android:background="@drawable/congzhi_bg"
             android:text="退出登录"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x14" />
+            android:textSize="@dimen/x28" />
     </RelativeLayout>
 
 
