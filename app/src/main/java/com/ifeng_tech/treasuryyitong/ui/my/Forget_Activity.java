@@ -33,6 +33,8 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
     private LinearLayout forget_weitanchuan;
     private Button forget_btn;
     private int weitanchuan_height;
+    private String mobile;
+    private String smscode;
 
     @Override
     public MyPresenter<Forget_Activity> initPresenter() {
@@ -78,7 +80,6 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
         forget_weitanchuan = (LinearLayout) findViewById(R.id.forget_weitanchuan);
         forget_btn = (Button) findViewById(R.id.forget_btn);
 
-
         //通过设置监听来获取 微弹窗 控件的高度
         forget_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -103,14 +104,15 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
 
         String queren = forget_queren.getText().toString().trim();
         if (TextUtils.isEmpty(queren)) {
-            Toast.makeText(this, "新登录密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "确认新密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
         // TODO validate success, do something
+//        myPresenter.postPreContent();
+
 
         MyUtils.setToast("请求网络。。。");
-
         if(true){
             MyUtils.setObjectAnimator_anquan(forget_weitanchuan,
                     forget_weitanchuan_img,

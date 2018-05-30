@@ -115,8 +115,6 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
         super.onResume();
 
         String shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
-        // 模拟一个手机号
-        shouji = "18360981992";
         String tou = shouji.substring(0, 3);
         String wei = shouji.substring(8, shouji.length());
         bind_email_shoujihao.setText(tou + "*****" + wei);

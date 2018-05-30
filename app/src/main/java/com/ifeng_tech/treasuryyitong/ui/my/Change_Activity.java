@@ -95,6 +95,11 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         h.removeMessages(0);  // 避免内存泄漏

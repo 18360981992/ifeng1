@@ -1,6 +1,8 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
 import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
+import com.ifeng_tech.treasuryyitong.service.CookieManger;
 import com.ifeng_tech.treasuryyitong.service.SearchApi;
 
 import java.util.Map;
@@ -33,7 +35,8 @@ public class RetrofitFacety {
 
     //使全局就一个OKHttpClient对象
     public static OkHttpClient okHttpClient = new OkHttpClient.Builder()
-//            .cookieJar(new CookiesManager())
+            .addInterceptor(DashApplication.loggingInterceptor)
+            .cookieJar(new CookieManger(DashApplication.getAppContext()))
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)
@@ -47,8 +50,8 @@ public class RetrofitFacety {
             .client(okHttpClient)
             //把 以前的 call 转化成 Observable,这是Retrofit与RxJava结合使用的关键
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-
-            .build().create(SearchApi.class);
+            .build()
+            .create(SearchApi.class);
 
     /**
      *  retrofit的get请求
@@ -60,7 +63,7 @@ public class RetrofitFacety {
                 .doOnNext(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        LogUtils.i("wc","这是处理缓存本地操作==="+s);
+                        LogUtils.i("wc","get===这是处理缓存本地操作==="+s);
                     }
                 })
                 .subscribeOn(Schedulers.io())
@@ -78,7 +81,7 @@ public class RetrofitFacety {
                 .doOnNext(new Consumer<String>() {
                     @Override
                     public void accept(@NonNull String s) throws Exception {
-                        LogUtils.i("wc","===这是个什么");
+                        LogUtils.i("wc","post===这是个什么==="+s);
                     }
                 })
                 .subscribeOn(Schedulers.io())

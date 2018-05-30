@@ -14,11 +14,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.my.ChangePwdBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * 重置密码
@@ -34,6 +46,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
     private TextView reset_weitanchuan_text;
     private LinearLayout reset_weitanchuan;
     private int weitanchuan_height;
+    private String news;
 
     @Override
     public MyPresenter<Reset_Activity> initPresenter() {
@@ -96,7 +109,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
             return;
         }
 
-        String news = reset_new.getText().toString().trim();
+        news = reset_new.getText().toString().trim();
         if (TextUtils.isEmpty(news)) {
             Toast.makeText(this, "新登录密码", Toast.LENGTH_SHORT).show();
             return;
@@ -108,30 +121,71 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
             return;
         }
 
-        MyUtils.setToast("请求网络。。。");
+//        MyUtils.setToast("请求网络。。。");
 
-        if (true) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("oldPassword",old);
+        map.put("newPassword", news);
+        map.put("rePassword",queren);
+        //  进度框
+        final AniDialog aniDialog = new AniDialog(Reset_Activity.this, null);
+        aniDialog.show();
+        setChangePwd(map,aniDialog);
 
-            MyUtils.setObjectAnimator_anquan(reset_weitanchuan,
-                    reset_weitanchuan_img,
-                    reset_weitanchuan_text,
-                    weitanchuan_height,
-                    true,"修改成功.2秒跳回...");
-            MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
-                @Override
-                public void chuan() {
-                    finish();
+    }
+
+    private void setChangePwd(final HashMap<String, String> map, final AniDialog aniDialog) {
+
+        myPresenter.postPreContent(APIs.changePwd, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+//                LogUtils.i("jiba","===="+json);
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        aniDialog.dismiss();
+                        ChangePwdBean changePwdBean = new Gson().fromJson(json, ChangePwdBean.class);
+                        // 手机号和密码重新保存
+                        DashApplication.edit.putString(SP_String.SHOUJI, changePwdBean.getData().getUser().getMobile())
+                                .putString(SP_String.PASS,news)
+                                .commit();
+                        MyUtils.setObjectAnimator_anquan(reset_weitanchuan,
+                                reset_weitanchuan_img,
+                                reset_weitanchuan_text,
+                                weitanchuan_height,
+                                true,"修改成功.2秒跳回...");
+                        MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
+                            @Override
+                            public void chuan() {
+                                finish();
+                            }
+                        });
+                    }else if(code.equals("4001")){
+                        setChangePwd(map,aniDialog);
+                    }else{
+                        aniDialog.dismiss();
+                        MyUtils.setObjectAnimator(reset_weitanchuan,
+                                reset_weitanchuan_img,
+                                reset_weitanchuan_text,
+                                weitanchuan_height,
+                                false,"修改失败!");
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
-            });
+            }
 
-        } else {
-            MyUtils.setObjectAnimator(reset_weitanchuan,
-                    reset_weitanchuan_img,
-                    reset_weitanchuan_text,
-                    weitanchuan_height,
-                    false,"修改失败!");
-        }
-
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setObjectAnimator(reset_weitanchuan,
+                        reset_weitanchuan_img,
+                        reset_weitanchuan_text,
+                        weitanchuan_height,
+                        false,"修改失败!");
+            }
+        });
     }
 
     @Override

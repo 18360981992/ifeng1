@@ -18,8 +18,10 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.ADVP_R_Activity;
@@ -32,6 +34,7 @@ import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
@@ -142,6 +145,17 @@ public class MyFragmet extends Fragment {
         if(aBoolean){
             wode_denglu.setVisibility(View.VISIBLE);
             wode_weidenglu.setVisibility(View.GONE);
+            activity.myPresenter.getPreContent(APIs.getUser, new MyInterfaces() {
+                @Override
+                public void chenggong(String json) {
+                    LogUtils.i("jiba","==="+json);
+                }
+
+                @Override
+                public void shibai(String ss) {
+
+                }
+            });
 
             Glide.with(activity)
                     .load(R.drawable.guangao)
@@ -276,6 +290,17 @@ public class MyFragmet extends Fragment {
             }
         });
     }
+
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if(hidden==false&&aBoolean){
+
+        }
+    }
+
+
 
     private void initView(View view) {
         wode_touxiang = (ImageView) view.findViewById(R.id.wode_touxiang);

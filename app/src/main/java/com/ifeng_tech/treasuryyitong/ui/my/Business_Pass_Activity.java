@@ -118,13 +118,9 @@ public class Business_Pass_Activity extends BaseMVPActivity<Business_Pass_Activi
 
         // 手机号应该是在登录成功后保存的数据
         shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
-        // 现在模拟数据
-        shouji = "18360981992";
         String tou = shouji.substring(0, 3);
         String wei = shouji.substring(8, shouji.length());
         business_pass_shoujihao.setText(tou + "*****" + wei);
-
-
 
     }
 

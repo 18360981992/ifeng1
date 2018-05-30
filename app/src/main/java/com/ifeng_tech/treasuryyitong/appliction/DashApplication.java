@@ -4,12 +4,16 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Process;
+import android.provider.Settings;
 import android.util.DisplayMetrics;
+import android.util.Log;
 
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
 import java.text.DecimalFormat;
+
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 /**
@@ -57,7 +61,17 @@ public class DashApplication extends TinkerApplication {
 
     public static SharedPreferences sp;
     public static SharedPreferences.Editor edit;
+    public static String android;
 
+    // 这是为了打印retrofit的log日志
+    //打印retrofit日志
+    public static HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        @Override
+        public void log(String message) {
+            //打印retrofit日志
+            Log.i("RetrofitLog","retrofitBack = "+message);
+        }
+    });
 
     public DashApplication() {
         super(ShareConstants.TINKER_ENABLE_ALL, "com.ifeng_tech.treasuryyitong.appliction.SampleApplicationLike",
@@ -83,6 +97,13 @@ public class DashApplication extends TinkerApplication {
 
         sp = getSharedPreferences("ifeng", MODE_PRIVATE);
         edit = sp.edit();
+
+        //获取安卓手机的唯一标识的方法
+        android = 'A' + Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
+
+
+        // 对log 的初始化
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
 
     }
 

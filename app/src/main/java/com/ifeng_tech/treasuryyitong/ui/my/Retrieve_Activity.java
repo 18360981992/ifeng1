@@ -18,13 +18,23 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.login.SmsCodeBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * 手机验证页面 用于 找回密码 与 更改绑定手机
@@ -63,6 +73,9 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     private EditText retrieve_shoujihao_shuru;
     private int select;
 
+    String mobile="";  // 短信发送对象
+
+    String codeType="6";
     @Override
     public MyPresenter<Retrieve_Activity> initPresenter() {
         if (myPresenter == null) {
@@ -88,19 +101,17 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         if (select == 1) {
             retrieve_shoujihao.setVisibility(View.GONE);
             retrieve_shoujihao_shuru.setVisibility(View.VISIBLE);
-
+            codeType="3";   // 根据select来设定codetype的值
         } else {
-
             retrieve_shoujihao.setVisibility(View.VISIBLE);
             retrieve_shoujihao_shuru.setVisibility(View.GONE);
 
             String shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
-
-            // 模拟一个手机号
-            shouji = "18360981992";
+            mobile=shouji;
             String tou = shouji.substring(0, 3);
             String wei = shouji.substring(8, shouji.length());
             retrieve_shoujihao.setText(tou + "*****" + wei);
+            codeType="6";
         }
 
 
@@ -115,11 +126,55 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         retrieve_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(select==1){
+                    String shuru = retrieve_shoujihao_shuru.getText().toString().trim();
+                    if (TextUtils.isEmpty(shuru)) {
+                        MyUtils.setToast("请输入手机号");
+                        return;
+                    }
+
+                    if(MyUtils.isPhoneNumber(shuru)==false){
+                        MyUtils.setToast("手机号码格式不正确");
+                        return;
+                    }
+                    mobile=shuru ;
+                }
+
                 retrieve_duan_btn.setText("重新发送" + time + "(s)");
                 retrieve_duan_btn.setEnabled(false);
                 h.sendEmptyMessageDelayed(0, 1000);
 
-                MyUtils.setToast("请求网络。。。");
+//                MyUtils.setToast("请求网络。。。");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("mobile",mobile);
+                map.put("codeType",codeType);
+                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                        if(smCodeBean.getCode().equals("2000")){
+//                            MyUtils.setObjectAnimator(retrieve_weitanchuan,
+//                                    retrieve_weitanchuan_img,
+//                                    retrieve_weitanchuan_text,
+//                                    weitanchuan_height,
+//                                    true, "短信发送成功!");
+                            MyUtils.setToast("短信发送成功");
+                        }
+                    }
+
+                    @Override
+                    public void shibai(String ss) {
+//                        MyUtils.setObjectAnimator(retrieve_weitanchuan,
+//                                retrieve_weitanchuan_img,
+//                                retrieve_weitanchuan_text,
+//                                weitanchuan_height,
+//                                false, "短信发送失败!");
+                        MyUtils.setToast("短信发送失败");
+                    }
+                });
+
+
             }
         });
 
@@ -137,6 +192,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        select=0;
         h.removeMessages(0); // 避免内存泄漏
     }
 
@@ -198,28 +254,93 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         }
 
 
-        // TODO validate success, do something
-        MyUtils.setToast("看清select的值，携带参数请求网络。。。");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("mobile",mobile);
+        map.put("smsCode",duan);
+        map.put("codeType",codeType);
+        //  进度框
+        final AniDialog aniDialog = new AniDialog(Retrieve_Activity.this, null);
+        aniDialog.show();
+        setXiaYiBu(map, aniDialog);
 
-        if (true) {
-            if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
-                Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
-                startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-            } else {
-                Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
-                startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+
+        // TODO validate success, do something
+//        MyUtils.setToast("看清select的值，携带参数请求网络。。。");
+
+//        if (true) {
+//            if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
+//                Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
+//                startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
+//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//            } else {
+//                Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
+//                startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
+//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//            }
+//
+//        } else {
+//            MyUtils.setObjectAnimator(retrieve_weitanchuan,
+//                    retrieve_weitanchuan_img,
+//                    retrieve_weitanchuan_text,
+//                    weitanchuan_height,
+//                    false, "修改失败!");
+//        }
+
+    }
+
+    private void setXiaYiBu(final HashMap<String, String> map, final AniDialog aniDialog) {
+        myPresenter.postPreContent(APIs.verifySmsCode, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    String message = (String) jsonObject.get("message");
+
+                    if(code.equals("2000")){
+                        aniDialog.dismiss();
+                        if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
+                            Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
+                            startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
+                        } else {
+                            Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
+                            startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
+                        }
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+
+                    }else if(code.equals("4001")){
+                        setLogin();
+                        setBaseMvpJieKou(new BaseMvpJieKou() {
+                            @Override
+                            public void chuan() {
+                                setXiaYiBu(map,aniDialog);
+                            }
+                        });
+                    }else{
+                        aniDialog.dismiss();
+                        MyUtils.setObjectAnimator(retrieve_weitanchuan,
+                                retrieve_weitanchuan_img,
+                                retrieve_weitanchuan_text,
+                                weitanchuan_height,
+                                false, message);
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
 
-        } else {
-            MyUtils.setObjectAnimator(retrieve_weitanchuan,
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setObjectAnimator(retrieve_weitanchuan,
                     retrieve_weitanchuan_img,
                     retrieve_weitanchuan_text,
                     weitanchuan_height,
-                    false, "修改失败!");
-        }
-
+                    false, "操作失败!");
+            }
+        });
     }
 
     @Override

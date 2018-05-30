@@ -61,10 +61,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
         initView(view);
         initData();
 
-        sp = activity.getSharedPreferences("ifeng", MODE_PRIVATE);
-        edit = sp.edit();
-        // 登录状态
-        aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
+
 
 
         return view;
@@ -74,6 +71,11 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
     @Override
     public void onResume() {
         super.onResume();
+
+        sp = activity.getSharedPreferences("ifeng", MODE_PRIVATE);
+        edit = sp.edit();
+        // 登录状态
+        aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
         if(aBoolean){
             warehouse_fra_weidenglu.setVisibility(View.GONE);
             warehouse_fra_denglu.setVisibility(View.VISIBLE);

@@ -20,24 +20,24 @@
             android:layout_centerInParent="true"
             >
             <ImageView
-                android:layout_width="@dimen/x200"
-                android:layout_height="@dimen/x260"
+                android:layout_width="@dimen/x140"
+                android:layout_height="@dimen/x200"
                 android:background="@drawable/cangku_null"
                 />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="登录后显示该页面"
-                android:textSize="@dimen/x36"
+                android:textSize="@dimen/x24"
                 android:textColor="@color/color_999999"
                 android:layout_marginTop="@dimen/x10"
                 />
             <Button
                 android:id="@+id/warehouse_fra_btn"
                 android:layout_width="@dimen/x360"
-                android:layout_height="@dimen/x100"
+                android:layout_height="@dimen/x70"
                 android:text="确定登录"
-                android:textSize="@dimen/x42"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"

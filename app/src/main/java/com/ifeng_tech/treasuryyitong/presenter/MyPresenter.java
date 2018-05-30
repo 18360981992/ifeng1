@@ -57,6 +57,7 @@ public class MyPresenter<V>  {
      * @param myInterfaces
      */
     public void postPreContent(String url, Map<String,String> map, final MyInterfaces myInterfaces){
+
         myModel.postModContent(url, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {

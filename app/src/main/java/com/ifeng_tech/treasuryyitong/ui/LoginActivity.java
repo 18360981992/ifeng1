@@ -14,11 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.login.LoginBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -59,17 +62,6 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         setContentView(R.layout.activity_login);
         initView();
 
-//        // 自动登录
-//        boolean isLogin = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
-//        if(isLogin){
-//            LogUtils.i("jiba","isLogin==="+isLogin);
-//            Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-//            startActivity(intent);
-//
-//            startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
-//            finish();
-//        }
-
         login_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,8 +84,8 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, Retrieve_Activity.class);
-                intent.putExtra("type",1);  // 用于手机验证页面的下次跳转识别码
-                intent.putExtra("select",1);   //  用于手机验证页面中的手机号的隐藏/显示
+                intent.putExtra("type",1);  // 用于手机验证页面的下次跳转识别码  1==到找回密码
+                intent.putExtra("select",1);   //  用于手机验证页面中的手机号输入框的隐藏/显示  1==有输入框
                 startActivity(intent);
             }
         });
@@ -163,7 +155,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             return;
         }
 
-        String pass = logo_pass.getText().toString().trim();
+        final String pass = logo_pass.getText().toString().trim();
         if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             logo_to_unlock.resetView();  // 将滑动条重置
@@ -176,60 +168,49 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         map.put("password",pass);
         map.put("loginType","0");
 
-
-//        myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
-//            @Override
-//            public void chenggong(String json) {
-////                LogUtils.i("wc","===="+json);
-//                logo_to_unlock.setVisibility(View.GONE);
-//                Intent intent = new Intent(LoginActivity.this, HomePageActivity.class);
-//                startActivity(intent);
-//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-//                finish();
-//
-//                DashApplication.edit.putString("shouji", name)
-//                        .putBoolean("isLogin",true)
-//                        .putString("uid","0")
-//                        .commit();
-//            }
-//
-//            @Override
-//            public void shibai(String ss) {
-//                logo_to_unlock.resetView();  // 将滑动条重置
-//                MyUtils.setObjectAnimator(login_weitanchuan,
-//                        login_weitanchuan_img,
-//                        login_weitanchuan_text,
-//                        weitanchuan_height,
-//                        false, "登录失败!");
-//            }
-//        });
-
         //  进度框
-        AniDialog aniDialog = new AniDialog(LoginActivity.this, null);
+        final AniDialog aniDialog = new AniDialog(LoginActivity.this, null);
         aniDialog.show();
 
+        myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+//                LogUtils.i("wc","===="+json);
+                aniDialog.dismiss();
 
-        if (true) {
-            aniDialog.dismiss();
-            logo_to_unlock.setVisibility(View.GONE);
-            DashApplication.edit.putString(SP_String.SHOUJI, name)
-                    .putBoolean(SP_String.ISLOGIN,true)
-                    .putString(SP_String.UID,"0")
-                    .putInt(SP_String.NEWS_NUM,0)
-                    .commit();
-            startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
+                Gson gson = new Gson();
+                LoginBean loginBean = gson.fromJson(json, LoginBean.class);
 
-            finish();
-        } else {
-            aniDialog.dismiss();
-            logo_to_unlock.resetView();  // 将滑动条重置
-            MyUtils.setObjectAnimator(login_weitanchuan,
-                    login_weitanchuan_img,
-                    login_weitanchuan_text,
-                    weitanchuan_height,
-                    false, "登录失败!");
-        }
+                if(loginBean.getCode().equals("2000")){
+                    finish();
+                    DashApplication.edit.putString(SP_String.SHOUJI, loginBean.getData().getUser().getMobile())
+                            .putString(SP_String.PASS,pass)
+                            .putBoolean(SP_String.ISLOGIN,true)
+                            .putString(SP_String.UID,loginBean.getData().getUser().getId()+"")
+                            .putString(SP_String.USERCODE,loginBean.getData().getUser().getUserCode()+"")
+                            .commit();
+                }else{
 
+                    logo_to_unlock.resetView();  // 将滑动条重置
+                    MyUtils.setObjectAnimator(login_weitanchuan,
+                            login_weitanchuan_img,
+                            login_weitanchuan_text,
+                            weitanchuan_height,
+                            false, loginBean.getMessage());
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                logo_to_unlock.resetView();  // 将滑动条重置
+                MyUtils.setObjectAnimator(login_weitanchuan,
+                        login_weitanchuan_img,
+                        login_weitanchuan_text,
+                        weitanchuan_height,
+                        false, "登录失败!");
+            }
+        });
     }
 
     @Override

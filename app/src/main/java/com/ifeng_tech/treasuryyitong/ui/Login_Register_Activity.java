@@ -17,13 +17,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.login.RegisterBean;
+import com.ifeng_tech.treasuryyitong.bean.login.SmsCodeBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
+
+import java.util.HashMap;
 
 /**
  * 注册
@@ -103,12 +111,48 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         register_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String name = register_name.getText().toString().trim();
+                if (TextUtils.isEmpty(name)) {
+                    MyUtils.setToast("请输入手机号码");
+                    return;
+                }
+                if(MyUtils.isPhoneNumber(name)==false){
+                    MyUtils.setToast("请输入正确的手机号");
+                    return;
+                }
                 register_duan_btn.setText("重新发送" + time + "(s)");
                 register_duan_btn.setEnabled(false);
                 register_duan_btn.setTextColor(getResources().getColor(R.color.name_se));
                 h.sendEmptyMessageDelayed(0, 1000);
 
-                MyUtils.setToast("请求网络。。。");
+//                MyUtils.setToast("请求网络。。。");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("mobile",name);
+                map.put("codeType",""+1);
+                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                        if(smCodeBean.getCode().equals("2000")){
+//                            MyUtils.setObjectAnimator(login_register_weitanchuan,
+//                                    login_register_weitanchuan_img,
+//                                    login_register_weitanchuan_text,
+//                                    weitanchuan_height,
+//                                    true, "短信发送成功！");
+                            MyUtils.setToast("短信发送成功");
+                        }
+                    }
+
+                    @Override
+                    public void shibai(String ss) {
+//                        MyUtils.setObjectAnimator(login_register_weitanchuan,
+//                                login_register_weitanchuan_img,
+//                                login_register_weitanchuan_text,
+//                                weitanchuan_height,
+//                                false, "短信发送失败！");
+                        MyUtils.setToast("短信发送失败");
+                    }
+                });
             }
         });
 
@@ -154,14 +198,14 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
 
     private void submit() {
         // validate
-        String name = register_name.getText().toString().trim();
+        final String name = register_name.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
             Toast.makeText(this, "请输入手机号码", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(MyUtils.isPhoneNumber(name)==false){
-            Toast.makeText(this, "手机号码格式不正确", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入正确的手机号", Toast.LENGTH_SHORT).show();
             return;
         }
         String duan = register_duan.getText().toString().trim();
@@ -170,7 +214,7 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
             return;
         }
 
-        String pass = register_pass.getText().toString().trim();
+        final String pass = register_pass.getText().toString().trim();
         if (TextUtils.isEmpty(pass)) {
             Toast.makeText(this, "请输入密码", Toast.LENGTH_SHORT).show();
             return;
@@ -188,20 +232,48 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         }
         // TODO validate success, do something
 
-        MyUtils.setToast("请求网络。。。");
-        if (true) {
-            Intent intent = getIntent();
-            intent.putExtra("name",name);
-            intent.putExtra("pass",pass);
-            setResult(DashApplication.LOGIN_TO_REGISTER_res,intent);
-            finish();
-        } else {
-            MyUtils.setObjectAnimator(login_register_weitanchuan,
-                    login_register_weitanchuan_img,
-                    login_register_weitanchuan_text,
-                    weitanchuan_height,
-                    false, "注册失败!");
-        }
+//        MyUtils.setToast("请求网络。。。");
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("mobile",name);
+        map.put("smsCode",duan);
+        map.put("password",pass);
+        map.put("rePassword",zaipass);
+
+        //  进度框
+        final AniDialog aniDialog = new AniDialog(Login_Register_Activity.this, null);
+        aniDialog.show();
+
+        myPresenter.postPreContent(APIs.register, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                RegisterBean registerBean = new Gson().fromJson(json, RegisterBean.class);
+                if(registerBean.getCode().equals("2000")){
+                    Intent intent = getIntent();
+                    intent.putExtra("name",name);
+                    intent.putExtra("pass",pass);
+                    setResult(DashApplication.LOGIN_TO_REGISTER_res,intent);
+                    finish();
+                }else{
+                    MyUtils.setObjectAnimator(login_register_weitanchuan,
+                            login_register_weitanchuan_img,
+                            login_register_weitanchuan_text,
+                            weitanchuan_height,
+                            false, registerBean.getMessage());
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setObjectAnimator(login_register_weitanchuan,
+                        login_register_weitanchuan_img,
+                        login_register_weitanchuan_text,
+                        weitanchuan_height,
+                        false, "注册失败!");
+            }
+        });
 
     }
 
