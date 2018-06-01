@@ -1,10 +1,17 @@
 package com.ifeng_tech.treasuryyitong.model;
 
 
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.utils.BaseServer;
 import com.ifeng_tech.treasuryyitong.utils.RetrofitFacety;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -17,19 +24,106 @@ import java.util.Map;
 
 public class MyModel {
 
+    private void setLogin_GET(final String url, final MyInterfaces myInterfaces) {
+        String shouji = DashApplication.sp.getString(SP_String.SHOUJI,"");
+        String pass = DashApplication.sp.getString(SP_String.PASS,"");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userName",shouji);
+        map.put("password",pass);
+        map.put("loginType","0");
+        postModContent(APIs.login, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        getModContent(url, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                myInterfaces.chenggong(json);
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void shibai(String ss) {
+
+            }
+        });
+    }
+
+    private void setLogin_POST(final String url,final Map<String,String> map1, final MyInterfaces myInterfaces) {
+        String shouji = DashApplication.sp.getString(SP_String.SHOUJI,"");
+        String pass = DashApplication.sp.getString(SP_String.PASS,"");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("userName",shouji);
+        map.put("password",pass);
+        map.put("loginType","0");
+        postModContent(APIs.login, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        postModContent(url,map1, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                myInterfaces.chenggong(json);
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void shibai(String ss) {
+
+            }
+        });
+    }
+
     /**
      * model中的get请求方式
      * @param url
      * @param myInterfaces
      */
-    public void getModContent(String url, final MyInterfaces myInterfaces){
+    public void getModContent(final String url, final MyInterfaces myInterfaces){
         RetrofitFacety.get(url)
                 .subscribe(new BaseServer() {
                     @Override
                     public void onSuccess(String json) {
-                        myInterfaces.chenggong(json);
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("4001")){
+                                setLogin_GET(url,myInterfaces);
+                            }else{
+                                myInterfaces.chenggong(json);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-
                     @Override
                     public void onErroy(String ss) {
                         myInterfaces.shibai(ss);
@@ -43,13 +137,23 @@ public class MyModel {
      * @param map
      * @param myInterfaces
      */
-    public void postModContent(String url, Map<String,String> map, final MyInterfaces myInterfaces){
+    public void postModContent(final String url, final Map<String,String> map, final MyInterfaces myInterfaces){
 
         RetrofitFacety.post(url,map)
                 .subscribe(new BaseServer() {
                     @Override
                     public void onSuccess(String json) {
-                        myInterfaces.chenggong(json);
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("4001")){
+                                setLogin_POST(url,map,myInterfaces);
+                            }else{
+                                myInterfaces.chenggong(json);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
 
                     @Override

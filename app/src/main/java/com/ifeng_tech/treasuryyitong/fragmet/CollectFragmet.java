@@ -13,9 +13,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.CollectAdapter;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
+import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
@@ -27,7 +31,11 @@ import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -36,7 +44,7 @@ import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 /**
  * Created by zzt on 2018/4/27.
  * <p>
- * 征集
+ *  一级页面 征集
  */
 
 public class CollectFragmet extends Fragment {
@@ -47,7 +55,7 @@ public class CollectFragmet extends Fragment {
     private XBanner collect_XBanner;
 
     List<Integer> imgs = new ArrayList<>();
-    List<CollectBean> collectlist = new ArrayList<>();
+    List<Collect_Bean.DataBean.ListBean> list = new ArrayList<>();
 
     private LinearLayout collect_null;
     private CollectAdapter collectAdapter;
@@ -71,6 +79,9 @@ public class CollectFragmet extends Fragment {
         return view;
     }
 
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
+
     @Override
     public void onResume() {
         super.onResume();
@@ -78,48 +89,84 @@ public class CollectFragmet extends Fragment {
         edit = sp.edit();
         aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
 
-        if(imgs.size()<=0||collectlist.size()<=0){
-            collect_null.setVisibility(View.VISIBLE);
-            collect_pulltoscroll.setVisibility(View.GONE);
-        }else{
-            collect_null.setVisibility(View.GONE);
-            collect_pulltoscroll.setVisibility(View.VISIBLE);
-
-            collect_XBanner.setData(imgs,null);//设置数据源
-            collect_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
-                @Override
-                public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    ((ImageView) view).setImageResource(imgs.get(position));
+        collect_XBanner.setData(imgs,null);//设置数据源
+        collect_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                ((ImageView) view).setImageResource(imgs.get(position));
 //                    Glide.with(activity).load(imgs.get(position)).into((ImageView) view);
-                }
-            });
-            setCollectAdapter();
-        }
+            }
+        });
+
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",""+10);
+        getFirstConect(map);
 
         collect_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getFirstConect(map);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getNextConect(map);
             }
         });
 
         collect_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
                 if(aBoolean){
-                    if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
-                        Intent intent = new Intent(activity, Collect_Activity.class);
-                        intent.putExtra("CollectBean",collectlist.get(position));
-                        startActivity(intent);
-                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    if(list.get(position).getStage()==4){ // 为4的时候可以点击进入征集页面
+
+                        final int JIN_DU = list.get(position).getAllAmount() - list.get(position).getResidueAmount();
+
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put("goodsId",list.get(position).getGoodsId()+"");
+                        activity.myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                                if(warehouseBean.getCode().equals("2000")){
+                                    if(warehouseBean.getData().getList().size()>0){
+                                        WarehouseBean.DataBean.ListBean listBean = warehouseBean.getData().getList().get(0);
+                                        if(listBean.getAvailableQty()>=JIN_DU){
+                                            Intent intent = new Intent(activity, Collect_Activity.class);
+                                            intent.putExtra("CollectBean",list.get(position));
+                                            intent.putExtra("MAX_NUM",JIN_DU);
+                                            startActivity(intent);
+                                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                        }else{
+                                            Intent intent = new Intent(activity, Collect_Activity.class);
+                                            intent.putExtra("CollectBean",list.get(position));
+                                            intent.putExtra("MAX_NUM",listBean.getAvailableQty());
+                                            startActivity(intent);
+                                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                        }
+                                    }else{
+                                        MyUtils.setToast("您的仓库中暂无该商品！");
+                                    }
+                                }else{
+                                    MyUtils.setToast(warehouseBean.getMessage());
+                                }
+
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+                                MyUtils.setToast(ss);
+                            }
+                        });
+
                     }else{
                         MyUtils.setToast("该商品还未开始征集。。。");
                     }
@@ -134,42 +181,106 @@ public class CollectFragmet extends Fragment {
 
     }
 
+
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map) {
+        activity.myPresenter.postPreContent(APIs.getCollectList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Collect_Bean Collect_Bean = new Gson().fromJson(json, Collect_Bean.class);
+                        List<Collect_Bean.DataBean.ListBean> zilist = Collect_Bean.getData().getList();
+                        list.clear();
+                        if(zilist.size()>0){
+                            for (Collect_Bean.DataBean.ListBean bean: zilist) {
+                                if(bean.getStage()==4||bean.getStage()==3){
+                                    list.add(bean);
+                                }
+                            }
+                        }
+                        // 初始化数据 与适配器
+                        setCollectAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        activity.myPresenter.postPreContent(APIs.getCollectList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Collect_Bean Collect_Bean = new Gson().fromJson(json, Collect_Bean.class);
+                        List<Collect_Bean.DataBean.ListBean> zilist = Collect_Bean.getData().getList();
+                        if(zilist.size()>0){
+                            for (Collect_Bean.DataBean.ListBean bean: zilist) {
+                                if(bean.getStage()==4||bean.getStage()==3){
+                                    list.add(bean);
+                                }
+                            }
+                        }
+                        // 初始化数据 与适配器
+                        setCollectAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+
     /**
      *  初始化适配器
      */
     private void setCollectAdapter() {
-        if(collectAdapter==null){
-            collectAdapter = new CollectAdapter(activity, collectlist);
-            collect_MyListView.setAdapter(collectAdapter);
+        if(list.size()>0){
+            if (collectAdapter == null) {
+                collectAdapter = new CollectAdapter(activity, list);
+                collect_MyListView.setAdapter(collectAdapter);
+            } else {
+                collectAdapter.notifyDataSetChanged();
+            }
         }else{
-            collectAdapter.notifyDataSetChanged();
+            MyUtils.setToast("暂无数据");
         }
-
-    }
-
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        collect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = collect_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
     }
 
 
-    private void initData() {
-
-        imgs.add(R.mipmap.band1);
-        imgs.add(R.mipmap.band2);
-        // 征集
-        for (int i = 0; i < 15; i++) {
-            if(i%2==0)
-                collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",0));
-            else
-                collectlist.add(new CollectBean(R.drawable.guangao,"世博四连体",689715675,"福利特寄卖商城","托管进度10/20",1));
-        }
-
-    }
 
     private void initView(View view) {
         collect_MyListView = (MyListView) view.findViewById(R.id.collect_MyListView);
@@ -180,6 +291,17 @@ public class CollectFragmet extends Fragment {
         // 设置刷新
         initRefreshListView();
 
-        initData();
+        imgs.add(R.mipmap.band1);
+        imgs.add(R.mipmap.band2);
+
+    }
+
+    private void initRefreshListView() {
+        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
+        collect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
+        ILoadingLayout Labels = collect_pulltoscroll.getLoadingLayoutProxy(true, false);
+        Labels.setPullLabel("下拉刷新...");
+        Labels.setRefreshingLabel("正在刷新...");
+        Labels.setReleaseLabel("放开刷新...");
     }
 }

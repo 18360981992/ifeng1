@@ -6,10 +6,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Incoming_Test_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.Incoming_bean;
+import com.ifeng_tech.treasuryyitong.bean.my.My_Collect_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
@@ -17,7 +20,11 @@ import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,11 +34,12 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
 
     private RelativeLayout mycollect_Fan;
 
-    List<Incoming_bean> incominglist = new ArrayList<>();
+    List<My_Collect_Bean.DataBean.ListBean> list = new ArrayList<>();
     private Incoming_Test_Adapter incoming_test_adapter;
     private LinearLayout mycollect_null;
     private MyListView mycollect_MyListView;
     private PullToRefreshScrollView mycollect_pulltoscroll;
+
 
     @Override
     public MyPresenter<MyCollectActivity> initPresenter() {
@@ -46,7 +54,6 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_collect);
         initView();
-        initData();
 
         mycollect_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,45 +63,118 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
         });
 
     }
-
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
     @Override
     protected void onResume() {
         super.onResume();
-
-        if (incominglist.size() > 0) {
-            mycollect_null.setVisibility(View.GONE);
-            mycollect_pulltoscroll.setVisibility(View.VISIBLE);
-            setAdapter();
-        } else {
-            mycollect_null.setVisibility(View.VISIBLE);
-            mycollect_pulltoscroll.setVisibility(View.GONE);
-        }
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",""+10);
+        getFirstConect(map);
 
         // 下拉刷新  加载
         mycollect_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getFirstConect(map);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getNextConect(map);
             }
         });
 
     }
 
+    // 进入页面的首次请求
+    private void getFirstConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getUserCollectList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        My_Collect_Bean my_collect_bean = new Gson().fromJson(json, My_Collect_Bean.class);
+                        List<My_Collect_Bean.DataBean.ListBean> zilist = my_collect_bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        setAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+
+    // 上拉加载更多的请求
+    private void getNextConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getUserCollectList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        My_Collect_Bean my_collect_bean = new Gson().fromJson(json, My_Collect_Bean.class);
+                        List<My_Collect_Bean.DataBean.ListBean> zilist = my_collect_bean.getData().getList();
+                        list.addAll(zilist);
+                        setAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                mycollect_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
 
     public void setAdapter() {
-        if (incoming_test_adapter == null) {
-            incoming_test_adapter = new Incoming_Test_Adapter(MyCollectActivity.this, incominglist);
-            mycollect_MyListView.setAdapter(incoming_test_adapter);
-        } else {
-            incoming_test_adapter.notifyDataSetChanged();
+        if (list.size() > 0) {
+            mycollect_null.setVisibility(View.GONE);
+            mycollect_pulltoscroll.setVisibility(View.VISIBLE);
+            if (incoming_test_adapter == null) {
+                incoming_test_adapter = new Incoming_Test_Adapter(MyCollectActivity.this, list);
+                mycollect_MyListView.setAdapter(incoming_test_adapter);
+            } else {
+                incoming_test_adapter.notifyDataSetChanged();
+            }
+        }else{
+            mycollect_null.setVisibility(View.VISIBLE);
+            mycollect_pulltoscroll.setVisibility(View.GONE);
         }
     }
 
@@ -116,13 +196,6 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
         Labels.setReleaseLabel("放开刷新...");
     }
 
-
-
-    public void initData() {
-        for (int i = 0; i < 20; i++) {
-            incominglist.add(new Incoming_bean("福利特", "655286224", "世博四连体", 20, "征集中", "2018-05-09 09:52:36"));
-        }
-    }
 
     @Override
     public void finish() {

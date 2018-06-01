@@ -20,7 +20,7 @@ import android.widget.Toast;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
@@ -29,7 +29,7 @@ import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
 
 /**
  *
- *  征集
+ *  征集  表单填写
  *
  */
 public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresenter<Collect_Activity>> {
@@ -50,6 +50,7 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
     private TextView collect_ac_weitanchuan_text;
     private int weitanchuan_height;
     private EditText collect_ac_yewu_pass;
+    private double upsideFee;   // 上盘费的单价
 
     @Override
     public MyPresenter<Collect_Activity> initPresenter() {
@@ -70,13 +71,22 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
 
         // 模拟 控制页面回显
         Intent intent = getIntent();
-        CollectBean collectBean = (CollectBean) intent.getSerializableExtra("CollectBean");
+        Collect_Bean.DataBean.ListBean collectBean = (Collect_Bean.DataBean.ListBean) intent.getSerializableExtra("CollectBean");
+        int max_num = intent.getIntExtra("MAX_NUM", 0);  // 获取最大转赠数量
+
         if(collectBean!=null){
-            collect_ac_pingtai.setText("福利特"); collect_ac_pingtai.setSelection(collect_ac_pingtai.length());
-            collect_ac_cword.setText("622422458");
-            collect_ac_name.setText(collectBean.getName());
-            collect_ac_shuliang_zuida.setText("最大转赠数量:"+1200);
-            collect_ac_daijia.setText("￥"+DashApplication.decimalFormat.format(120));
+            if(collectBean.getAgencyName().equals("")||collectBean.getAgencyName()==null){
+                collect_ac_pingtai.setText("福利特");
+            }else{
+                collect_ac_pingtai.setText(collectBean.getAgencyName());
+            }
+             collect_ac_pingtai.setSelection(collect_ac_pingtai.length());
+
+            collect_ac_cword.setText(collectBean.getGoodsCode());
+            collect_ac_name.setText(collectBean.getGoodsName());
+            collect_ac_shuliang_zuida.setText("最大转赠数量:"+max_num);
+            upsideFee = collectBean.getUpsideFee();    // 上盘费的单价
+            collect_ac_daijia.setText("￥"+DashApplication.decimalFormat.format(upsideFee));
         }
 
         // 点击返回
@@ -106,7 +116,7 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
                     if(integer<=0){
                         collect_ac_daijia.setText("￥0.00");
                     }else{
-                        String format = DashApplication.decimalFormat.format(integer * 120);// 这里的单价是从bean类中直接获取
+                        String format = DashApplication.decimalFormat.format(integer * upsideFee);// 这里的单价是从bean类中直接获取
                         collect_ac_daijia.setText("￥"+format);
                     }
                 }else{

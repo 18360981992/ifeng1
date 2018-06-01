@@ -170,7 +170,7 @@
                     android:id="@+id/donation_zuidae"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最大转赠数量:1200"
+                    android:text="最大转赠数量:0"
                     android:textSize="@dimen/x20"
                     android:textColor="#E93438"
                     android:layout_marginTop="@dimen/x4"

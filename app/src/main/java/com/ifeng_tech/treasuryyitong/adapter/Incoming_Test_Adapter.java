@@ -7,9 +7,14 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.Incoming_bean;
+import com.ifeng_tech.treasuryyitong.bean.my.My_Collect_Bean;
+import com.ifeng_tech.treasuryyitong.utils.ECollectStage;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.ifeng_tech.treasuryyitong.R.id.incoming_word;
 
 /**
  * Created by zzt on 2018/5/10.
@@ -18,9 +23,9 @@ import java.util.List;
 public class Incoming_Test_Adapter extends BaseAdapter{
 
     Context context;
-    List<Incoming_bean> incominglist;
+    List<My_Collect_Bean.DataBean.ListBean> incominglist;
 
-    public Incoming_Test_Adapter(Context context, List<Incoming_bean> incominglist) {
+    public Incoming_Test_Adapter(Context context, List<My_Collect_Bean.DataBean.ListBean> incominglist) {
         this.context = context;
         this.incominglist = incominglist;
     }
@@ -46,18 +51,35 @@ public class Incoming_Test_Adapter extends BaseAdapter{
             convertView=View.inflate(context,R.layout.incoming_xrecycle_item,null);
         }
         TextView incoming_trade_name = convertView.findViewById(R.id.incoming_trade_name);
-        TextView incoming_word = convertView.findViewById(R.id.incoming_word);
+        TextView incoming_cword = convertView.findViewById(incoming_word);
         TextView incoming_shopping_name = convertView.findViewById(R.id.incoming_shopping_name);
         TextView incoming_num = convertView.findViewById(R.id.incoming_num);
         TextView incoming_type = convertView.findViewById(R.id.incoming_type);
         TextView incoming_time = convertView.findViewById(R.id.incoming_time);
 
-        incoming_trade_name.setText(incominglist.get(position).getTrade_name());
-        incoming_word.setText(incominglist.get(position).getWord());
-        incoming_shopping_name.setText(incominglist.get(position).getShopping_name());
-        incoming_num.setText(incominglist.get(position).getNum()+"");
-        incoming_type.setText(incominglist.get(position).getType());
-        incoming_time.setText(incominglist.get(position).getTime());
+        if(incominglist.get(position).getAgencyName().equals("")||incominglist.get(position).getAgencyName()==null){
+            incoming_trade_name.setText("福利特");
+        }else{
+            incoming_trade_name.setText(incominglist.get(position).getAgencyName());
+        }
+
+        if(incominglist.get(position).getGoodsName().length()>10){
+            String name = incominglist.get(position).getGoodsName().substring(0, 10);
+            incoming_shopping_name.setText(name+"...");
+        }else{
+            incoming_shopping_name.setText(incominglist.get(position).getGoodsName());
+        }
+
+        incoming_cword.setText(incominglist.get(position).getGoodsCode());
+
+        incoming_num.setText(incominglist.get(position).getAmount()+"");
+
+        incoming_type.setText(ECollectStage.getName(incominglist.get(position).getStatus()));  // 根据状态显示ui
+
+        Date date = new Date(incominglist.get(position).getAddTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        incoming_time.setText(simpleDateFormat.format(date));
 
         return convertView;
     }

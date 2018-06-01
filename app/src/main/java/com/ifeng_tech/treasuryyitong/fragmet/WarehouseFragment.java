@@ -14,9 +14,12 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Warehouse_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
@@ -27,7 +30,11 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -35,6 +42,8 @@ import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 /**
  * Created by zzt on 2018/5/29.
+ *
+ *  一级页面的仓库
  */
 
 public class WarehouseFragment extends Fragment implements View.OnClickListener {
@@ -49,7 +58,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
     private SharedPreferences.Editor edit;
     private boolean aBoolean;
 
-    List<WarehouseBean> list = new ArrayList<WarehouseBean>();
+    List<WarehouseBean.DataBean.ListBean> list = new ArrayList<WarehouseBean.DataBean.ListBean>();
     private Warehouse_Adapter warehouse_adapter;
     @Nullable
     @Override
@@ -57,17 +66,13 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
 
         View view = inflater.inflate(R.layout.warehouse_fragmet, container, false);
         activity = (HomePageActivity) getActivity();
-
         initView(view);
-        initData();
-
-
-
 
         return view;
     }
 
-
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
     @Override
     public void onResume() {
         super.onResume();
@@ -79,26 +84,28 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
         if(aBoolean){
             warehouse_fra_weidenglu.setVisibility(View.GONE);
             warehouse_fra_denglu.setVisibility(View.VISIBLE);
-            if (list.size() > 0) {
-                warehouse_fra_null.setVisibility(View.GONE);
-                warehouse_fra_pulltoscroll.setVisibility(View.VISIBLE);
-                // 初始化数据 与适配器
-                setAdapter();
-            } else {
-                warehouse_fra_null.setVisibility(View.VISIBLE);
-                warehouse_fra_pulltoscroll.setVisibility(View.GONE);
-            }
+
+            pageNum=1;
+            map.put("pageNum",pageNum+"");
+            map.put("pageSize",""+10);
+            getFirstConect(map);
 
             warehouse_fra_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
                 @Override
                 public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                    MyUtils.setToast("下拉了。。。");
-                    warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                    MyUtils.setToast("下拉了。。。");
+                    pageNum=1;
+                    map.put("pageNum",pageNum+"");
+                    map.put("pageSize",""+10);
+                    getFirstConect(map);
                 }
 
                 @Override
                 public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                    warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                    pageNum++;
+                    map.put("pageNum",pageNum+"");
+                    map.put("pageSize",""+10);
+                    getNextConect(map);
                 }
             });
 
@@ -119,12 +126,91 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
 
     }
 
-    public void setAdapter() {
-        if (warehouse_adapter == null) {
-            warehouse_adapter = new Warehouse_Adapter(activity, list);
-            warehouse_fra_MyListView.setAdapter(warehouse_adapter);
-        } else {
-            warehouse_adapter.notifyDataSetChanged();
+
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map) {
+        activity.myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+
+                        // 初始化数据 与适配器
+                        setWarehouseAdapter();
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        activity.myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setWarehouseAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                warehouse_fra_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 初始化适配器
+    public void setWarehouseAdapter() {
+        if (list.size() > 0) {
+            warehouse_fra_null.setVisibility(View.GONE);
+            warehouse_fra_pulltoscroll.setVisibility(View.VISIBLE);
+
+            if (warehouse_adapter == null) {
+                warehouse_adapter = new Warehouse_Adapter(activity, list);
+                warehouse_fra_MyListView.setAdapter(warehouse_adapter);
+            } else {
+                warehouse_adapter.notifyDataSetChanged();
+            }
+        }else {
+            warehouse_fra_null.setVisibility(View.VISIBLE);
+            warehouse_fra_pulltoscroll.setVisibility(View.GONE);
         }
     }
 
@@ -159,12 +245,6 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
         Labels.setPullLabel("下拉刷新...");
         Labels.setRefreshingLabel("正在刷新...");
         Labels.setReleaseLabel("放开刷新...");
-    }
-
-    public void initData() {
-        for (int i = 0; i < 20; i++) {
-            list.add(new WarehouseBean("655286224", R.drawable.guangao, "世博四连体", 2000, 1000));
-        }
     }
 
 

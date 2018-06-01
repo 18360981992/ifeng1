@@ -43,14 +43,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x140"
+        android:layout_height="@dimen/x160"
         android:layout_marginTop="@dimen/x16"
         android:layout_marginBottom="@dimen/x16"
         >
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="1.7"
+            android:layout_weight="4.5"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:gravity="center_vertical"
@@ -75,6 +75,7 @@
                     android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x32"
+                    android:lineSpacingExtra="@dimen/x2"
                     />
 
             </LinearLayout>
@@ -147,18 +148,19 @@
                 android:textColor="@color/zhuse"
                 android:textSize="@dimen/x20"
                 android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/x18"
                 />
-            <TextView
-                android:id="@+id/my_collocation_detail_zong_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2018.05.17 / 2019.05.26"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/color_999999"
-                android:layout_marginRight="@dimen/x20"
-                android:layout_marginTop="@dimen/x100"
-                android:layout_alignParentRight="true"
-                />
+            <!--<TextView-->
+                <!--android:id="@+id/my_collocation_detail_zong_time"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="2018.05.17 / 2019.05.26"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--android:textColor="@color/color_999999"-->
+                <!--android:layout_marginRight="@dimen/x20"-->
+                <!--android:layout_marginTop="@dimen/x100"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--/>-->
         </RelativeLayout>
     </LinearLayout>
 
@@ -263,7 +265,7 @@
                 android:id="@+id/my_collocation_detail_kaishi_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="100"
+                android:text="2018.06.25"
                 android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x110"

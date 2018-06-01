@@ -55,7 +55,7 @@
             android:id="@+id/collect_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="托管进度10/20"
+            android:text="征集进度10/20"
             android:textSize="@dimen/x22"
             android:textColor="@color/zhuse_ziti"
             android:layout_marginTop="@dimen/x6"

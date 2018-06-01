@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.bean.GoodsListByCode_Bean;
 
 import java.util.List;
 
@@ -15,9 +16,9 @@ import java.util.List;
 
 public class MyPopList_Atapter extends android.widget.BaseAdapter{
     Context context;
-    List<String> list;
+    List<GoodsListByCode_Bean.DataBean.ListBean> list;
 
-    public MyPopList_Atapter(Context context, List<String> list) {
+    public MyPopList_Atapter(Context context, List<GoodsListByCode_Bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -43,7 +44,7 @@ public class MyPopList_Atapter extends android.widget.BaseAdapter{
             convertView=View.inflate(context, R.layout.pop_list_item,null);
         }
         TextView pop_list_text = convertView.findViewById(R.id.pop_list_text);
-        pop_list_text.setText(list.get(position));
+        pop_list_text.setText(list.get(position).getCommodityCode());
 
         return convertView;
     }

@@ -7,8 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 
 import java.util.List;
 
@@ -18,9 +19,9 @@ import java.util.List;
 
 public class CollectAdapter extends BaseAdapter{
     Context context;
-    List<CollectBean> list;
+    List<Collect_Bean.DataBean.ListBean> list;
 
-    public CollectAdapter(Context context, List<CollectBean> list) {
+    public CollectAdapter(Context context, List<Collect_Bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -53,13 +54,30 @@ public class CollectAdapter extends BaseAdapter{
         TextView collect_text = view.findViewById(R.id.collect_text);
         ImageView collect_imgflag = view.findViewById(R.id.collect_imgflag);
 
-        collect_img.setImageResource(list.get(position).getImg());
-        collect_name.setText(list.get(position).getName());
-        collect_cword.setText(""+list.get(position).getCword());
 
-        collect_title.setText(list.get(position).getTitle());
-        collect_text.setText(list.get(position).getText());
-        if(list.get(position).getType()==0){ // 0==等待 1==未开始
+        if(list.get(position).getGoodsImg().equals("")||list.get(position).getGoodsImg()==null){
+            collect_img.setImageResource(R.drawable.guangao);
+        }else{
+            Glide.with(context).load(list.get(position).getGoodsImg()).into(collect_img);
+        }
+
+        if(list.get(position).getGoodsName().length()>10){
+            String name = list.get(position).getGoodsName().substring(0, 10);
+            collect_name.setText(name+"...");
+        }else{
+            collect_name.setText(list.get(position).getGoodsName());
+        }
+
+        collect_cword.setText(""+list.get(position).getGoodsCode());
+
+        if(list.get(position).getAgencyName().equals("")||list.get(position).getAgencyName()==null){
+            collect_title.setText("福利特寄卖平台");
+        }else{
+            collect_title.setText(list.get(position).getAgencyName());
+        }
+
+        collect_text.setText(list.get(position).getResidueAmount()+"/"+list.get(position).getAllAmount());
+        if(list.get(position).getStage()==4){ //  3 "征集未开始" 4 "征集中"
             collect_imgflag.setImageResource(R.drawable.dengdai);
         }else{
             collect_imgflag.setImageResource(R.drawable.kaishi);

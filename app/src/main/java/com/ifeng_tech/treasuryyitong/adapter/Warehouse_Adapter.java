@@ -19,9 +19,9 @@ import java.util.List;
 public class Warehouse_Adapter extends BaseAdapter{
 
     Context context;
-    List<WarehouseBean> warehouselist;
+    List<WarehouseBean.DataBean.ListBean> warehouselist;
 
-    public Warehouse_Adapter(Context context, List<WarehouseBean> warehouselist) {
+    public Warehouse_Adapter(Context context, List<WarehouseBean.DataBean.ListBean> warehouselist) {
         this.context = context;
         this.warehouselist = warehouselist;
     }
@@ -58,10 +58,15 @@ public class Warehouse_Adapter extends BaseAdapter{
         warehouse_keyong_num = convertView.findViewById(R.id.warehouse_keyong_num);
         warehouse_dongjie_num = convertView.findViewById(R.id.warehouse_dongjie_num);
 
+        if(warehouselist.get(position).getGoodsName().length()>10){
+            String name = warehouselist.get(position).getGoodsName().substring(0, 10);
+            warehouse_shopping_name.setText(name+"...");
+        }else{
+            warehouse_shopping_name.setText(warehouselist.get(position).getGoodsName());
+        }
 
-        warehouse_shopping_name.setText(warehouselist.get(position).getShopping_name());
-        warehouse_keyong_num.setText(""+warehouselist.get(position).getKeyong_num());
-        warehouse_dongjie_num.setText(""+warehouselist.get(position).getDongjie_num());
+        warehouse_keyong_num.setText(""+warehouselist.get(position).getAvailableQty());
+        warehouse_dongjie_num.setText(""+warehouselist.get(position).getFrozenQty());
 
         return convertView;
     }

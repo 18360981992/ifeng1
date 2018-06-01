@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by zzt on 2018/4/27.
  *
- * 征集bean
+ *  征集bean
  */
 
 public class CollectBean implements Serializable{

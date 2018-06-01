@@ -36,7 +36,7 @@ public class RetrofitFacety {
     //使全局就一个OKHttpClient对象
     public static OkHttpClient okHttpClient = new OkHttpClient.Builder()
             .addInterceptor(DashApplication.loggingInterceptor)
-            .cookieJar(new CookieManger(DashApplication.getAppContext()))
+            .cookieJar(new CookieManger(DashApplication.getAppContext()))  //传递cookie
             .connectTimeout(20, TimeUnit.SECONDS)
             .readTimeout(20, TimeUnit.SECONDS)
             .writeTimeout(20, TimeUnit.SECONDS)

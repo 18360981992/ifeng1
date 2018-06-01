@@ -9,10 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Warehouse_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
@@ -20,7 +23,11 @@ import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,11 +39,12 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
     private RelativeLayout my_warehouse_Fan;
     private ImageView my_warehouse_zhangdan;
 
-    List<WarehouseBean> list = new ArrayList<WarehouseBean>();
+    List<WarehouseBean.DataBean.ListBean> list = new ArrayList<WarehouseBean.DataBean.ListBean>();
     private Warehouse_Adapter warehouse_adapter;
     private LinearLayout my_warehouse_null;
     private MyListView my_warehouse_MyListView;
     private PullToRefreshScrollView my_warehouse_pulltoscroll;
+    private WarehouseBean warehouseBean;
 
     @Override
     public MyPresenter<My_Warehouse_Activity> initPresenter() {
@@ -68,32 +76,33 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
 
     }
 
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
     @Override
     protected void onResume() {
         super.onResume();
 
-        if (list.size() > 0) {
-            my_warehouse_null.setVisibility(View.GONE);
-            my_warehouse_pulltoscroll.setVisibility(View.VISIBLE);
-            // 初始化数据 与适配器
-            setAdapter();
-        } else {
-            my_warehouse_null.setVisibility(View.VISIBLE);
-            my_warehouse_pulltoscroll.setVisibility(View.GONE);
-        }
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",""+10);
+        getFirstConect(map);
 
         my_warehouse_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getFirstConect(map);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getNextConect(map);
             }
         });
 
@@ -109,12 +118,90 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
 
     }
 
-    public void setAdapter() {
-        if (warehouse_adapter == null) {
-            warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity.this, list);
-            my_warehouse_MyListView.setAdapter(warehouse_adapter);
-        } else {
-            warehouse_adapter.notifyDataSetChanged();
+
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+
+                        // 初始化数据 与适配器
+                        setWarehouseAdapter();
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setWarehouseAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                my_warehouse_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 初始化数据 与适配器
+    public void setWarehouseAdapter() {
+        if (list.size() > 0) {
+            my_warehouse_null.setVisibility(View.GONE);
+            my_warehouse_pulltoscroll.setVisibility(View.VISIBLE);
+            if (warehouse_adapter == null) {
+                warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity.this, list);
+                my_warehouse_MyListView.setAdapter(warehouse_adapter);
+            } else {
+                warehouse_adapter.notifyDataSetChanged();
+            }
+        }else {
+            my_warehouse_null.setVisibility(View.VISIBLE);
+            my_warehouse_pulltoscroll.setVisibility(View.GONE);
         }
     }
 
@@ -133,9 +220,6 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         viewById.requestFocus();
 
         initRefreshListView();
-
-        initData();
-
     }
 
     private void initRefreshListView() {
@@ -147,12 +231,6 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         Labels.setReleaseLabel("放开刷新...");
     }
 
-    public void initData() {
-
-        for (int i = 0; i < 20; i++) {
-            list.add(new WarehouseBean("655286224", R.drawable.guangao, "世博四连体", 2000, 1000));
-        }
-    }
 
     @Override
     public void finish() {

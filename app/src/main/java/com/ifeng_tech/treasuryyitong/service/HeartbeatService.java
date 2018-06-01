@@ -9,7 +9,6 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import java.util.Date;
@@ -81,7 +80,7 @@ public class HeartbeatService extends Service {
 
     private  void getXinTiao() {
 
-        LogUtils.i("jiba","====="+time);
+//        LogUtils.i("jiba","====="+time);
 
         if(5== DashApplication.sp.getInt(SP_String.NEWS_NUM,0)){ // 如果网络获取到的数据和本地保存的相同，继续下次的心跳
 

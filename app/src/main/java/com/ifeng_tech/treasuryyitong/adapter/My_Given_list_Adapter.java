@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
+import com.ifeng_tech.treasuryyitong.utils.EGiven_ListStage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,10 +21,10 @@ import java.util.List;
 
 public class My_Given_list_Adapter extends BaseAdapter {
     Context context;
-    List<Give_List_Bean> list;
+    List<Give_List_Bean.DataBean.ListBean> list;
 
     int type;
-    public My_Given_list_Adapter(Context context, List<Give_List_Bean> list,int type) {
+    public My_Given_list_Adapter(Context context, List<Give_List_Bean.DataBean.ListBean> list,int type) {
         this.context = context;
         this.list = list;
         this.type=type;
@@ -56,22 +57,23 @@ public class My_Given_list_Adapter extends BaseAdapter {
         TextView my_given_list_time = convertView.findViewById(R.id.my_given_list_time);
         TextView my_given_list_zhuanru_text = convertView.findViewById(R.id.my_given_list_zhuanru_text);
 
-        my_given_list_cword.setText(""+list.get(position).getCword());
-        my_given_list_name.setText(list.get(position).getName());
-        my_given_list_num.setText(list.get(position).getNum()+"");
-        my_given_list_dfuid.setText("￥"+ DashApplication.decimalFormat.format(list.get(position).getDfuid()));
-        if(type==0){
-            my_given_list_zhuanru_text.setText("等待确认");
+        my_given_list_cword.setText(""+list.get(position).getGoodsCode());
+        if(list.get(position).getGoodsName().length()>10){
+            String name = list.get(position).getGoodsName().substring(0, 10);
+            my_given_list_name.setText(name+"...");
         }else{
-            my_given_list_zhuanru_text.setText("等待确认");
+            my_given_list_name.setText(list.get(position).getGoodsName());
         }
 
+        my_given_list_num.setText(list.get(position).getAmount()+"");
 
-        Date date = new Date(list.get(position).getTime());
+        double price=list.get(position).getFee()*list.get(position).getProfit();
+        my_given_list_dfuid.setText("￥"+ DashApplication.decimalFormat.format(price));
+        my_given_list_zhuanru_text.setText(EGiven_ListStage.getName(list.get(position).getStatus()));
+
+        Date date = new Date(list.get(position).getAddTime());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         my_given_list_time.setText(simpleDateFormat.format(date));
-
-
 
         return convertView;
     }

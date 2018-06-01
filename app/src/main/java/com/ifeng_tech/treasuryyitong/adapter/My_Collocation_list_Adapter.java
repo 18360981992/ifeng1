@@ -8,21 +8,21 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.bean.Collocation_list_Bean;
+import com.ifeng_tech.treasuryyitong.bean.my.My_Colloction_Bean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by zzt on 2018/5/18.
+ *
+ * 我的托管 适配器
  */
 
 public class My_Collocation_list_Adapter extends BaseAdapter{
     Context context;
-    List<Collocation_list_Bean> list;
+    List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list;
 
-    public My_Collocation_list_Adapter(Context context, List<Collocation_list_Bean> list) {
+    public My_Collocation_list_Adapter(Context context, List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -56,21 +56,34 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
         TextView my_collocation_list_time = convertView.findViewById(R.id.my_collocation_list_time);
         TextView my_collocation_list_type = convertView.findViewById(R.id.my_collocation_list_type);
 
-        my_collocation_list_danhao.setText(list.get(position).getDword());
-        my_collocation_list_cword.setText(""+list.get(position).getCword());
-        my_collocation_list_name.setText(list.get(position).getName());
-        my_collocation_list_num.setText(""+list.get(position).getNum());
-        my_collocation_list_price.setText("￥"+ DashApplication.decimalFormat.format(list.get(position).getPrice()));
+        my_collocation_list_danhao.setText(list.get(position).getOrderNo());
+        my_collocation_list_cword.setText(""+list.get(position).getGoodsCode());
 
-        Date date = new Date(list.get(position).getTime());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
-        my_collocation_list_time.setText(simpleDateFormat.format(date));
-
-        if(list.get(position).getType()==0){
-            my_collocation_list_type.setText("已过期");
+        if(list.get(position).getGoodsName().length()>10){
+            String name = list.get(position).getGoodsName().substring(0, 10);
+            my_collocation_list_name.setText(name+"...");
         }else{
-            my_collocation_list_type.setText("未过期");
+            my_collocation_list_name.setText(list.get(position).getGoodsName());
         }
+
+        my_collocation_list_num.setText(""+list.get(position).getNumber());
+
+        double price=list.get(position).getNumber()*list.get(position).getAppraisalFee();
+        my_collocation_list_price.setText("￥"+ DashApplication.decimalFormat.format(price));
+
+
+        if(list.get(position).getPmORam().equals("am")){
+            my_collocation_list_time.setText(list.get(position).getTrusteeTime()+" 上午");
+        }else{
+            my_collocation_list_time.setText(list.get(position).getTrusteeTime()+" 下午");
+        }
+
+
+//        if(list.get(position).getType()==0){
+//            my_collocation_list_type.setText("已过期");
+//        }else{
+//            my_collocation_list_type.setText("未过期");
+//        }
 
         return convertView;
     }

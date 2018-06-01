@@ -85,8 +85,8 @@ public class Incoming_Test_Activity extends BaseMVPActivity<Incoming_Test_Activi
 
     public void setAdapter() {
         if (incoming_test_adapter == null) {
-            incoming_test_adapter = new Incoming_Test_Adapter(Incoming_Test_Activity.this, incominglist);
-            incoming_MyListView.setAdapter(incoming_test_adapter);
+//            incoming_test_adapter = new Incoming_Test_Adapter(Incoming_Test_Activity.this, incominglist);
+//            incoming_MyListView.setAdapter(incoming_test_adapter);
         } else {
             incoming_test_adapter.notifyDataSetChanged();
         }

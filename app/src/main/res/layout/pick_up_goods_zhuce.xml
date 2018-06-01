@@ -140,7 +140,7 @@
             android:id="@+id/up_goods_zhuce_jiaoge_jianshu"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x70"
-            android:hint="您的最大交割件数1000"
+            android:hint="您的最大交割件数0"
             android:textSize="@dimen/x24"
             android:textColor="@color/name_se"
             android:layout_marginLeft="@dimen/x40"

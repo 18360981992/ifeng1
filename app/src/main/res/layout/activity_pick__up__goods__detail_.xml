@@ -364,6 +364,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/pick_up_goods_detail_anniu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/x16"
@@ -378,20 +379,21 @@
                 android:textSize="@dimen/x28"
                 android:textColor="@color/baise"
                 android:layout_marginLeft="@dimen/x20"
-                android:background="@drawable/congzhi_bg"
-                />
-            <Button
-                android:id="@+id/pick_up_goods_detail_xiazai"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/x70"
-                android:text="下载提货单"
-                android:textSize="@dimen/x28"
-                android:textColor="@color/baise"
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
-                android:layout_marginLeft="@dimen/x16"
                 />
+            <!--<Button-->
+                <!--android:id="@+id/pick_up_goods_detail_xiazai"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:layout_height="@dimen/x70"-->
+                <!--android:text="下载提货单"-->
+                <!--android:textSize="@dimen/x28"-->
+                <!--android:textColor="@color/baise"-->
+                <!--android:layout_marginRight="@dimen/x20"-->
+                <!--android:background="@drawable/congzhi_bg"-->
+                <!--android:layout_marginLeft="@dimen/x16"-->
+                <!--/>-->
         </LinearLayout>
 
     </RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,6 +13,7 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.EGiven_ListStage;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Activity, MyPresenter<My_Given_Datail_Activity>> implements View.OnClickListener {
@@ -27,6 +29,7 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
     private TextView my_Given_Datail_zhangtai;
     private Button my_Given_Datail_tongyi;
     private Button my_Given_Datail_jujue;
+    private LinearLayout my_given_datail_anniu;
 
     @Override
     public MyPresenter<My_Given_Datail_Activity> initPresenter() {
@@ -49,20 +52,41 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
         });
 
         Intent intent = getIntent();
-        Give_List_Bean give_list_bean = (Give_List_Bean) intent.getSerializableExtra("Give_List_Bean");
+        Give_List_Bean.DataBean.ListBean give_list_bean = (Give_List_Bean.DataBean.ListBean) intent.getSerializableExtra("Give_List_Bean");
         int leibie = intent.getIntExtra("leibie", 0);
-        my_Given_Datail_name.setText(give_list_bean.getName());
-        my_Given_Datail_cword.setText(""+give_list_bean.getCword());
-        my_Given_Datail_dword.setText(""+568974895);
+
+        my_Given_Datail_name.setText(give_list_bean.getGoodsName());
+        my_Given_Datail_cword.setText(""+give_list_bean.getGoodsCode());
+        my_Given_Datail_dword.setText(""+give_list_bean.getOrderNo());
         my_Given_Datail_cangku.setText("福利特仓库");
-        my_Given_Datail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(30.5));
-        if(leibie==0){
+        double price=give_list_bean.getFee()*give_list_bean.getProfit();
+        my_Given_Datail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(price));
+        if(leibie==0 ){
+
+            /*
+            状态:
+            0: 操作中
+            1: 完成
+            2: 失败
+            3: 取消
+            4: 拒绝
+            5: 超时
+             */
+
+            if(give_list_bean.getStatus()==0){
+                my_given_datail_anniu.setVisibility(View.VISIBLE);
+            }else{
+                my_given_datail_anniu.setVisibility(View.INVISIBLE);
+            }
             my_Given_Datail_leibie.setText("转入");
         }else{
             my_Given_Datail_leibie.setText("转出");
-        }
+            my_given_datail_anniu.setVisibility(View.INVISIBLE);
 
-        my_Given_Datail_zhangtai.setText("等待确认");
+        }
+        my_Given_Datail_zhangtai.setText(EGiven_ListStage.getName(give_list_bean.getStatus()));
+
+
 
     }
 
@@ -78,6 +102,7 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
         my_Given_Datail_zhangtai = (TextView) findViewById(R.id.my_Given_Datail_zhangtai);
         my_Given_Datail_tongyi = (Button) findViewById(R.id.my_Given_Datail_tongyi);
         my_Given_Datail_jujue = (Button) findViewById(R.id.my_Given_Datail_jujue);
+        my_given_datail_anniu = (LinearLayout)findViewById(R.id.my_Given_Datail_anniu);
 
         my_Given_Datail_tongyi.setOnClickListener(this);
         my_Given_Datail_jujue.setOnClickListener(this);

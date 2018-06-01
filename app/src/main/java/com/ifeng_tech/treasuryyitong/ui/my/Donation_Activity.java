@@ -18,10 +18,15 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.GoodsListByCode_Bean;
+import com.ifeng_tech.treasuryyitong.bean.TransferFee_Bean;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
@@ -29,11 +34,14 @@ import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.Search_Pop_View;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
 
-import java.util.ArrayList;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.List;
 
 /**
- *  转赠
+ *  转赠  表单填写  两种情况  从仓库进入  从首页进入
  */
 public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPresenter<Donation_Activity>> {
 
@@ -56,6 +64,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     private TextView donation_weitanchuan_text;
     private int weitanchuan_height;
 
+
     @Override
     public MyPresenter<Donation_Activity> initPresenter() {
         if(myPresenter==null) {
@@ -74,12 +83,16 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
 
         // 模拟数据 做页面回显，其中暂无单价回显
         Intent intent = getIntent();
-        WarehouseBean warehouseBean = (WarehouseBean) intent.getSerializableExtra("WarehouseBean");
+        WarehouseBean.DataBean.ListBean warehouseBean = (WarehouseBean.DataBean.ListBean) intent.getSerializableExtra("WarehouseBean");
+
         if(warehouseBean!=null){
-            donation_cangpin_wrod.setText(warehouseBean.getWord());
-            donation_name.setText(warehouseBean.getShopping_name());
-            donation_zuidae.setText("最大转赠数量:"+warehouseBean.getKeyong_num());
-            donation_danjia.setText("￥"+DashApplication.decimalFormat.format(120));// 这里是模拟数据
+            donation_cangpin_wrod.setText(warehouseBean.getGoodsCode());
+            donation_name.setText(warehouseBean.getGoodsName());
+            donation_zuidae.setText("最大转赠数量:"+warehouseBean.getAvailableQty());
+            HashMap<String, String> map = new HashMap<>();
+            map.put("goodsId",warehouseBean.getGoodsId()+"");
+            getShouXuFei(map);
+
         }else{
             donation_shuliang.setText("");
         }
@@ -90,36 +103,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             @Override
             public void onClick(View v) {
                 finish();
-            }
-        });
-
-        // 数量输入的监听
-        donation_shuliang.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                String s1 = s.toString();
-                if(s1.length()>0){
-                    Integer integer = new Integer(s1);
-                    if(integer<=0){
-                        donation_danjia.setText("￥0.00");  // 这里的单价是从bean类中直接获取
-                    }else{
-                        String format = DashApplication.decimalFormat.format(integer * 120);
-                        donation_danjia.setText("￥"+format);
-                    }
-                }else{
-                    donation_danjia.setText("￥0.00");
-                }
-
             }
         });
 
@@ -142,21 +125,48 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.toString().length()>4){ // 当输入框中数据长度大于4时，先去请求网络，然后将请求出来的数据装入集合，传入pop框
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("goodsCode",s.toString());
+                    myPresenter.postPreContent(APIs.getGoodsListByCode, map, new MyInterfaces() {
+                        @Override
+                        public void chenggong(String json) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                String code = (String) jsonObject.get("code");
+                                if(code.equals("2000")){
+                                    GoodsListByCode_Bean goodsListByCode_bean = new Gson().fromJson(json, GoodsListByCode_Bean.class);
+                                    List<GoodsListByCode_Bean.DataBean.ListBean> list = goodsListByCode_bean.getData().getList();
+                                    if(search_pop_view==null){
+                                        search_pop_view = new Search_Pop_View(Donation_Activity.this,measuredWidth,list);
+                                        search_pop_view.setBackgroundDrawable(new BitmapDrawable());
+                                        search_pop_view.showAsDropDown(donation_cangpin_wrod);
+                                        donation_Pop_JieKou.chuan();
+                                    }else{
+                                        if(search_pop_view.isShowing()){  // 判断pop是隐藏/显示
+                                            search_pop_view.setPopShuJu(list);
+                                        }else{
+                                            search_pop_view.showAsDropDown(donation_cangpin_wrod);
+                                            search_pop_view.setPopShuJu(list);
+                                        }
+                                        donation_Pop_JieKou.chuan();
+                                    }
+                                }else{
+                                    MyUtils.setToast((String) jsonObject.get("message"));
+                                }
 
-                    if(search_pop_view==null){
-                        search_pop_view = new Search_Pop_View(Donation_Activity.this,measuredWidth,list);
-                        search_pop_view.setBackgroundDrawable(new BitmapDrawable());
-                        search_pop_view.showAsDropDown(donation_cangpin_wrod);
-                        donation_Pop_JieKou.chuan();
-                    }else{
-                        if(search_pop_view.isShowing()){  // 判断pop是隐藏/显示
-                            search_pop_view.setPopShuJu(list);
-                        }else{
-                            search_pop_view.showAsDropDown(donation_cangpin_wrod);
-                            search_pop_view.setPopShuJu(list);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
                         }
-                        donation_Pop_JieKou.chuan();
-                    }
+
+                        @Override
+                        public void shibai(String ss) {
+                            MyUtils.setToast(ss);
+                        }
+                    });
+
+
 
                 }else{
                     if(search_pop_view!=null){
@@ -175,6 +185,34 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         });
     }
 
+    // 获取手续费   在刚进来调用一次   根据藏品代码再调一次
+    private void getShouXuFei(HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.findTransferFee, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        TransferFee_Bean transferFee_bean = new Gson().fromJson(json, TransferFee_Bean.class);
+                        double price = transferFee_bean.getData().getTransferFee() * transferFee_bean.getData().getCommonFeeRate();
+                        donation_danjia.setText("￥"+ DashApplication.decimalFormat.format(price)); // 这里是手续费
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+            }
+        });
+    }
+
 
     @Override
     protected void onResume() {
@@ -184,14 +222,18 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             public void chuan() {
                 search_pop_view.setSearch_Pop_JieKou(new Search_Pop_View.Search_Pop_JieKou() {
                     @Override
-                    public void chuan(int postion) {
-                        MyUtils.setToast("请做回显操作。。。");
+                    public void chuan(List<GoodsListByCode_Bean.DataBean.ListBean> list,int postion) {
+//                        MyUtils.setToast("请做回显操作。。。");
                         // 模拟数据
-                        donation_cangpin_wrod.setText(list.get(postion)+"");
-                        donation_cangpin_wrod.setSelection(list.get(postion).length());
-                        donation_name.setText("两只老虎");
+                        donation_cangpin_wrod.setText(list.get(postion).getCommodityCode());
+                        donation_cangpin_wrod.setSelection(list.get(postion).getCommodityCode().length());
+                        donation_name.setText(list.get(postion).getCommodityName());
                         donation_danjia.setText("￥"+DashApplication.decimalFormat.format(120)); // 价格会从请求的数据来获取
                         donation_zuidae.setText("最大转赠数量:"+120);
+
+                        HashMap<String, String> map = new HashMap<>();
+//                        map.put("goodsId",warehouseBean.getGoodsId()+"");
+//                        getShouXuFei(map);
                     }
                 });
             }
@@ -244,15 +286,9 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             }
         });
 
-        initData();
     }
 
-    List<String> list = new ArrayList<>();
-    public void initData(){
-        for (int i=0;i<15;i++){
-            list.add("2365894==");
-        }
-    }
+
 
 
     private void submit() {

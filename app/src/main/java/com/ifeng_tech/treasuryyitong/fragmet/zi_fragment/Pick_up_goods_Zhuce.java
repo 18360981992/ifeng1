@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
@@ -53,6 +54,15 @@ public class Pick_up_goods_Zhuce extends Fragment  {
         initView(view);
 
         activity = (Pick_up_goods_Activity) getActivity();
+
+        WarehouseBean.DataBean.ListBean warehouseBean = (WarehouseBean.DataBean.ListBean) activity.getIntent().getSerializableExtra("WarehouseBean");
+        if(warehouseBean!=null){
+            up_goods_zhuce_name.setText(warehouseBean.getGoodsName());
+            up_goods_zhuce_word.setText(warehouseBean.getGoodsCode());
+            up_goods_zhuce_word.requestFocus();
+            up_goods_zhuce_word.setSelection(warehouseBean.getGoodsCode().length());
+            up_goods_zhuce_jiaoge_jianshu.setHint("您的最大交割件数"+warehouseBean.getAvailableQty());
+        }
 
         up_goods_zhuce_cangku_img.setOnClickListener(new View.OnClickListener() {
             @Override

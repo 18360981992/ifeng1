@@ -84,7 +84,7 @@
                 android:id="@+id/my_collocation_list_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2018.05.23"
+                android:text="2018.05.23 am"
                 android:textSize="@dimen/x20"
                 android:textColor="@color/name_se"
                 android:layout_alignParentRight="true"

@@ -37,5 +37,34 @@ public class APIs {
     // 个人中心
     public static String getUser = APIs.debugApi+"user/personalcenter/findPersonalUserAccount";
 
+    // 个人资产中的资金流水
+    public static String findUserPaymentRecords = "user/personalcenter/findUserPaymentRecords";
+
+    // 我的征集
+    public static String getUserCollectList = "user/collect/getUserCollectList";
+
+    // 我的托管
+    public static String getUserTrusteeshipList = "user/trusteeship/getUserTrusteeshipList";
+
+    // 转赠列表
+    public static String getBestowList = "user/bestow/list";
+
+    // 我的仓库
+    public static String getHoldList = "user/depots/getHoldList";
+
+    // 查询转赠手续费  根据goodsid
+    public static String findTransferFee = "user/bestow/findTransferFee";
+
+    // 转赠  模糊查询藏品代码
+    public static String getGoodsListByCode = "goods/getGoodsListByCode";
+
+    // 提货单查询
+    public static String getTakeDeliveryList = "user/depots/getTakeDeliveryList";
+
+    // 提货单注销
+    public static String cancelTakeDeliveryOrder = "user/depots/cancelTakeDeliveryOrder";
+
+    // 一级页面 征集
+    public static String getCollectList = "collect/getCollectList";
 
 }

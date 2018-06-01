@@ -16,11 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
+import com.ifeng_tech.treasuryyitong.bean.my.UserBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
@@ -34,9 +36,12 @@ import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
-import com.ifeng_tech.treasuryyitong.utils.LogUtils;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -145,58 +150,13 @@ public class MyFragmet extends Fragment {
         if(aBoolean){
             wode_denglu.setVisibility(View.VISIBLE);
             wode_weidenglu.setVisibility(View.GONE);
-            activity.myPresenter.getPreContent(APIs.getUser, new MyInterfaces() {
-                @Override
-                public void chenggong(String json) {
-                    LogUtils.i("jiba","==="+json);
-                }
-
-                @Override
-                public void shibai(String ss) {
-
-                }
-            });
-
-            Glide.with(activity)
-                    .load(R.drawable.guangao)
-                    .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
-                    .into(wode_touxiang);
-
-            // 登录状态以后还需要判断用户信息是否实名认证状态
-            switch (shiming_type){
-                case 1:  // 已认证
-                    wode_weirenzheng.setVisibility(View.GONE);
-                    wode_yirenzheng.setVisibility(View.VISIBLE);
-                    break;
-                case 2: // 认证中
-                    wode_weirenzheng.setVisibility(View.VISIBLE);
-                    wode_yirenzheng.setVisibility(View.GONE);
-                    wode_weirenzheng.setText("认证中...");
-                    wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
-                    wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
-                    wode_weirenzheng.setEnabled(false);
-                    break;
-                case 3:// 认证失败
-                    wode_weirenzheng.setVisibility(View.VISIBLE);
-                    wode_yirenzheng.setVisibility(View.GONE);
-                    wode_weirenzheng.setText("认证失败");
-                    wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
-                    wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
-                    wode_weirenzheng.setEnabled(true);
-                    break;
-                case 4: // 未认证
-                    wode_weirenzheng.setVisibility(View.VISIBLE);
-                    wode_yirenzheng.setVisibility(View.GONE);
-                    wode_weirenzheng.setEnabled(true);
-                    break;
-            }
+            getUser(); // 获取个人信息
 
         }else{
             wode_denglu.setVisibility(View.GONE);
             wode_weidenglu.setVisibility(View.VISIBLE);
             wode_touxiang.setImageResource(R.drawable.wode_weidenglu_img);
         }
-
 
         wode_MyListView.setAdapter(new MyListAdapter(activity, myListBeen));
 
@@ -246,14 +206,12 @@ public class MyFragmet extends Fragment {
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
-
                     }
                 }else{ // 没登录直接跳到登录页面
                     intent = new Intent(activity, LoginActivity.class);
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
-
             }
         });
         // 安全保护 点击
@@ -291,15 +249,75 @@ public class MyFragmet extends Fragment {
         });
     }
 
+    // 获取用户信息
+    private void getUser() {
+        activity.myPresenter.getPreContent(APIs.getUser, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        UserBean userBean = new Gson().fromJson(json, UserBean.class);
+                        wode_hao.setText(userBean.getData().getUserCode()+"");
+                        shiming_type=userBean.getData().getVerified();
+                        if(!userBean.getData().getImgUrl().equals("")){
+                            DashApplication.edit.putString(SP_String.USERIMG,userBean.getData().getImgUrl()).commit();
+                            Glide.with(activity)
+                                    .load(userBean.getData().getImgUrl())
+                                    .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
+                                    .into(wode_touxiang);
+                        }else{
+                            Glide.with(activity)
+                                    .load(R.drawable.guangao)
+                                    .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
+                                    .into(wode_touxiang);
+                        }
 
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        super.onHiddenChanged(hidden);
-        if(hidden==false&&aBoolean){
+                        // 登录状态以后还需要判断用户信息是否实名认证状态
+                        switch (shiming_type){
+                            case 1:  // 已认证
+                                wode_weirenzheng.setVisibility(View.GONE);
+                                wode_yirenzheng.setVisibility(View.VISIBLE);
+                                break;
+                            case 2: // 认证中
+                                wode_weirenzheng.setVisibility(View.VISIBLE);
+                                wode_yirenzheng.setVisibility(View.GONE);
+                                wode_weirenzheng.setText("认证中...");
+                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
+                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
+                                wode_weirenzheng.setEnabled(false);
+                                break;
+                            case 3:// 认证失败
+                                wode_weirenzheng.setVisibility(View.VISIBLE);
+                                wode_yirenzheng.setVisibility(View.GONE);
+                                wode_weirenzheng.setText("认证失败");
+                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
+                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
+                                wode_weirenzheng.setEnabled(true);
+                                break;
+                            case 0: // 未认证
+                                wode_weirenzheng.setVisibility(View.VISIBLE);
+                                wode_yirenzheng.setVisibility(View.GONE);
+                                wode_weirenzheng.setEnabled(true);
+                                break;
+                        }
 
-        }
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+            }
+        });
     }
-
 
 
     private void initView(View view) {
@@ -313,7 +331,6 @@ public class MyFragmet extends Fragment {
         wode_denglu = (LinearLayout) view.findViewById(R.id.wode_denglu);
         wode_weidenglu = (LinearLayout) view.findViewById(R.id.wode_weidenglu);
         wode_yirenzheng = (ImageView) view.findViewById(R.id.wode_yirenzheng);
-
 
         initData();
     }

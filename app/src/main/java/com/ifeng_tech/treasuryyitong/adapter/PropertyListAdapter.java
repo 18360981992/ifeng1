@@ -7,8 +7,10 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.DetailBean;
+import com.ifeng_tech.treasuryyitong.bean.my.My_Property_list_Bean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -17,16 +19,16 @@ import java.util.List;
 
 public class PropertyListAdapter extends BaseAdapter {
     Context context;
-    List<DetailBean> detailList;
+    List<My_Property_list_Bean.DataBean.ListBean> list;
 
-    public PropertyListAdapter(Context context, List<DetailBean> detailList) {
+    public PropertyListAdapter(Context context, List<My_Property_list_Bean.DataBean.ListBean> list) {
         this.context = context;
-        this.detailList = detailList;
+        this.list = list;
     }
 
     @Override
     public int getCount() {
-        return detailList.size();
+        return list.size();
     }
 
     @Override
@@ -44,14 +46,21 @@ public class PropertyListAdapter extends BaseAdapter {
         if(convertView==null){
             convertView=View.inflate(context, R.layout.property_list_item,null);
         }
+
         TextView property_list_title = convertView.findViewById(R.id.property_list_title);
         TextView property_list_time = convertView.findViewById(R.id.property_list_time);
         TextView property_list_detail = convertView.findViewById(R.id.property_list_detail);
+        if(list.get(position).getPaymentType()==1){
+            property_list_title.setText("充值");
+            property_list_detail.setText("+"+list.get(position).getAmount());
+        }else if(list.get(position).getPaymentType()==2){
+            property_list_title.setText("提现");
+            property_list_detail.setText("-"+list.get(position).getAmount());
+        }
 
-        property_list_title.setText(detailList.get(position).getTitle());
-        property_list_time.setText(detailList.get(position).getTime());
-        property_list_detail.setText(detailList.get(position).getDetail());
-
+        Date date = new Date(list.get(position).getAddTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        property_list_time.setText(simpleDateFormat.format(date));
         return convertView;
     }
 }

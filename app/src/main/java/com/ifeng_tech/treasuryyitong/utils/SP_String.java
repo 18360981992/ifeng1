@@ -11,7 +11,8 @@ public class SP_String {
     public static String PASS="密码";
     public static String ISLOGIN="是否登录";
     public static String UID="用户id";
-    public static String USERCODE="内部用户code";
+    public static String USERCODE="内部用户code";  // 用户会员号
+    public static String USERIMG="用户头像";
 
 
     public static String NEWS_NUM="消息数目";

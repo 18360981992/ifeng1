@@ -78,8 +78,6 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
             }
         });
 
-
-
         fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()

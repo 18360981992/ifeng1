@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -24,7 +25,6 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
-import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import org.json.JSONException;
@@ -128,13 +128,17 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         map.put("newPassword", news);
         map.put("rePassword",queren);
         //  进度框
-        final AniDialog aniDialog = new AniDialog(Reset_Activity.this, null);
-        aniDialog.show();
-        setChangePwd(map,aniDialog);
+//        final AniDialog aniDialog = new AniDialog(Reset_Activity.this, null);
 
+        ProgressDialog aniDialog = new ProgressDialog(this);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载...");
+        aniDialog.show();
+
+        setChangePwd(map,aniDialog);
     }
 
-    private void setChangePwd(final HashMap<String, String> map, final AniDialog aniDialog) {
+    private void setChangePwd(final HashMap<String, String> map, final ProgressDialog aniDialog) {
 
         myPresenter.postPreContent(APIs.changePwd, map, new MyInterfaces() {
             @Override
@@ -161,8 +165,6 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
                                 finish();
                             }
                         });
-                    }else if(code.equals("4001")){
-                        setChangePwd(map,aniDialog);
                     }else{
                         aniDialog.dismiss();
                         MyUtils.setObjectAnimator(reset_weitanchuan,

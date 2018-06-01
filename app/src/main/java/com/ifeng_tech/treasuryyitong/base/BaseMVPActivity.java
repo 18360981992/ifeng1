@@ -4,17 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.api.APIs;
-import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.bean.login.LoginBean;
-import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.NetWorkUtil;
-import com.ifeng_tech.treasuryyitong.utils.SP_String;
-
-import java.util.HashMap;
 
 
 /**
@@ -54,38 +46,5 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
         myPresenter.setonDestroy();
     }
 
-    public void  setLogin(){
-        String shouji = DashApplication.sp.getString(SP_String.SHOUJI,"");
-        String pass = DashApplication.sp.getString(SP_String.PASS,"");
-        HashMap<String, String> map = new HashMap<>();
-        map.put("userName",shouji);
-        map.put("password",pass);
-        map.put("loginType","0");
 
-        myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
-            @Override
-            public void chenggong(String json) {
-                LoginBean loginBean = new Gson().fromJson(json, LoginBean.class);
-                if(loginBean.getCode().equals("2000")){
-
-                    baseMvpJieKou.chuan();
-                }
-            }
-
-            @Override
-            public void shibai(String ss) {
-
-            }
-        });
-    }
-
-    public interface BaseMvpJieKou{
-        void chuan();
-    }
-
-    BaseMvpJieKou baseMvpJieKou;
-
-    public void setBaseMvpJieKou(BaseMvpJieKou baseMvpJieKou) {
-        this.baseMvpJieKou = baseMvpJieKou;
-    }
 }

@@ -4,19 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Pick_Up_Goods_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.EPickUpStage;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 /**
  *  提货单详情
@@ -37,7 +45,8 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
     private TextView pick_up_goods_detail_cangchufei;
     private TextView pick_up_goods_detail_type;
     private Button pick_up_goods_detail_zhuxiao;
-    private Button pick_up_goods_detail_xiazai;
+    private LinearLayout pick_up_goods_detail_anniu;
+    private Pick_Up_Goods_Bean.DataBean.ListBean pick_up_goods_bean;
 
     @Override
     public MyPresenter<Pick_Up_Goods_Detail_Activity> initPresenter() {
@@ -65,13 +74,34 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         pick_up_goods_detail_zhuxiao.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
-                MyUtils.setToast("点击注销。。。");
-            }
-        });
-        pick_up_goods_detail_xiazai.setOnClickListener(new ForbidClickListener() {
-            @Override
-            public void forbidClick(View v) {
-                MyUtils.setToast("点击下载。。。");
+//                MyUtils.setToast("点击注销。。。");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("orderId",pick_up_goods_bean.getId()+"");
+                myPresenter.postPreContent(APIs.cancelTakeDeliveryOrder, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("2000")){
+//                                CancelTakeDeliveryOrder_Bean cancelTakeDeliveryOrder_bean = new Gson().fromJson(json, CancelTakeDeliveryOrder_Bean.class);
+                                MyUtils.setToast((String) jsonObject.get("message"));
+                                finish();
+                            }else{
+                                MyUtils.setToast((String) jsonObject.get("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void shibai(String ss) {
+                        MyUtils.setToast(ss);
+                    }
+                });
+
+
             }
         });
 
@@ -79,26 +109,35 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
          * 以下模拟数据 可能是查询网络，可能是获取跳转传递
          */
         Intent intent = getIntent();
-        Pick_Up_Goods_Bean pick_up_goods_bean = (Pick_Up_Goods_Bean) intent.getSerializableExtra("Pick_Up_Goods_Bean");
-        pick_up_goods_detail_name.setText(pick_up_goods_bean.getName());
-        pick_up_goods_detail_dword.setText(pick_up_goods_bean.getDword()+"");
-        pick_up_goods_detail_cword.setText(""+pick_up_goods_bean.getCword());
-        pick_up_goods_detail_cangku.setText("福利特仓库");
+        pick_up_goods_bean = (Pick_Up_Goods_Bean.DataBean.ListBean) intent.getSerializableExtra("Pick_Up_Goods_Bean");
+        pick_up_goods_detail_name.setText(pick_up_goods_bean.getGoodsName());
+        pick_up_goods_detail_dword.setText(pick_up_goods_bean.getBillId()+"");
+        pick_up_goods_detail_cword.setText(""+ pick_up_goods_bean.getGoodsCode());
 
-        Date date = new Date(pick_up_goods_bean.getTime());
+        if(pick_up_goods_bean.getDepotName().equals("")|| pick_up_goods_bean.getDepotName()==null){
+            pick_up_goods_detail_cangku.setText("福丽特仓库");
+        }else{
+            pick_up_goods_detail_cangku.setText(pick_up_goods_bean.getDepotName());
+        }
+
+        Date date = new Date(pick_up_goods_bean.getAddTime()); // 注册日期
+        Date date1 = new Date(pick_up_goods_bean.getDeliveryTime());  // 提货日期
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd");
         pick_up_goods_detail_zhuce_riqi.setText(simpleDateFormat.format(date));
-        pick_up_goods_detail_tihuo_riqi.setText(simpleDateFormat.format(date));
+        pick_up_goods_detail_tihuo_riqi.setText(simpleDateFormat.format(date1));
 
-        pick_up_goods_detail_jianshu.setText(""+50);
-        pick_up_goods_detail_shuliang.setText(""+400);
-        pick_up_goods_detail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(pick_up_goods_bean.getPrice()));
-        pick_up_goods_detail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(pick_up_goods_bean.getPrice()));
+        pick_up_goods_detail_jianshu.setText(""+ pick_up_goods_bean.getDeliveryQty());  // 提货件数
+        pick_up_goods_detail_shuliang.setText(""+ pick_up_goods_bean.getQuantity());  // 数量
 
-        if(pick_up_goods_bean.getType()==0){
-            pick_up_goods_detail_type.setText("等待提货");
+        pick_up_goods_detail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(pick_up_goods_bean.getDeliveryFee()));  // 手续费
+        pick_up_goods_detail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));  // 仓储费  暂无数据
+
+        pick_up_goods_detail_type.setText(EPickUpStage.getName(pick_up_goods_bean.getBillStage()));
+
+        if(pick_up_goods_bean.getBillStage()==0){
+            pick_up_goods_detail_anniu.setVisibility(View.VISIBLE);
         }else{
-            pick_up_goods_detail_type.setText("已逾期");
+            pick_up_goods_detail_anniu.setVisibility(View.GONE);
         }
 
 
@@ -119,8 +158,7 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         pick_up_goods_detail_cangchufei = (TextView) findViewById(R.id.pick_up_goods_detail_cangchufei);
         pick_up_goods_detail_type = (TextView) findViewById(R.id.pick_up_goods_detail_type);
         pick_up_goods_detail_zhuxiao = (Button) findViewById(R.id.pick_up_goods_detail_zhuxiao);
-        pick_up_goods_detail_xiazai = (Button) findViewById(R.id.pick_up_goods_detail_xiazai);
-
+        pick_up_goods_detail_anniu = (LinearLayout)findViewById(R.id.pick_up_goods_detail_anniu);
 
     }
 

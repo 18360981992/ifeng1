@@ -264,7 +264,6 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         setXiaYiBu(map, aniDialog);
 
 
-        // TODO validate success, do something
 //        MyUtils.setToast("看清select的值，携带参数请求网络。。。");
 
 //        if (true) {
@@ -288,6 +287,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
     }
 
+    // 下一步 的点击接口调用
     private void setXiaYiBu(final HashMap<String, String> map, final AniDialog aniDialog) {
         myPresenter.postPreContent(APIs.verifySmsCode, map, new MyInterfaces() {
             @Override
@@ -308,14 +308,6 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                         }
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
 
-                    }else if(code.equals("4001")){
-                        setLogin();
-                        setBaseMvpJieKou(new BaseMvpJieKou() {
-                            @Override
-                            public void chuan() {
-                                setXiaYiBu(map,aniDialog);
-                            }
-                        });
                     }else{
                         aniDialog.dismiss();
                         MyUtils.setObjectAnimator(retrieve_weitanchuan,

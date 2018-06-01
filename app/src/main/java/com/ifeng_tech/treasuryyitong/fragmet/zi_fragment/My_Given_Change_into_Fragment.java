@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.fragmet.zi_fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,18 +12,27 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.My_Given_list_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_Datail_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,7 +47,8 @@ public class My_Given_Change_into_Fragment extends Fragment {
     private PullToRefreshScrollView my_Given_Change_into_pulltoscroll;
     private LinearLayout my_Given_Change_into_null;
 
-    List<Give_List_Bean> list = new ArrayList<>();
+    List<Give_List_Bean.DataBean.ListBean> list = new ArrayList<>();
+
     private My_Given_list_Adapter my_given_list_adapter;
     private My_Given_list_Activity activity;
 
@@ -49,35 +60,43 @@ public class My_Given_Change_into_Fragment extends Fragment {
 
         initView(view);
 
-        initData();
         return view;
     }
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
 
     @Override
     public void onResume() {
         super.onResume();
-        if(list.size()>0){
-            my_Given_Change_into_null.setVisibility(View.GONE);
-            my_Given_Change_into_pulltoscroll.setVisibility(View.VISIBLE);
-            // 初始化数据 与适配器
-            setMy_Given_list_Adapter();
-        }else{
-            my_Given_Change_into_null.setVisibility(View.VISIBLE);
-            my_Given_Change_into_pulltoscroll.setVisibility(View.GONE);
-        }
+        //  进度框
+//        final AniDialog aniDialog = new AniDialog(activity, null);
+//        aniDialog.show();
+
+        final ProgressDialog aniDialog = new ProgressDialog(activity);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载。。。");
+        aniDialog.show();
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",""+10);
+        getFirstConect(map,aniDialog);
 
         my_Given_Change_into_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getFirstConect(map,aniDialog);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getNextConect(map);
             }
         });
 
@@ -94,15 +113,105 @@ public class My_Given_Change_into_Fragment extends Fragment {
         });
     }
 
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map, final ProgressDialog aniDialog) {
+        activity.myPresenter.postPreContent(APIs.getBestowList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Give_List_Bean give_List_Bean = new Gson().fromJson(json, Give_List_Bean.class);
+                        List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
+                        list.clear();
+                        if(zilist.size()>0){
+                            for(Give_List_Bean.DataBean.ListBean bean:zilist){
+                                String uid=""+bean.getOppositeUserId();
+                                if(uid.equals(DashApplication.sp.getString(SP_String.UID,""))){
+                                    list.add(bean);
+                                }
+                            }
+                        }
+                        setMy_Given_list_Adapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setToast(ss);
+                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        activity.myPresenter.postPreContent(APIs.getBestowList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Give_List_Bean give_List_Bean = new Gson().fromJson(json, Give_List_Bean.class);
+                        List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
+                        if(zilist.size()>0){
+                            for(Give_List_Bean.DataBean.ListBean bean:zilist){
+                                if(bean.getOppositeUserId()==bean.getUserId()){
+                                    list.add(bean);
+                                }
+                            }
+                        }
+                        // 初始化数据 与适配器
+                        setMy_Given_list_Adapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                my_Given_Change_into_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
     // 初始化数据 与适配器
-
     private void setMy_Given_list_Adapter() {
+        if(list.size()>0) {
+            my_Given_Change_into_null.setVisibility(View.GONE);
+            my_Given_Change_into_pulltoscroll.setVisibility(View.VISIBLE);
 
-        if (my_given_list_adapter == null) {
-            my_given_list_adapter = new My_Given_list_Adapter(activity, list,0); // 0==转入
-            my_Given_Change_into_MyListView.setAdapter(my_given_list_adapter);
-        } else {
-            my_given_list_adapter.notifyDataSetChanged();
+            if (my_given_list_adapter == null) {
+                my_given_list_adapter = new My_Given_list_Adapter(activity, list, 0); // 0==转入
+                my_Given_Change_into_MyListView.setAdapter(my_given_list_adapter);
+            } else {
+                my_given_list_adapter.notifyDataSetChanged();
+            }
+        }else{
+            my_Given_Change_into_null.setVisibility(View.VISIBLE);
+            my_Given_Change_into_pulltoscroll.setVisibility(View.GONE);
         }
 
     }
@@ -124,13 +233,4 @@ public class My_Given_Change_into_Fragment extends Fragment {
         Labels.setReleaseLabel("放开刷新...");
     }
 
-    private void initData() {
-        // 征集
-        for (int i = 0; i < 15; i++) {
-            if (i % 2 == 0)  // type==0 转出状态
-                list.add(new Give_List_Bean("68947594615661", 689715675, "世博四连体", 20, 5689, 1025689468, 0));
-            else
-                list.add(new Give_List_Bean("36987569448952", 689715675, "世博四连体", 20, 5568, 1564897425, 1));
-        }
-    }
 }

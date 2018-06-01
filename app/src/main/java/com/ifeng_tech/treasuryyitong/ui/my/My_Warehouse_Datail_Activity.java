@@ -13,6 +13,10 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 
+/**
+ *
+ *  仓库详情
+ */
 public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_Datail_Activity, MyPresenter<My_Warehouse_Datail_Activity>> implements View.OnClickListener {
 
     private RelativeLayout my_Warehouse_Datail_Fan;
@@ -25,7 +29,7 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
     private TextView my_Warehouse_Datail_cangchufei;
     private Button my_Warehouse_Datail_zhuanzeng;
     private Button my_Warehouse_Datail_tihuo;
-    private WarehouseBean warehouseBean;
+    private WarehouseBean.DataBean.ListBean warehouseBean;
 
     @Override
     public MyPresenter<My_Warehouse_Datail_Activity> initPresenter() {
@@ -41,7 +45,7 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
         setContentView(R.layout.activity_my__warehouse__datail_);
         initView();
 
-        warehouseBean = (WarehouseBean) getIntent().getSerializableExtra("WarehouseBean");
+        warehouseBean = (WarehouseBean.DataBean.ListBean) getIntent().getSerializableExtra("WarehouseBean");
 
         my_Warehouse_Datail_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,13 +54,13 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
             }
         });
 
-        my_Warehouse_Datail_name.setText(warehouseBean.getShopping_name());
-        my_Warehouse_Datail_cword.setText(""+warehouseBean.getWord());
-        my_Warehouse_Datail_keyong_num.setText(""+warehouseBean.getKeyong_num());
-        my_Warehouse_Datail_dongjie_num.setText(""+warehouseBean.getDongjie_num());
-        my_Warehouse_Datail_zong_num.setText(""+(warehouseBean.getKeyong_num()+warehouseBean.getDongjie_num()));
+        my_Warehouse_Datail_name.setText(warehouseBean.getGoodsName());
+        my_Warehouse_Datail_cword.setText(""+warehouseBean.getGoodsCode());
+        my_Warehouse_Datail_keyong_num.setText(""+warehouseBean.getAvailableQty());
+        my_Warehouse_Datail_dongjie_num.setText(""+warehouseBean.getFrozenQty());
+        my_Warehouse_Datail_zong_num.setText(""+(warehouseBean.getHoldQty()));
 
-        my_Warehouse_Datail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(30.5));
+        my_Warehouse_Datail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));
     }
 
 

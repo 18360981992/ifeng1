@@ -8,10 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.My_Collocation_list_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.Collocation_list_Bean;
+import com.ifeng_tech.treasuryyitong.bean.my.My_Colloction_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
@@ -19,7 +22,11 @@ import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -30,7 +37,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
     private RelativeLayout my_collocation_Fan;
     private MyListView my_collocation_MyListView;
     private PullToRefreshScrollView my_collocation_pulltoscroll;
-    List<Collocation_list_Bean> list = new ArrayList<>();
+    List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list = new ArrayList<>();
     private My_Collocation_list_Adapter my_collocation_adapter;
     private LinearLayout my_collocation_null;
 
@@ -47,7 +54,6 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__collocation_);
         initView();
-        initData();
 
         my_collocation_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,34 +64,33 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
 
 
     }
-
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(list.size()>0){
-            my_collocation_null.setVisibility(View.GONE);
-            my_collocation_pulltoscroll.setVisibility(View.VISIBLE);
-            // 初始化数据 与适配器
-            setMy_Collocation_list_Adapter();
-        }else{
-            my_collocation_null.setVisibility(View.VISIBLE);
-            my_collocation_pulltoscroll.setVisibility(View.GONE);
-        }
-
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",""+10);
+        getFirstConect(map);
 
         my_collocation_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getFirstConect(map);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",""+10);
+                getNextConect(map);
             }
         });
 
@@ -100,13 +105,91 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         });
     }
 
-    private void setMy_Collocation_list_Adapter() {
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getUserTrusteeshipList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        My_Colloction_Bean my_Colloction_Bean = new Gson().fromJson(json, My_Colloction_Bean.class);
+                        List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> zilist = my_Colloction_Bean.getData().getPageInfo().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setMy_Collocation_list_Adapter();
+                    }else if(code.equals("4000")){
+                        my_collocation_null.setVisibility(View.VISIBLE);
+                        my_collocation_pulltoscroll.setVisibility(View.GONE);
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
 
-        if(my_collocation_adapter==null){
-            my_collocation_adapter = new My_Collocation_list_Adapter(My_Collocation_Activity.this,list);
-            my_collocation_MyListView.setAdapter(my_collocation_adapter);
-        }else{
-            my_collocation_adapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getUserTrusteeshipList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        My_Colloction_Bean my_Colloction_Bean = new Gson().fromJson(json, My_Colloction_Bean.class);
+                        List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> zilist = my_Colloction_Bean.getData().getPageInfo().getList();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setMy_Collocation_list_Adapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                my_collocation_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 适配器的刷新
+    private void setMy_Collocation_list_Adapter() {
+        if(list.size()>0) {
+            my_collocation_null.setVisibility(View.GONE);
+            my_collocation_pulltoscroll.setVisibility(View.VISIBLE);
+            if (my_collocation_adapter == null) {
+                my_collocation_adapter = new My_Collocation_list_Adapter(My_Collocation_Activity.this, list);
+                my_collocation_MyListView.setAdapter(my_collocation_adapter);
+            } else {
+                my_collocation_adapter.notifyDataSetChanged();
+            }
+        }else {
+            my_collocation_null.setVisibility(View.VISIBLE);
+            my_collocation_pulltoscroll.setVisibility(View.GONE);
         }
     }
 
@@ -127,16 +210,6 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
 
         // 设置刷新
         initRefreshListView();
-    }
-
-    private void initData() {
-        // 征集
-        for (int i = 0; i < 15; i++) {
-            if(i%2==0)  // type==0 已过期
-                list.add(new Collocation_list_Bean("68947594615661",689715675,"世博四连体",20,100,1025689468,0));
-            else
-                list.add(new Collocation_list_Bean("36987569448952",689715675,"世博四连体",20,99.99,1564897425,1));
-        }
     }
 
     @Override
