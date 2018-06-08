@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,14 +19,21 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  *
@@ -51,7 +59,10 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
     private int weitanchuan_height;
     private EditText collect_ac_yewu_pass;
     private double upsideFee;   // 上盘费的单价
+    private int max_num;
 
+    String collectId="";  // 征集id
+    String goodsId="";
     @Override
     public MyPresenter<Collect_Activity> initPresenter() {
         if(myPresenter==null) {
@@ -72,7 +83,9 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         // 模拟 控制页面回显
         Intent intent = getIntent();
         Collect_Bean.DataBean.ListBean collectBean = (Collect_Bean.DataBean.ListBean) intent.getSerializableExtra("CollectBean");
-        int max_num = intent.getIntExtra("MAX_NUM", 0);  // 获取最大转赠数量
+        max_num = intent.getIntExtra("MAX_NUM", 0);  // 获取最大转赠数量
+        collectId=collectBean.getId()+"";
+        goodsId=collectBean.getGoodsId()+"";
 
         if(collectBean!=null){
             if(collectBean.getAgencyName().equals("")||collectBean.getAgencyName()==null){
@@ -80,11 +93,12 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             }else{
                 collect_ac_pingtai.setText(collectBean.getAgencyName());
             }
-             collect_ac_pingtai.setSelection(collect_ac_pingtai.length());
+            collect_ac_pingtai.setSelection(collect_ac_pingtai.length());
 
             collect_ac_cword.setText(collectBean.getGoodsCode());
             collect_ac_name.setText(collectBean.getGoodsName());
             collect_ac_shuliang_zuida.setText("最大转赠数量:"+max_num);
+
             upsideFee = collectBean.getUpsideFee();    // 上盘费的单价
             collect_ac_daijia.setText("￥"+DashApplication.decimalFormat.format(upsideFee));
         }
@@ -177,13 +191,13 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             return;
         }
 
-        String zhanghu = collect_ac_zhanghu.getText().toString().trim();
+        final String zhanghu = collect_ac_zhanghu.getText().toString().trim();
         if (TextUtils.isEmpty(zhanghu)) {
             Toast.makeText(this, "账户为选择平台注册的账户", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        String shouji = collect_ac_shouji.getText().toString().trim();
+        final String shouji = collect_ac_shouji.getText().toString().trim();
         if (TextUtils.isEmpty(shouji)) {
             Toast.makeText(this, "手机号为转赠平台绑定手机号", Toast.LENGTH_SHORT).show();
             return;
@@ -206,18 +220,26 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
             return;
         }
 
-        String shuliang = collect_ac_shuliang.getText().toString().trim();
+        final String shuliang = collect_ac_shuliang.getText().toString().trim();
         if (TextUtils.isEmpty(shuliang)||Integer.valueOf(shuliang)<=0) {
             Toast.makeText(this, "转赠数量不能为空且不能小于0", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(Integer.valueOf(shuliang)>max_num){
+            MyUtils.setToast("转赠的数量大于最大转赠数量");
+            return;
+        }
 
-        String yewu_pass = collect_ac_yewu_pass.getText().toString().trim();
+        final String yewu_pass = collect_ac_yewu_pass.getText().toString().trim();
         if (TextUtils.isEmpty(yewu_pass)) {
             Toast.makeText(this, "请输入业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
+        if(yewu_pass.length()<6){
+            Toast.makeText(this, "请输入6-12位的业务密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
         // TODO validate success, do something
 
         //设置dialog的样式
@@ -231,15 +253,59 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         dialog.setTakeDonation_Dialog_JieKou(new TakeDonation_Dialog.TakeDonation_Dialog_JieKou() {
             @Override
             public void QuanRen() { // 点击确认
-                MyUtils.setToast("正在请求网络。。。");
-                dialog.dismiss();
-                MyUtils.setObjectAnimator(collect_ac_weitanchuan,
+//                MyUtils.setToast("正在请求网络。。。");
+
+                HashMap<String, String> map = new HashMap<>();
+                map.put("oppAccountCode",zhanghu);
+                map.put("mobile",shouji);
+                map.put("collectId",collectId);
+                map.put("amount",shuliang);
+                map.put("goodsId",goodsId);
+                map.put("businessPwd",yewu_pass);
+
+                final ProgressDialog aniDialog = new ProgressDialog(Collect_Activity.this);
+                aniDialog.setCancelable(true);
+                aniDialog.setMessage("正在加载。。。");
+                aniDialog.show();
+
+                myPresenter.postPreContent(APIs.applyCollect, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        aniDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("2000")){
+                                dialog.dismiss();
+                                MyUtils.setObjectAnimator(collect_ac_weitanchuan,
                                         collect_ac_weitanchuan_img,
                                         collect_ac_weitanchuan_text,
                                         weitanchuan_height,
-                                        true,
-                                         "转赠成功！"
-                        );
+                                        true,"征集成功！");
+                            }else{
+                                dialog.dismiss();
+                                MyUtils.setObjectAnimator(collect_ac_weitanchuan,
+                                        collect_ac_weitanchuan_img,
+                                        collect_ac_weitanchuan_text,
+                                        weitanchuan_height,
+                                        false,(String) jsonObject.get("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void shibai(String ss) {
+                        dialog.dismiss();
+                        aniDialog.dismiss();
+                        MyUtils.setObjectAnimator(collect_ac_weitanchuan,
+                                collect_ac_weitanchuan_img,
+                                collect_ac_weitanchuan_text,
+                                weitanchuan_height,
+                                false,ss);
+                    }
+                });
             }
 
             @Override

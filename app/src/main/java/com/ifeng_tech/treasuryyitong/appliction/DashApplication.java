@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.text.DecimalFormat;
 
@@ -50,17 +51,41 @@ public class DashApplication extends TinkerApplication {
     public static int CERTIFICATION_TO_ADVP_req=100;
     public static int CERTIFICATION_TO_ADVP_res=101;
 
-    public static int LOGIN_TO_REGISTER_req=100;
+    public static int LOGIN_TO_REGISTER_req=100;   //
     public static int LOGIN_TO_REGISTER_res=101;
 
-    public static int EMAIL1_TO_EMAIL2_req=100;
+    public static int EMAIL1_TO_EMAIL2_req=100;  // 从绑定邮箱1跳到邮箱2
     public static int EMAIL1_TO_EMAIL2_res=101;
+
+    public static int BUSINESS_TO_DISREM_req=100;  // 从重置密码不记得跳到绑定邮箱
+    public static int BUSINESS_TO_DISREM_res=101;
+
+    public static int BUSINESS_TO_REMEM_req=200;  // 从重置密码记得跳到重置
+    public static int BUSINESS_TO_REMEM_res=201;
+
+    public static int WITHDRAW_TO_WITHDRAW2_req=100;  // 从提现跳到提现2
+    public static int WITHDRAW_TO_WITHDRAW2_res=101;
+
+    public static int QR_TO_QR2_req=100;  // 从商品二维码跳到设置数量
+    public static int QR_TO_QR2_res=101;
+
+    public static int ERWIMA_SAOMIAO_req=300;  // 二维码扫描
+    public static int ERWIMA_SAOMIAO_res=301;
+
+    public static int ZHUAN_TO_CANGKU_req=100;  // 转赠跳到新仓库
+    public static int ZHUAN_TO_CANGKU_res=101;
+
+    public static int TIHUO_TO_CANGKU_req=200;  // 提货注册跳到新仓库
+    public static int TIHUO_TO_CANGKU_res=201;
+
 
     public static  int ANQUAN_TYPE_ZHAOHUI=1;
     public static  int ANQUAN_TYPE_GENGGAI=2;
 
     public static SharedPreferences sp;
     public static SharedPreferences.Editor edit;
+
+
     public static String android;
 
     // 这是为了打印retrofit的log日志
@@ -72,6 +97,14 @@ public class DashApplication extends TinkerApplication {
             Log.i("RetrofitLog","retrofitBack = "+message);
         }
     });
+    public static SharedPreferences sp_message_xitong;
+    public static SharedPreferences.Editor edit_message_xitong;
+
+    public static SharedPreferences sp_message_chongzhi;
+    public static SharedPreferences.Editor edit_message_chongzhi;
+
+    public static SharedPreferences sp_message_anquan;
+    public static SharedPreferences.Editor edit_message_anquan;
 
     public DashApplication() {
         super(ShareConstants.TINKER_ENABLE_ALL, "com.ifeng_tech.treasuryyitong.appliction.SampleApplicationLike",
@@ -98,12 +131,24 @@ public class DashApplication extends TinkerApplication {
         sp = getSharedPreferences("ifeng", MODE_PRIVATE);
         edit = sp.edit();
 
+        sp_message_xitong = getSharedPreferences("ifeng_message_xitong", MODE_PRIVATE);
+        edit_message_xitong = sp_message_xitong.edit();
+
+        sp_message_chongzhi = getSharedPreferences("ifeng_message_chongzhi", MODE_PRIVATE);
+        edit_message_chongzhi = sp_message_chongzhi.edit();
+
+        sp_message_anquan = getSharedPreferences("ifeng_message_anquan", MODE_PRIVATE);
+        edit_message_anquan = sp_message_anquan.edit();
+
         //获取安卓手机的唯一标识的方法
         android = 'A' + Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
 
 
         // 对log 的初始化
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+
+        //初始化二维码工具类
+        ZXingLibrary.initDisplayOpinion(this);
 
     }
 

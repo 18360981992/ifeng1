@@ -119,6 +119,28 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
                 }
             });
 
+            warehouse_fra_MyListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                @Override
+                public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                    for (int i=0;i<list.size();i++){
+                        WarehouseBean.DataBean.ListBean listBean = list.get(i);
+                        listBean.setFlag(false);
+                        list.set(i,listBean);
+                    }
+                    warehouse_adapter = null;
+                    setWarehouseAdapter();
+
+                    WarehouseBean.DataBean.ListBean listBean = list.get(position);
+                    listBean.setFlag(true);
+                    list.set(position,listBean);
+                    warehouse_adapter = null;
+                    setWarehouseAdapter();
+
+                    return true;
+                }
+            });
+
         }else{
             warehouse_fra_weidenglu.setVisibility(View.VISIBLE);
             warehouse_fra_denglu.setVisibility(View.GONE);

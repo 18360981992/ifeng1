@@ -6,10 +6,11 @@ package com.ifeng_tech.treasuryyitong.bean.login;
 
 public class LoginBean {
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"IsNoBusinessPwd":0,"user":{"id":212,"addTime":1525918369000,"mobile":"15847209769","userName":null,"account":"15847209769","userCode":"000000000212","userState":"1","agencyInfo":null}}
+     * data : {"user":{"id":123,"addTime":1524881998000,"mobile":"18810209061","userName":null,"account":"18810209061","userCode":"000000000123","userState":"1","agencyInfo":null}}
      */
 
     private String code;
@@ -42,20 +43,10 @@ public class LoginBean {
 
     public static class DataBean {
         /**
-         * IsNoBusinessPwd : 0
-         * user : {"id":212,"addTime":1525918369000,"mobile":"15847209769","userName":null,"account":"15847209769","userCode":"000000000212","userState":"1","agencyInfo":null}
+         * user : {"id":123,"addTime":1524881998000,"mobile":"18810209061","userName":null,"account":"18810209061","userCode":"000000000123","userState":"1","agencyInfo":null}
          */
 
-        private int IsNoBusinessPwd;
         private UserBean user;
-
-        public int getIsNoBusinessPwd() {
-            return IsNoBusinessPwd;
-        }
-
-        public void setIsNoBusinessPwd(int IsNoBusinessPwd) {
-            this.IsNoBusinessPwd = IsNoBusinessPwd;
-        }
 
         public UserBean getUser() {
             return user;
@@ -67,12 +58,12 @@ public class LoginBean {
 
         public static class UserBean {
             /**
-             * id : 212
-             * addTime : 1525918369000
-             * mobile : 15847209769
+             * id : 123
+             * addTime : 1524881998000
+             * mobile : 18810209061
              * userName : null
-             * account : 15847209769
-             * userCode : 000000000212
+             * account : 18810209061
+             * userCode : 000000000123
              * userState : 1
              * agencyInfo : null
              */

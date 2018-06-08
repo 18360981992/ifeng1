@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/x120"
     android:orientation="vertical"
     android:background="@drawable/item_bg"
     >
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x110"
+        android:layout_height="@dimen/x120"
         >
         <TextView
             android:id="@+id/warehouse_shopping_name"
@@ -26,21 +27,11 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="10000"
-            android:textSize="@dimen/x26"
-            android:textColor="@color/color_666666"
-            android:gravity="center"
-            />
-        <TextView
-            android:id="@+id/warehouse_dongjie_num"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="match_parent"
-            android:text="10000"
+            android:text="10000（枚）"
             android:textSize="@dimen/x26"
             android:textColor="@color/color_666666"
             android:gravity="end|center_vertical"
-            android:layout_marginRight="@dimen/x24"
+            android:layout_marginRight="@dimen/x60"
             />
     </LinearLayout>
 
@@ -51,6 +42,54 @@
         android:background="@color/fengouxian"
         android:layout_marginLeft="@dimen/x16"
         android:layout_marginRight="@dimen/x16"
+        android:layout_alignParentBottom="true"
         />
-</LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/warehouse_item_touming"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@color/touming1"
+        android:visibility="gone"
+        >
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="end|center_vertical"
+            >
+            <TextView
+                android:id="@+id/warehouse_item_zhuanzeng"
+                android:layout_width="@dimen/x80"
+                android:layout_height="@dimen/x80"
+                android:textSize="@dimen/x26"
+                android:text="转赠"
+                android:textColor="@color/zhuse"
+                android:background="@drawable/list_changan"
+                android:gravity="center"
+                android:layout_marginRight="@dimen/x50"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:id="@+id/warehouse_item_tihuo"
+                android:layout_width="@dimen/x70"
+                android:layout_height="@dimen/x70"
+                android:textSize="@dimen/x26"
+                android:text="提货"
+                android:textColor="@color/zhuse"
+                android:background="@drawable/list_changan"
+                android:gravity="center"
+                android:layout_marginLeft="@dimen/x50"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
 

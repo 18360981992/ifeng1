@@ -109,10 +109,41 @@ public class My_Warehouse_Activity extends BaseMVPActivity<My_Warehouse_Activity
         my_warehouse_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                for (int i=0;i<list.size();i++){
+                    WarehouseBean.DataBean.ListBean listBean = list.get(i);
+                    listBean.setFlag(false);
+                    list.set(i,listBean);
+                }
+                warehouse_adapter = null;
+                setWarehouseAdapter();
+
                 Intent intent = new Intent(My_Warehouse_Activity.this, My_Warehouse_Datail_Activity.class);
                 intent.putExtra("WarehouseBean", list.get(position));
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
+
+        my_warehouse_MyListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+
+                for (int i=0;i<list.size();i++){
+                    WarehouseBean.DataBean.ListBean listBean = list.get(i);
+                    listBean.setFlag(false);
+                    list.set(i,listBean);
+                }
+                warehouse_adapter = null;
+                setWarehouseAdapter();
+
+                WarehouseBean.DataBean.ListBean listBean = list.get(position);
+                listBean.setFlag(true);
+                list.set(position,listBean);
+                warehouse_adapter = null;
+                setWarehouseAdapter();
+
+                return true;
             }
         });
 

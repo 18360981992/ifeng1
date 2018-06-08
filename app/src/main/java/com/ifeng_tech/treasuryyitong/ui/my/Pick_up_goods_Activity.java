@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
@@ -7,7 +8,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Pick_up_goods_ChaXun;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Pick_up_goods_Zhuce;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
@@ -106,6 +109,14 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == DashApplication.TIHUO_TO_CANGKU_req&&resultCode==DashApplication.TIHUO_TO_CANGKU_res){
+            WarehouseBean.DataBean.ListBean warehouseBean = (WarehouseBean.DataBean.ListBean)data.getSerializableExtra("WarehouseBean");
+            pick_up_goods_Activity_JieKou.chuan(warehouseBean);
+        }
+    }
 
     //设置传值方法
     private void setSelected(int value) {
@@ -133,5 +144,15 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
+
+    public interface Pick_up_goods_Activity_JieKou{
+        void chuan(WarehouseBean.DataBean.ListBean warehouseBean);
+    }
+
+    public  Pick_up_goods_Activity_JieKou pick_up_goods_Activity_JieKou;
+
+    public void setPick_up_goods_Activity_JieKou(Pick_up_goods_Activity_JieKou pick_up_goods_Activity_JieKou) {
+        this.pick_up_goods_Activity_JieKou = pick_up_goods_Activity_JieKou;
     }
 }

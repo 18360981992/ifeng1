@@ -2,13 +2,29 @@ package com.ifeng_tech.treasuryyitong.ui;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.adapter.Collection_Directory_Detail_List_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Collection_directory_Bean;
+import com.ifeng_tech.treasuryyitong.bean.cangpin.Collection_Directory_Detail_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 藏品详情
@@ -23,6 +39,9 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
     private TextView collocation_mulu_detail_name;
     private TextView collocation_mulu_detail_cword;
     private Collection_directory_Bean collection_directory_bean;
+    private String goodsId;
+    private ImageView collocation_mulu_detail_img;
+    private ListView collocation_mulu_detail_listview;
 
     @Override
     public MyPresenter<Collection_Directory_Detail_Activity> initPresenter() {
@@ -37,15 +56,14 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection__directory__detail_);
         initView();
-
-
-
         collection_mulu_detail_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+
+        goodsId = getIntent().getStringExtra("goodsId");
 
     }
 
@@ -54,26 +72,64 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
     protected void onResume() {
         super.onResume();
 
-        /**
-         *  以下是模拟数据  这些数据可以是根据id获取信息
-         */
-        collection_directory_bean = (Collection_directory_Bean) getIntent().getSerializableExtra("Collection_directory_Bean");
-        collocation_mulu_detail_name.setText(collection_directory_bean.getName());
-        collocation_mulu_detail_cword.setText(collection_directory_bean.getCword()+"");
-        collocation_mulu_detail_guige.setText("100mm*120mm");
-        collocation_mulu_detail_shoujia.setText(collection_directory_bean.getPrice()+"元");
-        collocation_mulu_detail_faxingliang.setText(collection_directory_bean.getNum()+"枚");
-        collocation_mulu_detail_jianjie.setText("2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株");
+        Map<String, String> map = new HashMap<>();
+        map.put("commodityId",goodsId);
+        myPresenter.postPreContent(APIs.getonestamp, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        Collection_Directory_Detail_Bean collection_directory_detail_bean = new Gson().fromJson(json, Collection_Directory_Detail_Bean.class);
+
+                        if(collection_directory_detail_bean.getData().getCommodity().getCommodityLink().size()<=0){
+                            collocation_mulu_detail_img.setImageResource(R.drawable.img_erroy);
+                        }else{
+                            Glide.with(Collection_Directory_Detail_Activity.this).load(collection_directory_detail_bean.getData().getCommodity().getCommodityLink().get(0)).error(R.drawable.img_erroy).into(collocation_mulu_detail_img);
+                        }
+
+                        collocation_mulu_detail_name.setText(collection_directory_detail_bean.getData().getCommodity().getCommodityName());
+
+                        collocation_mulu_detail_cword.setText(collection_directory_detail_bean.getData().getCommodity().getCommodityCode());
+                        final List<Collection_Directory_Detail_Bean.DataBean.DescriptionListBean> list = collection_directory_detail_bean.getData().getDescriptionList();
+                        collocation_mulu_detail_listview.setAdapter(new Collection_Directory_Detail_List_Adapter(Collection_Directory_Detail_Activity.this,list));
+
+
+                        if(collection_directory_detail_bean.getData().getCommodity().getCommodityDetails()==null){
+                            collocation_mulu_detail_jianjie.setText("2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株");
+                        }else{
+                            collocation_mulu_detail_jianjie.setText(collection_directory_detail_bean.getData().getCommodity().getCommodityDetails());
+                        }
+
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast("藏品详情=="+ss);
+            }
+        });
+
     }
 
     private void initView() {
         collection_mulu_detail_Fan = (RelativeLayout) findViewById(R.id.collection_mulu_detail_Fan);
+        collocation_mulu_detail_img = findViewById(R.id.collocation_mulu_detail_img);
         collocation_mulu_detail_name = (TextView) findViewById(R.id.collocation_mulu_detail_name);
         collocation_mulu_detail_cword = (TextView) findViewById(R.id.collocation_mulu_detail_cword);
-        collocation_mulu_detail_guige = (TextView) findViewById(R.id.collocation_mulu_detail_guige);
-        collocation_mulu_detail_shoujia = (TextView) findViewById(R.id.collocation_mulu_detail_shoujia);
-        collocation_mulu_detail_faxingliang = (TextView) findViewById(R.id.collocation_mulu_detail_faxingliang);
+//        collocation_mulu_detail_guige = (TextView) findViewById(R.id.collocation_mulu_detail_guige);
+//        collocation_mulu_detail_shoujia = (TextView) findViewById(R.id.collocation_mulu_detail_shoujia);
+//        collocation_mulu_detail_faxingliang = (TextView) findViewById(R.id.collocation_mulu_detail_faxingliang);
+        collocation_mulu_detail_listview = findViewById(R.id.collocation_mulu_detail_listview);
         collocation_mulu_detail_jianjie = (TextView) findViewById(R.id.collocation_mulu_detail_jianjie);
+
 
     }
 

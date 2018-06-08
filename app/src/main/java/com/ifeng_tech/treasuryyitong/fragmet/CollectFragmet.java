@@ -127,7 +127,7 @@ public class CollectFragmet extends Fragment {
 
                 if(aBoolean){
                     if(list.get(position).getStage()==4){ // 为4的时候可以点击进入征集页面
-
+                        // 获取最大征集数量  和仓库进行比较
                         final int JIN_DU = list.get(position).getAllAmount() - list.get(position).getResidueAmount();
 
                         HashMap<String, String> map = new HashMap<>();
@@ -143,13 +143,13 @@ public class CollectFragmet extends Fragment {
                                             Intent intent = new Intent(activity, Collect_Activity.class);
                                             intent.putExtra("CollectBean",list.get(position));
                                             intent.putExtra("MAX_NUM",JIN_DU);
-                                            startActivity(intent);
+                                            activity.startActivity(intent);
                                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                                         }else{
                                             Intent intent = new Intent(activity, Collect_Activity.class);
                                             intent.putExtra("CollectBean",list.get(position));
                                             intent.putExtra("MAX_NUM",listBean.getAvailableQty());
-                                            startActivity(intent);
+                                            activity.startActivity(intent);
                                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                                         }
                                     }else{
@@ -269,6 +269,8 @@ public class CollectFragmet extends Fragment {
      */
     private void setCollectAdapter() {
         if(list.size()>0){
+            collect_null.setVisibility(View.GONE);
+            collect_MyListView.setVisibility(View.VISIBLE);
             if (collectAdapter == null) {
                 collectAdapter = new CollectAdapter(activity, list);
                 collect_MyListView.setAdapter(collectAdapter);
@@ -276,7 +278,8 @@ public class CollectFragmet extends Fragment {
                 collectAdapter.notifyDataSetChanged();
             }
         }else{
-            MyUtils.setToast("暂无数据");
+            collect_null.setVisibility(View.VISIBLE);
+            collect_MyListView.setVisibility(View.GONE);
         }
     }
 

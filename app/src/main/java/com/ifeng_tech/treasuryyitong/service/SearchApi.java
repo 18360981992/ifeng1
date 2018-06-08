@@ -3,6 +3,8 @@ package com.ifeng_tech.treasuryyitong.service;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -34,5 +36,16 @@ public interface SearchApi {
     @FormUrlEncoded
     @POST
     Observable<String> post(@Url String url, @FieldMap Map<String, String> map);
+
+
+
+    @FormUrlEncoded
+    @POST
+    Call<ResponseBody> postFormFieldMap(@Url String url,@FieldMap Map<String , String> map);
+
+
+    @GET
+    Observable<ResponseBody> downloadPicFromNet_Get(@Url String fileUrl);
+
 
 }

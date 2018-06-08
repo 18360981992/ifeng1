@@ -9,15 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
+import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
+import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,11 +32,11 @@ import java.util.List;
 
 public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.HomeZhengJi> {
     Context context;
-    List<CollectBean> collectlist;
+    List<Collect_Bean.DataBean.ListBean> collectlist;
     private final HomePageActivity activity;
     private final boolean aBoolean;
 
-    public HomeCollectAdapter(Context context, List<CollectBean> collectlist) {
+    public HomeCollectAdapter(Context context, List<Collect_Bean.DataBean.ListBean> collectlist) {
         this.context = context;
         this.collectlist = collectlist;
 
@@ -49,28 +55,78 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
 
     @Override
     public void onBindViewHolder(HomeZhengJi holder, final int position) {
-        holder.home_zhengji_img.setImageResource(collectlist.get(position).getImg());
-        holder.home_daohang_name.setText(collectlist.get(position).getName());
-        holder.home_zhengji_title.setText(collectlist.get(position).getTitle());
-        holder.home_zhengji_text.setText(collectlist.get(position).getText());
 
-        if(collectlist.get(position).getType()==0){ // 0==等待 1==未开始
+        if(collectlist.get(position).getGoodsImg()==null){
+            holder.home_zhengji_img.setImageResource(R.drawable.img_erroy);
+        }else{
+            Glide.with(context).load(collectlist.get(position).getGoodsImg()).error(R.drawable.img_erroy).into( holder.home_zhengji_img);
+        }
+
+        if(collectlist.get(position).getGoodsName().length()>10){
+            String name = collectlist.get(position).getGoodsName().substring(0, 10);
+            holder.home_daohang_name.setText(name+"...");
+        }else{
+            holder.home_daohang_name.setText(collectlist.get(position).getGoodsName());
+        }
+
+        if(collectlist.get(position).getAgencyName().equals("")||collectlist.get(position).getAgencyName()==null){
+            holder.home_zhengji_title.setText("福利特寄卖平台");
+        }else{
+            holder.home_zhengji_title.setText(collectlist.get(position).getAgencyName());
+        }
+
+        holder.home_zhengji_text.setText(collectlist.get(position).getResidueAmount()+"/"+collectlist.get(position).getAllAmount());
+
+        if(collectlist.get(position).getStage()==4){ //  3 "征集未开始" 4 "征集中"
             holder.home_zhengji_imgflag.setImageResource(R.drawable.dengdai);
         }else{
             holder.home_zhengji_imgflag.setImageResource(R.drawable.kaishi);
         }
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // 首页 中征集的点击
 
                 if(aBoolean){
-                    if(collectlist.get(position).getType()==0){ // 为0的时候可以点击进入征集页面
-                        Intent intent = new Intent(context, Collect_Activity.class);
-                        intent.putExtra("CollectBean",collectlist.get(position));
-                        context.startActivity(intent);
-                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    if(collectlist.get(position).getStage()==4){ // 为0的时候可以点击进入征集页面
+                        // 获取最大征集数量  和仓库进行比较
+                        final int JIN_DU = collectlist.get(position).getAllAmount() - collectlist.get(position).getResidueAmount();
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put("goodsId",collectlist.get(position).getGoodsId()+"");
+                        activity.myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                                if(warehouseBean.getCode().equals("2000")){
+                                    if(warehouseBean.getData().getList().size()>0){
+                                        WarehouseBean.DataBean.ListBean listBean = warehouseBean.getData().getList().get(0);
+                                        if(listBean.getAvailableQty()>=JIN_DU){
+                                            Intent intent = new Intent(activity, Collect_Activity.class);
+                                            intent.putExtra("CollectBean",collectlist.get(position));
+                                            intent.putExtra("MAX_NUM",JIN_DU);
+                                            activity.startActivity(intent);
+                                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                        }else{
+                                            Intent intent = new Intent(activity, Collect_Activity.class);
+                                            intent.putExtra("CollectBean",collectlist.get(position));
+                                            intent.putExtra("MAX_NUM",listBean.getAvailableQty());
+                                            activity.startActivity(intent);
+                                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                        }
+                                    }else{
+                                        MyUtils.setToast("您的仓库中暂无该商品！");
+                                    }
+                                }else{
+                                    MyUtils.setToast(warehouseBean.getMessage());
+                                }
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+                                MyUtils.setToast(ss);
+                            }
+                        });
+
                     }else{
                         MyUtils.setToast("该商品还未开始征集。。。");
                     }

@@ -25,6 +25,7 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import org.json.JSONException;
@@ -87,6 +88,8 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         reset_weitanchuan_img = (ImageView) findViewById(R.id.reset_weitanchuan_img);
         reset_weitanchuan_text = (TextView) findViewById(R.id.reset_weitanchuan_text);
         reset_weitanchuan = (LinearLayout) findViewById(R.id.reset_weitanchuan);
+
+        SoftHideKeyBoardUtil.assistActivity(this);
 
         //通过设置监听来获取 微弹窗 控件的高度
         reset_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {

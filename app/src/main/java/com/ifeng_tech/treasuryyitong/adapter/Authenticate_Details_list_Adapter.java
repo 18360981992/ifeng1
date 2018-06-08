@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Bean;
+import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Time_Bean;
 import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -25,11 +25,11 @@ import java.util.List;
 
 public class Authenticate_Details_list_Adapter extends BaseAdapter {
     Context context;
-    List<Authenticate_Details_Bean> list;
+    List<Authenticate_Details_Time_Bean.DataBean.ListBean> list;
     private final boolean aBoolean;
     private final Authenticate_Details_Activity activity;
 
-    public Authenticate_Details_list_Adapter(Context context, List<Authenticate_Details_Bean> list) {
+    public Authenticate_Details_list_Adapter(Context context, List<Authenticate_Details_Time_Bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
 
@@ -64,12 +64,12 @@ public class Authenticate_Details_list_Adapter extends BaseAdapter {
         LinearLayout authenticate_Details_list_xiawu = convertView.findViewById(R.id.authenticate_Details_list_xiawu);
         TextView authenticate_Details_list_xiawu_num = convertView.findViewById(R.id.authenticate_Details_list_xiawu_num);
 
-        Date date = new Date(list.get(position).getTime());
+        Date date = new Date(list.get(position).getOrderDate());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy年MM月dd日");
         authenticate_Details_list_time.setText(simpleDateFormat.format(date));
 
-        authenticate_Details_list_shangwu_num.setText(list.get(position).getAMsy()+"");
-        authenticate_Details_list_xiawu_num.setText(list.get(position).getPMsy()+"");
+        authenticate_Details_list_shangwu_num.setText(list.get(position).getRestNumber_am()+"");
+        authenticate_Details_list_xiawu_num.setText(list.get(position).getRestNumber_pm()+"");
 
         authenticate_Details_list_shangwu.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -17,19 +17,20 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
-import com.ifeng_tech.treasuryyitong.bean.CollectBean;
-import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
+import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
-import com.ifeng_tech.treasuryyitong.bean.InformationBean;
+import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
+import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
+import com.ifeng_tech.treasuryyitong.ui.Delivery_Activity;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.stx.xhb.xbanner.XBanner;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 
 import java.util.List;
 
@@ -67,14 +68,14 @@ public class HomeAdapter extends RecyclerView.Adapter{
             HomeZhengJi homeZhengJi = new HomeZhengJi(view);
             return homeZhengJi;
         }else if(viewType==3){
-            View view = LayoutInflater.from(context).inflate(R.layout.home_guangao, parent,false);
-            HomeGuangGao homeGuangGao = new HomeGuangGao(view);
-            return homeGuangGao;
-        }
-        else if(viewType==4){
             View view = LayoutInflater.from(context).inflate(R.layout.home_tuoguan, parent,false);
             HomeTuoGuan homeTuoGuan = new HomeTuoGuan(view);
             return homeTuoGuan;
+        }
+        else if(viewType==4){
+           View view = LayoutInflater.from(context).inflate(R.layout.home_guangao, parent,false);
+            HomeGuangGao homeGuangGao = new HomeGuangGao(view);
+            return homeGuangGao;
         }else {
             View view = LayoutInflater.from(context).inflate(R.layout.home_zixun, parent,false);
             HomeZiXun homeZiXun = new HomeZiXun(view);
@@ -117,12 +118,20 @@ public class HomeAdapter extends RecyclerView.Adapter{
                 public void gpsChuan(int i) {
                     switch (i){
                         case 0:
-                            MyUtils.setToast("点击了扫一扫。。。");
+//                            MyUtils.setToast("点击了扫一扫。。。");
+                            if(aBoolean){
+                                Intent intent = new Intent(activity, CaptureActivity.class);
+                                activity.startActivityForResult(intent, DashApplication.ERWIMA_SAOMIAO_req);
+                            }else{
+                                Intent intent1 = new Intent(context, LoginActivity.class);
+                                context.startActivity(intent1);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }
                             break;
                         case 1:
 //                            MyUtils.setToast("点击了收货。。。");
                             if(aBoolean){
-                                Intent intent1 = new Intent(context, My_Given_list_Activity.class);
+                                Intent intent1 = new Intent(context, Delivery_Activity.class);
                                 context.startActivity(intent1);
                                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             }else{
@@ -163,33 +172,21 @@ public class HomeAdapter extends RecyclerView.Adapter{
             RecyclerView home_zhengji_recyclerView = ((HomeZhengJi) holder).home_zhengji_recyclerView;
             RelativeLayout home_zhengji_RelativeLayout = ((HomeZhengJi) holder).home_zhengji_RelativeLayout;
 
-            List<CollectBean> collectlist = (List<CollectBean>) list.get(position);
-            home_zhengji_recyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL,false));
-            home_zhengji_recyclerView.setAdapter(new HomeCollectAdapter(context,collectlist));
-
-            home_zhengji_RelativeLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HomePageActivity.homePageActivity_JieKou.chuan(0); // 点击征集
-                }
-            });
+            List<Collect_Bean.DataBean.ListBean> collectlist = (List<Collect_Bean.DataBean.ListBean>) list.get(position);
+//            home_zhengji_recyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL,false));
+//            home_zhengji_recyclerView.setAdapter(new HomeCollectAdapter(context,collectlist));
+//
+//            home_zhengji_RelativeLayout.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    HomePageActivity.homePageActivity_JieKou.chuan(0); // 点击征集
+//                }
+//            });
         }else if(getItemViewType(position)==3){
-            ImageView home_guanggao_img = ((HomeGuangGao) holder).home_guanggao_img;
-            Integer imguri = (Integer) list.get(position);
-            Glide.with(context).load(imguri).into(home_guanggao_img);
-            home_guanggao_img.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    HomePageActivity.homePageActivity_JieKou.chuan(1); // 点击广告
-                }
-            });
-
-        }
-        else if(getItemViewType(position)==4){  // 托管
             RecyclerView home_tuoguan_recyclerView = ((HomeTuoGuan) holder).home_tuoguan_recyclerView;
             RelativeLayout home_tuoguan_RelativeLayout = ((HomeTuoGuan) holder).home_tuoguan_RelativeLayout;
 
-            List<CollocationBean> trusteeshiplist = (List<CollocationBean>) list.get(position);
+            List<Collocation_Subscribe_bean.DataBean.ListBean> trusteeshiplist = (List<Collocation_Subscribe_bean.DataBean.ListBean>) list.get(position);
             home_tuoguan_recyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL,false));
             home_tuoguan_recyclerView.setAdapter(new HomeCollocationAdapter(context,trusteeshiplist));
 
@@ -200,10 +197,22 @@ public class HomeAdapter extends RecyclerView.Adapter{
                 }
             });
 
+        }
+        else if(getItemViewType(position)==4){  // 托管
+
+            ImageView home_guanggao_img = ((HomeGuangGao) holder).home_guanggao_img;
+            Integer imguri = (Integer) list.get(position);
+            Glide.with(context).load(imguri).into(home_guanggao_img);
+            home_guanggao_img.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    HomePageActivity.homePageActivity_JieKou.chuan(1); // 点击广告
+                }
+            });
         }else{  // 资讯
             RecyclerView home_zixun_myListView = ((HomeZiXun) holder).home_zixun_myListView;
             RelativeLayout home_zixun_relativeLayout = ((HomeZiXun) holder).home_zixun_relativeLayout;
-            final List<InformationBean> informationlist = (List<InformationBean>) list.get(position);
+            final List<Information_Zi_Bean.DataBean.ListBean> informationlist = (List<Information_Zi_Bean.DataBean.ListBean>) list.get(position);
             home_zixun_myListView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
             HomeInformationAdapter homeInformationAdapter = new HomeInformationAdapter(context, informationlist);
@@ -286,7 +295,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
         public HomeZhengJi(View itemView) {
             super(itemView);
             home_zhengji_recyclerView = itemView.findViewById(R.id.home_zhengji_RecyclerView);
-            home_zhengji_RelativeLayout = itemView.findViewById(R.id.home_zhengji_RelativeLayout);
+//            home_zhengji_RelativeLayout = itemView.findViewById(R.id.home_zhengji_RelativeLayout);
         }
     }
 

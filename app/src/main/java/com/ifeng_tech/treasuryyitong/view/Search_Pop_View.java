@@ -12,7 +12,7 @@ import android.widget.PopupWindow;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.MyPopList_Atapter;
-import com.ifeng_tech.treasuryyitong.bean.GoodsListByCode_Bean;
+import com.ifeng_tech.treasuryyitong.bean.tihuo.DepotListByGoodsId_Bean;
 
 import java.util.List;
 
@@ -27,8 +27,10 @@ public class Search_Pop_View extends PopupWindow {
     private final ListView search_pop_listview;
     Context context;
 
+
+
     public interface Search_Pop_JieKou{
-        void chuan(List<GoodsListByCode_Bean.DataBean.ListBean> list,int postion);
+        void chuan(List<DepotListByGoodsId_Bean.DataBean.ListBean> list,int postion);
     }
 
     Search_Pop_JieKou search_Pop_JieKou;
@@ -43,7 +45,7 @@ public class Search_Pop_View extends PopupWindow {
      * @param width  对应输入框的宽
      * @param list   数据源
      */
-    public Search_Pop_View(Context context,int width, List<GoodsListByCode_Bean.DataBean.ListBean> list ) {
+    public Search_Pop_View(Context context,int width, List<DepotListByGoodsId_Bean.DataBean.ListBean> list ) {
         super(context);
         this.context=context;
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -75,7 +77,7 @@ public class Search_Pop_View extends PopupWindow {
      * 更新pop框中的数据源
      * @param list
      */
-    public void setPopShuJu(final List<GoodsListByCode_Bean.DataBean.ListBean> list) {
+    public void setPopShuJu(final List<DepotListByGoodsId_Bean.DataBean.ListBean> list) {
 
         search_pop_listview.setAdapter(new MyPopList_Atapter(context,list));
 

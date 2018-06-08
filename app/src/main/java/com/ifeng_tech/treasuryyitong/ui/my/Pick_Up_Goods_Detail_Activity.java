@@ -18,6 +18,7 @@ import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.EPickUpStage;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
+import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -75,33 +76,44 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
             @Override
             public void forbidClick(View v) {
 //                MyUtils.setToast("点击注销。。。");
-                HashMap<String, String> map = new HashMap<>();
-                map.put("orderId",pick_up_goods_bean.getId()+"");
-                myPresenter.postPreContent(APIs.cancelTakeDeliveryOrder, map, new MyInterfaces() {
+                final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(Pick_Up_Goods_Detail_Activity.this, R.style.dialog_setting,"是否确认注销该提货单");
+                MyUtils.getPuTongDiaLog(Pick_Up_Goods_Detail_Activity.this,takeCommonDialog);
+                takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
                     @Override
-                    public void chenggong(String json) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(json);
-                            String code = (String) jsonObject.get("code");
-                            if(code.equals("2000")){
-//                                CancelTakeDeliveryOrder_Bean cancelTakeDeliveryOrder_bean = new Gson().fromJson(json, CancelTakeDeliveryOrder_Bean.class);
-                                MyUtils.setToast((String) jsonObject.get("message"));
-                                finish();
-                            }else{
-                                MyUtils.setToast((String) jsonObject.get("message"));
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                    public void quxiao() {
+                        takeCommonDialog.dismiss();
                     }
 
                     @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast(ss);
+                    public void queren() {
+                        HashMap<String, String> map = new HashMap<>();
+                        map.put("orderId",pick_up_goods_bean.getId()+"");
+                        myPresenter.postPreContent(APIs.cancelTakeDeliveryOrder, map, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    String code = (String) jsonObject.get("code");
+                                    if(code.equals("2000")){
+//                                CancelTakeDeliveryOrder_Bean cancelTakeDeliveryOrder_bean = new Gson().fromJson(json, CancelTakeDeliveryOrder_Bean.class);
+                                        MyUtils.setToast((String) jsonObject.get("message"));
+                                        takeCommonDialog.dismiss();
+                                        finish();
+                                    }else{
+                                        MyUtils.setToast((String) jsonObject.get("message"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+                                MyUtils.setToast(ss);
+                            }
+                        });
                     }
                 });
-
-
             }
         });
 
@@ -129,7 +141,12 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         pick_up_goods_detail_jianshu.setText(""+ pick_up_goods_bean.getDeliveryQty());  // 提货件数
         pick_up_goods_detail_shuliang.setText(""+ pick_up_goods_bean.getQuantity());  // 数量
 
-        pick_up_goods_detail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(pick_up_goods_bean.getDeliveryFee()));  // 手续费
+//        pick_up_goods_detail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(pick_up_goods_bean.getDeliveryFee()));  // 手续费
+        HashMap<String, String> map = new HashMap<>();
+        map.put("goodsId",pick_up_goods_bean.getGoodsId()+"");
+        getTiHuo_ShouXuFei(map,pick_up_goods_detail_shouxufei);  // 提货手续费
+
+
         pick_up_goods_detail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));  // 仓储费  暂无数据
 
         pick_up_goods_detail_type.setText(EPickUpStage.getName(pick_up_goods_bean.getBillStage()));
@@ -162,5 +179,9 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
 
     }
 
-
+    @Override
+    public void finish() {
+        super.finish();
+        overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
 }

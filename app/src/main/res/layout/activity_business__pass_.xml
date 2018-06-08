@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Business_Pass_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -105,6 +105,8 @@
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColorHint="@color/color_999999"
+                    android:gravity="center_vertical"
+                    android:maxLength="12"
                     />
 
             </LinearLayout>
@@ -135,6 +137,8 @@
                     android:inputType="textPassword"
                     android:singleLine="true"
                     android:textColorHint="@color/color_999999"
+                    android:gravity="center_vertical"
+                    android:maxLength="12"
                     />
 
             </LinearLayout>
@@ -171,6 +175,7 @@
                         android:singleLine="true"
                         android:textColor="@color/name_se"
                         android:textSize="@dimen/x26"
+                        android:gravity="center_vertical"
                         />
 
                     <View
@@ -190,11 +195,10 @@
                         android:paddingRight="@dimen/x12"
                         >
                         <ImageView
-                            android:id="@+id/business_pass_tu_yan_img"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:background="@drawable/tu_yan"
+                            android:id="@+id/business_pass_tu_yan_img"
+                            android:layout_gravity="center"
                             />
                     </LinearLayout>
 
@@ -230,10 +234,12 @@
                         android:background="@null"
                         android:hint="请输入短信验证码"
                         android:inputType="number"
-                        android:maxLength="6"
+                        android:maxLength="4"
                         android:singleLine="true"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x26"
+                        android:gravity="center_vertical"
+                        />
 
                     <View
                         android:layout_width="@dimen/x2"
@@ -269,7 +275,9 @@
                     android:background="@drawable/congzhi_bg"
                     android:text="确定"
                     android:textColor="@color/baise"
-                    android:textSize="@dimen/x28" />
+                    android:textSize="@dimen/x28"
+                    android:gravity="center"
+                    />
             </RelativeLayout>
 
         </LinearLayout>

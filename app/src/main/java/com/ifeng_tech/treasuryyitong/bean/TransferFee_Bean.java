@@ -3,15 +3,16 @@ package com.ifeng_tech.treasuryyitong.bean;
 /**
  * Created by zzt on 2018/6/1.
  *
- *  转赠手续费
+ *  转赠/提货 手续费
  */
 
 public class TransferFee_Bean {
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"commonFeeRate":0.55,"TransferFee":6.4,"availableQty":"102"}
+     * data : {"deliveryFee":4,"commonFeeRate":0.55,"TransferFee":6,"availableQty":"112"}
      */
 
     private String code;
@@ -44,14 +45,24 @@ public class TransferFee_Bean {
 
     public static class DataBean {
         /**
+         * deliveryFee : 4
          * commonFeeRate : 0.55
-         * TransferFee : 6.4
-         * availableQty : 102
+         * TransferFee : 6
+         * availableQty : 112
          */
 
+        private double deliveryFee;   // 提货
         private double commonFeeRate;
-        private double TransferFee;
+        private double TransferFee;   // 转赠
         private String availableQty;
+
+        public double getDeliveryFee() {
+            return deliveryFee;
+        }
+
+        public void setDeliveryFee(double deliveryFee) {
+            this.deliveryFee = deliveryFee;
+        }
 
         public double getCommonFeeRate() {
             return commonFeeRate;

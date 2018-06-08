@@ -111,7 +111,9 @@
                 android:background="@drawable/congzhi_bg"
                 android:text="重新认证"
                 android:textColor="@color/baise"
-                android:textSize="@dimen/x28" />
+                android:textSize="@dimen/x28"
+                android:gravity="center"
+                />
         </RelativeLayout>
 
     </RelativeLayout>

@@ -6,8 +6,8 @@
 
     <ListView
         android:id="@+id/search_pop_listview"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/x300"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x200"
         android:scrollbars="none"
         android:background="@color/baise"
         android:overScrollMode="never"

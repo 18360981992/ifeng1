@@ -92,30 +92,30 @@
                 />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/zhengji"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            >
-            <ImageView
-                android:id="@+id/zhengjiImg"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x40"
-                android:layout_gravity="center"/>
-            <TextView
-                android:id="@+id/zhengjiName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="征集"
-                android:textColor="@color/zhuse_ziti"
-                android:textSize="@dimen/x20"
-                android:gravity="center"
-                android:layout_marginTop="@dimen/x8"
-                />
-        </LinearLayout>
+        <!--<LinearLayout-->
+            <!--android:id="@+id/zhengji"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:orientation="vertical"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:gravity="center"-->
+            <!--&gt;-->
+            <!--<ImageView-->
+                <!--android:id="@+id/zhengjiImg"-->
+                <!--android:layout_width="@dimen/x40"-->
+                <!--android:layout_height="@dimen/x40"-->
+                <!--android:layout_gravity="center"/>-->
+            <!--<TextView-->
+                <!--android:id="@+id/zhengjiName"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="征集"-->
+                <!--android:textColor="@color/zhuse_ziti"-->
+                <!--android:textSize="@dimen/x20"-->
+                <!--android:gravity="center"-->
+                <!--android:layout_marginTop="@dimen/x8"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:id="@+id/xiaoxi"

@@ -6,18 +6,35 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.Information_LanMu_Bean;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Information_zi_Fragment;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyTabLayout;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ *  资讯列表
+ */
 public class Information_Activity extends BaseMVPActivity<Information_Activity, MyPresenter<Information_Activity>> {
 
     private TabLayout zixun_TabLayout;
     private FrameLayout zixun_FrameLayout;
-    String[] title = {"全部", "热门", "关注", "栏目1", "栏目2", "栏目3", "栏目4", "栏目5", "栏目6", "栏目7", "栏目8"};
     private RelativeLayout zixun_Fan;
+
+
+    private List<Information_LanMu_Bean.DataBean.ListBean> list;
 
     @Override
     public MyPresenter<Information_Activity> initPresenter() {
@@ -48,11 +65,6 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
             }
         });
 
-        for (int i = 0; i < title.length; i++) {
-            //添加tab
-            zixun_TabLayout.addTab(zixun_TabLayout.newTab().setText(title[i]));
-        }
-
 
         //设置tab的点击监听器
         zixun_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -72,24 +84,81 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
             }
         });
 
+        HashMap<String, String> map = new HashMap<>();
+        map.put("mainColumnId","147");
+        myPresenter.postPreContent(APIs.getSubColumnList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        Information_LanMu_Bean information_lanMu_bean = new Gson().fromJson(json, Information_LanMu_Bean.class);
+                        list = information_lanMu_bean.getData().getList();
+                        if(list.size()>0){
+                            List<String> listTitle=new ArrayList<>();
+                            listTitle.clear();
+                            for (Information_LanMu_Bean.DataBean.ListBean bean: list){
+                                listTitle.add(bean.getName());
+                            }
+                            listTitle.add(0,"全部");
+                            for (int i = 0; i < listTitle.size(); i++) {
+                                //添加tab
+                                zixun_TabLayout.addTab(zixun_TabLayout.newTab().setText(listTitle.get(i)));
+                            }
+
+                            //设置传值，，将title的值穿走，，默认展示“全部”
+                            setSelected(listTitle.get(0));
+                        }
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast("资讯主栏目=="+ss);
+            }
+        });
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        //设置传值，，将title的值穿走，，默认展示“全部”
-        setSelected(title[0]);
     }
 
     //设置传值方法
     private void setSelected(String value) {
+        int id=0;
+        String type="";
+        if(value.equals("全部")){
+            id=147;
+            type="1";
+        }else{
+            for (Information_LanMu_Bean.DataBean.ListBean bean: list){
+                if(value.equals(bean.getName())){
+                    id=bean.getId();
+                    break;
+                }
+            }
+            type="2";
+        }
+
+
         Bundle bundle = new Bundle();
-        bundle.putString("top", value);
+        bundle.putString("id", id+"");
+        bundle.putString("type",type);
+        bundle.putString("top",value);
+
         Information_zi_Fragment information_zi_Fragment = new Information_zi_Fragment();
         information_zi_Fragment.setArguments(bundle);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.zixun_FrameLayout, information_zi_Fragment).commit();
     }
+
 
     private void initView() {
         zixun_TabLayout = (TabLayout) findViewById(R.id.zixun_TabLayout);

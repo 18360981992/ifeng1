@@ -1,8 +1,6 @@
 package com.ifeng_tech.treasuryyitong.utils;
 
 
-import android.util.Log;
-
 import io.reactivex.Observer;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
@@ -21,7 +19,6 @@ public abstract class BaseServer implements Observer<String> {
     @Override
     public void onError(Throwable e) {
         onErroy("请求失败");
-        Log.i("jiba","===="+e);
     }
 
     @Override

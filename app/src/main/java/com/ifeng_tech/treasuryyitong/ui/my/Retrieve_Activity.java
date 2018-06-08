@@ -28,7 +28,7 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
-import com.ifeng_tech.treasuryyitong.view.AniDialog;
+import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import org.json.JSONException;
@@ -75,7 +75,11 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
     String mobile="";  // 短信发送对象
 
-    String codeType="6";
+    /*
+    ("通用", 0),("注册", 1),("登录", 2),("找回密码", 3),("开户", 4),("重置登录密码", 5),
+    ("更换绑定手机", 6),("绑定新手机", 7),("绑定邮箱", 8),("设置交易密码", 9),("重置交易密码", 10);
+     */
+    String codeType="0";
     @Override
     public MyPresenter<Retrieve_Activity> initPresenter() {
         if (myPresenter == null) {
@@ -94,7 +98,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         /**
          *  因为这个页面被重复使用了3次  所以逻辑要。。。
          */
-        type = intent.getIntExtra("type", 0); // 用于识别是哪个验证  分为找回密码==1，更改手机==2
+        type = intent.getIntExtra("type", 0); // 用于识别是哪个验证  分为找回密码/忘记密码==1，更改手机==2
         // 用于判断手机号码的输入框 的隐藏/显示
         select = intent.getIntExtra("select", 0);
 
@@ -154,27 +158,15 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                     public void chenggong(String json) {
                         SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
                         if(smCodeBean.getCode().equals("2000")){
-//                            MyUtils.setObjectAnimator(retrieve_weitanchuan,
-//                                    retrieve_weitanchuan_img,
-//                                    retrieve_weitanchuan_text,
-//                                    weitanchuan_height,
-//                                    true, "短信发送成功!");
                             MyUtils.setToast("短信发送成功");
                         }
                     }
 
                     @Override
                     public void shibai(String ss) {
-//                        MyUtils.setObjectAnimator(retrieve_weitanchuan,
-//                                retrieve_weitanchuan_img,
-//                                retrieve_weitanchuan_text,
-//                                weitanchuan_height,
-//                                false, "短信发送失败!");
                         MyUtils.setToast("短信发送失败");
                     }
                 });
-
-
             }
         });
 
@@ -206,6 +198,8 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         retrieve_weitanchuan_img = (ImageView) findViewById(R.id.retrieve_weitanchuan_img);
         retrieve_weitanchuan_text = (TextView) findViewById(R.id.retrieve_weitanchuan_text);
         retrieve_weitanchuan = (LinearLayout) findViewById(R.id.retrieve_weitanchuan);
+
+        SoftHideKeyBoardUtil.assistActivity(this);
 
         //通过设置监听来获取 微弹窗 控件的高度
         retrieve_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -253,42 +247,15 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             return;
         }
 
-
         HashMap<String, String> map = new HashMap<>();
         map.put("mobile",mobile);
         map.put("smsCode",duan);
         map.put("codeType",codeType);
-        //  进度框
-        final AniDialog aniDialog = new AniDialog(Retrieve_Activity.this, null);
-        aniDialog.show();
-        setXiaYiBu(map, aniDialog);
-
-
-//        MyUtils.setToast("看清select的值，携带参数请求网络。。。");
-
-//        if (true) {
-//            if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
-//                Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
-//                startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
-//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-//            } else {
-//                Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
-//                startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
-//                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-//            }
-//
-//        } else {
-//            MyUtils.setObjectAnimator(retrieve_weitanchuan,
-//                    retrieve_weitanchuan_img,
-//                    retrieve_weitanchuan_text,
-//                    weitanchuan_height,
-//                    false, "修改失败!");
-//        }
-
+        setXiaYiBu(map,duan);
     }
 
     // 下一步 的点击接口调用
-    private void setXiaYiBu(final HashMap<String, String> map, final AniDialog aniDialog) {
+    private void setXiaYiBu(final HashMap<String, String> map, final String duan) {
         myPresenter.postPreContent(APIs.verifySmsCode, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
@@ -296,20 +263,20 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     String message = (String) jsonObject.get("message");
-
                     if(code.equals("2000")){
-                        aniDialog.dismiss();
-                        if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {
+                        if (type == DashApplication.ANQUAN_TYPE_ZHAOHUI) {  // 从有输入框的页面 跳到忘记密码/ 找回密码  暂无接口
                             Intent intent = new Intent(Retrieve_Activity.this, Forget_Activity.class);
+                            intent.putExtra("mobile",mobile);
+                            intent.putExtra("smsCode",duan);
                             startActivityForResult(intent, DashApplication.RETRIEVE_TO_FORGET_req);
-                        } else {
+                        } else {                                          // 跳到更换手机号 页面
                             Intent intent = new Intent(Retrieve_Activity.this, Change_Activity.class);
+                            intent.putExtra("oldSmsCode",duan);
                             startActivityForResult(intent, DashApplication.RETRIEVE_TO_CHANGE_req);
                         }
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
 
                     }else{
-                        aniDialog.dismiss();
                         MyUtils.setObjectAnimator(retrieve_weitanchuan,
                                 retrieve_weitanchuan_img,
                                 retrieve_weitanchuan_text,
@@ -325,7 +292,6 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
             @Override
             public void shibai(String ss) {
-                aniDialog.dismiss();
                 MyUtils.setObjectAnimator(retrieve_weitanchuan,
                     retrieve_weitanchuan_img,
                     retrieve_weitanchuan_text,

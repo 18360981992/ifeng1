@@ -1,12 +1,16 @@
 package com.ifeng_tech.treasuryyitong.bean.my;
 
+import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Activity;
+
 import java.util.List;
 
 /**
  * Created by zzt on 2018/5/31.
  */
 
-public class My_Property_list_Bean {
+public class My_Property_list_Bean<B extends BaseMVPActivity<Business_Pass_Activity, MyPresenter<Business_Pass_Activity>>> {
 
     /**
      * code : 2000

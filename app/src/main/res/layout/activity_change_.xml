@@ -40,6 +40,12 @@
 
     </RelativeLayout>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -52,6 +58,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/x80"
                 android:gravity="center"
+                android:layout_marginTop="@dimen/x20"
                 >
                 <TextView
                     android:layout_width="wrap_content"
@@ -73,6 +80,7 @@
                     android:singleLine="true"
                     android:inputType="number"
                     android:maxLength="11"
+                    android:gravity="center_vertical"
                     />
 
             </LinearLayout>
@@ -108,7 +116,8 @@
                         android:singleLine="true"
                         android:textColor="@color/name_se"
                         android:textSize="@dimen/x28"
-                        android:maxLength="6"
+                        android:maxLength="4"
+                        android:gravity="center_vertical"
                         />
 
                     <View
@@ -130,6 +139,7 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/change_weitanchuan"
             android:layout_width="match_parent"
@@ -154,6 +164,7 @@
                 android:layout_marginLeft="@dimen/x16"/>
 
         </LinearLayout>
+
         <Button
             android:id="@+id/change_btn"
             android:layout_width="match_parent"
@@ -165,6 +176,9 @@
             android:background="@drawable/congzhi_bg"
             android:text="确认"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x28" />
+            android:textSize="@dimen/x28"
+            android:gravity="center"
+            />
     </RelativeLayout>
+    </ScrollView>
 </LinearLayout>

@@ -1,6 +1,8 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,17 +19,31 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.login.SmsCodeBean;
+import com.ifeng_tech.treasuryyitong.bean.my.UpLode_bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
+import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.ImageUtils;
-import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.TakePhotosDialog;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.File;
+import java.util.HashMap;
+
+import me.ele.download.FinalHttp;
+import me.ele.download.http.AjaxCallBack;
+import me.ele.download.http.AjaxParams;
 
 import static com.ifeng_tech.treasuryyitong.utils.ImageUtils.getPhotos;
 
@@ -56,18 +72,23 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                certification_duan_btn.setText("点击发送");
-                certification_duan_btn.setEnabled(true);
-            } else {
-                certification_duan_btn.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    certification_duan_btn.setText("点击发送");
+                    certification_duan_btn.setEnabled(true);
+                } else {
+                    certification_duan_btn.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
             }
+
         }
     };
-
+    private String shouji;
+    String frontUrl="";
+    String backUrl="";
 
     @Override
     public MyPresenter<Certification_Activity> initPresenter() {
@@ -83,6 +104,8 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         setContentView(R.layout.activity_certification_);
         initView();
 
+        shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
+
         certification_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +113,24 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             }
         });
 
+        // 点击刚换图形验证码
         certification_tu_yan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyUtils.setToast("请求网络，获取图形验证码。。。");
+        //                MyUtils.setToast("请求网络，获取图形验证码。。。");
+                myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+                    @Override
+                    public void chenggong(Bitmap bitmap) {
+                        if(bitmap!=null){
+                            certification_tu_yan_btn.setImageBitmap(bitmap);
+                        }
+                    }
+
+                    @Override
+                    public void shibai(String ss) {
+                        MyUtils.setToast("图形验证码获取失败！");
+                    }
+                });
             }
         });
 
@@ -115,14 +152,30 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             }
         });
 
+        // 短信验证
         certification_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 certification_duan_btn.setText("重新发送" + time + "(s)");
                 certification_duan_btn.setEnabled(false);
                 h.sendEmptyMessageDelayed(0, 1000);
-
-                MyUtils.setToast("请求网络，获取短信验证码。。。");
+//                MyUtils.setToast("请求网络，获取短信验证码。。。");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("mobile", shouji);
+                map.put("codeType","0");  // ("通用", 0)
+                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                        if(smCodeBean.getCode().equals("2000")){
+                            MyUtils.setToast("短信发送成功");
+                        }
+                    }
+                    @Override
+                    public void shibai(String ss) {
+                        MyUtils.setToast("短信发送失败");
+                    }
+                });
             }
         });
     }
@@ -130,6 +183,21 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
     @Override
     protected void onResume() {
         super.onResume();
+        // 获取图形验证码
+        myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+            @Override
+            public void chenggong(Bitmap bitmap) {
+                if(bitmap!=null){
+                    certification_tu_yan_btn.setImageBitmap(bitmap);
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast("图形验证码获取失败！");
+            }
+        });
+
         // 接口回调 选择相册/相机
         setBuyerJieKou(new BuyerJieKou() {
             @Override
@@ -156,43 +224,77 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         if(requestCode==DashApplication.CERTIFICATION_TO_ADVP_req&&resultCode==DashApplication.CERTIFICATION_TO_ADVP_res){
             finish();
         }
-        // 正面照的请求结果
+        // 正面照的请求结果  相册
         if(requestCode==100&resultCode==RESULT_OK){
             Uri uri = data.getData();
             File fileUri = ImageUtils.getFileUri(uri, this); // 将uri转成file
-//            imgfront=fileUri.length()+""; // 为正面照的参数大小赋值
-//            byte[] filebyte = MyUtils.Filebyte(fileUri);  // 将file转成字节 byte[]
-//            imgfrontstr = Base64.encodeToString(filebyte, Base64.DEFAULT); // base64加密  并为参数赋值
-
             certification_shangchuan_zheng_img.setImageURI(uri);
+            getUplode(fileUri,1);  // 上传文件
         }
-        if(requestCode==1000&resultCode==RESULT_OK){
+        if(requestCode==1000&resultCode==RESULT_OK){   // 相机
             File photos = ImageUtils.getPhotos(data);
-
-//            imgfront=photos.length()+""; // 为正面照的参数大小赋值
-//            byte[] filebyte = MyUtlis.Filebyte(photos);  // 将file转成字节 byte[]
-//            imgfrontstr = Base64.encodeToString(filebyte, Base64.DEFAULT); // base64加密  并为参数赋值
-
             Glide.with(this).load(photos).into(certification_shangchuan_zheng_img);
+            getUplode(photos,1);  // 上传文件
         }
 
-        // 背面照的请求结果
+        // 背面照的请求结果  相册
         if(requestCode==200&resultCode==RESULT_OK){
             Uri uri = data.getData();
             File fileUri = ImageUtils.getFileUri(uri, this); // 将uri转成file
-//            imgback=fileUri.length()+""; // 为正面照的参数大小赋值
-//            byte[] filebyte = MyUtlis.Filebyte(fileUri);  // 将file转成字节 byte[]
-//            imgbackstr = Base64.encodeToString(filebyte, Base64.DEFAULT); // base64加密  并为参数赋值
             certification_shangchuan_bei_img.setImageURI(uri);
+            getUplode(fileUri,2);  // 上传文件
         }
         if(requestCode==2000&resultCode==RESULT_OK){
             File photos = getPhotos(data);
-//            imgback=photos.length()+""; // 为正面照的参数大小赋值
-//            byte[] filebyte = MyUtlis.Filebyte(photos);  // 将file转成字节 byte[]
-//            imgbackstr = Base64.encodeToString(filebyte, Base64.DEFAULT); // base64加密  并为参数赋值
             Glide.with(this).load(photos).into(certification_shangchuan_bei_img);
+            getUplode(photos,2);  // 上传文件
         }
 
+    }
+
+    /**
+     * 上传文件
+     * @param fileUri  文件类型
+     * @param i  // 状态值  1==正面 2==背面
+     */
+    FinalHttp fh = new FinalHttp();  // 框架的实例化
+    private void getUplode(File fileUri, final int i) {
+        AjaxParams params = new AjaxParams();
+        try {
+            params.put("file", fileUri);
+            fh.post(APIs.upload, params, new AjaxCallBack<String>() {
+                @Override
+                public void onSuccess(String json) {
+                    super.onSuccess(json);
+                    try {
+                        JSONObject jsonObject = new JSONObject(json);
+                        String code = (String) jsonObject.get("code");
+                        if(code.equals("2000")){
+                            UpLode_bean upLode_bean = new Gson().fromJson(json, UpLode_bean.class);
+                            if(i==1){
+                                frontUrl=upLode_bean.getData();
+                            }else{
+                                backUrl=upLode_bean.getData();
+                            }
+                            MyUtils.setToast((String) jsonObject.get("message"));
+                        }else{
+                            MyUtils.setToast((String) jsonObject.get("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Throwable t, int errorNo, String strMsg) {
+                    super.onFailure(t, errorNo, strMsg);
+                    MyUtils.setToast("上传失败！");
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -245,7 +347,6 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             return;
         }
 
-        LogUtils.i("jiba","==="+MyUtils.isIDCard(shenfenzheng));
         if(MyUtils.isIDCard(shenfenzheng)==false){
             Toast.makeText(this, "输入的身份证号有误", Toast.LENGTH_SHORT).show();
             return;
@@ -268,22 +369,49 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         /**
          *  从这里的入口永远也不会进到失败的页面，所以不需要
          */
-        MyUtils.setToast("请求网络，进行认证。。。");
+//        MyUtils.setToast("请求网络，进行认证。。。");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("realName", name);
+        map.put("idCard", shenfenzheng);
+        map.put("frontUrl", frontUrl);
+        map.put("backUrl", backUrl);
+        map.put("smsCode", duan);
+        map.put("verifyCode", yan);
 
-        if(true){
-            // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
-            Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
-            intent.putExtra("rengzheng_type",1);
-            startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
-            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-        }
+        //  进度框
+        final ProgressDialog aniDialog = new ProgressDialog(Certification_Activity.this);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载...");
+        aniDialog.show();
 
-//        else{
-//            Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
-//            intent.putExtra("rengzheng_type",2);
-//            startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
-//            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-//        }
+        // 设置实名认证 确认按钮
+        myPresenter.postPreContent(APIs.applyIdentify, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
+                        Intent intent = new Intent(Certification_Activity.this, ADVP_R_Activity.class);
+                        intent.putExtra("rengzheng_type",1);
+                        startActivityForResult(intent, DashApplication.CERTIFICATION_TO_ADVP_req);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setToast(ss);
+            }
+        });
 
     }
 

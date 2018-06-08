@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.GoodsListByCode_Bean;
+import com.ifeng_tech.treasuryyitong.bean.tihuo.DepotListByGoodsId_Bean;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import java.util.List;
 
 public class MyPopList_Atapter extends android.widget.BaseAdapter{
     Context context;
-    List<GoodsListByCode_Bean.DataBean.ListBean> list;
+    List<DepotListByGoodsId_Bean.DataBean.ListBean> list;
 
-    public MyPopList_Atapter(Context context, List<GoodsListByCode_Bean.DataBean.ListBean> list) {
+    public MyPopList_Atapter(Context context, List<DepotListByGoodsId_Bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -44,7 +44,12 @@ public class MyPopList_Atapter extends android.widget.BaseAdapter{
             convertView=View.inflate(context, R.layout.pop_list_item,null);
         }
         TextView pop_list_text = convertView.findViewById(R.id.pop_list_text);
-        pop_list_text.setText(list.get(position).getCommodityCode());
+        if(list.get(position).getDepotName()!=null && !list.get(position).getDepotName().equals("")){
+            pop_list_text.setText(list.get(position).getDepotName());
+        }else{
+            pop_list_text.setText("测试仓库");
+        }
+
 
         return convertView;
     }

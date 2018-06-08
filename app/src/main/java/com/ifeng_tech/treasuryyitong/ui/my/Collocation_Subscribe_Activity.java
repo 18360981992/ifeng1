@@ -9,10 +9,13 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Collocation_Subscribe_list_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
+import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
@@ -22,7 +25,11 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 import com.stx.xhb.xbanner.XBanner;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,7 +45,7 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
 
     List<Integer> imgs = new ArrayList<>();
 
-    List<CollocationBean> list = new ArrayList<>();
+    List<Collocation_Subscribe_bean.DataBean.ListBean> list = new ArrayList<>();
     private Collocation_Subscribe_list_Adapter collocation_subscribe_list_adapter;
     private LinearLayout collocation_subscribe_null;
 
@@ -63,7 +70,6 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
             }
         });
 
-
         /**
          * 解决scrollview 显示不在顶部问题
          */
@@ -71,76 +77,151 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
         collocation_Subscribe_XBanner.setFocusableInTouchMode(true);
         collocation_Subscribe_XBanner.requestFocus();
 
-        // 设置刷新
-        initRefreshListView();
-
     }
 
+
+    HashMap<String, String> map = new HashMap<>();
+    int pageNum=1;
     @Override
     protected void onResume() {
         super.onResume();
 
-        if(imgs.size()<=0||list.size()<=0){
-            collocation_subscribe_null.setVisibility(View.VISIBLE);
-            collocation_Subscribe_pulltoscroll.setVisibility(View.GONE);
-        }else{
-            collocation_subscribe_null.setVisibility(View.GONE);
-            collocation_Subscribe_pulltoscroll.setVisibility(View.VISIBLE);
-
-            collocation_Subscribe_XBanner.setData(imgs,null);//设置数据源
-            collocation_Subscribe_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
-                @Override
-                public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    ((ImageView) view).setImageResource(imgs.get(position));
+        collocation_Subscribe_XBanner.setData(imgs,null);//设置数据源
+        collocation_Subscribe_XBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
+            @Override
+            public void loadBanner(XBanner banner, Object model, View view, int position) {
+                ((ImageView) view).setImageResource(imgs.get(position));
 //                    Glide.with(Collocation_Subscribe_Activity.this).load(imgs.get(position)).into((ImageView) view);
-                }
-            });
-            // 初始数据
-            setCollocation_sub_list_Adapter();
+            }
+        });
 
-        }
-
+        pageNum=1;
+        map.put("pageNum",pageNum+"");
+        map.put("pageSize",10+"");
+        getFirstConect(map);
 
 
         collocation_Subscribe_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                pageNum=1;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",10+"");
+                getFirstConect(map);
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                pageNum++;
+                map.put("pageNum",pageNum+"");
+                map.put("pageSize",10+"");
+                getNextConect(map);
             }
         });
 
         collocation_Subscribe_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(list.get(position).getType()==0){ // 0==等待 1==未开始
+                if(list.get(position).getState().equals("1")){ // 1==等待 2==未开始
                     Intent intent = new Intent(Collocation_Subscribe_Activity.this, Authenticate_Details_Activity.class);
                     intent.putExtra("CollocationBean",list.get(position));
                     startActivity(intent);
                 }else{
-                    MyUtils.setToast("该商品还未开始托管。。。");
+                    MyUtils.setToast("该商品还未开始托管...");
                 }
             }
         });
+    }
 
 
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getCurrentTrusteeshipList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Collocation_Subscribe_bean collocation_Subscribe_bean = new Gson().fromJson(json, Collocation_Subscribe_bean.class);
+                        List<Collocation_Subscribe_bean.DataBean.ListBean> zilist = collocation_Subscribe_bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setCollocation_sub_list_Adapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map) {
+        myPresenter.postPreContent(APIs.getCurrentTrusteeshipList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Collocation_Subscribe_bean collocation_Subscribe_bean = new Gson().fromJson(json, Collocation_Subscribe_bean.class);
+                        List<Collocation_Subscribe_bean.DataBean.ListBean> zilist = collocation_Subscribe_bean.getData().getList();
+                        list.addAll(zilist);
+
+                        // 初始化数据 与适配器
+                        setCollocation_sub_list_Adapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collocation_Subscribe_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
     }
 
     // 适配器的设置
     private void setCollocation_sub_list_Adapter() {
-        if(collocation_subscribe_list_adapter==null){
-            collocation_subscribe_list_adapter = new Collocation_Subscribe_list_Adapter(Collocation_Subscribe_Activity.this, list);
-            collocation_Subscribe_MyListView.setAdapter(collocation_subscribe_list_adapter);
+        if(imgs.size()<=0||list.size()<=0) {
+            collocation_subscribe_null.setVisibility(View.VISIBLE);
+            collocation_Subscribe_pulltoscroll.setVisibility(View.GONE);
         }else{
-            collocation_subscribe_list_adapter.notifyDataSetChanged();
+            collocation_subscribe_null.setVisibility(View.GONE);
+            collocation_Subscribe_pulltoscroll.setVisibility(View.VISIBLE);
+
+            if(collocation_subscribe_list_adapter==null){
+                collocation_subscribe_list_adapter = new Collocation_Subscribe_list_Adapter(Collocation_Subscribe_Activity.this, list);
+                collocation_Subscribe_MyListView.setAdapter(collocation_subscribe_list_adapter);
+            }else{
+                collocation_subscribe_list_adapter.notifyDataSetChanged();
+            }
         }
+
 
     }
 
@@ -161,24 +242,11 @@ public class Collocation_Subscribe_Activity extends BaseMVPActivity<Collocation_
         collocation_Subscribe_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.collocation_Subscribe_pulltoscroll);
         collocation_subscribe_null = (LinearLayout) findViewById(R.id.collocation_Subscribe_null);
 
-        initData();
-    }
+        initRefreshListView();
 
-
-    private void initData() {
         imgs.add(R.mipmap.band1);
         imgs.add(R.mipmap.band2);
-
-        // 托管预约
-        for (int i = 0; i < 15; i++) {
-            if(i%2==0)
-                list.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",0));
-            else
-                list.add(new CollocationBean(R.drawable.guangao,"世博四连体",689715675,1025689468,"托管进度10/20",1));
-        }
-
     }
-
 
     @Override
     public void finish() {

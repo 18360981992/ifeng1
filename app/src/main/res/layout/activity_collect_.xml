@@ -81,7 +81,9 @@
                     android:singleLine="true"
                     android:text="福利特"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x26" />
+                    android:textSize="@dimen/x26"
+                    android:gravity="center_vertical"
+                    />
 
             </LinearLayout>
 
@@ -109,7 +111,9 @@
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x26" />
+                    android:textSize="@dimen/x26"
+                    android:gravity="center_vertical"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -121,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/x16"
-                    android:text="手机号"
+                    android:text="备注"
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x26" />
 
@@ -129,7 +133,7 @@
                     android:id="@+id/collect_ac_shouji"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x70"
-                    android:layout_marginLeft="@dimen/x114"
+                    android:layout_marginLeft="@dimen/x142"
                     android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
                     android:hint="手机号为转赠平台绑定手机号"
@@ -138,6 +142,7 @@
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x26"
                     android:maxLength="11"
+                    android:gravity="center_vertical"
                     />
             </LinearLayout>
 
@@ -167,6 +172,7 @@
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x26"
                     android:maxLength="10"
+                    android:gravity="center_vertical"
                     />
             </LinearLayout>
 
@@ -193,7 +199,9 @@
                     android:hint="请输入藏品名称"
                     android:singleLine="true"
                     android:textColor="@color/name_se"
-                    android:textSize="@dimen/x26" />
+                    android:textSize="@dimen/x26"
+                    android:gravity="center_vertical"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -229,7 +237,9 @@
                         android:singleLine="true"
                         android:text="1"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x26"
+                        android:gravity="center_vertical"
+                        />
 
                     <TextView
                         android:id="@+id/collect_ac_shuliang_zuida"
@@ -293,7 +303,8 @@
                     android:singleLine="true"
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x26"
-                    android:maxLength="10"
+                    android:maxLength="12"
+                    android:gravity="center_vertical"
                     />
             </LinearLayout>
 
@@ -312,7 +323,9 @@
                     android:background="@drawable/congzhi_bg"
                     android:text="提交"
                     android:textColor="@color/baise"
-                    android:textSize="@dimen/x28" />
+                    android:textSize="@dimen/x28"
+                    android:gravity="center"
+                    />
             </RelativeLayout>
         </LinearLayout>
     </ScrollView>

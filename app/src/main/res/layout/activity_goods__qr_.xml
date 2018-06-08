@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/zichan_jianbian"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.Goods_QR_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        >
+        <RelativeLayout
+            android:id="@+id/goods_qr_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_back"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/goods_qr_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="世博四连体"
+            android:textSize="@dimen/x32"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:layout_centerHorizontal="true"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x700"
+        android:layout_marginRight="@dimen/x15"
+        android:layout_marginLeft="@dimen/x15"
+        android:background="@color/baise"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="扫一扫，向我转赠"
+            android:textSize="@dimen/x26"
+            android:textColor="@color/name_se"
+            android:gravity="center"
+            android:layout_margin="@dimen/x50"
+            />
+
+        <ImageView
+            android:id="@+id/goods_qr_erweima"
+            android:layout_width="@dimen/x400"
+            android:layout_height="@dimen/x400"
+            android:layout_centerInParent="true"
+            android:scaleType="fitXY"
+            />
+        
+        <LinearLayout
+            android:layout_width="@dimen/x400"
+            android:layout_height="@dimen/x30"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x15"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical"
+            >
+            <TextView
+                android:id="@+id/goods_qr_shezhi"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="设置数量"
+                android:textSize="@dimen/x24"
+                android:textColor="@color/zhuse"
+                android:gravity="center"
+                />
+            <View
+                android:layout_width="@dimen/x2"
+                android:layout_height="@dimen/x24"
+                android:background="@color/zhuse"
+                />
+            <TextView
+                android:id="@+id/goods_qr_baocun"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:text="保存图片"
+                android:textSize="@dimen/x24"
+                android:textColor="@color/zhuse"
+                android:gravity="center"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</LinearLayout>

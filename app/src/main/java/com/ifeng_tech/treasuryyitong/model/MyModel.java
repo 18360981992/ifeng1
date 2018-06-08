@@ -1,9 +1,13 @@
 package com.ifeng_tech.treasuryyitong.model;
 
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
+import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.utils.BaseServer;
 import com.ifeng_tech.treasuryyitong.utils.RetrofitFacety;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -11,8 +15,14 @@ import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+
+import io.reactivex.Observer;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import okhttp3.ResponseBody;
 
 /**
  * Created by mypc on 2018/1/10.
@@ -162,4 +172,38 @@ public class MyModel {
                     }
                 });
     }
+
+
+    /**
+     *  M 层的获取图形验证码
+     * @param url
+     * @param myJieKou
+     */
+    public void getMod_TuXingYanZheng(final String url,final MyJieKou myJieKou){
+        RetrofitFacety.get_img(url)
+                .subscribe(new Observer<ResponseBody>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(@NonNull ResponseBody responseBody) {
+                        InputStream inputStream = responseBody.byteStream();
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        myJieKou.chenggong(bitmap);
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        myJieKou.shibai("请求失败！");
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
 }

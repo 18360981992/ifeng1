@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,11 +17,21 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.login.SmsCodeBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 /**
  * 更改手机
@@ -53,6 +64,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
             }
         }
     };
+    private String oldSmsCode;   // 旧手机的短信验证码
 
     @Override
     public MyPresenter<Change_Activity> initPresenter() {
@@ -68,6 +80,9 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
         setContentView(R.layout.activity_change_);
         initView();
 
+        oldSmsCode = getIntent().getStringExtra("oldSmsCode");// 旧手机的短信验证码
+
+
         change_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,8 +96,35 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                 change_duan_btn.setText("重新发送" + time + "(s)");
                 change_duan_btn.setEnabled(false);
                 h.sendEmptyMessageDelayed(0, 1000);
+//                MyUtils.setToast("请求网络。。。");
 
-                MyUtils.setToast("请求网络。。。");
+                String shuru = change_new_phone.getText().toString().trim();
+                if (TextUtils.isEmpty(shuru)) {
+                    MyUtils.setToast("请输入手机号");
+                    return;
+                }
+
+                if(MyUtils.isPhoneNumber(shuru)==false){
+                    MyUtils.setToast("手机号码格式不正确");
+                    return;
+                }
+
+                HashMap<String, String> map = new HashMap<>();
+                map.put("mobile",shuru);
+                map.put("codeType","7");  // ("绑定新手机", 7)
+                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                    @Override
+                    public void chenggong(String json) {
+                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                        if(smCodeBean.getCode().equals("2000")){
+                            MyUtils.setToast("短信发送成功");
+                        }
+                    }
+                    @Override
+                    public void shibai(String ss) {
+                        MyUtils.setToast("短信发送失败");
+                    }
+                });
             }
         });
 
@@ -115,6 +157,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
         change_weitanchuan = (LinearLayout) findViewById(R.id.change_weitanchuan);
         change_btn = (Button) findViewById(R.id.change_btn);
 
+        SoftHideKeyBoardUtil.assistActivity(this);
 
         //通过设置监听来获取 微弹窗 控件的高度
         change_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -150,10 +193,58 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
 
         // TODO validate success, do something
 
-        MyUtils.setToast("请求网络。。。");
+//        MyUtils.setToast("请求网络。。。");
+        HashMap<String, String> map = new HashMap<>();
+        map.put("oldSmsCode",oldSmsCode);
+        map.put("newMobile",phone);
+        map.put("newSmsCode",duan);  // ("绑定新手机", 7)
 
+        //  进度框
+        final ProgressDialog aniDialog = new ProgressDialog(Change_Activity.this);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载...");
+        aniDialog.show();
+
+        myPresenter.postPreContent(APIs.changeMobile, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")) {
+
+                        MyUtils.setObjectAnimator_anquan(change_weitanchuan,
+                                change_weitanchuan_img,
+                                change_weitanchuan_text,
+                                weitanchuan_height,
+                                true,"修改成功!");
+
+                        MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
+                            @Override
+                            public void chuan() {
+                                setResult(DashApplication.RETRIEVE_TO_CHANGE_res);
+                                change_btn.setEnabled(false);
+                                finish();
+                            }
+                        });
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setObjectAnimator(change_weitanchuan,
+                        change_weitanchuan_img,
+                        change_weitanchuan_text,
+                        weitanchuan_height,
+                        false,"修改失败!");
+            }
+        });
         if (true) {
-
             MyUtils.setObjectAnimator_anquan(change_weitanchuan,
                     change_weitanchuan_img,
                     change_weitanchuan_text,

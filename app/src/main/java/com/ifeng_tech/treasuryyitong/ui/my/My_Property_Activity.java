@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -16,9 +17,10 @@ import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Property_list_Bean;
-import com.ifeng_tech.treasuryyitong.bean.my.UserBean;
+import com.ifeng_tech.treasuryyitong.bean.my.PersonalUserAccount_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
 import org.json.JSONException;
@@ -95,7 +97,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
-                        My_Property_list_Bean my_property_list_bean = new Gson().fromJson(json, My_Property_list_Bean.class);
+                        My_Property_list_Bean<BaseMVPActivity<Business_Pass_Activity, MyPresenter<Business_Pass_Activity>>> my_property_list_bean = new Gson().fromJson(json, My_Property_list_Bean.class);
                         if(my_property_list_bean.getData().getList().size()>0){
                             my_property_null.setVisibility(View.GONE);
                             property_ListView.setVisibility(View.VISIBLE);
@@ -124,18 +126,18 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
 
     // 获取个人信息
     private void getUser() {
-        myPresenter.getPreContent(APIs.getUser, new MyInterfaces() {
+        myPresenter.getPreContent(APIs.findPersonalUserAccount, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
-                        UserBean userBean = new Gson().fromJson(json, UserBean.class);
-                        property_money.setText(""+ DashApplication.decimalFormat.format(userBean.getData().getBalance()));
-                        property_dongjie.setText(""+DashApplication.decimalFormat.format(userBean.getData().getFrozenFunds()));
-                        property_keyong.setText(""+DashApplication.decimalFormat.format(userBean.getData().getDesirableFunds()));
-                        qiankuan.setText(""+DashApplication.decimalFormat.format(userBean.getData().getArrearage()));
+                        PersonalUserAccount_Bean userBean = new Gson().fromJson(json, PersonalUserAccount_Bean.class);
+                        property_money.setText(""+ DashApplication.decimalFormat.format(userBean.getData().getAccountInfo().getBalance()));
+                        property_dongjie.setText(""+DashApplication.decimalFormat.format(userBean.getData().getAccountInfo().getFrozenFunds()));
+                        property_keyong.setText(""+DashApplication.decimalFormat.format(userBean.getData().getAccountInfo().getDesirableFunds()));
+                        qiankuan.setText(""+DashApplication.decimalFormat.format(userBean.getData().getAccountInfo().getArrearage()));
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -173,10 +175,14 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.property_tixian:
-                MyUtils.setToast("点击了提现。。。");
+//                MyUtils.setToast("点击了提现。。。");
+                Intent intent = new Intent(My_Property_Activity.this, Withdraw_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 break;
             case R.id.property_congzhi:
                 MyUtils.setToast("点击了充值。。。");
+
                 break;
         }
     }

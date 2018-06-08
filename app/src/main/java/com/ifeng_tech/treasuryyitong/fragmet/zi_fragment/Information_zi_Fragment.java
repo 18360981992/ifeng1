@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.fragmet.zi_fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +12,12 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Information_zi_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
@@ -22,7 +26,11 @@ import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -38,13 +46,12 @@ public class Information_zi_Fragment extends Fragment {
     private MyListView information_zi_fragment_MyListView;
     private PullToRefreshScrollView information_zi_fragment_pulltoscroll;
 
-    List<Information_Zi_Bean> arrs = new ArrayList<>();
-    List<Information_Zi_Bean> arr1 = new ArrayList<>();
-    List<Information_Zi_Bean> arr2 = new ArrayList<>();
-    List<Information_Zi_Bean> arr3 = new ArrayList<>();
-    List<Information_Zi_Bean> arr4 = new ArrayList<>();
-    private Information_zi_Adapter information_zi_adapter;
+    List<Information_Zi_Bean.DataBean.ListBean> list = new ArrayList<>();
 
+    private Information_zi_Adapter information_zi_adapter;
+    private String id;
+    private String type;
+    private String top;
 
 
     @Nullable
@@ -52,43 +59,84 @@ public class Information_zi_Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.information_zi_fragment, container, false);
         initView(view);
-        initData();
 
         activity = (Information_Activity) getActivity();
         return view;
     }
+
+    int pageNum_Quanbu=1;
+    int pageNum_LanMu=1;
 
     @Override
     public void onResume() {
         super.onResume();
 
         //获取传递的top值，，
-        String top = getArguments().getString("top");
+        id = getArguments().getString("id");
+        type = getArguments().getString("type");
+        top = getArguments().getString("top");
 
-        final List<Information_Zi_Bean> topList = getTopList(top);
+        //  进度框
+        final ProgressDialog aniDialog = new ProgressDialog(activity);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载...");
+//        aniDialog.show();
 
-        if (topList != null) {
-            information_zi_fragment_pulltoscroll.setVisibility(View.VISIBLE);
-            information_zi_null.setVisibility(View.GONE);
-            setAdapter(topList);
-        } else {
-            information_zi_fragment_pulltoscroll.setVisibility(View.GONE);
-            information_zi_null.setVisibility(View.VISIBLE);
+        if(type.equals("1")){  // 查询全部
+            HashMap<String, String> map = new HashMap<>();
+            map.put("mainColumnId", id);
+            map.put("pageNum", pageNum_Quanbu+"");
+            map.put("pageSize", 10+"");
+
+            getFirstConect(map,APIs.getArticleListByMainColumnId,top,aniDialog);
+        }else{
+            HashMap<String, String> map = new HashMap<>();
+            map.put("subColumnId", id);
+            map.put("pageNum", pageNum_LanMu+"");
+            map.put("pageSize", 10+"");
+            getFirstConect(map,APIs.getArticleListBySubColumnId,top,aniDialog);
         }
+
 
         // 下拉刷新  加载
         information_zi_fragment_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
+//                MyUtils.setToast("下拉了。。。");
 
-                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                if(type.equals("1")){  // 查询全部
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("mainColumnId", id);
+                    map.put("pageNum", pageNum_Quanbu+"");
+                    map.put("pageSize", 10+"");
+                    getFirstConect(map,APIs.getArticleListByMainColumnId,top,aniDialog);
+                }else{
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("subColumnId", id);
+                    map.put("pageNum", pageNum_LanMu+"");
+                    map.put("pageSize", 10+"");
+                    getFirstConect(map,APIs.getArticleListBySubColumnId,top,aniDialog);
+                }
+
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                if(type.equals("1")){  // 查询全部
+                    pageNum_Quanbu++;
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("mainColumnId", id);
+                    map.put("pageNum", pageNum_Quanbu+"");
+                    map.put("pageSize", 10+"");
+                    getNextConect(map,APIs.getArticleListByMainColumnId,top);
+                }else{
+                    pageNum_LanMu++;
+                    HashMap<String, String> map = new HashMap<>();
+                    map.put("subColumnId", id);
+                    map.put("pageNum", pageNum_LanMu+"");
+                    map.put("pageSize", 10+"");
+                    getNextConect(map,APIs.getArticleListBySubColumnId,top);
+                }
             }
         });
 
@@ -108,75 +156,96 @@ public class Information_zi_Fragment extends Fragment {
         });
     }
 
-    private void setAdapter(List<Information_Zi_Bean> topList) {
-        if (information_zi_adapter == null) {
-            information_zi_adapter = new Information_zi_Adapter(activity, topList);
-            information_zi_fragment_MyListView.setAdapter(information_zi_adapter);
-        } else {
-            information_zi_adapter.notifyDataSetChanged();
+    // 首次进入页面获取列表
+    private void getFirstConect(final HashMap<String, String> map , String url, final String top,final ProgressDialog aniDialog) {
+        activity.myPresenter.postPreContent(url, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
+                        List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setInformation_Adapter(top);
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setToast(ss);
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+
+    // 下拉加载更多
+    private void getNextConect(final HashMap<String, String> map , String url,final String top) {
+        activity.myPresenter.postPreContent(url, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
+                        List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
+
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setInformation_Adapter(top);
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+
+    // 初始化适配器
+    private void setInformation_Adapter(String top) {
+        if (list.size()>0) {
+            information_zi_fragment_pulltoscroll.setVisibility(View.VISIBLE);
+            information_zi_null.setVisibility(View.GONE);
+            if (information_zi_adapter == null) {
+                information_zi_adapter = new Information_zi_Adapter(activity, list,top);
+                information_zi_fragment_MyListView.setAdapter(information_zi_adapter);
+            } else {
+                information_zi_adapter.notifyDataSetChanged();
+            }
+        }else{
+            information_zi_fragment_pulltoscroll.setVisibility(View.GONE);
+            information_zi_null.setVisibility(View.VISIBLE);
         }
     }
 
-    private List<Information_Zi_Bean> getTopList(String top) {
-
-        if (top.equals("全部")) {
-            return arrs;
-        } else if (top.equals("热门")) {
-            return arr1;
-        } else if (top.equals("关注")) {
-            return arr2;
-        } else if (top.equals("栏目1")) {
-            return arr3;
-        } else if (top.equals("栏目2")) {
-            return arr4;
-        } else {
-            return null;
-        }
-    }
-
-
-    int[] img = {R.drawable.guangao};
-    int[] imgs = {R.drawable.guangao,
-            R.drawable.guangao,
-            R.drawable.guangao};
-
-    // 模拟数据
-    private void initData() {
-        // 热门
-        for (int i = 0; i < 4; i++) {
-            arr1.add(new Information_Zi_Bean(img, "热门", "这是内容...这是内容...这是内容...这是内容...", "2018-05-02"));
-            if (i == 3) {
-                arr1.add(new Information_Zi_Bean(imgs, "热门", "这是内容..这是内容...这是内容...这是内容...这是内容....", "2018-05-02"));
-            }
-        }
-
-        // 关注
-        for (int i = 0; i < 4; i++) {
-            arr2.add(new Information_Zi_Bean(img, "关注", "这是内容.这是内容...这是内容...这是内容.....", "2018-05-02"));
-            if (i == 3) {
-                arr2.add(new Information_Zi_Bean(imgs, "关注", "这是内容..这是内容...这是内容...这是内容....", "2018-05-02"));
-            }
-        }
-        // 栏目1
-        for (int i = 0; i < 4; i++) {
-            arr3.add(new Information_Zi_Bean(img, "栏目1", "这是内容..这是内容...这是内容...这是内容....", "2018-05-02"));
-            if (i == 3) {
-                arr3.add(new Information_Zi_Bean(imgs, "栏目1", "这是内容..这是内容...这是内容...这是内容....", "2018-05-02"));
-            }
-        }
-        // 栏目2
-        for (int i = 0; i < 4; i++) {
-            arr4.add(new Information_Zi_Bean(img, "栏目2", "这是内容...这是内容...这是内容...这是内容...这是内容.....", "2018-05-02"));
-            if (i == 3) {
-                arr4.add(new Information_Zi_Bean(imgs, "栏目2", "这是内容.这是内容...这是内容...这是内容...这是内容......", "2018-05-02"));
-            }
-        }
-
-        arrs.addAll(arr1);
-        arrs.addAll(arr2);
-        arrs.addAll(arr3);
-        arrs.addAll(arr4);
-    }
 
     private void initView(View view) {
         information_zi_fragment_MyListView = (MyListView) view.findViewById(R.id.information_zi_fragment_MyListView);

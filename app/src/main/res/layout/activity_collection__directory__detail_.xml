@@ -45,9 +45,9 @@
         android:layout_height="wrap_content"
         >
         <ImageView
+            android:id="@+id/collocation_mulu_detail_img"
             android:layout_width="@dimen/x200"
             android:layout_height="@dimen/x200"
-            android:background="@drawable/guangao"
             android:layout_marginTop="@dimen/x40"
             android:layout_marginBottom="@dimen/x40"
             android:layout_marginRight="@dimen/x40"
@@ -106,105 +106,147 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <LinearLayout
+        android:orientation="vertical"
+        >
+
+        <ListView
+            android:id="@+id/collocation_mulu_detail_listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x24">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:text="规格"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
-                />
-
-            <TextView
-                android:id="@+id/collocation_mulu_detail_guige"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x116"
-                android:text="220mm*110mm"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x24">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:text="售价"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
-                />
-
-            <TextView
-                android:id="@+id/collocation_mulu_detail_shoujia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x116"
-                android:text="1.90元"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x24" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x24">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:text="发行量"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
-                />
-
-            <TextView
-                android:id="@+id/collocation_mulu_detail_faxingliang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x94"
-                android:text="200000枚"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x24" />
-        </LinearLayout>
+            android:scrollbars="none"
+            android:divider="@null"
+            ></ListView>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x24"
-            android:layout_marginRight="@dimen/x16"
             >
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1.5"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x20"
+                    android:text="藏品简介"
+                    android:textColor="@color/color_999999"
+                    android:textSize="@dimen/x24"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:text="藏品简介"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
-                />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/x16"
+                >
+                <TextView
+                    android:id="@+id/collocation_mulu_detail_jianjie"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x24"
+                    />
+            </LinearLayout>
 
-            <TextView
-                android:id="@+id/collocation_mulu_detail_jianjie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x70"
-                android:text="2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株"
-                android:textColor="@color/name_se"
-                android:textSize="@dimen/x24"
-                />
         </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/x24">-->
+
+            <!---->
+
+            <!--<TextView-->
+                <!--android:id="@+id/collocation_mulu_detail_guige"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x116"-->
+                <!--android:text="220mm*110mm"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:textSize="@dimen/x24" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/x24">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x20"-->
+                <!--android:text="售价"-->
+                <!--android:textColor="@color/color_999999"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/collocation_mulu_detail_shoujia"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x116"-->
+                <!--android:text="1.90元"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:textSize="@dimen/x24" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/x24">-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x20"-->
+                <!--android:text="发行量"-->
+                <!--android:textColor="@color/color_999999"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/collocation_mulu_detail_faxingliang"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x94"-->
+                <!--android:text="200000枚"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:textSize="@dimen/x24" />-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="@dimen/x24"-->
+            <!--android:layout_marginRight="@dimen/x16"-->
+            <!--&gt;-->
+
+            <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x20"-->
+                <!--android:text="藏品简介"-->
+                <!--android:textColor="@color/color_999999"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--/>-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/collocation_mulu_detail_jianjie"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginLeft="@dimen/x70"-->
+                <!--android:text="2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--/>-->
+        <!--</LinearLayout>-->
     </LinearLayout>
 
 </LinearLayout>

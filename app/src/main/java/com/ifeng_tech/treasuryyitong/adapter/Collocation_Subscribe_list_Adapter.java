@@ -7,22 +7,23 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
+import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by zzt on 2018/5/18.
+ *
+ *  托管预约 的适配器
  */
 
 public class Collocation_Subscribe_list_Adapter extends BaseAdapter {
     Context context;
-    List<CollocationBean> list;
+    List<Collocation_Subscribe_bean.DataBean.ListBean> list;
 
-    public Collocation_Subscribe_list_Adapter(Context context, List<CollocationBean> list) {
+    public Collocation_Subscribe_list_Adapter(Context context, List<Collocation_Subscribe_bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -54,24 +55,30 @@ public class Collocation_Subscribe_list_Adapter extends BaseAdapter {
         TextView collocation_Subscribe_list_text = convertView.findViewById(R.id.collocation_Subscribe_list_text);
         ImageView collocation_Subscribe_list_imgflag = convertView.findViewById(R.id.collocation_Subscribe_list_imgflag);
 
-        collocation_Subscribe_list_img.setImageResource(list.get(position).getImg());
-        collocation_Subscribe_list_name.setText(list.get(position).getName());
-        collocation_Subscribe_list_cword.setText(""+list.get(position).getCword());
+        if(list.get(position).getGoodsImg()==null){
+            collocation_Subscribe_list_img.setImageResource(R.drawable.guangao);
+        }else{
+            Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(collocation_Subscribe_list_img);
+        }
+        if(list.get(position).getGoodsName().length()>10){
+            String name = list.get(position).getGoodsName().substring(0, 10);
+            collocation_Subscribe_list_name.setText(name+"...");
+        }else{
+            collocation_Subscribe_list_name.setText(list.get(position).getGoodsName());
+        }
 
-        collocation_Subscribe_list_text.setText(list.get(position).getText());
+        collocation_Subscribe_list_cword.setText(""+list.get(position).getGoodsCode());
 
-        if(list.get(position).getType()==0){ // 0==等待 1==未开始
+        String[] times = list.get(position).getApplyTime().split("\\/");
+        collocation_Subscribe_list_time.setText("截止时间:"+times[1]);
+
+
+        collocation_Subscribe_list_text.setText("托管进度:"+list.get(position).getCount()+"/"+list.get(position).getNumber());
+
+        if(list.get(position).getState().equals("1")){ // 1==等待 2==未开始
             collocation_Subscribe_list_imgflag.setImageResource(R.drawable.dengdai);
-            Date date = new Date(list.get(position).getTime());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            collocation_Subscribe_list_time.setText("截止时间:"+simpleDateFormat.format(date));
-
         }else{
             collocation_Subscribe_list_imgflag.setImageResource(R.drawable.kaishi);
-            // 状态处于为开始的时候，返回时间应该是当前时间
-            Date date = new Date(System.currentTimeMillis());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            collocation_Subscribe_list_time.setText("开始时间:"+simpleDateFormat.format(date));
         }
         return convertView;
     }

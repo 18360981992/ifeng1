@@ -11,10 +11,11 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.fragmet.CollectFragmet;
+import com.ifeng_tech.treasuryyitong.bean.my.QR_Bean;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
@@ -22,8 +23,11 @@ import com.ifeng_tech.treasuryyitong.fragmet.WarehouseFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
 
@@ -50,7 +54,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     HomeFragmet homeFragmet = new HomeFragmet();  // 首页
     WarehouseFragment treasuryFragmet = new WarehouseFragment();  // 仓库
-    CollectFragmet collectFragmet = new CollectFragmet(); // 征集
+//    CollectFragmet collectFragmet = new CollectFragmet(); // 征集
     MessageFragmet authenticateFragmet = new MessageFragmet();  // 消息
     MyFragmet myFragmet = new MyFragmet();  // 我的
 
@@ -88,12 +92,12 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         fragmentManager.beginTransaction()
                 .add(R.id.homepage_FrameLayout,homeFragmet)
                 .add(R.id.homepage_FrameLayout,treasuryFragmet)
-                .add(R.id.homepage_FrameLayout,collectFragmet)
+//                .add(R.id.homepage_FrameLayout,collectFragmet)
                 .add(R.id.homepage_FrameLayout,authenticateFragmet)
                 .add(R.id.homepage_FrameLayout,myFragmet)
                 .show(homeFragmet)
                 .hide(treasuryFragmet)
-                .hide(collectFragmet)
+//                .hide(collectFragmet)
                 .hide(authenticateFragmet)
                 .hide(myFragmet)
                 .commit();
@@ -116,7 +120,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 fragmentManager.beginTransaction()
                         .show(homeFragmet)
                         .hide(treasuryFragmet)
-                        .hide(collectFragmet)
+//                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
                         .hide(myFragmet)
                         .commit();
@@ -130,26 +134,26 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .show(treasuryFragmet)
-                        .hide(collectFragmet)
+//                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
                         .hide(myFragmet)
                         .commit();
             }
         });
 
-        zhengji.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                setBeiJing(false,false,true,false,false);
-                fragmentManager.beginTransaction()
-                        .hide(homeFragmet)
-                        .hide(treasuryFragmet)
-                        .show(collectFragmet)
-                        .hide(authenticateFragmet)
-                        .hide(myFragmet)
-                        .commit();
-            }
-        });
+//        zhengji.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                setBeiJing(false,false,true,false,false);
+//                fragmentManager.beginTransaction()
+//                        .hide(homeFragmet)
+//                        .hide(treasuryFragmet)
+//                        .show(collectFragmet)
+//                        .hide(authenticateFragmet)
+//                        .hide(myFragmet)
+//                        .commit();
+//            }
+//        });
 
         xiaoxi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -158,7 +162,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .hide(treasuryFragmet)
-                        .hide(collectFragmet)
+//                        .hide(collectFragmet)
                         .show(authenticateFragmet)
                         .hide(myFragmet)
                         .commit();
@@ -172,7 +176,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .hide(treasuryFragmet)
-                        .hide(collectFragmet)
+//                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
                         .show(myFragmet)
                         .commit();
@@ -188,13 +192,13 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         fragmentManager.beginTransaction()
                                 .hide(homeFragmet)
                                 .hide(treasuryFragmet)
-                                .show(collectFragmet)
+//                                .show(collectFragmet)
                                 .hide(authenticateFragmet)
                                 .hide(myFragmet)
                                 .commit();
 
                         break;
-                    case 1:
+                    case 1:   // 跳转  藏品目录
 //                        MyUtils.setToast("点击了广告。。。");
 
                         Intent intent1 = new Intent(HomePageActivity.this, Collection_directory_Activity.class);
@@ -216,6 +220,48 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         });
     }
 
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==DashApplication.ERWIMA_SAOMIAO_req){
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+
+                    if(result.length()>20){
+                        String path = result.substring(0, result.indexOf("?"));
+                        String referralCode = result.substring(result.indexOf("=")+1, result.length());
+
+                        LogUtils.i("jiba","referralCode===="+referralCode);
+
+                        QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
+                        if(path.equals(SP_String.QR_ZHUANZENG)){
+                            Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
+                            intent.putExtra("QR_Bean", referralCode);
+                            if(qr_bean.getGoodsInfo()==null) intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
+
+                            else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                    }else{
+                        MyUtils.setToast(result);
+                    }
+
+
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    MyUtils.setToast("解析二维码失败");
+                }
+            }
+        }
+    }
+
     //主页面点击切换视图
     public void setBeiJing(boolean syFlag, boolean zxFlag, boolean zjFlag,boolean xxFlag,boolean wdFlag) {
         if (syFlag) {
@@ -235,14 +281,14 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             zixunImg.setImageResource(R.drawable.cangku_hui);
             zixunName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
-        if (zjFlag) {
-            zhengjiImg.setImageResource(R.drawable.zhengji_lan);
-            zhengjiName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("征集");
-        } else {
-            zhengjiImg.setImageResource(R.drawable.zhengji_hui);
-            zhengjiName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
-        }
+//        if (zjFlag) {
+//            zhengjiImg.setImageResource(R.drawable.zhengji_lan);
+//            zhengjiName.setTextColor(getResources().getColor(R.color.zhuse));
+//            homepage_title.setText("征集");
+//        } else {
+//            zhengjiImg.setImageResource(R.drawable.zhengji_hui);
+//            zhengjiName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+//        }
         if (xxFlag) {
             xiaoxiImg.setImageResource(R.drawable.xiaoxi_lan);
             xiaoxiName.setTextColor(getResources().getColor(R.color.zhuse));
@@ -273,9 +319,9 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         zixunImg = (ImageView) findViewById(R.id.zixunImg);
         zixunName = (TextView) findViewById(R.id.zixunName);
         zixun = (LinearLayout) findViewById(R.id.zixun);
-        zhengjiImg = (ImageView) findViewById(R.id.zhengjiImg);
-        zhengjiName = (TextView) findViewById(R.id.zhengjiName);
-        zhengji = (LinearLayout) findViewById(R.id.zhengji);
+//        zhengjiImg = (ImageView) findViewById(R.id.zhengjiImg);
+//        zhengjiName = (TextView) findViewById(R.id.zhengjiName);
+//        zhengji = (LinearLayout) findViewById(R.id.zhengji);
         xiaoxiImg = (ImageView) findViewById(R.id.xiaoxiImg);
         xiaoxiName = (TextView) findViewById(R.id.xiaoxiName);
         xiaoxi = (LinearLayout) findViewById(R.id.xiaoxi);

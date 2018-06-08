@@ -11,9 +11,12 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Collection_directory_Adapter;
-import com.ifeng_tech.treasuryyitong.bean.Collection_directory_Bean;
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.bean.cangpin.Collection_directory_Fragment_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
@@ -21,6 +24,9 @@ import com.ifeng_tech.treasuryyitong.ui.Collection_Directory_Detail_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Collection_directory_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,57 +40,45 @@ public class Collection_directory_Fragment extends Fragment {
     private PullToRefreshScrollView collection_mulu_fragment_pulltoscroll;
     private LinearLayout collection_mulu_null;
 
-    List<Collection_directory_Bean> arrs = new ArrayList<>();
-    List<Collection_directory_Bean> arr1 = new ArrayList<>();
-    List<Collection_directory_Bean> arr2 = new ArrayList<>();
-    List<Collection_directory_Bean> arr3 = new ArrayList<>();
+    List<Collection_directory_Fragment_Bean.DataBean.ListBean> list = new ArrayList<>();
+
     private String top;
-    private List<Collection_directory_Bean> collection_mulu_Adapter;
     private Collection_directory_Activity activity;
     private Collection_directory_Adapter collection_directory_adapter;
+    private String url;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.collection_directory_fragment, container, false);
         initView(view);
-        initData();
 
         activity = (Collection_directory_Activity) getActivity();
         //获取传递的top值，，，
         top = getArguments().getString("top");
-
         return view;
-
     }
+
+    int pageNum=1;
 
     @Override
     public void onResume() {
         super.onResume();
 
-        final List<Collection_directory_Bean> topList = getTopList(top);
+        url = APIs.queryCommodityList(pageNum, getTopList(top));
+        getFristConect(url);  // 进入页面首次获取数据
 
-        if (topList != null) {
-            collection_mulu_fragment_pulltoscroll.setVisibility(View.VISIBLE);
-            collection_mulu_null.setVisibility(View.GONE);
-            setcollection_mulu_Adapter(topList);
-        } else {
-            collection_mulu_fragment_pulltoscroll.setVisibility(View.GONE);
-            collection_mulu_null.setVisibility(View.VISIBLE);
-        }
         // 下拉刷新  加载
         collection_mulu_fragment_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                getFristConect(url);  // 进入页面首次获取数据
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-
-                collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                getNextConect(url); // 上拉加载 获取数据
             }
         });
 
@@ -92,22 +86,92 @@ public class Collection_directory_Fragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                MyUtils.setToast("点击了藏品目录条目==="+position);
+                int goodsId = list.get(position).getId();
                 Intent intent = new Intent(activity, Collection_Directory_Detail_Activity.class);
-                intent.putExtra("Collection_directory_Bean",topList.get(position));
+                intent.putExtra("goodsId",""+goodsId);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }
+    // 进入页面首次获取数据
+    private void getFristConect(String url) {
+        activity.myPresenter.getPreContent(url, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        Collection_directory_Fragment_Bean collection_directory_fragment_bean = new Gson().fromJson(json, Collection_directory_Fragment_Bean.class);
+                        List<Collection_directory_Fragment_Bean.DataBean.ListBean> zilist = collection_directory_fragment_bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        setcollection_mulu_Adapter();
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                    collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+    // 上拉加载 获取数据
+    private void getNextConect(String url) {
+        activity.myPresenter.getPreContent(url, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        Collection_directory_Fragment_Bean collection_directory_fragment_bean = new Gson().fromJson(json, Collection_directory_Fragment_Bean.class);
+                        List<Collection_directory_Fragment_Bean.DataBean.ListBean> zilist = collection_directory_fragment_bean.getData().getList();
+
+                        list.addAll(zilist);
+                        setcollection_mulu_Adapter();
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                    collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                collection_mulu_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
 
 
-    public void setcollection_mulu_Adapter(List<Collection_directory_Bean> topList) {
-        if(collection_directory_adapter==null){
-            collection_directory_adapter = new Collection_directory_Adapter(activity, topList);
-            collection_mulu_fragment_MyListView.setAdapter(collection_directory_adapter);
-        }else{
-            collection_directory_adapter.notifyDataSetChanged();
+    // 初始化适配器
+    public void setcollection_mulu_Adapter() {
+        if (list.size()>0) {
+            collection_mulu_fragment_pulltoscroll.setVisibility(View.VISIBLE);
+            collection_mulu_null.setVisibility(View.GONE);
+            if(collection_directory_adapter==null){
+                collection_directory_adapter = new Collection_directory_Adapter(activity, list);
+                collection_mulu_fragment_MyListView.setAdapter(collection_directory_adapter);
+            }else{
+                collection_directory_adapter.notifyDataSetChanged();
+            }
+        } else {
+            collection_mulu_fragment_pulltoscroll.setVisibility(View.GONE);
+            collection_mulu_null.setVisibility(View.VISIBLE);
         }
+
     }
 
     private void initView(View view) {
@@ -126,41 +190,16 @@ public class Collection_directory_Fragment extends Fragment {
         Labels.setReleaseLabel("放开刷新...");
     }
 
-    private List<Collection_directory_Bean> getTopList(String top) {
-
+    private String getTopList(String top) {
+        String ss="";
         if (top.equals("全部")) {
-            return arrs;
-        } else if (top.equals("新中国邮票")) {
-            return arr1;
-        } else if (top.equals("邮资封片")) {
-            return arr2;
-        } else if (top.equals("“J”字头邮票")) {
-            return arr3;
+            ss="";
         } else {
-            return null;
+            ss=top;
         }
+        return ss;
     }
 
-    // 模拟数据
-    private void initData() {
-        // 新中国邮票
-        for (int i = 0; i < 6; i++) {
-            arr1.add(new Collection_directory_Bean(R.drawable.guangao, "2007-7《扬州园林》特种邮票  " +1, 1000111158,99.99,2000,1589754656));
-        }
-
-        // 邮资封片
-        for (int i = 0; i < 6; i++) {
-            arr2.add(new Collection_directory_Bean(R.drawable.guangao, "2007-7《扬州园林》特种邮票  " +2, 1000111158,99.99,2000,1589754656));
-        }
-        // “J”字头邮票
-        for (int i = 0; i < 6; i++) {
-            arr3.add(new Collection_directory_Bean(R.drawable.guangao, "2007-7《扬州园林》特种邮票  " +3, 1000111158,99.99,2000,1589754656));
-        }
-
-        arrs.addAll(arr1);
-        arrs.addAll(arr2);
-        arrs.addAll(arr3);
-    }
 
 
 }

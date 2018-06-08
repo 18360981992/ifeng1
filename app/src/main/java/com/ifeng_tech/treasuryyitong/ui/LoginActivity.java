@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,11 +23,11 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.login.LoginBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
-import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.hua_dong.CustomSlideToUnlockView;
 
 import java.util.HashMap;
@@ -164,6 +165,13 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             return;
         }
 
+        if (pass.length()<6) {
+            Toast.makeText(this, "请输入6-12位的密码", Toast.LENGTH_SHORT).show();
+            logo_to_unlock.resetView();  // 将滑动条重置
+            return;
+        }
+
+
         // TODO validate success, do something
         HashMap<String, String> map = new HashMap<>();
         map.put("userName",name);
@@ -171,7 +179,9 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         map.put("loginType","0");
 
         //  进度框
-        final AniDialog aniDialog = new AniDialog(LoginActivity.this, null);
+        final ProgressDialog aniDialog = new ProgressDialog(LoginActivity.this);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在登录...");
         aniDialog.show();
 
         myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
@@ -179,12 +189,11 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             public void chenggong(String json) {
 //                LogUtils.i("wc","===="+json);
                 aniDialog.dismiss();
-
                 Gson gson = new Gson();
                 LoginBean loginBean = gson.fromJson(json, LoginBean.class);
-
                 if(loginBean.getCode().equals("2000")){
                     finish();
+                    startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
                     DashApplication.edit.putString(SP_String.SHOUJI, loginBean.getData().getUser().getMobile())
                             .putString(SP_String.PASS,pass)
                             .putBoolean(SP_String.ISLOGIN,true)

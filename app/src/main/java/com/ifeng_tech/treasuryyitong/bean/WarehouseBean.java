@@ -158,6 +158,8 @@ public class WarehouseBean implements Serializable{
              * evenPrice : 0
              */
 
+            boolean flag=false;
+
             private String goodsImg;
             private int canReWarehousing;
             private Object clearDate;
@@ -176,6 +178,15 @@ public class WarehouseBean implements Serializable{
             private String goodsCode;
             private String goodsName;
             private int evenPrice;
+
+            public void setFlag(boolean flag) {
+                this.flag = flag;
+            }
+
+            public boolean isFlag() {
+
+                return flag;
+            }
 
             public String getGoodsImg() {
                 return goodsImg;

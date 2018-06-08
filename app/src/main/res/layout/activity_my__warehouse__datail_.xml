@@ -51,7 +51,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_weight="2"
+            android:layout_weight="4"
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
@@ -110,17 +110,25 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
-            <TextView
-                android:id="@+id/my_Warehouse_Datail_xiangqing"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/x36"
+            <!--<TextView-->
+                <!--android:id="@+id/my_Warehouse_Datail_xiangqing"-->
+                <!--android:layout_width="@dimen/x120"-->
+                <!--android:layout_height="@dimen/x36"-->
+                <!--android:layout_marginRight="@dimen/x20"-->
+                <!--android:background="@drawable/shangwu_kuang"-->
+                <!--android:gravity="center"-->
+                <!--android:text="商品详情"-->
+                <!--android:textColor="@color/zhuse"-->
+                <!--android:textSize="@dimen/x20"-->
+                <!--android:layout_gravity="end"-->
+                <!--/>-->
+            <ImageView
+                android:id="@+id/my_Warehouse_Datail_erweima"
+                android:layout_width="@dimen/x50"
+                android:layout_height="@dimen/x50"
+                android:background="@drawable/erweima_lan"
+                android:layout_gravity="end|center_vertical"
                 android:layout_marginRight="@dimen/x20"
-                android:background="@drawable/shangwu_kuang"
-                android:gravity="center"
-                android:text="商品详情"
-                android:textColor="@color/zhuse"
-                android:textSize="@dimen/x20"
-                android:layout_gravity="end"
                 />
 
         </LinearLayout>
@@ -230,6 +238,13 @@
         </LinearLayout>
 
     </LinearLayout>
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/x16"-->
+        <!--android:background="@color/fengouxian"-->
+        <!--android:layout_marginTop="@dimen/x24"-->
+        <!--/>-->
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -250,6 +265,7 @@
                 android:textColor="@color/baise"
                 android:layout_marginLeft="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
+                android:gravity="center"
                 />
             <Button
                 android:id="@+id/my_Warehouse_Datail_tihuo"
@@ -262,6 +278,7 @@
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
                 android:layout_marginLeft="@dimen/x16"
+                android:gravity="center"
                 />
         </LinearLayout>
     </RelativeLayout>

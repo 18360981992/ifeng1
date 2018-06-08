@@ -381,6 +381,7 @@
                 android:layout_marginLeft="@dimen/x20"
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
+                android:gravity="center"
                 />
             <!--<Button-->
                 <!--android:id="@+id/pick_up_goods_detail_xiazai"-->

@@ -22,6 +22,7 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, MyPresenter<Bind_Email_Activity2>> {
@@ -114,6 +115,8 @@ public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, 
         bind_email_weitanchuan_img2 = (ImageView) findViewById(R.id.bind_email_weitanchuan_img2);
         bind_email_weitanchuan_text2 = (TextView) findViewById(R.id.bind_email_weitanchuan_text2);
         bind_email_weitanchuan2 = (LinearLayout) findViewById(R.id.bind_email_weitanchuan2);
+
+        SoftHideKeyBoardUtil.assistActivity(this);
 
 //        bind_email_btn2.setOnClickListener(this);
 

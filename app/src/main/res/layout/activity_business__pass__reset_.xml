@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Reset_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian"
+        >
+        <RelativeLayout
+            android:id="@+id/business_pass_reset_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/btn_back"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="业务密码重置"
+            android:textSize="@dimen/x32"
+            android:textColor="@color/baise"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:layout_centerHorizontal="true"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="您是否记得当前使用的支付密码"
+        android:textColor="@color/name_se"
+        android:textSize="@dimen/x25"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/x25"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/x60"
+        >
+        <Button
+            android:id="@+id/business_pass_reset_bujide"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/x70"
+            android:text="不记得"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/baise"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@drawable/congzhi_bg"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/business_pass_reset_jide"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/x70"
+            android:text="记得"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/baise"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/congzhi_bg"
+            android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
+            />
+    </LinearLayout>
+
+</LinearLayout>

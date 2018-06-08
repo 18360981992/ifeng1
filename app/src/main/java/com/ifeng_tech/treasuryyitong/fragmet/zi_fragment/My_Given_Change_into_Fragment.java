@@ -72,13 +72,32 @@ public class My_Given_Change_into_Fragment extends Fragment {
 //        final AniDialog aniDialog = new AniDialog(activity, null);
 //        aniDialog.show();
 
+        // 网络加载框  暂时禁用
         final ProgressDialog aniDialog = new ProgressDialog(activity);
         aniDialog.setCancelable(true);
         aniDialog.setMessage("正在加载。。。");
-        aniDialog.show();
+//        aniDialog.show();
+
+
         pageNum=1;
         map.put("pageNum",pageNum+"");
         map.put("pageSize",""+10);
+        // 获取缓存中的转入
+        if(!DashApplication.sp.getString(SP_String.ZHUANRU,"").equals("")){
+            Give_List_Bean give_List_Bean = new Gson().fromJson(DashApplication.sp.getString(SP_String.ZHUANRU,""), Give_List_Bean.class);
+            List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
+            list.clear();
+            if(zilist.size()>0){
+                for(Give_List_Bean.DataBean.ListBean bean:zilist){
+                    String uid=""+bean.getOppositeUserId();
+                    if(uid.equals(DashApplication.sp.getString(SP_String.UID,""))){
+                        list.add(bean);
+                    }
+                }
+            }
+            setMy_Given_list_Adapter();
+        }
+        // 不管缓存与否，都要去获取最新的数据
         getFirstConect(map,aniDialog);
 
         my_Given_Change_into_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -124,6 +143,8 @@ public class My_Given_Change_into_Fragment extends Fragment {
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
+                        DashApplication.edit.putString(SP_String.ZHUANRU,json).commit();
+
                         Give_List_Bean give_List_Bean = new Gson().fromJson(json, Give_List_Bean.class);
                         List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
                         list.clear();

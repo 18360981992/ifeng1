@@ -55,10 +55,10 @@ public class CollectAdapter extends BaseAdapter{
         ImageView collect_imgflag = view.findViewById(R.id.collect_imgflag);
 
 
-        if(list.get(position).getGoodsImg().equals("")||list.get(position).getGoodsImg()==null){
-            collect_img.setImageResource(R.drawable.guangao);
+        if(list.get(position).getGoodsImg()==null){
+            collect_img.setImageResource(R.drawable.img_erroy);
         }else{
-            Glide.with(context).load(list.get(position).getGoodsImg()).into(collect_img);
+            Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(collect_img);
         }
 
         if(list.get(position).getGoodsName().length()>10){

@@ -20,11 +20,13 @@ import java.util.List;
 
 public class Message_List_Adapter extends BaseAdapter{
     Context context;
-    List<Message_Lists_Bean> list;
+    List<Message_Lists_Bean.DataBean.ListBean> list;
+    String title;
 
-    public Message_List_Adapter(Context context, List<Message_Lists_Bean> list) {
+    public Message_List_Adapter(Context context, List<Message_Lists_Bean.DataBean.ListBean> list,String title) {
         this.context = context;
         this.list = list;
+        this.title=title;
     }
 
     @Override
@@ -51,10 +53,10 @@ public class Message_List_Adapter extends BaseAdapter{
         TextView message_lists_item_title = convertView.findViewById(R.id.message_lists_item_title);
         TextView message_lists_item_text = convertView.findViewById(R.id.message_lists_item_text);
 
-        message_lists_item_title.setText(list.get(position).getTitle());
-        message_lists_item_text.setText(list.get(position).getText());
+        message_lists_item_title.setText(title);
+        message_lists_item_text.setText(list.get(position).getContent());
 
-        Date date = new Date(list.get(position).getTime());
+        Date date = new Date(list.get(position).getAddTime());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         boolean b = Date_Utils.IsToday(simpleDateFormat.format(date));
         if(b){

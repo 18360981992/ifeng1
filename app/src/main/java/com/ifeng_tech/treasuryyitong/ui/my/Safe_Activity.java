@@ -10,6 +10,10 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Reset_Activity;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 /**
  *  安全保护
@@ -83,9 +87,24 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             @Override
             public void onClick(View v) {
 //                MyUtils.setToast("点击业务密码设置。。。");
-                Intent intent = new Intent(Safe_Activity.this, Business_Pass_Activity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                String emali = DashApplication.sp.getString(SP_String.EMAIL, "");
+
+                if(emali.equals("")){
+                    MyUtils.setToast("请先绑定邮箱");
+                }else{
+                    String anInt = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                    if(anInt.equals("0")){     // 0 == 设置过业务密码
+                        Intent intent = new Intent(Safe_Activity.this, Business_Pass_Reset_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    }else{
+                        Intent intent = new Intent(Safe_Activity.this, Business_Pass_Activity.class);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                    }
+                }
+
+
             }
         });
 

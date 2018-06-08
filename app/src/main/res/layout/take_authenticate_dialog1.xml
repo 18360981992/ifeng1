@@ -12,24 +12,27 @@
         >
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:layout_height="@dimen/x120"
         android:layout_marginTop="@dimen/x20"
         >
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/x90"
             android:text="转赠数量:"
             android:textColor="@color/name_se"
             android:textSize="@dimen/x26"
-            android:layout_marginLeft="@dimen/x16"/>
+            android:layout_marginLeft="@dimen/x16"
+            android:gravity="center_vertical"
+            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/x90"
             android:layout_marginRight="@dimen/x16"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical"
+            >
 
             <EditText
                 android:id="@+id/take_Authenticate_Dialog1_shuliang"
@@ -38,20 +41,39 @@
                 android:background="@drawable/tihuo_ed_bg"
                 android:inputType="number"
                 android:singleLine="true"
+                android:text="1"
                 android:textColor="@color/name_se"
                 android:textSize="@dimen/x26"
                 android:hint="请输入数量"/>
 
-            <TextView
-                android:id="@+id/take_Authenticate_Dialog1_zuida"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/x4"
-                android:text="最大转赠数量:1200"
-                android:textColor="#E93438"
-                android:textSize="@dimen/x20"
-                android:inputType="number"
-                android:singleLine="true"/>
+                >
+                <TextView
+                    android:id="@+id/take_Authenticate_Dialog1_zuida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最大转赠数量:0"
+                    android:textColor="#E93438"
+                    android:textSize="@dimen/x20"
+                    android:inputType="number"
+                    android:singleLine="true"/>
+                <TextView
+                    android:id="@+id/take_Authenticate_Dialog1_zuixiao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="最小转赠数量:0"
+                    android:textColor="#E93438"
+                    android:textSize="@dimen/x20"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:layout_marginLeft="@dimen/x20"
+                    />
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
@@ -73,7 +95,7 @@
             android:id="@+id/take_Authenticate_Dialog1_shouxufei"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="￥100.00"
+            android:text="￥0.00"
             android:textColor="@color/name_se"
             android:textSize="@dimen/x26"
             android:layout_marginLeft="@dimen/x116"

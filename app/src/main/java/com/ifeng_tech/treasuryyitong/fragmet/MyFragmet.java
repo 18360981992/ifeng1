@@ -22,13 +22,12 @@ import com.ifeng_tech.treasuryyitong.adapter.MyListAdapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.MyListBean;
-import com.ifeng_tech.treasuryyitong.bean.my.UserBean;
+import com.ifeng_tech.treasuryyitong.bean.my.PersonalUserAccount_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.ADVP_R_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Certification_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.MyCollectActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
@@ -72,7 +71,7 @@ public class MyFragmet extends Fragment {
     private LinearLayout wode_weidenglu;
     private ImageView wode_yirenzheng;
     private boolean aBoolean;
-    private int shiming_type;
+    private int shiming_type;   // 0==失败 1 == 认证中 2 == 已认证 3 == 未认证
     private SharedPreferences.Editor edit;
 
     @Nullable
@@ -82,8 +81,6 @@ public class MyFragmet extends Fragment {
         initView(view);
 
         activity = (HomePageActivity) getActivity();
-
-
 
         wode_weidenglu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,23 +99,23 @@ public class MyFragmet extends Fragment {
             @Override
             public void onClick(View v) {
                 switch (shiming_type){
-                    case 1:// 已认证
+                    case 2:// 已认证
                         break;
-                    case 2:// 认证中
+                    case 1:// 认证中
                         // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
                         intent = new Intent(activity, ADVP_R_Activity.class);
                         intent.putExtra("rengzheng_type",1);
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
-                    case 3:// 认证失败
+                    case 0:// 认证失败
                         // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
                         intent = new Intent(activity, ADVP_R_Activity.class);
                         intent.putExtra("rengzheng_type",2);
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
-                    case 4:// 未认证
+                    default: // 未认证
                         intent = new Intent(activity, Certification_Activity.class);
                         startActivity(intent);
                         activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -137,15 +134,11 @@ public class MyFragmet extends Fragment {
 
         /**
          * 进入页面后，现获取用户信息，判断是否登录状态
-         *
-         * 这里先做模拟数据  未登录状态
          */
         sp = activity.getSharedPreferences("ifeng", MODE_PRIVATE);
         edit = sp.edit();
 
         aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);// 登录状态
-
-        shiming_type = 4;   // 实名认证的状态
 
         if(aBoolean){
             wode_denglu.setVisibility(View.VISIBLE);
@@ -172,17 +165,17 @@ public class MyFragmet extends Fragment {
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
-                        case 1: // 我的征集
-                            intent = new Intent(activity, MyCollectActivity.class);
-                            activity.startActivity(intent);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            break;
-                        case 2:  // 我的托管
+//                        case 1: // 我的征集
+//                            intent = new Intent(activity, MyCollectActivity.class);
+//                            activity.startActivity(intent);
+//                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//                            break;
+                        case 1:  // 我的托管
                             intent = new Intent(activity, My_Collocation_Activity.class);
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
-                        case 3:  // 转赠列表
+                        case 2:  // 转赠列表
                             intent = new Intent(activity, My_Given_list_Activity.class);
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -196,12 +189,12 @@ public class MyFragmet extends Fragment {
 //                        intent = new Intent(activity, Stock_Removal_Activity.class);
 //                        activity.startActivity(intent);
 //                        break;
-                        case 4:   // 我的仓库
+                        case 3:   // 我的仓库
                             intent = new Intent(activity, My_Warehouse_Activity.class);
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
-                        case 5:   // 提货注册
+                        case 4:   // 提货注册
                             intent = new Intent(activity, Pick_up_goods_Activity.class);
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -251,44 +244,51 @@ public class MyFragmet extends Fragment {
 
     // 获取用户信息
     private void getUser() {
-        activity.myPresenter.getPreContent(APIs.getUser, new MyInterfaces() {
+        activity.myPresenter.getPreContent(APIs.findPersonalUserAccount, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
-                        UserBean userBean = new Gson().fromJson(json, UserBean.class);
-                        wode_hao.setText(userBean.getData().getUserCode()+"");
-                        shiming_type=userBean.getData().getVerified();
-                        if(!userBean.getData().getImgUrl().equals("")){
-                            DashApplication.edit.putString(SP_String.USERIMG,userBean.getData().getImgUrl()).commit();
+                        PersonalUserAccount_Bean userBean = new Gson().fromJson(json, PersonalUserAccount_Bean.class);
+                        wode_hao.setText(userBean.getData().getUser().getUserCode()+"");
+                        shiming_type=userBean.getData().getAccountInfo().getVerified();   // 获取个人认证状态
+
+                        DashApplication.edit
+                                .putString(SP_String.ISUSERYEWUPASS,userBean.getData().getAccountInfo().getIsNoBusinessPwd()+"")
+                                .putString(SP_String.EMAIL,userBean.getData().getAccountInfo().getEmail()+"")
+                                .commit();
+
+                        if(userBean.getData().getAccountInfo().getImgUrl()==null){
                             Glide.with(activity)
-                                    .load(userBean.getData().getImgUrl())
+                                    .load(R.drawable.guangao)
                                     .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
                                     .into(wode_touxiang);
                         }else{
+                            DashApplication.edit.putString(SP_String.USERIMG,userBean.getData().getAccountInfo().getImgUrl()).commit();
                             Glide.with(activity)
-                                    .load(R.drawable.guangao)
+                                    .load(userBean.getData().getAccountInfo().getImgUrl())
+                                    .error(R.drawable.wode_weidenglu_img)
                                     .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
                                     .into(wode_touxiang);
                         }
 
                         // 登录状态以后还需要判断用户信息是否实名认证状态
                         switch (shiming_type){
-                            case 1:  // 已认证
+                            case 2:  // 已认证
                                 wode_weirenzheng.setVisibility(View.GONE);
                                 wode_yirenzheng.setVisibility(View.VISIBLE);
                                 break;
-                            case 2: // 认证中
+                            case 1: // 认证中
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
                                 wode_weirenzheng.setText("认证中...");
                                 wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
                                 wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
-                                wode_weirenzheng.setEnabled(false);
+                                wode_weirenzheng.setEnabled(true);
                                 break;
-                            case 3:// 认证失败
+                            case 0:// 认证失败
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
                                 wode_weirenzheng.setText("认证失败");
@@ -296,7 +296,7 @@ public class MyFragmet extends Fragment {
                                 wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
                                 wode_weirenzheng.setEnabled(true);
                                 break;
-                            case 0: // 未认证
+                            default:  // 未认证
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
                                 wode_weirenzheng.setEnabled(true);
@@ -337,7 +337,7 @@ public class MyFragmet extends Fragment {
 
     public void initData() {
         myListBeen.add(new MyListBean(R.drawable.wode_zican, "我的资产"));
-        myListBeen.add(new MyListBean(R.drawable.wode_zhengji, "我的征集"));
+//        myListBeen.add(new MyListBean(R.drawable.wode_zhengji, "我的征集"));
         myListBeen.add(new MyListBean(R.drawable.wode_tuoguan, "我的托管"));
         myListBeen.add(new MyListBean(R.drawable.wode_zhuanzeng, "转赠列表"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_ruku,"入库管理"));

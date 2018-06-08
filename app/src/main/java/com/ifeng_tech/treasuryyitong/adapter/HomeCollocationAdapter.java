@@ -9,26 +9,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.CollocationBean;
+import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
 import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by zzt on 2018/5/16.
+ *
+ *  首页的托管适配器
  */
 
 public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocationAdapter.HomeTuoGuan> {
     Context context;
-    List<CollocationBean> list;
+    List<Collocation_Subscribe_bean.DataBean.ListBean> list;
     private final HomePageActivity activity;
 
-    public HomeCollocationAdapter(Context context, List<CollocationBean> list) {
+    public HomeCollocationAdapter(Context context, List<Collocation_Subscribe_bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
         activity = (HomePageActivity) context;
@@ -43,35 +44,41 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
 
     @Override
     public void onBindViewHolder(HomeTuoGuan holder, final int position) {
-        holder.home_tuoguan_img.setImageResource(list.get(position).getImg());
-        holder.home_tuoguan_name.setText(list.get(position).getName());
+        if(list.get(position).getGoodsImg()==null){
+            holder.home_tuoguan_img.setImageResource(R.drawable.guangao);
+        }else{
+            Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(holder.home_tuoguan_img);
+        }
 
-        holder.home_tuoguan_text.setText(list.get(position).getText());
+        if(list.get(position).getGoodsName().length()>10){
+            String name = list.get(position).getGoodsName().substring(0, 10);
+            holder.home_tuoguan_name.setText(name+"...");
+        }else{
+            holder.home_tuoguan_name.setText(list.get(position).getGoodsName());
+        }
 
-        if(list.get(position).getType()==0){ // 0==等待 1==未开始
+        String[] times = list.get(position).getApplyTime().split("\\/");
+        holder.home_tuoguan_time.setText("截止时间:"+times[1]);
+
+        holder.home_tuoguan_text.setText("托管进度:"+list.get(position).getCount()+"/"+list.get(position).getNumber());
+
+        if(list.get(position).getState().equals("1")){ // 1==等待 2==未开始
             holder.home_tuoguan_imgflag.setImageResource(R.drawable.dengdai);
-            Date date = new Date(list.get(position).getTime());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            holder.home_tuoguan_time.setText("截止时间:"+simpleDateFormat.format(date));
-
         }else{
             holder.home_tuoguan_imgflag.setImageResource(R.drawable.kaishi);
-            // 状态处于为开始的时候，返回时间应该是当前时间
-            Date date = new Date(System.currentTimeMillis());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            holder.home_tuoguan_time.setText("开始时间:"+simpleDateFormat.format(date));
         }
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // 首页 中征集的点击
-            if(list.get(position).getType()==0){ // 0==等待 1==未开始
+            if(list.get(position).getState().equals("1")){ // 0==等待 1==未开始
                 Intent intent = new Intent(context, Authenticate_Details_Activity.class);
                 intent.putExtra("CollocationBean",list.get(position));
                 context.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }else{
-                MyUtils.setToast("该商品还未开始托管。。。");
+                MyUtils.setToast("该商品还未开始托管...");
             }
 
             }

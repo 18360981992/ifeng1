@@ -1,6 +1,9 @@
 package com.ifeng_tech.treasuryyitong.presenter;
 
+import android.graphics.Bitmap;
+
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
+import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.model.MyModel;
 
 import java.util.Map;
@@ -70,6 +73,27 @@ public class MyPresenter<V>  {
             }
         });
     }
+
+    /**
+     *  P 层中的获取图形验证码
+     * @param url
+     * @param myJieKou
+     */
+    public void getPro_TuXingYanZheng(String url, final MyJieKou myJieKou){
+        myModel.getMod_TuXingYanZheng(url, new MyJieKou() {
+            @Override
+            public void chenggong(Bitmap bitmap) {
+                myJieKou.chenggong(bitmap);
+            }
+
+            @Override
+            public void shibai(String ss) {
+                myJieKou.shibai(ss);
+            }
+        });
+    }
+
+
 
 
     //将泛型v与p进行解绑

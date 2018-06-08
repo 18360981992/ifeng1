@@ -1,105 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/baise"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x500"
+        android:layout_height="@dimen/x540"
         android:orientation="vertical">
 
         <!-- 日历时间选择栏 -->
         <RelativeLayout
-            android:layout_width="fill_parent"
+            android:padding="@dimen/x20"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical"
-            android:background="@drawable/shape_rc_sign_background"
-            android:layout_marginLeft="@dimen/x16"
-            android:layout_marginRight="@dimen/x16"
-
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
             >
-            <ImageView
-                android:id="@+id/iv_left"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x26"
-                android:layout_alignParentLeft="true"
-                android:contentDescription="@null"
-                android:background="@drawable/icon_left"
-                android:layout_marginLeft="@dimen/x16"
+            <TextView
+                android:clickable="true"
+                android:id="@+id/tv_pre"
+                android:textColor="#4586ED"
                 android:layout_centerVertical="true"
-                />
-            <ImageView
-                android:id="@+id/iv_right"
-                android:layout_width="@dimen/x20"
-                android:layout_height="@dimen/x26"
-                android:layout_alignParentRight="true"
-                android:contentDescription="@null"
-                android:background="@drawable/icon_right"
-                android:layout_marginRight="@dimen/x16"
-                android:layout_centerVertical="true"
-                />
-            <LinearLayout
-                android:id="@+id/date_operator_ll"
+                android:textSize="@dimen/x24"
+                android:text="7月"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:gravity="center"
+                android:layout_height="wrap_content" />
+            <TextView
                 android:layout_centerInParent="true"
-                android:orientation="horizontal" >
-                <TextView
-                    android:id="@+id/tv_today"
-                    android:layout_width="@dimen/x40"
-                    android:layout_height="@dimen/x40"
-                    android:layout_marginRight="@dimen/x10"
-                    android:text="今"
-                    android:gravity="center"
-                    android:background="#FFD700"
-                    android:textColor="#ffffff"
-                    android:textSize="@dimen/x26"
-                    android:visibility="visible"
-                    />
-
-                <TextView
-                    android:id="@+id/date_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:textColor="#93C73C"
-                    android:textSize="@dimen/x26"
-                    android:text="2018年5月28日" />
-                <TextView
-                    android:id="@+id/week_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:layout_marginLeft="@dimen/x16"
-                    android:textColor="#93C73C"
-                    android:textSize="@dimen/x26"
-                    android:text="" />
-            </LinearLayout>
+                android:id="@+id/tv_month"
+                android:textColor="#768797"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/x26"
+                android:text="2016年8月"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:clickable="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/tv_next"
+                android:textColor="#4586ED"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/x24"
+                android:text="8月"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
         </RelativeLayout>
 
-        <LinearLayout
+        <com.ifeng_tech.treasuryyitong.view.rili.CalendarView
+            android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@drawable/shape_rc_sign_background"
-            android:layout_marginRight="@dimen/x16"
-            android:layout_marginLeft="@dimen/x16"
-            android:layout_marginTop="@dimen/x16"
-            android:layout_marginBottom="@dimen/x16"
-            >
-            <com.ifeng_tech.treasuryyitong.view.rili_view.WeekDayView
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x50"
-                android:id="@+id/weekDayView"
-                />
-
-            <com.ifeng_tech.treasuryyitong.view.rili_view.MonthDateView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/monthDateView"
-                />
-        </LinearLayout>
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:layout_marginBottom="@dimen/x15"
+            />
     </LinearLayout>
 </RelativeLayout>

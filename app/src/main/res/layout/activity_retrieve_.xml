@@ -40,7 +40,11 @@
 
     </RelativeLayout>
 
-
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -90,6 +94,7 @@
                     android:singleLine="true"
                     android:maxLength="11"
                     android:visibility="gone"
+                    android:gravity="center_vertical"
                     />
 
 
@@ -127,7 +132,9 @@
                         android:maxLength="4"
                         android:singleLine="true"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x28" />
+                        android:textSize="@dimen/x28"
+                        android:gravity="center_vertical"
+                        />
 
                     <View
                         android:layout_width="@dimen/x2"
@@ -186,8 +193,11 @@
             android:background="@drawable/congzhi_bg"
             android:text="下一步"
             android:textColor="@color/baise"
-            android:textSize="@dimen/x28" />
+            android:textSize="@dimen/x28"
+            android:gravity="center"
+            />
     </RelativeLayout>
+</ScrollView>
 
 
 </LinearLayout>

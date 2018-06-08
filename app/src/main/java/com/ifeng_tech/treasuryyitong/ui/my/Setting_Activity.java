@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.api.APIs;
@@ -27,6 +28,7 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
     private RelativeLayout setting_guanyu;
     private RelativeLayout setting_banben;
     private Button setting_btn;
+    private TextView setting_banben_code;
 
     @Override
     public MyPresenter<Setting_Activity> initPresenter() {
@@ -64,6 +66,7 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
 //                MyUtils.setToast("检索版本。。。");
             }
         });
+
 
 
         setting_btn.setOnClickListener(new ForbidClickListener() {
@@ -107,11 +110,18 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setting_banben_code.setText("当前版本 "+getLocalVersion());
+    }
+
     private void initView() {
         setting_Fan = (RelativeLayout) findViewById(R.id.setting_Fan);
         setting_guanyu = (RelativeLayout) findViewById(R.id.setting_guanyu);
         setting_banben = (RelativeLayout) findViewById(R.id.setting_banben);
         setting_btn = (Button) findViewById(R.id.setting_btn);
+        setting_banben_code = findViewById(R.id.setting_banben_code);
     }
 
 

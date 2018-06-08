@@ -6,19 +6,29 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Message_List_Adapter;
+import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Message_Lists_Bean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 系统消息
@@ -30,7 +40,7 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
     private PullToRefreshScrollView system_pulltoscroll;
     private LinearLayout system_null;
 
-    List<Message_Lists_Bean> list = new ArrayList<Message_Lists_Bean>();
+    List<Message_Lists_Bean.DataBean.ListBean> list = new ArrayList<>();
     private Message_List_Adapter message_list_adapter;
 
     @Override
@@ -46,7 +56,6 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_system__message_);
         initView();
-        initData();
 
         system_Fan.setOnClickListener(new View.OnClickListener() {
               @Override
@@ -56,30 +65,102 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
           });
 
     }
-
+    Map<String, String> map = new HashMap<>();
+    int start=0;
     @Override
     protected void onResume() {
         super.onResume();
-        if(list.size()>0){
-            system_null.setVisibility(View.GONE);
-            system_pulltoscroll.setVisibility(View.VISIBLE);
-            setMessageAdapter();
-        }else{
-            system_null.setVisibility(View.VISIBLE);
-            system_pulltoscroll.setVisibility(View.GONE);
-        }
+
+        start=0*10;
+        map.put("start",start+"");
+        map.put("number",10+"");
+        map.put("messageType","0");
+        getFristConect();
+
 
         system_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                MyUtils.setToast("下拉了。。。");
-
-                system_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+//                MyUtils.setToast("下拉了。。。");
+                start=0;
+                map.put("start",start+"");
+                map.put("number",10+"");
+                map.put("messageType","0");
+                getFristConect();
             }
 
             @Override
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 
+                start++;
+                map.put("start",(start*10)+"");
+                map.put("number",10+"");
+                map.put("messageType","0");
+                getNextConect();
+            }
+        });
+    }
+
+    private void getFristConect() {
+        myPresenter.postPreContent(APIs.getMessageList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+
+                        Message_Lists_Bean message_lists_bean = new Gson().fromJson(json, Message_Lists_Bean.class);
+                        List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+
+                        DashApplication.edit_message_xitong.putInt(SP_String.NEWS_XITONG_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
+
+                        setMessageAdapter();
+
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                    system_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                system_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    private void getNextConect() {
+        myPresenter.postPreContent(APIs.getMessageList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        Message_Lists_Bean message_lists_bean = new Gson().fromJson(json, Message_Lists_Bean.class);
+                        List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
+                        list.addAll(zilist);
+                        setMessageAdapter();
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                    system_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
                 system_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
             }
         });
@@ -87,12 +168,20 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
 
 
     private void setMessageAdapter() {
-        if(message_list_adapter==null){
-            message_list_adapter = new Message_List_Adapter(System_Message_Activity.this, list);
-            system_MyListView.setAdapter(message_list_adapter);
+        if(list.size()>0){
+            system_null.setVisibility(View.GONE);
+            system_pulltoscroll.setVisibility(View.VISIBLE);
+            if(message_list_adapter==null){
+                message_list_adapter = new Message_List_Adapter(System_Message_Activity.this, list,"系统消息");
+                system_MyListView.setAdapter(message_list_adapter);
+            }else{
+                message_list_adapter.notifyDataSetChanged();
+            }
         }else{
-            message_list_adapter.notifyDataSetChanged();
+            system_null.setVisibility(View.VISIBLE);
+            system_pulltoscroll.setVisibility(View.GONE);
         }
+
     }
 
 
@@ -115,11 +204,6 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
         Labels.setReleaseLabel("放开刷新...");
     }
 
-    public void initData(){
-        for (int i=0;i<15;i++){
-            list.add(new Message_Lists_Bean(1255689741,"版本更新提醒","系统1.1.1已经更新"));
-        }
-    }
 
     @Override
     public void finish() {

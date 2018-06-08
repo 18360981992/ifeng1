@@ -7,8 +7,9 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.Collection_directory_Bean;
+import com.ifeng_tech.treasuryyitong.bean.cangpin.Collection_directory_Fragment_Bean;
 
 import java.util.List;
 
@@ -18,10 +19,8 @@ import java.util.List;
 
 public class Collection_directory_Adapter extends BaseAdapter{
     Context context;
-    List<Collection_directory_Bean> topList;
-
-
-    public Collection_directory_Adapter(Context context, List<Collection_directory_Bean> topList) {
+    List<Collection_directory_Fragment_Bean.DataBean.ListBean> topList;
+    public Collection_directory_Adapter(Context context,  List<Collection_directory_Fragment_Bean.DataBean.ListBean> topList) {
         this.context = context;
         this.topList = topList;
     }
@@ -50,9 +49,19 @@ public class Collection_directory_Adapter extends BaseAdapter{
         TextView collection_mulu_item_name = convertView.findViewById(R.id.collection_mulu_item_name);
         TextView collection_mulu_item_cword = convertView.findViewById(R.id.collection_mulu_item_cword);
 
-        collection_mulu_item_img.setImageResource(topList.get(position).getImg());
-        collection_mulu_item_name.setText(topList.get(position).getName());
-        collection_mulu_item_cword.setText(""+topList.get(position).getCword());
+        if(topList.get(position).getCommodityLink()==null){
+            collection_mulu_item_img.setImageResource(R.drawable.img_erroy);
+        }else{
+            Glide.with(context).load(topList.get(position).getCommodityLink()).error(R.drawable.img_erroy).into(collection_mulu_item_img);
+        }
+        if(topList.get(position).getCommodityName().length()>10){
+            String name = topList.get(position).getCommodityName().substring(0, 10);
+            collection_mulu_item_name.setText(name+"...");
+        }else{
+            collection_mulu_item_name.setText(topList.get(position).getCommodityName());
+        }
+
+        collection_mulu_item_cword.setText(""+topList.get(position).getCommodityCode());
 
         return convertView;
     }

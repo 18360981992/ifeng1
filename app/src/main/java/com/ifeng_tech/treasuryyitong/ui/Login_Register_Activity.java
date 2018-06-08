@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +29,6 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
-import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import java.util.HashMap;
@@ -220,9 +220,19 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
             return;
         }
 
+        if(pass.length()<6){
+            Toast.makeText(this, "请输入6-12位的密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String zaipass = register_zaici_pass.getText().toString().trim();
         if (TextUtils.isEmpty(zaipass)) {
             Toast.makeText(this, "请确认密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if(!pass.equals(zaipass)){
+            Toast.makeText(this, "两次密码输入不一致!", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -241,7 +251,9 @@ public class Login_Register_Activity extends BaseMVPActivity<Login_Register_Acti
         map.put("rePassword",zaipass);
 
         //  进度框
-        final AniDialog aniDialog = new AniDialog(Login_Register_Activity.this, null);
+        final ProgressDialog aniDialog = new ProgressDialog(Login_Register_Activity.this);
+        aniDialog.setCancelable(true);
+        aniDialog.setMessage("正在加载。。。");
         aniDialog.show();
 
         myPresenter.postPreContent(APIs.register, map, new MyInterfaces() {

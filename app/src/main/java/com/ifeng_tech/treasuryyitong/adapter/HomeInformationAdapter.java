@@ -11,8 +11,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.InformationBean;
+import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ import java.util.List;
 
 class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter.ZiXunHolder> {
     Context context;
-    List<InformationBean> informationlist;
+    List<Information_Zi_Bean.DataBean.ListBean> informationlist;
 
     public interface ZiXunAdapterJieKou{
         void ZiXunChuan(int i);
@@ -33,7 +35,7 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
         this.ziXunAdapterJieKou = ziXunAdapterJieKou;
     }
 
-    public HomeInformationAdapter(Context context, List<InformationBean> informationlist) {
+    public HomeInformationAdapter(Context context, List<Information_Zi_Bean.DataBean.ListBean> informationlist) {
         this.context = context;
         this.informationlist = informationlist;
     }
@@ -48,13 +50,17 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
     @Override
     public void onBindViewHolder(ZiXunHolder holder, final int position) {
 
-        String text=informationlist.get(position).getTitle()+"\t"+informationlist.get(position).getText();
+        String text="全部\t\t"+informationlist.get(position).getTitle();
         SpannableStringBuilder builder = new SpannableStringBuilder(text);
         // 设置textview 的富文本颜色
         ForegroundColorSpan span = new ForegroundColorSpan(context.getResources().getColor(R.color.zhuse));
-        builder.setSpan(span, 0, informationlist.get(position).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(span, 0, "全部".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.home_zixun_text.setText(builder);
-        holder.home_zixun_time.setText(informationlist.get(position).getTime());
+
+        Date date = new Date(informationlist.get(position).getAddTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        holder.home_zixun_time.setText(simpleDateFormat.format(date));
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

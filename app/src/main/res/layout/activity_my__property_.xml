@@ -71,7 +71,7 @@
                     android:id="@+id/property_money"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="50000"
+                    android:text="0.00"
                     android:textSize="@dimen/x60"
                     android:textColor="@color/baise"
                     />
@@ -114,7 +114,7 @@
                     android:id="@+id/property_dongjie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50000"
+                    android:text="0.00"
                     android:layout_marginTop="@dimen/x16"
                     android:textSize="@dimen/x24"
                     android:textColor="@color/name_se"
@@ -138,7 +138,7 @@
                     android:id="@+id/property_keyong"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50000"
+                    android:text="0.00"
                     android:layout_marginTop="@dimen/x16"
                     android:textSize="@dimen/x24"
                     android:textColor="@color/name_se"/>
@@ -161,7 +161,7 @@
                     android:id="@+id/qiankuan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50000"
+                    android:text="0.00"
                     android:layout_marginTop="@dimen/x16"
                     android:textSize="@dimen/x24"
                     android:textColor="@color/name_se"
@@ -203,7 +203,7 @@
             android:visibility="visible"
             >
             <ImageView
-                android:layout_width="@dimen/x140"
+                android:layout_width="@dimen/x158"
                 android:layout_height="@dimen/x120"
                 android:background="@drawable/zanwu_shuju"/>
             <TextView
@@ -234,6 +234,7 @@
             android:textColor="@color/baise"
             android:layout_marginLeft="@dimen/x20"
             android:background="@drawable/congzhi_bg"
+            android:gravity="center"
             />
         <Button
             android:id="@+id/property_congzhi"
@@ -246,6 +247,7 @@
             android:layout_marginRight="@dimen/x20"
             android:background="@drawable/congzhi_bg"
             android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
             />
     </LinearLayout>
 

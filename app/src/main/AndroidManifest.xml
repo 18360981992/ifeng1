@@ -7,6 +7,14 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:name=".appliction.DashApplication"
@@ -135,7 +143,7 @@
             android:name=".ui.Collection_Directory_Detail_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.Business_Pass_Activity"
+            android:name=".ui.my.yewu_pass.Business_Pass_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.Bind_Email_Activity1"
@@ -154,19 +162,29 @@
 
 
         <!-- android:authorities="com.example.dell.legutinker.fileprovider"  这句话是个bug 千万要注意，文档有坑 -->
-        <!--<provider-->
-            <!--android:name="android.support.v4.content.FileProvider"-->
-            <!--android:authorities="com.example.fileprovider"-->
-            <!--android:exported="false"-->
-            <!--android:grantUriPermissions="true">-->
-            <!--<meta-data-->
-                <!--android:name="android.support.FILE_PROVIDER_PATHS"-->
-                <!--android:resource="@xml/provider_paths" />-->
-        <!--</provider>-->
+         <provider
+             android:name="android.support.v4.content.FileProvider"
+             android:authorities="com.example.fileprovider"
+             android:exported="false"
+             android:grantUriPermissions="true">
+             <meta-data
+             android:name="android.support.FILE_PROVIDER_PATHS"
+             android:resource="@xml/provider_paths" />
+         </provider>
 
         <activity android:name=".ui.my.My_Warehouse_Datail_Activity" />
         <activity android:name=".ui.my.My_Given_Datail_Activity" />
-        <activity android:name=".ui.Information_Activity"></activity>
+        <activity android:name=".ui.Information_Activity" />
+        <activity android:name=".ui.my.yewu_pass.Business_Pass_Reset_Activity" />
+        <activity android:name=".ui.my.yewu_pass.Disremember_Business_Pass_Activity" />
+        <activity android:name=".ui.my.Withdraw_Activity" />
+        <activity android:name=".ui.my.Withdraw_Activity2" />
+        <activity android:name=".ui.Scan_One_Scan_Activity" />
+        <activity android:name=".ui.Delivery_Activity" />
+        <activity android:name=".ui.Goods_QR_Activity" />
+        <activity android:name=".ui.Goods_Setting_Num_Activity" />
+        <activity android:name=".ui.my.yewu_pass.Remember_Business_Pass_Activity" />
+        <activity android:name=".ui.my.My_Warehouse_Activity2"></activity>
     </application>
 
 </manifest>
