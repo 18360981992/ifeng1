@@ -20,12 +20,16 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.Collection_Directory_Detail_Activity;
 import com.ifeng_tech.treasuryyitong.utils.EGiven_ListStage;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 /**
@@ -55,6 +59,8 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
     private ImageView my_given_datail_weitanchuan_img;
     private TextView my_given_datail_weitanchuan_text;
     private int weitanchuan_height;
+    private TextView my_given_datail_duifang;
+    private TextView my_given_datail_riqi;
 
     @Override
     public MyPresenter<My_Given_Datail_Activity> initPresenter() {
@@ -83,7 +89,7 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
         my_Given_Datail_name.setText(give_list_bean.getGoodsName());
         my_Given_Datail_cword.setText(""+ give_list_bean.getGoodsCode());
         my_Given_Datail_dword.setText(""+ give_list_bean.getOrderNo());
-        my_Given_Datail_cangku.setText("福利特仓库");
+        my_Given_Datail_cangku.setText(give_list_bean.getAmount()+"");  // 仓库改成数量
         double price= give_list_bean.getFee()* give_list_bean.getProfit();
         my_Given_Datail_shouxufei.setText("￥"+ DashApplication.decimalFormat.format(price));
         if(leibie==0 ){
@@ -104,14 +110,30 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
                 my_given_datail_anniu.setVisibility(View.INVISIBLE);
             }
             my_Given_Datail_leibie.setText("转入");
+            my_given_datail_duifang.setText(give_list_bean.getUserCode()+"");
             orderNo=give_list_bean.getOrderNo();  // 为转赠单号赋值
         }else{
             my_Given_Datail_leibie.setText("转出");
             my_given_datail_anniu.setVisibility(View.INVISIBLE);
-
+            my_given_datail_duifang.setText(give_list_bean.getOppositeUserCode()+"");
         }
         my_Given_Datail_zhangtai.setText(EGiven_ListStage.getName(give_list_bean.getStatus()));
 
+        Date date = new Date(give_list_bean.getAddTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        my_given_datail_riqi.setText(simpleDateFormat.format(date));
+
+        // 转赠详情中的 商品详情跳到藏品目录详情
+        my_Given_Datail_xiangqing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int goodsId = give_list_bean.getGoodsId();
+                Intent intent = new Intent(My_Given_Datail_Activity.this, Collection_Directory_Detail_Activity.class);
+                intent.putExtra("goodsId",""+goodsId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
     }
 
     private void initView() {
@@ -124,6 +146,9 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
         my_Given_Datail_shouxufei = (TextView) findViewById(R.id.my_Given_Datail_shouxufei);
         my_Given_Datail_leibie = (TextView) findViewById(R.id.my_Given_Datail_leibie);
         my_Given_Datail_zhangtai = (TextView) findViewById(R.id.my_Given_Datail_zhangtai);
+        my_given_datail_duifang = (TextView) findViewById(R.id.my_Given_Datail_duifang);
+        my_given_datail_riqi = (TextView) findViewById(R.id.my_Given_Datail_riqi);
+
         my_Given_Datail_tongyi = (Button) findViewById(R.id.my_Given_Datail_tongyi);
         my_Given_Datail_jujue = (Button) findViewById(R.id.my_Given_Datail_jujue);
         my_given_datail_anniu = (LinearLayout)findViewById(R.id.my_Given_Datail_anniu);
@@ -156,12 +181,10 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
                 HashMap<String, String> map = new HashMap<>();
                 map.put("orderNo",orderNo);
 
-                final ProgressDialog aniDialog = new ProgressDialog(My_Given_Datail_Activity.this);
-                aniDialog.setCancelable(true);
-                aniDialog.setMessage("正在加载。。。");
-                aniDialog.show();
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(My_Given_Datail_Activity.this, SP_String.JIAZAI);
 
-                setButton(map, aniDialog,"同意转赠成功");
+                setButton(APIs.getUserZhuanzeng_accept,map, aniDialog,"同意转赠成功");
 
 
                 break;
@@ -171,19 +194,17 @@ public class My_Given_Datail_Activity extends BaseMVPActivity<My_Given_Datail_Ac
                 HashMap<String, String> map1 = new HashMap<>();
                 map1.put("orderNo",orderNo);
 
-                final ProgressDialog aniDialog1 = new ProgressDialog(My_Given_Datail_Activity.this);
-                aniDialog1.setCancelable(true);
-                aniDialog1.setMessage("正在加载。。。");
-                aniDialog1.show();
+                //  进度框
+                final ProgressDialog aniDialog1 = MyUtils.getProgressDialog(My_Given_Datail_Activity.this, SP_String.JIAZAI);
 
-                setButton(map1, aniDialog1,"拒绝转赠成功");
+                setButton(APIs.getUserZhuanzeng_refuse,map1, aniDialog1,"拒绝转赠成功");
 
                 break;
         }
     }
 
-    private void setButton(HashMap<String, String> map, final ProgressDialog aniDialog, final String text) {
-        myPresenter.postPreContent(APIs.getUserZhuanzeng_accept, map, new MyInterfaces() {
+    private void setButton(String url,HashMap<String, String> map, final ProgressDialog aniDialog, final String text) {
+        myPresenter.postPreContent(url, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 aniDialog.dismiss();

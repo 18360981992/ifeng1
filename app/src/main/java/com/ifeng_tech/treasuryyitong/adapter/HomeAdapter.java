@@ -16,21 +16,15 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.bean.FirstGpsBean;
-import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
+import com.ifeng_tech.treasuryyitong.bean.SelectAdvertise_Bean;
 import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
-import com.ifeng_tech.treasuryyitong.ui.Delivery_Activity;
+import com.ifeng_tech.treasuryyitong.bean.zixun.HotList_Bean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.stx.xhb.xbanner.XBanner;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
 
 import java.util.List;
 
@@ -42,7 +36,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
     Context context;
     List<Object> list;
     private final HomePageActivity activity;
-    private final boolean aBoolean;
+    public static XBanner home_xBanner;
 
     public HomeAdapter(Context context, List<Object> list) {
         this.context = context;
@@ -50,7 +44,8 @@ public class HomeAdapter extends RecyclerView.Adapter{
 
         activity = (HomePageActivity) context;
 
-        aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
+//        sp = context.getSharedPreferences("ifeng", MODE_PRIVATE);
+//        aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
     }
 
     @Override
@@ -87,24 +82,34 @@ public class HomeAdapter extends RecyclerView.Adapter{
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if(getItemViewType(position)==0){
-            XBanner home_xBanner = ((HomeLunBo) holder).home_xBanner;
-            final List<Integer> imgs = (List<Integer>) list.get(position);
+            home_xBanner = ((HomeLunBo) holder).home_xBanner;
+            final List<SelectAdvertise_Bean.DataBean.ListBean> imgs = (List<SelectAdvertise_Bean.DataBean.ListBean>) list.get(position);
 
-            home_xBanner.setData(imgs,null);//设置数据源
-            home_xBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
-                @Override
-                public void loadBanner(XBanner banner, Object model, View view, int position) {
-                    ((ImageView) view).setImageResource(imgs.get(position));
-//                    Glide.with(context).load(imgs.get(position)).into((ImageView) view);
-                }
-            });
-            home_xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
-                @Override
-                public void onItemClick(XBanner banner, int position) {
-                    MyUtils.setToast("=="+position);
-                }
-            });
+            if(imgs.size()>0){
+                home_xBanner.setData(imgs,null);//设置数据源
+                home_xBanner.setmAdapter(new XBanner.XBannerAdapter() {//xbanner的适配器，加载图片
+                    @Override
+                    public void loadBanner(XBanner banner, Object model, View view, int position) {
 
+                        if(imgs.get(position).getImgeUrl()==null){
+                            ((ImageView) view).setImageResource(R.drawable.img_erroy);
+                        }else{
+                            Glide.with(context).load(imgs.get(position).getImgeUrl()).error(R.drawable.img_erroy).into((ImageView) view);
+                        }
+                    }
+                });
+                home_xBanner.setOnItemClickListener(new XBanner.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(XBanner banner, int position) {
+                        if(imgs.get(position).getImgeLink()!=null&&!imgs.get(position).getImgeLink().equals("")){
+                            Intent intent = new Intent(activity, Information_Details_Activity.class);
+                            intent.putExtra("SelectAdvertise_Bean.DataBean.ListBean",imgs.get(position));
+                            activity.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                    }
+                });
+            }
 
         }else if(getItemViewType(position)==1){  // 导航
             RecyclerView home_gridView = ((HomeDaoHang) holder).home_gridView;
@@ -119,49 +124,20 @@ public class HomeAdapter extends RecyclerView.Adapter{
                     switch (i){
                         case 0:
 //                            MyUtils.setToast("点击了扫一扫。。。");
-                            if(aBoolean){
-                                Intent intent = new Intent(activity, CaptureActivity.class);
-                                activity.startActivityForResult(intent, DashApplication.ERWIMA_SAOMIAO_req);
-                            }else{
-                                Intent intent1 = new Intent(context, LoginActivity.class);
-                                context.startActivity(intent1);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }
+                            HomePageActivity.homePageActivity_JieKou.chuan(4);
                             break;
                         case 1:
 //                            MyUtils.setToast("点击了收货。。。");
-                            if(aBoolean){
-                                Intent intent1 = new Intent(context, Delivery_Activity.class);
-                                context.startActivity(intent1);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }else{
-                                Intent intent1 = new Intent(context, LoginActivity.class);
-                                context.startActivity(intent1);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }
+                            HomePageActivity.homePageActivity_JieKou.chuan(5);
                             break;
                         case 2: // 转赠
-                            if(aBoolean){
-                                Intent intent = new Intent(context, Donation_Activity.class);
-                                context.startActivity(intent);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }else{
-                                Intent intent1 = new Intent(context, LoginActivity.class);
-                                context.startActivity(intent1);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }
+                            HomePageActivity.homePageActivity_JieKou.chuan(6);
                             break;
                         case 3:
 //                            MyUtils.setToast("点击了鉴定。。。");
-                            if(aBoolean){
-                                Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
-                                context.startActivity(intent2);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }else{
-                                Intent intent1 = new Intent(context, LoginActivity.class);
-                                context.startActivity(intent1);
-                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            }
+                            Intent intent2 = new Intent(context, Collocation_Subscribe_Activity.class);
+                            activity.startActivity(intent2);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
                     }
 
@@ -209,10 +185,10 @@ public class HomeAdapter extends RecyclerView.Adapter{
                     HomePageActivity.homePageActivity_JieKou.chuan(1); // 点击广告
                 }
             });
-        }else{  // 资讯
+        }else{           // 资讯
             RecyclerView home_zixun_myListView = ((HomeZiXun) holder).home_zixun_myListView;
             RelativeLayout home_zixun_relativeLayout = ((HomeZiXun) holder).home_zixun_relativeLayout;
-            final List<Information_Zi_Bean.DataBean.ListBean> informationlist = (List<Information_Zi_Bean.DataBean.ListBean>) list.get(position);
+            final List<HotList_Bean.DataBean.ListBean> informationlist = (List<HotList_Bean.DataBean.ListBean>) list.get(position);
             home_zixun_myListView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
 
             HomeInformationAdapter homeInformationAdapter = new HomeInformationAdapter(context, informationlist);
@@ -223,7 +199,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
                 public void ZiXunChuan(int i) {
 //                    MyUtils.setToast("点击了资讯条目=="+i);
                     Intent intent = new Intent(context, Information_Details_Activity.class);
-//                    intent.putExtra("InformationBean",informationlist.get(i));
+                    intent.putExtra("id",informationlist.get(i).getId()+"");
                     context.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }

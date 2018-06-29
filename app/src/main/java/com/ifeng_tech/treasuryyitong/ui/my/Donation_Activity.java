@@ -1,12 +1,15 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -27,12 +30,16 @@ import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.bean.my.QR_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.utils.SignUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.Search_Pop_View;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
+import com.jwsd.libzxing.OnQRCodeListener;
+import com.jwsd.libzxing.QRCodeManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +79,8 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
 
     List<WarehouseBean.DataBean.ListBean> list = new ArrayList<WarehouseBean.DataBean.ListBean>();
     private String type;
+    private ImageView donation_saoyisao;
+    private RelativeLayout donation_title;
 
     @Override
     public MyPresenter<Donation_Activity> initPresenter() {
@@ -85,6 +94,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donation_);
+
         initView();
 
         // 藏品代码失焦
@@ -194,6 +204,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 intent1.putExtra("userCode",word+"");
                 intent1.putExtra("select","转赠");
                 startActivityForResult(intent1,DashApplication.ZHUAN_TO_CANGKU_req);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -205,6 +216,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 intent1.putExtra("userCode",word+"");
                 intent1.putExtra("select","转赠");
                 startActivityForResult(intent1,DashApplication.ZHUAN_TO_CANGKU_req);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -215,6 +227,83 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             @Override
             public void forbidClick(View v) {
                 submit();
+            }
+        });
+
+        // 点击扫描二维码
+        donation_saoyisao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 6.0权限适配
+                if (ActivityCompat.checkSelfPermission(Donation_Activity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Donation_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    return;
+                }
+                QRCodeManager.getInstance()
+                        .with(Donation_Activity.this)
+                        .setReqeustType(DashApplication.DONATION_SAOMIAO_req)
+//                .setRequestCode(1001)
+                        .scanningQRCode(new OnQRCodeListener() {
+                            @Override
+                            public void onCompleted(String des) {
+                                LogUtils.i("jiba","donation==="+des);
+                                String result = null;
+                                try {
+                                    result = SignUtils.decode(des);
+                                    if(result.contains(SP_String.QR_ZHUANZENG)){
+                                        if(result.length()>20){
+                                            String path = result.substring(0, result.indexOf("?"));
+                                            String referralCode = result.substring(result.indexOf("=")+1, result.length());
+
+//                            LogUtils.i("jiba","referralCode===="+referralCode);
+
+                                            QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
+                                            if(path.equals(SP_String.QR_ZHUANZENG)){
+                                                Intent intent = new Intent(Donation_Activity.this, Donation_Activity.class);
+                                                intent.putExtra("QR_Bean", referralCode);
+                                                if(qr_bean.getGoodsInfo()==null) intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
+
+                                                else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+
+                                                startActivityForResult(intent,500);
+                                                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                            }
+                                        }else{
+                                            MyUtils.setToast(des);
+                                        }
+                                    }else{
+                                        MyUtils.setToast(des);
+                                    }
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    MyUtils.setToast(des);
+                                }
+                            }
+
+                            @Override
+                            public void onError(Throwable errorMsg) {
+                                MyUtils.setToast("解析二维码失败=="+errorMsg);
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                MyUtils.setToast("扫描任务取消了");
+                            }
+
+                            /**
+                             * 当点击手动添加时回调
+                             *
+                             * @param requestCode
+                             * @param resultCode
+                             * @param data
+                             */
+                            @Override
+                            public void onManual(int requestCode, int resultCode, Intent data) {
+                                Log.i("jiba","点击了手动添加了");
+                            }
+
+
+                        });
             }
         });
     }
@@ -267,10 +356,19 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //注册onActivityResult
+        QRCodeManager.getInstance().with(this).onActivityResult(requestCode, resultCode, data);
+
         if(requestCode==DashApplication.ZHUAN_TO_CANGKU_req&&resultCode==DashApplication.ZHUAN_TO_CANGKU_res){
             String type = data.getStringExtra("type");
             get_QR_Moth(data, type);
         }
+
+        if(requestCode==500){
+            finish();
+        }
+
     }
 
     // 设置textview 是否可点击
@@ -281,33 +379,33 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     }
 
 
-    // 输入框获取焦点的时候获取我的持仓
-    private void getFirstConect(final HashMap<String, String> map) {
-        myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
-            @Override
-            public void chenggong(String json) {
-                try {
-                    JSONObject jsonObject = new JSONObject(json);
-                    String code = (String) jsonObject.get("code");
-                    if(code.equals("2000")){
-                        SharedPreferences.Editor edit = DashApplication.edit;
-                        edit.putString(SP_String.CHICANG,json).commit();
-//                        LogUtils.i("jiba","==="+json);
-                    }else{
-                        MyUtils.setToast((String) jsonObject.get("message"));
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            @Override
-            public void shibai(String ss) {
-                MyUtils.setToast("获取我的持仓=="+ss);
-            }
-        });
-    }
+//    // 输入框获取焦点的时候获取我的持仓
+//    private void getFirstConect(final HashMap<String, String> map) {
+//        myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+//            @Override
+//            public void chenggong(String json) {
+//                try {
+//                    JSONObject jsonObject = new JSONObject(json);
+//                    String code = (String) jsonObject.get("code");
+//                    if(code.equals("2000")){
+//                        SharedPreferences.Editor edit = DashApplication.edit;
+//                        edit.putString(SP_String.CHICANG,json).commit();
+////                        LogUtils.i("jiba","==="+json);
+//                    }else{
+//                        MyUtils.setToast((String) jsonObject.get("message"));
+//                    }
+//
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//
+//            @Override
+//            public void shibai(String ss) {
+//                MyUtils.setToast("获取我的持仓=="+ss);
+//            }
+//        });
+//    }
 
     @Override
     protected void onResume() {
@@ -342,8 +440,10 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
     }
 
     private void initView() {
+        donation_title = (RelativeLayout) findViewById(R.id.donation_title);
         donation_Fan = (RelativeLayout) findViewById(R.id.donation_Fan);
         donation_huiyuan_word = (EditText) findViewById(R.id.donation_huiyuan_word);
+        donation_saoyisao = (ImageView) findViewById(R.id.donation_saoyisao);
         donation_cangpin_wrod = (EditText) findViewById(R.id.donation_cangpin_wrod);
         donation_name = (EditText) findViewById(R.id.donation_name);
         donation_shuliang = (EditText) findViewById(R.id.donation_shuliang);
@@ -354,8 +454,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         donation_weitanchuan = (LinearLayout) findViewById(R.id.donation_weitanchuan);
         donation_weitanchuan_img = (ImageView) findViewById(R.id.donation_weitanchuan_img);
         donation_weitanchuan_text = (TextView) findViewById(R.id.donation_weitanchuan_text);
-
-
         // 解决键盘挡住输入框
         SoftHideKeyBoardUtil.assistActivity(this);
 
@@ -380,6 +478,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 weitanchuan_height = donation_weitanchuan.getMeasuredHeight();
             }
         });
+
 
     }
 
@@ -406,6 +505,11 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
         }
 
         String shuliang = donation_shuliang.getText().toString().trim();
+        if(shuliang.length()>=10){
+            MyUtils.setToast("您已超出最大转赠件数");
+            return;
+        }
+
         if (TextUtils.isEmpty(shuliang)||Integer.valueOf(shuliang)<=0) {
             Toast.makeText(this, "转赠数量不能为空且不能小于0", Toast.LENGTH_SHORT).show();
             return;
@@ -419,8 +523,8 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
             return;
         }
 
-        if(yewu_pass.length()<6){
-            Toast.makeText(this, "请输入6-12位的业务密码", Toast.LENGTH_SHORT).show();
+        if(yewu_pass.length()!=6){
+            Toast.makeText(this, "请输入6位的业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -447,10 +551,8 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 map.put("oppositeUserCode",oppositeUserCode);
                 map.put("businessPwd",businessPwd);
 
-                final ProgressDialog aniDialog = new ProgressDialog(Donation_Activity.this);
-                aniDialog.setCancelable(true);
-                aniDialog.setMessage("正在加载。。。");
-                aniDialog.show();
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Donation_Activity.this, SP_String.JIAZAI);
 
                 myPresenter.postPreContent(APIs.getUserZhuanzeng, map, new MyInterfaces() {
                     @Override
@@ -469,10 +571,23 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                                 MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                                     @Override
                                     public void chuan() {
-                                        donation_tijiao.setEnabled(false);
-                                        finish();
+                                        goodsId="";
+                                        amount="";
+                                        oppositeUserCode="";
+                                        businessPwd="";
+                                        donation_huiyuan_word.setText("");
+                                        donation_cangpin_wrod.setText("");
+                                        donation_name.setText("");
+                                        donation_shuliang.setText("");
+                                        donation_yewu_pass.setText("");
+                                        setTextView(donation_huiyuan_word,true);
+                                        setTextView(donation_shuliang,true);
+                                        setTextView(donation_yewu_pass,true);
+
                                     }
                                 });
+
+
                             }else{
                                 MyUtils.setObjectAnimator(donation_weitanchuan,
                                         donation_weitanchuan_img,
@@ -495,8 +610,6 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                                 false,ss);
                     }
                 });
-
-
             }
 
             @Override

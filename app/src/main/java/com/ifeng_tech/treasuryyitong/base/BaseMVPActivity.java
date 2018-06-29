@@ -5,6 +5,10 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -14,6 +18,9 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.TransferFee_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
+import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
+import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.NetWorkUtil;
@@ -23,6 +30,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
+
+import cn.jpush.android.api.JPushInterface;
+import cn.jpush.android.api.TagAliasCallback;
 
 
 /**
@@ -37,11 +49,11 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
     public abstract T initPresenter();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        setTheme(R.style.AppTheme);
 
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_base_mvp);
         myPresenter=initPresenter();
-
         boolean conn = NetWorkUtil.isConn((Context) this);
         if(!conn){
             NetWorkUtil.showNoNetWorkDlg((Context) this);
@@ -176,5 +188,115 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
         }
         return localVersionName;
     }
+
+
+    // eidttext的获焦并软件盘的显示
+    public void setEditTexttHuo(EditText editText){
+        editText.setFocusable(true);
+        editText.setFocusableInTouchMode(true);
+        editText.requestFocus();
+        editText.findFocus();
+        InputMethodManager imm = (InputMethodManager) getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(editText, InputMethodManager.SHOW_FORCED);// 显示输入法
+    }
+
+    public void initRefreshListView(PullToRefreshScrollView my_collocation_pulltoscroll) {
+        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
+        my_collocation_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
+        ILoadingLayout Labels = my_collocation_pulltoscroll.getLoadingLayoutProxy(true, false);
+        Labels.setPullLabel("下拉刷新...");
+        Labels.setRefreshingLabel("正在刷新...");
+        Labels.setReleaseLabel("放开刷新...");
+
+        ILoadingLayout Labels1 = my_collocation_pulltoscroll.getLoadingLayoutProxy(false, true);
+        Labels1.setPullLabel("上拉加载...");
+        Labels1.setRefreshingLabel("正在加载...");
+        Labels1.setReleaseLabel("放开刷新...");
+    }
+
+    /**
+     * 判断两次密码是否一致
+     * @param ed1  再次密码
+     * @param ed2  新密码
+     */
+    public void isPass_Old_New(final EditText ed1, final EditText ed2){
+        // 再次确认密码的失焦事件
+        ed1.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus==false){
+                    String s = ed1.getText().toString().trim();  // 再次确认
+                    String s1 = ed2.getText().toString().trim();  // 新密码
+                    if(!s.equals(s1)){
+                        MyUtils.setToast("两次密码不一致");
+                        return;
+                    }
+                }
+            }
+        });
+    }
+
+    /**
+     * 设置标签与别名
+     */
+    public void setTagAndAlias(String uid) {
+
+//        LogUtils.i("jiba","uid==="+uid);
+        /**
+         *这里设置了别名，在这里获取的用户登录的信息
+         *并且此时已经获取了用户的userId,然后就可以用用户的userId来设置别名了
+         **/
+        //false状态为未设置标签与别名成功
+        //if (UserUtils.getTagAlias(getHoldingActivity()) == false) {
+        Set<String> tags = new HashSet<String>();
+        //这里可以设置你要推送的人，一般是用户uid 不为空在设置进去 可同时添加多个
+        if (!TextUtils.isEmpty(uid)){
+            tags.add(uid);//设置tag
+        }
+        //上下文、别名【Sting行】、标签【Set型】、回调
+        JPushInterface.setAliasAndTags(BaseMVPActivity.this,uid, tags, mAliasCallback);
+
+    }
+
+
+    /**
+     * /**
+     * TagAliasCallback类是JPush开发包jar中的类，用于
+     * 设置别名和标签的回调接口，成功与否都会回调该方法
+     * 同时给定回调的代码。如果code=0,说明别名设置成功。
+     * /**
+     * 6001   无效的设置，tag/alias 不应参数都为 null
+     * 6002   设置超时    建议重试
+     * 6003   alias 字符串不合法    有效的别名、标签组成：字母（区分大小写）、数字、下划线、汉字。
+     * 6004   alias超长。最多 40个字节    中文 UTF-8 是 3 个字节
+     * 6005   某一个 tag 字符串不合法  有效的别名、标签组成：字母（区分大小写）、数字、下划线、汉字。
+     * 6006   某一个 tag 超长。一个 tag 最多 40个字节  中文 UTF-8 是 3 个字节
+     * 6007   tags 数量超出限制。最多 100个 这是一台设备的限制。一个应用全局的标签数量无限制。
+     * 6008   tag/alias 超出总长度限制。总长度最多 1K 字节
+     * 6011   10s内设置tag或alias大于3次 短时间内操作过于频繁
+     **/
+    private final TagAliasCallback mAliasCallback = new TagAliasCallback() {
+        @Override
+        public void gotResult(int code, String alias, Set<String> tags) {
+            String logs;
+            switch (code) {
+                case 0:
+                    //这里可以往 SharePreference 里写一个成功设置的状态。成功设置一次后，以后不必再次设置了。
+                    //UserUtils.saveTagAlias(getHoldingActivity(), true);
+                    logs = "Set tag and alias success极光推送别名设置成功";
+                    LogUtils.e("TAG", logs);
+                    break;
+                case 6002:
+                    //极低的可能设置失败 我设置过几百回 出现3次失败 不放心的话可以失败后继续调用上面那个方面 重连3次即可 记得return 不要进入死循环了...
+                    logs = "Failed to set alias and tags due to timeout. Try again after 60s.极光推送别名设置失败，60秒后重试";
+                    LogUtils.e("TAG", logs);
+                    break;
+                default:
+                    logs = "极光推送设置失败，Failed with errorCode = " + code;
+                    LogUtils.e("TAG", logs);
+                    break;
+            }
+        }
+    };
 
 }

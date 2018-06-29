@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--未点击是白色-->
+    <item android:drawable="@drawable/tihuo_ed_bg" android:state_pressed="false"/>
+    <!--点击是灰色-->
+    <item android:drawable="@color/fengouxian" android:state_window_focused="true" />
+</selector>

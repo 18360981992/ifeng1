@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -30,6 +31,7 @@ import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +41,7 @@ import java.util.HashMap;
 /**
  * 记得业务密码
  */
-public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Business_Pass_Activity, MyPresenter<Remember_Business_Pass_Activity>> implements View.OnClickListener {
+public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Business_Pass_Activity, MyPresenter<Remember_Business_Pass_Activity>>  {
 
     private RelativeLayout remember_Business_pass_Fan;
     private TextView remember_Business_pass_shoujihao;
@@ -99,10 +101,10 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         });
 
         //  点击切换图形验证码
-        remember_Business_pass_tu_yan_img.setOnClickListener(new View.OnClickListener() {
+        remember_Business_pass_tu_yan_img.setOnClickListener(new ForbidClickListener() {
             @Override
-            public void onClick(View v) {
-                myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+            public void forbidClick(View v) {
+                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
                     @Override
                     public void chenggong(Bitmap bitmap) {
                         if(bitmap!=null){
@@ -123,32 +125,86 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         remember_Business_pass_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                remember_Business_pass_duan_btn.setText("重新发送" + time + "(s)");
-                remember_Business_pass_duan_btn.setEnabled(false);
-                h.sendEmptyMessageDelayed(0, 1000);
 
+                String yan = remember_Business_pass_tu_yan.getText().toString().trim();
+                if (TextUtils.isEmpty(yan)) {
+                    Toast.makeText(Remember_Business_Pass_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 HashMap<String, String> map = new HashMap<>();
-                map.put("mobile",shouji);
-                map.put("codeType","9");  // ("设置交易密码", 9)
-                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                map.put("verifyCode",yan);
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Remember_Business_Pass_Activity.this, SP_String.JIAZAI);
+
+                myPresenter.postPreContent(APIs.verifyCode, map, new MyInterfaces() {
                     @Override
                     public void chenggong(String json) {
-                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
-                        if(smCodeBean.getCode().equals("2000")){
-                            MyUtils.setToast("短信发送成功");
+                        aniDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("2000")){
+                                remember_Business_pass_duan_btn.setText("重新发送" + time + "(s)");
+                                remember_Business_pass_duan_btn.setEnabled(false);
+                                h.sendEmptyMessageDelayed(0, 1000);
+
+                                HashMap<String, String> map = new HashMap<>();
+                                map.put("mobile",shouji);
+                                map.put("codeType","9");  // ("设置交易密码", 9)  状态写10 有异常
+                                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                                    @Override
+                                    public void chenggong(String json) {
+                                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                                        if(smCodeBean.getCode().equals("2000")){
+                                            MyUtils.setToast("短信发送成功");
+                                        }else{
+                                            MyUtils.setToast(smCodeBean.getMessage()+"");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void shibai(String ss) {
+                                        MyUtils.setToast("短信发送失败");
+                                    }
+                                });
+                            }else{
+                                MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
+                                        remember_Business_pass_weitanchuan_img,
+                                        remember_Business_pass_weitanchuan_text,
+                                        weitanchuan_height,
+                                        false, (String) jsonObject.get("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void shibai(String ss) {
-                        MyUtils.setToast("短信发送失败");
+                        aniDialog.dismiss();
+                        MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
+                                remember_Business_pass_weitanchuan_img,
+                                remember_Business_pass_weitanchuan_text,
+                                weitanchuan_height,
+                                false, ss);
                     }
                 });
-
             }
         });
 
+        // 失焦是判断两次密码是否一致
+        isPass_Old_New(remember_Business_pass_zaici_pass,remember_Business_pass_new_pass);
 
+
+        remember_Business_pass_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(remember_Business_pass_duan.getWindowToken(), 0);
+                submit();
+            }
+        });
     }
 
     @Override
@@ -163,7 +219,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
 
 
         // 获取图形验证码
-        myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+        myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
             @Override
             public void chenggong(Bitmap bitmap) {
                 if(bitmap!=null){
@@ -193,8 +249,6 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         remember_Business_pass_weitanchuan_text = (TextView) findViewById(R.id.remember_Business_pass_weitanchuan_text);
         remember_Business_pass_weitanchuan = (LinearLayout) findViewById(R.id.remember_Business_pass_weitanchuan);
 
-        remember_Business_pass_btn.setOnClickListener(this);
-
         // 解决键盘挡住输入框
         SoftHideKeyBoardUtil.assistActivity(this);
 
@@ -210,14 +264,6 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         });
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.remember_Business_pass_btn:
-                submit();
-                break;
-        }
-    }
 
     private void submit() {
         // validate
@@ -227,8 +273,8 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
             return;
         }
 
-        if(oldpass.length()<6){
-            Toast.makeText(this, "请输入6-12位旧业务密码", Toast.LENGTH_SHORT).show();
+        if(oldpass.length()!=6){
+            Toast.makeText(this, "请输入6位旧业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -238,8 +284,8 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
             return;
         }
 
-        if(newpass.length()<6){
-            Toast.makeText(this, "请输入6-12位新业务密码", Toast.LENGTH_SHORT).show();
+        if(newpass.length()!=6){
+            Toast.makeText(this, "请输入6位新业务密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -268,71 +314,42 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
 
         // TODO validate success, do something
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("verifyCode",yan);
 
         //  进度框
-        final ProgressDialog aniDialog = new ProgressDialog(Remember_Business_Pass_Activity.this);
-        aniDialog.setCancelable(true);
-        aniDialog.setMessage("正在加载...");
-        aniDialog.show();
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
 
-        myPresenter.postPreContent(APIs.verifyCode, map, new MyInterfaces() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("businessPassword",newpass);
+        map.put("smsCode",duan);
+        map.put("oldBusinessPwd",oldpass);
+        map.put("type","0");
+        myPresenter.postPreContent(APIs.setBusinessPassword, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
+                aniDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
-                        HashMap<String, String> map = new HashMap<>();
-                        map.put("businessPassword",newpass);
-                        map.put("smsCode",duan);
-                        map.put("oldBusinessPwd",oldpass);
-                        myPresenter.postPreContent(APIs.setBusinessPassword, map, new MyInterfaces() {
-                            @Override
-                            public void chenggong(String json) {
-                                aniDialog.dismiss();
-                                try {
-                                    JSONObject jsonObject = new JSONObject(json);
-                                    String code = (String) jsonObject.get("code");
-                                    if(code.equals("2000")){
-                                        MyUtils.setObjectAnimator_anquan(remember_Business_pass_weitanchuan,
-                                                remember_Business_pass_weitanchuan_img,
-                                                remember_Business_pass_weitanchuan_text,
-                                                weitanchuan_height,
-                                                true, "重置成功,2秒跳回...!");
+                        MyUtils.setObjectAnimator_anquan(remember_Business_pass_weitanchuan,
+                                remember_Business_pass_weitanchuan_img,
+                                remember_Business_pass_weitanchuan_text,
+                                weitanchuan_height,
+                                true, "重置成功!");
 
-                                        MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
-                                            @Override
-                                            public void chuan() {
-                                                finish();
-                                            }
-                                        });
-                                    }else{
-                                        MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
-                                                remember_Business_pass_weitanchuan_img,
-                                                remember_Business_pass_weitanchuan_text,
-                                                weitanchuan_height,
-                                                false, (String) jsonObject.get("message"));
-                                    }
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-
+                        MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                             @Override
-                            public void shibai(String ss) {
-                                aniDialog.dismiss();
-                                MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
-                                        remember_Business_pass_weitanchuan_img,
-                                        remember_Business_pass_weitanchuan_text,
-                                        weitanchuan_height,
-                                        false, "重置失败!");
+                            public void chuan() {
+                                setResult(DashApplication.BUSINESS_TO_REMEM_res);
+                                finish();
                             }
                         });
                     }else{
-                        aniDialog.dismiss();
-                        MyUtils.setToast((String) jsonObject.get("message"));
+                        MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
+                                remember_Business_pass_weitanchuan_img,
+                                remember_Business_pass_weitanchuan_text,
+                                weitanchuan_height,
+                                false, (String) jsonObject.get("message"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

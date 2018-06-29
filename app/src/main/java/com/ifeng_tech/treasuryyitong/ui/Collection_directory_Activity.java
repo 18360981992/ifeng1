@@ -67,12 +67,12 @@ public class Collection_directory_Activity extends BaseMVPActivity<Collection_di
             }
         });
 
-        collection_mulu_sousuo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MyUtils.setToast("点击了搜索。。。");
-            }
-        });
+//        collection_mulu_sousuo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                MyUtils.setToast("搜索功能还在开发中！");
+//            }
+//        });
 
 
         myPresenter.getPreContent(APIs.getFirstCategoryList, new MyInterfaces() {
@@ -148,7 +148,7 @@ public class Collection_directory_Activity extends BaseMVPActivity<Collection_di
 
     private void initView() {
         collection_mulu_Fan = (RelativeLayout) findViewById(R.id.collection_mulu_Fan);
-        collection_mulu_sousuo = (LinearLayout) findViewById(R.id.collection_mulu_sousuo);
+//        collection_mulu_sousuo = (LinearLayout) findViewById(R.id.collection_mulu_sousuo);
         collection_mulu_TabLayout = (TabLayout) findViewById(R.id.collection_mulu_TabLayout);
         collection_mulu_FrameLayout = (FrameLayout) findViewById(R.id.collection_mulu_FrameLayout);
     }

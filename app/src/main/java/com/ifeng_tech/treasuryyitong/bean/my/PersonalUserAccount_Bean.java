@@ -10,7 +10,7 @@ public class PersonalUserAccount_Bean {
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"accountInfo":{"imgUrl":"","Verified":3,"IsNoBusinessPwd":0,"frozenFunds":0,"balance":0,"holdQty":0,"withdrawMin":50,"desirableFunds":0,"arrearage":0,"withdrawMax":0,"email":""},"user":{"id":274,"addTime":1527645237000,"mobile":"18360981992","userName":null,"account":"18360981992","userCode":"000000000274","userState":"1","agencyInfo":null}}
+     * data : {"accountInfo":{"infoState":3,"IsNoBusinessPwd":0,"frozenFunds":396,"addTime":1529376657000,"holdQty":0,"desirableFunds":99999604,"arrearage":0,"withdrawMax":99999604,"userName":"王亚男","userId":3,"userCode":"000000000003","imgUrl":"","balance":100000000,"url1":"","url2":"","certificateNumber":"","withdrawMin":50,"id":199,"email":"","certificateType":"1","deleteState":1},"user":{"id":3,"addTime":1529376657000,"mobile":"18810209061","userName":null,"account":"王亚男","userCode":"000000000003","userState":"1","agencyInfo":null}}
      */
 
     private String code;
@@ -43,8 +43,8 @@ public class PersonalUserAccount_Bean {
 
     public static class DataBean {
         /**
-         * accountInfo : {"imgUrl":"","Verified":3,"IsNoBusinessPwd":0,"frozenFunds":0,"balance":0,"holdQty":0,"withdrawMin":50,"desirableFunds":0,"arrearage":0,"withdrawMax":0,"email":""}
-         * user : {"id":274,"addTime":1527645237000,"mobile":"18360981992","userName":null,"account":"18360981992","userCode":"000000000274","userState":"1","agencyInfo":null}
+         * accountInfo : {"infoState":3,"IsNoBusinessPwd":0,"frozenFunds":396,"addTime":1529376657000,"holdQty":0,"desirableFunds":99999604,"arrearage":0,"withdrawMax":99999604,"userName":"王亚男","userId":3,"userCode":"000000000003","imgUrl":"","balance":100000000,"url1":"","url2":"","certificateNumber":"","withdrawMin":50,"id":199,"email":"","certificateType":"1","deleteState":1}
+         * user : {"id":3,"addTime":1529376657000,"mobile":"18810209061","userName":null,"account":"王亚男","userCode":"000000000003","userState":"1","agencyInfo":null}
          */
 
         private AccountInfoBean accountInfo;
@@ -68,45 +68,57 @@ public class PersonalUserAccount_Bean {
 
         public static class AccountInfoBean {
             /**
-             * imgUrl :
-             * Verified : 3
-             * IsNoBusinessPwd : 0
-             * frozenFunds : 0
-             * balance : 0
-             * holdQty : 0
-             * withdrawMin : 50
-             * desirableFunds : 0
+             * infoState : 3   实名认证
+             * IsNoBusinessPwd : 0   业务密码
+             * frozenFunds : 396   冻结资金
+             * addTime : 1529376657000
+             * holdQty : 0    持仓总数
+             * desirableFunds : 99999604
              * arrearage : 0
-             * withdrawMax : 0
+             * withdrawMax : 99999604
+             * userName : 王亚男
+             * userId : 3
+             * userCode : 000000000003
+             * imgUrl :
+             * balance : 100000000
+             * url1 :
+             * url2 :
+             * certificateNumber :
+             * withdrawMin : 50
+             * id : 199
              * email :
+             * certificateType : 1
+             * deleteState : 1
              */
 
-            private String imgUrl;
-            private int Verified;
+            private int infoState;
             private int IsNoBusinessPwd;
             private double frozenFunds;
-            private double balance;
-            private double holdQty;
-            private double withdrawMin;
+            private long addTime;
+            private int holdQty;
             private double desirableFunds;
             private double arrearage;
             private double withdrawMax;
+            private String userName;
+            private int userId;
+            private String userCode;
+            private String imgUrl;
+            private double balance;
+            private String url1;
+            private String url2;
+            private String certificateNumber;
+            private double withdrawMin;
+            private int id;
             private String email;
+            private String certificateType;
+            private int deleteState;
 
-            public String getImgUrl() {
-                return imgUrl;
+            public int getInfoState() {
+                return infoState;
             }
 
-            public void setImgUrl(String imgUrl) {
-                this.imgUrl = imgUrl;
-            }
-
-            public int getVerified() {
-                return Verified;
-            }
-
-            public void setVerified(int Verified) {
-                this.Verified = Verified;
+            public void setInfoState(int infoState) {
+                this.infoState = infoState;
             }
 
             public int getIsNoBusinessPwd() {
@@ -125,28 +137,20 @@ public class PersonalUserAccount_Bean {
                 this.frozenFunds = frozenFunds;
             }
 
-            public double getBalance() {
-                return balance;
+            public long getAddTime() {
+                return addTime;
             }
 
-            public void setBalance(double balance) {
-                this.balance = balance;
+            public void setAddTime(long addTime) {
+                this.addTime = addTime;
             }
 
-            public double getHoldQty() {
+            public int getHoldQty() {
                 return holdQty;
             }
 
-            public void setHoldQty(double holdQty) {
+            public void setHoldQty(int holdQty) {
                 this.holdQty = holdQty;
-            }
-
-            public double getWithdrawMin() {
-                return withdrawMin;
-            }
-
-            public void setWithdrawMin(double withdrawMin) {
-                this.withdrawMin = withdrawMin;
             }
 
             public double getDesirableFunds() {
@@ -173,6 +177,86 @@ public class PersonalUserAccount_Bean {
                 this.withdrawMax = withdrawMax;
             }
 
+            public String getUserName() {
+                return userName;
+            }
+
+            public void setUserName(String userName) {
+                this.userName = userName;
+            }
+
+            public int getUserId() {
+                return userId;
+            }
+
+            public void setUserId(int userId) {
+                this.userId = userId;
+            }
+
+            public String getUserCode() {
+                return userCode;
+            }
+
+            public void setUserCode(String userCode) {
+                this.userCode = userCode;
+            }
+
+            public String getImgUrl() {
+                return imgUrl;
+            }
+
+            public void setImgUrl(String imgUrl) {
+                this.imgUrl = imgUrl;
+            }
+
+            public double getBalance() {
+                return balance;
+            }
+
+            public void setBalance(double balance) {
+                this.balance = balance;
+            }
+
+            public String getUrl1() {
+                return url1;
+            }
+
+            public void setUrl1(String url1) {
+                this.url1 = url1;
+            }
+
+            public String getUrl2() {
+                return url2;
+            }
+
+            public void setUrl2(String url2) {
+                this.url2 = url2;
+            }
+
+            public String getCertificateNumber() {
+                return certificateNumber;
+            }
+
+            public void setCertificateNumber(String certificateNumber) {
+                this.certificateNumber = certificateNumber;
+            }
+
+            public double getWithdrawMin() {
+                return withdrawMin;
+            }
+
+            public void setWithdrawMin(double withdrawMin) {
+                this.withdrawMin = withdrawMin;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
             public String getEmail() {
                 return email;
             }
@@ -180,16 +264,32 @@ public class PersonalUserAccount_Bean {
             public void setEmail(String email) {
                 this.email = email;
             }
+
+            public String getCertificateType() {
+                return certificateType;
+            }
+
+            public void setCertificateType(String certificateType) {
+                this.certificateType = certificateType;
+            }
+
+            public int getDeleteState() {
+                return deleteState;
+            }
+
+            public void setDeleteState(int deleteState) {
+                this.deleteState = deleteState;
+            }
         }
 
         public static class UserBean {
             /**
-             * id : 274
-             * addTime : 1527645237000
-             * mobile : 18360981992
+             * id : 3
+             * addTime : 1529376657000
+             * mobile : 18810209061
              * userName : null
-             * account : 18360981992
-             * userCode : 000000000274
+             * account : 王亚男
+             * userCode : 000000000003
              * userState : 1
              * agencyInfo : null
              */

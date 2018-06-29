@@ -20,7 +20,6 @@ import com.ifeng_tech.treasuryyitong.adapter.Warehouse_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
@@ -60,6 +59,8 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
 
     List<WarehouseBean.DataBean.ListBean> list = new ArrayList<WarehouseBean.DataBean.ListBean>();
     private Warehouse_Adapter warehouse_adapter;
+    private WarehouseBean warehouseBean;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -112,8 +113,10 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
             warehouse_fra_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean maxTrasferableAmountAndFee = warehouseBean.getData().getMaxTrasferableAmountAndFee();
                     Intent intent = new Intent(activity, My_Warehouse_Datail_Activity.class);
                     intent.putExtra("WarehouseBean", list.get(position));
+                    intent.putExtra("MaxTrasferableAmountAndFeeBean",maxTrasferableAmountAndFee);   // 这个对象用来设定提货/转赠的手续费
                     startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -159,7 +162,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
-                        WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
                         List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
                         list.clear();
                         list.addAll(zilist);
@@ -194,12 +197,17 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
-                        WarehouseBean warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
-                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
-                        list.addAll(zilist);
-                        // 初始化数据 与适配器
-                        setWarehouseAdapter();
+                        warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
+                        String pageNum = map.get("pageNum");
 
+                        if( Integer.valueOf(pageNum) <= warehouseBean.getData().getPageInfo().getTotalPage()){
+                            List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setWarehouseAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -225,7 +233,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
             warehouse_fra_pulltoscroll.setVisibility(View.VISIBLE);
 
             if (warehouse_adapter == null) {
-                warehouse_adapter = new Warehouse_Adapter(activity, list);
+                warehouse_adapter = new Warehouse_Adapter(activity, list,warehouseBean);
                 warehouse_fra_MyListView.setAdapter(warehouse_adapter);
             } else {
                 warehouse_adapter.notifyDataSetChanged();
@@ -256,19 +264,9 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
         viewById.setFocusableInTouchMode(true);
         viewById.requestFocus();
 
-        initRefreshListView();
+        activity.initRefreshListView(warehouse_fra_pulltoscroll);
 
     }
-
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        warehouse_fra_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = warehouse_fra_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
-
 
     @Override
     public void onClick(View v) {

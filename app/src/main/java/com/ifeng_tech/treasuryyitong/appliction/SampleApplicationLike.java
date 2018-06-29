@@ -97,14 +97,15 @@ public class SampleApplicationLike extends DefaultApplicationLike {
 
          //设置通知栏大图标，largeIconId为项目中的图片资源;
 
-         Beta.largeIconId = R.mipmap.ic_launcher;
+         Beta.largeIconId = R.drawable.logo;
         // 设置开发设备，默认为false，上传补丁如果下发范围指定为“开发设备”，需要调用此接口来标识开发设备
         Bugly.setIsDevelopmentDevice(getApplication(),false);
         // 多渠道需求塞入
         String channel = WalleChannelReader.getChannel(getApplication());
         Bugly.setAppChannel(getApplication(), channel);
+
         // 这里实现SDK初始化，appId替换成你的在Bugly平台申请的appId
-        Bugly.init(getApplication(), "3c8199b9aa", true);
+        Bugly.init(getApplication(), "75e5e54fb2", true);
     }
 
 

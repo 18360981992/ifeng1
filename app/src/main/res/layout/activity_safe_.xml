@@ -185,7 +185,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="业务密码（设置）"
+            android:text="业务密码"
             android:textSize="@dimen/x26"
             android:textColor="@color/name_se"
             android:layout_toRightOf="@+id/img4"
@@ -228,7 +228,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="绑定邮箱（设置）"
+            android:text="绑定邮箱"
             android:textSize="@dimen/x26"
             android:textColor="@color/name_se"
             android:layout_toRightOf="@+id/img5"

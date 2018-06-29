@@ -5,10 +5,9 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Environment;
-import android.telephony.PhoneNumberUtils;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
@@ -16,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.OvershootInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
+import com.ifeng_tech.treasuryyitong.view.dialog_jiazaikuang.Loading_view;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -57,24 +58,8 @@ public class MyUtils {
      * @return
      */
     public static boolean isPhoneNumber(String phoneNo) {
-        if (TextUtils.isEmpty(phoneNo)) {
-            return false;
-        }
-        if (phoneNo.length() == 11) {
-            for (int i = 0; i < 11; i++) {
-                if (!PhoneNumberUtils.isISODigit(phoneNo.charAt(i))) {
-                    return false;
-                }
-            }
-            Pattern p = Pattern.compile("^((13[^4,\\D])" + "|(134[^9,\\D])" +
-                    "|(14[5,7])" +
-                    "|(15[^4,\\D])" +
-                    "|(17[3,6-8])" +
-                    "|(18[0-9]))\\d{8}$");
-            Matcher m = p.matcher(phoneNo);
-            return m.matches();
-        }
-        return false;
+        String telRegex = "^((13[0-9])|(14[5,7,9])|(15[^4])|(18[0-9])|(17[0,1,3,5,6,7,8]))\\d{8}$";
+        return phoneNo.matches(telRegex);
     }
 
     //邮箱验证
@@ -86,14 +71,22 @@ public class MyUtils {
     }
 
     /**
-     * 判断密码的格式 6-20位字母，数字组合密码
+     * 判断密码的格式 8-16位字母，数字组合密码
      * @param input
      * @return
      */
-    public static boolean isNumber(String input){
-        boolean matches = input.matches("^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,20}$");
-        return matches;
+    public static boolean isPassWord(String input){
+        Pattern p = Pattern.compile("^[^ ]{8,12}$");
+        Matcher m = p.matcher(input);
+        if(m.matches()){
+            if(input.getBytes().length==input.length()){
+                return true;
+            }
+        }
+        return false;
     }
+
+
 
     // 判断是否符合身份证号码的规范
     public static boolean isIDCard(String IDCard) {
@@ -135,8 +128,7 @@ public class MyUtils {
      * @param file  文件
      * @return
      */
-    public static byte[] Filebyte(File file)
-    {
+    public static byte[] Filebyte(File file){
         byte[] buffer = null;
         try
         {
@@ -162,6 +154,7 @@ public class MyUtils {
         }
         return buffer;
     }
+
 
     /**
      * 检测
@@ -355,5 +348,118 @@ public class MyUtils {
         date = calendar.getTime();
         return date;
     }
+
+    /**
+     *  网络加载进度框
+     * @param context
+     * @param text
+     * @return
+     */
+    public static ProgressDialog getProgressDialog(Context context, String text){
+        //  进度框
+//        ProgressDialog aniDialog = new ProgressDialog(context);
+//        aniDialog.setCancelable(false);  // 设置android4.0以后 dialog弹出后会点击屏幕或物理返回键，dialog不消失
+//        aniDialog.setCanceledOnTouchOutside(false); // dialog弹出后会点击屏幕，dialog不消失；点击物理返回键dialog消失
+//        aniDialog.setMessage(text);
+//        aniDialog.show();
+        Loading_view aniDialog = new Loading_view(context, R.style.CustomDialog);
+        aniDialog.show();
+        return aniDialog;
+    }
+
+    /**
+     * 根据当前的状态来旋转箭头。
+     */
+    public static void rotateArrow(ImageView arrow, boolean flag) {
+        float pivotX = arrow.getWidth() / 2f;
+        float pivotY = arrow.getHeight() / 2f;
+        float fromDegrees = 0f;
+        float toDegrees = 0f;
+        // flag为true则向上
+        if (flag) {
+            fromDegrees = 0f;
+            toDegrees = 180f;
+        } else {
+            fromDegrees = 180f;
+            toDegrees = 0f;
+        }
+        //旋转动画效果   参数值 旋转的开始角度  旋转的结束角度  pivotX x轴伸缩值
+        RotateAnimation animation = new RotateAnimation(fromDegrees, toDegrees,
+                pivotX, pivotY);
+        //该方法用于设置动画的持续时间，以毫秒为单位
+        animation.setDuration(100);
+        //设置重复次数
+        //animation.setRepeatCount(int repeatCount);
+        //动画终止时停留在最后一帧
+        animation.setFillAfter(true);
+        //启动动画
+        arrow.startAnimation(animation);
+    }
+
+
+    /**
+     * <pre>
+     * 根据指定的日期字符串获取星期几
+     * </pre>
+     *
+     * @param strDate 指定的日期字符串(yyyy-MM-dd 或 yyyy/MM/dd)
+     * @return week
+     *         星期几(MONDAY,TUESDAY,WEDNESDAY,THURSDAY,FRIDAY,SATURDAY,SUNDAY)
+     */
+    public static String getWeekByDateStr(String strDate)
+    {
+        int year = Integer.parseInt(strDate.substring(0, 4));
+        int month = Integer.parseInt(strDate.substring(5, 7));
+        int day = Integer.parseInt(strDate.substring(8, 10));
+
+        Calendar c = Calendar.getInstance();
+
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month - 1);
+        c.set(Calendar.DAY_OF_MONTH, day);
+
+        String week = "";
+        int weekIndex = c.get(Calendar.DAY_OF_WEEK);
+
+        switch (weekIndex)
+        {
+            case 1:
+                week = "SUNDAY";
+                break;
+            case 2:
+                week = "MONDAY";
+                break;
+            case 3:
+                week = "TUESDAY";
+                break;
+            case 4:
+                week = "WEDNESDAY";
+                break;
+            case 5:
+                week = "THURSDAY";
+                break;
+            case 6:
+                week = "FRIDAY";
+                break;
+            case 7:
+                week = "SATURDAY";
+                break;
+        }
+        return week;
+    }
+
+    // 获取拼接的email
+    public static String getEmail(String email){
+        String tou = email.substring(0, 2);
+        String wei = email.substring(email.length()-10, email.length());
+        int i=email.length()-12;  // 获取“*”的个数
+        String ss="";
+        for (int j=0;j<i;j++){
+            ss=ss+"*";
+        }
+        String newEmail=tou+ss+wei;
+        return newEmail;
+    }
+
 
 }

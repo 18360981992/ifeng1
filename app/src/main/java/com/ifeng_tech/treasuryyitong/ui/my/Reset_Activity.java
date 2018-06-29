@@ -7,6 +7,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,9 +74,16 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         reset_btn.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(reset_queren.getWindowToken(), 0);
+
                 submit();
             }
         });
+
+        // 失焦后判断两次密码是否一致
+        isPass_Old_New(reset_queren,reset_new);
     }
 
     private void initView() {
@@ -111,10 +119,20 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
             Toast.makeText(this, "原登录密码", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (MyUtils.isPassWord(old)==false) {
+            Toast.makeText(this, SP_String.IS_PASS, Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         news = reset_new.getText().toString().trim();
         if (TextUtils.isEmpty(news)) {
             Toast.makeText(this, "新登录密码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (MyUtils.isPassWord(news)==false) {
+            Toast.makeText(this, SP_String.IS_PASS, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -124,19 +142,20 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
             return;
         }
 
+        if(!news.equals(queren)){
+            Toast.makeText(this, "两次密码不一致", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 //        MyUtils.setToast("请求网络。。。");
 
         HashMap<String, String> map = new HashMap<>();
         map.put("oldPassword",old);
         map.put("newPassword", news);
         map.put("rePassword",queren);
-        //  进度框
-//        final AniDialog aniDialog = new AniDialog(Reset_Activity.this, null);
 
-        ProgressDialog aniDialog = new ProgressDialog(this);
-        aniDialog.setCancelable(true);
-        aniDialog.setMessage("正在加载...");
-        aniDialog.show();
+        //  进度框
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
 
         setChangePwd(map,aniDialog);
     }
@@ -161,10 +180,13 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
                                 reset_weitanchuan_img,
                                 reset_weitanchuan_text,
                                 weitanchuan_height,
-                                true,"修改成功.2秒跳回...");
+                                true,"修改成功!");
                         MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                             @Override
                             public void chuan() {
+                                DashApplication.edit
+                                        .putString(SP_String.PASS,news)
+                                        .commit();
                                 finish();
                             }
                         });
@@ -174,7 +196,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
                                 reset_weitanchuan_img,
                                 reset_weitanchuan_text,
                                 weitanchuan_height,
-                                false,"修改失败!");
+                                false,(String) jsonObject.get("message"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -10,9 +10,9 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
+import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Reset_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.yewu_pass.Business_Pass_Reset_Activity;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 /**
@@ -77,7 +77,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             public void onClick(View v) {
 //                MyUtils.setToast("点击更改手机。。。");
                 Intent intent = new Intent(Safe_Activity.this, Retrieve_Activity.class);
-                intent.putExtra("type", DashApplication.ANQUAN_TYPE_GENGGAI);
+                intent.putExtra("type", DashApplication.ANQUAN_TYPE_GENGGAI);  // type == 2
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
@@ -87,23 +87,19 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             @Override
             public void onClick(View v) {
 //                MyUtils.setToast("点击业务密码设置。。。");
-                String emali = DashApplication.sp.getString(SP_String.EMAIL, "");
 
-                if(emali.equals("")){
-                    MyUtils.setToast("请先绑定邮箱");
+                String anInt = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                if(anInt.equals("0")){     // 0 == 设置过业务密码
+                    Intent intent = new Intent(Safe_Activity.this, Business_Pass_Reset_Activity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
-                    String anInt = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
-                    if(anInt.equals("0")){     // 0 == 设置过业务密码
-                        Intent intent = new Intent(Safe_Activity.this, Business_Pass_Reset_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                    }else{
-                        Intent intent = new Intent(Safe_Activity.this, Business_Pass_Activity.class);
-                        startActivity(intent);
-                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                    }
+                    Intent intent = new Intent(Safe_Activity.this, Bind_Email_Activity1.class);
+                    intent.putExtra("title","业务密码（设置）");
+                    intent.putExtra("select",SP_String.YEWUMIMA);   // 产品更改需求，业务密码设置与绑定邮箱是相同的
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
-
 
             }
         });
@@ -112,12 +108,22 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
             @Override
             public void onClick(View v) {
 //                MyUtils.setToast("点击绑定邮箱设置。。。");
-                Intent intent = new Intent(Safe_Activity.this, Bind_Email_Activity1.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                String emali = DashApplication.sp.getString(SP_String.EMAIL, "");
+                if(emali.equals("")){
+                    Intent intent = new Intent(Safe_Activity.this, Bind_Email_Activity1.class);
+                    intent.putExtra("title","绑定邮箱（设置）");
+                    intent.putExtra("select",SP_String.YEWUMIMA);  // 产品更改需求，业务密码设置与绑定邮箱是相同的
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                }else{
+                    Intent intent = new Intent(Safe_Activity.this, Bind_Email_Reset_Activity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                }
             }
         });
     }
+
 
     private void initView() {
         safe_Fan = (RelativeLayout) findViewById(R.id.safe_Fan);

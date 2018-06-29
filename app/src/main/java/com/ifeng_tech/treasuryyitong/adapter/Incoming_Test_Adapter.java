@@ -63,8 +63,8 @@ public class Incoming_Test_Adapter extends BaseAdapter{
             incoming_trade_name.setText(incominglist.get(position).getAgencyName());
         }
 
-        if(incominglist.get(position).getGoodsName().length()>10){
-            String name = incominglist.get(position).getGoodsName().substring(0, 10);
+        if(incominglist.get(position).getGoodsName().length()>18){
+            String name = incominglist.get(position).getGoodsName().substring(0, 18);
             incoming_shopping_name.setText(name+"...");
         }else{
             incoming_shopping_name.setText(incominglist.get(position).getGoodsName());

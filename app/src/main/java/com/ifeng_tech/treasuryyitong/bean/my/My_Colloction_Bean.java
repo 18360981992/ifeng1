@@ -9,10 +9,11 @@ import java.util.List;
 
 public class My_Colloction_Bean implements Serializable{
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"pageInfo":{"startRow":1,"lastPage":4,"navigatepageNums":[1,2,3,4],"prePage":0,"hasNextPage":true,"nextPage":2,"pageSize":5,"orderBy":null,"endRow":5,"list":[{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-02","addTime":"2018-05-31 10:42:44.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":141,"state":"ingno","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"bj","orderNo":"0000000123201805311042443767","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-04","addTime":"2018-05-31 10:42:31.0","goodsId":839,"applyBeginTime":"2018-05-31","pmORam":"am","number":100,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":140,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","appraisalFee":0.4,"address":"bj","orderNo":"0000000123201805311042317997","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":839,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070030","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070040.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-06","addTime":"2018-05-31 10:42:18.0","goodsId":840,"applyBeginTime":"2018-05-31","pmORam":"am","number":300,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":139,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-3《石湾陶瓷》特种邮票","appraisalFee":20,"address":"bj","orderNo":"0000000123201805311042189150","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":840,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070040","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-08","addTime":"2018-05-31 10:42:02.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":138,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311042025715","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1079900020-1.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-10","addTime":"2018-05-31 10:41:45.0","goodsId":1364,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":137,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"普26民居","appraisalFee":17.2,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311041452106","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":1364,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"1079900020","commodityName":null}],"pageNum":1,"navigatePages":8,"total":19,"pages":4,"size":5,"firstPage":1,"isLastPage":false,"hasPreviousPage":false,"isFirstPage":true}}
+     * data : {"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":6,"resultNum":6},"list":[{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 18:02:55.0","goodsId":838,"applyBeginTime":"2018-06-26","pmORam":"am","number":3,"appraisalFeeRate":0.01,"minNumber":3,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":"0","price":null,"freeTime":"2018-06-30","commodityCode":null,"id":331,"state":"0","beginTime":null,"applyTime":null,"goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":"北京","orderNo":"0000000004201806271802550728","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":4,"endTime":null,"goodsCode":"3010070020","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 14:22:06.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"pm","number":25,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":330,"state":"3","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806271422065464","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 14:21:54.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"am","number":25,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":329,"state":"0","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806271421549377","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":"2018-06-29","trusteeTime":"2018-06-30","addTime":"2018-06-26 17:59:46.0","goodsId":836,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":10,"guidingPrice":80,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-26","commodityCode":null,"id":322,"state":"3","beginTime":null,"applyTime":null,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0.8,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806261759466245","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-26 17:59:30.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":321,"state":"3","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806261759303053","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-26 17:56:35.0","goodsId":838,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":3,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":"0","price":null,"freeTime":"2018-06-30","commodityCode":null,"id":316,"state":"3","beginTime":null,"applyTime":null,"goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":"北京","orderNo":"0000000004201806261756353699","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":4,"endTime":null,"goodsCode":"3010070020","commodityName":null}]}
      */
 
     private String code;
@@ -45,10 +46,12 @@ public class My_Colloction_Bean implements Serializable{
 
     public static class DataBean implements Serializable{
         /**
-         * pageInfo : {"startRow":1,"lastPage":4,"navigatepageNums":[1,2,3,4],"prePage":0,"hasNextPage":true,"nextPage":2,"pageSize":5,"orderBy":null,"endRow":5,"list":[{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-02","addTime":"2018-05-31 10:42:44.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":141,"state":"ingno","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"bj","orderNo":"0000000123201805311042443767","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-04","addTime":"2018-05-31 10:42:31.0","goodsId":839,"applyBeginTime":"2018-05-31","pmORam":"am","number":100,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":140,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","appraisalFee":0.4,"address":"bj","orderNo":"0000000123201805311042317997","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":839,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070030","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070040.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-06","addTime":"2018-05-31 10:42:18.0","goodsId":840,"applyBeginTime":"2018-05-31","pmORam":"am","number":300,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":139,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-3《石湾陶瓷》特种邮票","appraisalFee":20,"address":"bj","orderNo":"0000000123201805311042189150","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":840,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070040","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-08","addTime":"2018-05-31 10:42:02.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":138,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311042025715","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1079900020-1.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-10","addTime":"2018-05-31 10:41:45.0","goodsId":1364,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":137,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"普26民居","appraisalFee":17.2,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311041452106","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":1364,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"1079900020","commodityName":null}],"pageNum":1,"navigatePages":8,"total":19,"pages":4,"size":5,"firstPage":1,"isLastPage":false,"hasPreviousPage":false,"isFirstPage":true}
+         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":6,"resultNum":6}
+         * list : [{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 18:02:55.0","goodsId":838,"applyBeginTime":"2018-06-26","pmORam":"am","number":3,"appraisalFeeRate":0.01,"minNumber":3,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":"0","price":null,"freeTime":"2018-06-30","commodityCode":null,"id":331,"state":"0","beginTime":null,"applyTime":null,"goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":"北京","orderNo":"0000000004201806271802550728","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":4,"endTime":null,"goodsCode":"3010070020","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 14:22:06.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"pm","number":25,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":330,"state":"3","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806271422065464","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-27 14:21:54.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"am","number":25,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":329,"state":"0","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806271421549377","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":"2018-06-29","trusteeTime":"2018-06-30","addTime":"2018-06-26 17:59:46.0","goodsId":836,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":10,"guidingPrice":80,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-26","commodityCode":null,"id":322,"state":"3","beginTime":null,"applyTime":null,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0.8,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806261759466245","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-26 17:59:30.0","goodsId":837,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":100,"inhouseFee":0.01,"deleteStatus":"0","price":null,"freeTime":"2018-06-27","commodityCode":null,"id":321,"state":"3","beginTime":null,"applyTime":null,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","appraisalFee":1,"storageFeeRate":0.01,"address":"北京","orderNo":"0000000004201806261759303053","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":837,"collectionGuidePrice":100,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":1,"endTime":null,"goodsCode":"3010070010","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":"2018-06-27","trusteeTime":"2018-06-28","addTime":"2018-06-26 17:56:35.0","goodsId":838,"applyBeginTime":"2018-06-26","pmORam":"am","number":50,"appraisalFeeRate":0.01,"minNumber":3,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":"0","price":null,"freeTime":"2018-06-30","commodityCode":null,"id":316,"state":"3","beginTime":null,"applyTime":null,"goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":"北京","orderNo":"0000000004201806261756353699","isTransfer":1,"passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":4,"leaseFate":4,"endTime":null,"goodsCode":"3010070020","commodityName":null}]
          */
 
         private PageInfoBean pageInfo;
+        private List<ListBean> list;
 
         public PageInfoBean getPageInfo() {
             return pageInfo;
@@ -58,87 +61,35 @@ public class My_Colloction_Bean implements Serializable{
             this.pageInfo = pageInfo;
         }
 
+        public List<ListBean> getList() {
+            return list;
+        }
+
+        public void setList(List<ListBean> list) {
+            this.list = list;
+        }
+
         public static class PageInfoBean implements Serializable{
             /**
-             * startRow : 1
-             * lastPage : 4
-             * navigatepageNums : [1,2,3,4]
-             * prePage : 0
-             * hasNextPage : true
-             * nextPage : 2
-             * pageSize : 5
-             * orderBy : null
-             * endRow : 5
-             * list : [{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-02","addTime":"2018-05-31 10:42:44.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":141,"state":"ingno","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"bj","orderNo":"0000000123201805311042443767","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-04","addTime":"2018-05-31 10:42:31.0","goodsId":839,"applyBeginTime":"2018-05-31","pmORam":"am","number":100,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":140,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","appraisalFee":0.4,"address":"bj","orderNo":"0000000123201805311042317997","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":839,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070030","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070040.jpg","applyEndTime":"2018-06-01","trusteeTime":"2018-06-06","addTime":"2018-05-31 10:42:18.0","goodsId":840,"applyBeginTime":"2018-05-31","pmORam":"am","number":300,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":139,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-3《石湾陶瓷》特种邮票","appraisalFee":20,"address":"bj","orderNo":"0000000123201805311042189150","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":840,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070040","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-08","addTime":"2018-05-31 10:42:02.0","goodsId":836,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":138,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311042025715","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":836,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1079900020-1.jpg","applyEndTime":"2018-06-02","trusteeTime":"2018-06-10","addTime":"2018-05-31 10:41:45.0","goodsId":1364,"applyBeginTime":"2018-05-31","pmORam":"am","number":500,"minNumber":null,"inhouseFee":null,"deleteStatus":"0","price":null,"commodityCode":null,"id":137,"state":"ingok","beginTime":null,"applyTime":null,"goodsName":"普26民居","appraisalFee":17.2,"address":"北京福利特收藏品市场","orderNo":"0000000123201805311041452106","passnumber":null,"pictureUrl":null,"count":null,"articleId":null,"commodityId":1364,"collectionGuidePrice":null,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":null,"endTime":null,"goodsCode":"1079900020","commodityName":null}]
              * pageNum : 1
-             * navigatePages : 8
-             * total : 19
-             * pages : 4
-             * size : 5
-             * firstPage : 1
-             * isLastPage : false
-             * hasPreviousPage : false
-             * isFirstPage : true
+             * pageSize : 10
+             * totalPage : 1
+             * totalNum : 6
+             * resultNum : 6
              */
 
-            private int startRow;
-            private int lastPage;
-            private int prePage;
-            private boolean hasNextPage;
-            private int nextPage;
-            private int pageSize;
-            private Object orderBy;
-            private int endRow;
             private int pageNum;
-            private int navigatePages;
-            private int total;
-            private int pages;
-            private int size;
-            private int firstPage;
-            private boolean isLastPage;
-            private boolean hasPreviousPage;
-            private boolean isFirstPage;
-            private List<Integer> navigatepageNums;
-            private List<ListBean> list;
+            private int pageSize;
+            private int totalPage;
+            private int totalNum;
+            private int resultNum;
 
-            public int getStartRow() {
-                return startRow;
+            public int getPageNum() {
+                return pageNum;
             }
 
-            public void setStartRow(int startRow) {
-                this.startRow = startRow;
-            }
-
-            public int getLastPage() {
-                return lastPage;
-            }
-
-            public void setLastPage(int lastPage) {
-                this.lastPage = lastPage;
-            }
-
-            public int getPrePage() {
-                return prePage;
-            }
-
-            public void setPrePage(int prePage) {
-                this.prePage = prePage;
-            }
-
-            public boolean isHasNextPage() {
-                return hasNextPage;
-            }
-
-            public void setHasNextPage(boolean hasNextPage) {
-                this.hasNextPage = hasNextPage;
-            }
-
-            public int getNextPage() {
-                return nextPage;
-            }
-
-            public void setNextPage(int nextPage) {
-                this.nextPage = nextPage;
+            public void setPageNum(int pageNum) {
+                this.pageNum = pageNum;
             }
 
             public int getPageSize() {
@@ -149,474 +100,444 @@ public class My_Colloction_Bean implements Serializable{
                 this.pageSize = pageSize;
             }
 
-            public Object getOrderBy() {
-                return orderBy;
+            public int getTotalPage() {
+                return totalPage;
             }
 
-            public void setOrderBy(Object orderBy) {
-                this.orderBy = orderBy;
+            public void setTotalPage(int totalPage) {
+                this.totalPage = totalPage;
             }
 
-            public int getEndRow() {
-                return endRow;
+            public int getTotalNum() {
+                return totalNum;
             }
 
-            public void setEndRow(int endRow) {
-                this.endRow = endRow;
+            public void setTotalNum(int totalNum) {
+                this.totalNum = totalNum;
             }
 
-            public int getPageNum() {
-                return pageNum;
+            public int getResultNum() {
+                return resultNum;
             }
 
-            public void setPageNum(int pageNum) {
-                this.pageNum = pageNum;
+            public void setResultNum(int resultNum) {
+                this.resultNum = resultNum;
+            }
+        }
+
+        public static class ListBean implements Serializable{
+            /**
+             * insurance : null
+             * goodsImg : http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg
+             * applyEndTime : 2018-06-27
+             * trusteeTime : 2018-06-28
+             * addTime : 2018-06-27 18:02:55.0
+             * goodsId : 838
+             * applyBeginTime : 2018-06-26
+             * pmORam : am
+             * number : 3
+             * appraisalFeeRate : 0.01
+             * minNumber : 3
+             * guidingPrice : 80
+             * inhouseFee : 0.02
+             * deleteStatus : 0
+             * price : null
+             * freeTime : 2018-06-30
+             * commodityCode : null
+             * id : 331
+             * state : 0
+             * beginTime : null
+             * applyTime : null
+             * goodsName : 2007-1《丁亥年》特种邮票
+             * appraisalFee : 0.8
+             * storageFeeRate : 0.02
+             * address : 北京
+             * orderNo : 0000000004201806271802550728
+             * isTransfer : 1
+             * passnumber : null
+             * pictureUrl : null
+             * count : null
+             * articleId : null
+             * commodityId : 838
+             * collectionGuidePrice : 80
+             * fakepassrate : null
+             * warehousingFee : null
+             * unit : null
+             * firmId : 4
+             * leaseFate : 4
+             * endTime : null
+             * goodsCode : 3010070020
+             * commodityName : null
+             */
+
+            private Object insurance;
+            private String goodsImg;
+            private String applyEndTime;
+            private String trusteeTime;
+            private String addTime;
+            private int goodsId;
+            private String applyBeginTime;
+            private String pmORam;
+            private int number;
+            private double appraisalFeeRate;
+            private int minNumber;
+            private int guidingPrice;
+            private double inhouseFee;
+            private String deleteStatus;
+            private Object price;
+            private String freeTime;
+            private Object commodityCode;
+            private int id;
+            private String state;
+            private Object beginTime;
+            private Object applyTime;
+            private String goodsName;
+            private double appraisalFee;
+            private double storageFeeRate;
+            private String address;
+            private String orderNo;
+            private int isTransfer;
+            private Object passnumber;
+            private Object pictureUrl;
+            private Object count;
+            private Object articleId;
+            private int commodityId;
+            private int collectionGuidePrice;
+            private Object fakepassrate;
+            private Object warehousingFee;
+            private Object unit;
+            private int firmId;
+            private int leaseFate;
+            private Object endTime;
+            private String goodsCode;
+            private Object commodityName;
+
+            public Object getInsurance() {
+                return insurance;
             }
 
-            public int getNavigatePages() {
-                return navigatePages;
+            public void setInsurance(Object insurance) {
+                this.insurance = insurance;
             }
 
-            public void setNavigatePages(int navigatePages) {
-                this.navigatePages = navigatePages;
+            public String getGoodsImg() {
+                return goodsImg;
             }
 
-            public int getTotal() {
-                return total;
+            public void setGoodsImg(String goodsImg) {
+                this.goodsImg = goodsImg;
             }
 
-            public void setTotal(int total) {
-                this.total = total;
+            public String getApplyEndTime() {
+                return applyEndTime;
             }
 
-            public int getPages() {
-                return pages;
+            public void setApplyEndTime(String applyEndTime) {
+                this.applyEndTime = applyEndTime;
             }
 
-            public void setPages(int pages) {
-                this.pages = pages;
+            public String getTrusteeTime() {
+                return trusteeTime;
             }
 
-            public int getSize() {
-                return size;
+            public void setTrusteeTime(String trusteeTime) {
+                this.trusteeTime = trusteeTime;
             }
 
-            public void setSize(int size) {
-                this.size = size;
+            public String getAddTime() {
+                return addTime;
             }
 
-            public int getFirstPage() {
-                return firstPage;
+            public void setAddTime(String addTime) {
+                this.addTime = addTime;
             }
 
-            public void setFirstPage(int firstPage) {
-                this.firstPage = firstPage;
+            public int getGoodsId() {
+                return goodsId;
             }
 
-            public boolean isIsLastPage() {
-                return isLastPage;
+            public void setGoodsId(int goodsId) {
+                this.goodsId = goodsId;
             }
 
-            public void setIsLastPage(boolean isLastPage) {
-                this.isLastPage = isLastPage;
+            public String getApplyBeginTime() {
+                return applyBeginTime;
             }
 
-            public boolean isHasPreviousPage() {
-                return hasPreviousPage;
+            public void setApplyBeginTime(String applyBeginTime) {
+                this.applyBeginTime = applyBeginTime;
             }
 
-            public void setHasPreviousPage(boolean hasPreviousPage) {
-                this.hasPreviousPage = hasPreviousPage;
+            public String getPmORam() {
+                return pmORam;
             }
 
-            public boolean isIsFirstPage() {
-                return isFirstPage;
+            public void setPmORam(String pmORam) {
+                this.pmORam = pmORam;
             }
 
-            public void setIsFirstPage(boolean isFirstPage) {
-                this.isFirstPage = isFirstPage;
+            public int getNumber() {
+                return number;
             }
 
-            public List<Integer> getNavigatepageNums() {
-                return navigatepageNums;
+            public void setNumber(int number) {
+                this.number = number;
             }
 
-            public void setNavigatepageNums(List<Integer> navigatepageNums) {
-                this.navigatepageNums = navigatepageNums;
+            public double getAppraisalFeeRate() {
+                return appraisalFeeRate;
             }
 
-            public List<ListBean> getList() {
-                return list;
+            public void setAppraisalFeeRate(double appraisalFeeRate) {
+                this.appraisalFeeRate = appraisalFeeRate;
             }
 
-            public void setList(List<ListBean> list) {
-                this.list = list;
+            public int getMinNumber() {
+                return minNumber;
             }
 
-            public static class ListBean implements Serializable{
-                /**
-                 * insurance : null
-                 * goodsImg : http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg
-                 * applyEndTime : 2018-06-01
-                 * trusteeTime : 2018-06-02
-                 * addTime : 2018-05-31 10:42:44.0
-                 * goodsId : 836
-                 * applyBeginTime : 2018-05-31
-                 * pmORam : am
-                 * number : 500
-                 * minNumber : null
-                 * inhouseFee : null
-                 * deleteStatus : 0
-                 * price : null
-                 * commodityCode : null
-                 * id : 141
-                 * state : ingno
-                 * beginTime : null
-                 * applyTime : null
-                 * goodsName : 2007-10《中国话剧诞生一百周年》纪念邮票11
-                 * appraisalFee : 0.5
-                 * address : bj
-                 * orderNo : 0000000123201805311042443767
-                 * passnumber : null
-                 * pictureUrl : null
-                 * count : null
-                 * articleId : null
-                 * commodityId : 836
-                 * collectionGuidePrice : null
-                 * fakepassrate : null
-                 * warehousingFee : null
-                 * unit : null
-                 * firmId : null
-                 * leaseFate : null
-                 * endTime : null
-                 * goodsCode : 3010070130
-                 * commodityName : null
-                 */
-
-                private Object insurance;
-                private String goodsImg;
-                private String applyEndTime;
-                private String trusteeTime;
-                private String addTime;
-                private int goodsId;
-                private String applyBeginTime;
-                private String pmORam;
-                private int number;
-                private Object minNumber;
-                private Object inhouseFee;
-                private String deleteStatus;
-                private double price;
-                private Object commodityCode;
-                private int id;
-                private String state;
-                private long beginTime;
-                private long applyTime;
-                private String goodsName;
-                private double appraisalFee;
-                private String address;
-                private String orderNo;
-                private Object passnumber;
-                private Object pictureUrl;
-                private Object count;
-                private Object articleId;
-                private int commodityId;
-                private Object collectionGuidePrice;
-                private Object fakepassrate;
-                private Object warehousingFee;
-                private Object unit;
-                private Object firmId;
-                private int leaseFate;
-                private long endTime;
-                private String goodsCode;
-                private Object commodityName;
-
-                public Object getInsurance() {
-                    return insurance;
-                }
-
-                public void setInsurance(Object insurance) {
-                    this.insurance = insurance;
-                }
-
-                public String getGoodsImg() {
-                    return goodsImg;
-                }
-
-                public void setGoodsImg(String goodsImg) {
-                    this.goodsImg = goodsImg;
-                }
-
-                public String getApplyEndTime() {
-                    return applyEndTime;
-                }
-
-                public void setApplyEndTime(String applyEndTime) {
-                    this.applyEndTime = applyEndTime;
-                }
-
-                public String getTrusteeTime() {
-                    return trusteeTime;
-                }
-
-                public void setTrusteeTime(String trusteeTime) {
-                    this.trusteeTime = trusteeTime;
-                }
-
-                public String getAddTime() {
-                    return addTime;
-                }
-
-                public void setAddTime(String addTime) {
-                    this.addTime = addTime;
-                }
-
-                public int getGoodsId() {
-                    return goodsId;
-                }
-
-                public void setGoodsId(int goodsId) {
-                    this.goodsId = goodsId;
-                }
-
-                public String getApplyBeginTime() {
-                    return applyBeginTime;
-                }
-
-                public void setApplyBeginTime(String applyBeginTime) {
-                    this.applyBeginTime = applyBeginTime;
-                }
-
-                public String getPmORam() {
-                    return pmORam;
-                }
-
-                public void setPmORam(String pmORam) {
-                    this.pmORam = pmORam;
-                }
-
-                public int getNumber() {
-                    return number;
-                }
-
-                public void setNumber(int number) {
-                    this.number = number;
-                }
-
-                public Object getMinNumber() {
-                    return minNumber;
-                }
-
-                public void setMinNumber(Object minNumber) {
-                    this.minNumber = minNumber;
-                }
-
-                public Object getInhouseFee() {
-                    return inhouseFee;
-                }
-
-                public void setInhouseFee(Object inhouseFee) {
-                    this.inhouseFee = inhouseFee;
-                }
-
-                public String getDeleteStatus() {
-                    return deleteStatus;
-                }
-
-                public void setDeleteStatus(String deleteStatus) {
-                    this.deleteStatus = deleteStatus;
-                }
-
-                public double getPrice() {
-                    return price;
-                }
-
-                public void setPrice(double price) {
-                    this.price = price;
-                }
-
-                public Object getCommodityCode() {
-                    return commodityCode;
-                }
-
-                public void setCommodityCode(Object commodityCode) {
-                    this.commodityCode = commodityCode;
-                }
-
-                public int getId() {
-                    return id;
-                }
-
-                public void setId(int id) {
-                    this.id = id;
-                }
-
-                public String getState() {
-                    return state;
-                }
-
-                public void setState(String state) {
-                    this.state = state;
-                }
-
-                public long getBeginTime() {
-                    return beginTime;
-                }
-
-                public void setBeginTime(long beginTime) {
-                    this.beginTime = beginTime;
-                }
-
-                public long getApplyTime() {
-                    return applyTime;
-                }
-
-                public void setApplyTime(long applyTime) {
-                    this.applyTime = applyTime;
-                }
-
-                public String getGoodsName() {
-                    return goodsName;
-                }
-
-                public void setGoodsName(String goodsName) {
-                    this.goodsName = goodsName;
-                }
-
-                public double getAppraisalFee() {
-                    return appraisalFee;
-                }
-
-                public void setAppraisalFee(double appraisalFee) {
-                    this.appraisalFee = appraisalFee;
-                }
-
-                public String getAddress() {
-                    return address;
-                }
-
-                public void setAddress(String address) {
-                    this.address = address;
-                }
-
-                public String getOrderNo() {
-                    return orderNo;
-                }
-
-                public void setOrderNo(String orderNo) {
-                    this.orderNo = orderNo;
-                }
-
-                public Object getPassnumber() {
-                    return passnumber;
-                }
-
-                public void setPassnumber(Object passnumber) {
-                    this.passnumber = passnumber;
-                }
-
-                public Object getPictureUrl() {
-                    return pictureUrl;
-                }
-
-                public void setPictureUrl(Object pictureUrl) {
-                    this.pictureUrl = pictureUrl;
-                }
-
-                public Object getCount() {
-                    return count;
-                }
-
-                public void setCount(Object count) {
-                    this.count = count;
-                }
-
-                public Object getArticleId() {
-                    return articleId;
-                }
-
-                public void setArticleId(Object articleId) {
-                    this.articleId = articleId;
-                }
-
-                public int getCommodityId() {
-                    return commodityId;
-                }
-
-                public void setCommodityId(int commodityId) {
-                    this.commodityId = commodityId;
-                }
-
-                public Object getCollectionGuidePrice() {
-                    return collectionGuidePrice;
-                }
-
-                public void setCollectionGuidePrice(Object collectionGuidePrice) {
-                    this.collectionGuidePrice = collectionGuidePrice;
-                }
-
-                public Object getFakepassrate() {
-                    return fakepassrate;
-                }
-
-                public void setFakepassrate(Object fakepassrate) {
-                    this.fakepassrate = fakepassrate;
-                }
-
-                public Object getWarehousingFee() {
-                    return warehousingFee;
-                }
-
-                public void setWarehousingFee(Object warehousingFee) {
-                    this.warehousingFee = warehousingFee;
-                }
-
-                public Object getUnit() {
-                    return unit;
-                }
-
-                public void setUnit(Object unit) {
-                    this.unit = unit;
-                }
-
-                public Object getFirmId() {
-                    return firmId;
-                }
-
-                public void setFirmId(Object firmId) {
-                    this.firmId = firmId;
-                }
-
-                public int getLeaseFate() {
-                    return leaseFate;
-                }
-
-                public void setLeaseFate(int leaseFate) {
-                    this.leaseFate = leaseFate;
-                }
-
-                public long getEndTime() {
-                    return endTime;
-                }
-
-                public void setEndTime(long endTime) {
-                    this.endTime = endTime;
-                }
-
-                public String getGoodsCode() {
-                    return goodsCode;
-                }
-
-                public void setGoodsCode(String goodsCode) {
-                    this.goodsCode = goodsCode;
-                }
-
-                public Object getCommodityName() {
-                    return commodityName;
-                }
-
-                public void setCommodityName(Object commodityName) {
-                    this.commodityName = commodityName;
-                }
+            public void setMinNumber(int minNumber) {
+                this.minNumber = minNumber;
+            }
+
+            public int getGuidingPrice() {
+                return guidingPrice;
+            }
+
+            public void setGuidingPrice(int guidingPrice) {
+                this.guidingPrice = guidingPrice;
+            }
+
+            public double getInhouseFee() {
+                return inhouseFee;
+            }
+
+            public void setInhouseFee(double inhouseFee) {
+                this.inhouseFee = inhouseFee;
+            }
+
+            public String getDeleteStatus() {
+                return deleteStatus;
+            }
+
+            public void setDeleteStatus(String deleteStatus) {
+                this.deleteStatus = deleteStatus;
+            }
+
+            public Object getPrice() {
+                return price;
+            }
+
+            public void setPrice(Object price) {
+                this.price = price;
+            }
+
+            public String getFreeTime() {
+                return freeTime;
+            }
+
+            public void setFreeTime(String freeTime) {
+                this.freeTime = freeTime;
+            }
+
+            public Object getCommodityCode() {
+                return commodityCode;
+            }
+
+            public void setCommodityCode(Object commodityCode) {
+                this.commodityCode = commodityCode;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public String getState() {
+                return state;
+            }
+
+            public void setState(String state) {
+                this.state = state;
+            }
+
+            public Object getBeginTime() {
+                return beginTime;
+            }
+
+            public void setBeginTime(Object beginTime) {
+                this.beginTime = beginTime;
+            }
+
+            public Object getApplyTime() {
+                return applyTime;
+            }
+
+            public void setApplyTime(Object applyTime) {
+                this.applyTime = applyTime;
+            }
+
+            public String getGoodsName() {
+                return goodsName;
+            }
+
+            public void setGoodsName(String goodsName) {
+                this.goodsName = goodsName;
+            }
+
+            public double getAppraisalFee() {
+                return appraisalFee;
+            }
+
+            public void setAppraisalFee(double appraisalFee) {
+                this.appraisalFee = appraisalFee;
+            }
+
+            public double getStorageFeeRate() {
+                return storageFeeRate;
+            }
+
+            public void setStorageFeeRate(double storageFeeRate) {
+                this.storageFeeRate = storageFeeRate;
+            }
+
+            public String getAddress() {
+                return address;
+            }
+
+            public void setAddress(String address) {
+                this.address = address;
+            }
+
+            public String getOrderNo() {
+                return orderNo;
+            }
+
+            public void setOrderNo(String orderNo) {
+                this.orderNo = orderNo;
+            }
+
+            public int getIsTransfer() {
+                return isTransfer;
+            }
+
+            public void setIsTransfer(int isTransfer) {
+                this.isTransfer = isTransfer;
+            }
+
+            public Object getPassnumber() {
+                return passnumber;
+            }
+
+            public void setPassnumber(Object passnumber) {
+                this.passnumber = passnumber;
+            }
+
+            public Object getPictureUrl() {
+                return pictureUrl;
+            }
+
+            public void setPictureUrl(Object pictureUrl) {
+                this.pictureUrl = pictureUrl;
+            }
+
+            public Object getCount() {
+                return count;
+            }
+
+            public void setCount(Object count) {
+                this.count = count;
+            }
+
+            public Object getArticleId() {
+                return articleId;
+            }
+
+            public void setArticleId(Object articleId) {
+                this.articleId = articleId;
+            }
+
+            public int getCommodityId() {
+                return commodityId;
+            }
+
+            public void setCommodityId(int commodityId) {
+                this.commodityId = commodityId;
+            }
+
+            public int getCollectionGuidePrice() {
+                return collectionGuidePrice;
+            }
+
+            public void setCollectionGuidePrice(int collectionGuidePrice) {
+                this.collectionGuidePrice = collectionGuidePrice;
+            }
+
+            public Object getFakepassrate() {
+                return fakepassrate;
+            }
+
+            public void setFakepassrate(Object fakepassrate) {
+                this.fakepassrate = fakepassrate;
+            }
+
+            public Object getWarehousingFee() {
+                return warehousingFee;
+            }
+
+            public void setWarehousingFee(Object warehousingFee) {
+                this.warehousingFee = warehousingFee;
+            }
+
+            public Object getUnit() {
+                return unit;
+            }
+
+            public void setUnit(Object unit) {
+                this.unit = unit;
+            }
+
+            public int getFirmId() {
+                return firmId;
+            }
+
+            public void setFirmId(int firmId) {
+                this.firmId = firmId;
+            }
+
+            public int getLeaseFate() {
+                return leaseFate;
+            }
+
+            public void setLeaseFate(int leaseFate) {
+                this.leaseFate = leaseFate;
+            }
+
+            public Object getEndTime() {
+                return endTime;
+            }
+
+            public void setEndTime(Object endTime) {
+                this.endTime = endTime;
+            }
+
+            public String getGoodsCode() {
+                return goodsCode;
+            }
+
+            public void setGoodsCode(String goodsCode) {
+                this.goodsCode = goodsCode;
+            }
+
+            public Object getCommodityName() {
+                return commodityName;
+            }
+
+            public void setCommodityName(Object commodityName) {
+                this.commodityName = commodityName;
             }
         }
     }

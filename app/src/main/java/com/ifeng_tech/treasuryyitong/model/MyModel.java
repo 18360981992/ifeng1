@@ -9,6 +9,7 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.utils.BaseServer;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.RetrofitFacety;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
@@ -59,6 +60,10 @@ public class MyModel {
 
                             }
                         });
+                    }else{
+                        DashApplication.edit.clear().commit();
+//                        activity.finish();
+                        MyUtils.setToast("登录失效，请重新登录！");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -98,6 +103,9 @@ public class MyModel {
 
                             }
                         });
+                    }else{
+                        DashApplication.edit.clear().commit();
+                        MyUtils.setToast("登录失效，请重新登录！");
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

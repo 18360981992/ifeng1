@@ -1,7 +1,9 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
@@ -10,16 +12,14 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Message_List_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
-import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Message_Lists_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import org.json.JSONException;
@@ -99,6 +99,18 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
                 getNextConect();
             }
         });
+
+        system_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int msgType = list.get(position).getMsgType();
+                if(msgType==1){
+                    Intent intent = new Intent(System_Message_Activity.this, My_Given_list_Activity.class);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                }
+            }
+        });
     }
 
     private void getFristConect() {
@@ -115,7 +127,7 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
                         list.clear();
                         list.addAll(zilist);
 
-                        DashApplication.edit_message_xitong.putInt(SP_String.NEWS_XITONG_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
+//                        DashApplication.edit_message_xitong.putInt(SP_String.NEWS_XITONG_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
 
                         setMessageAdapter();
 
@@ -192,18 +204,8 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
         system_null = (LinearLayout) findViewById(R.id.system_null);
 
         // 设置刷新
-        initRefreshListView();
+        initRefreshListView(system_pulltoscroll);
     }
-
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        system_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = system_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
-
 
     @Override
     public void finish() {

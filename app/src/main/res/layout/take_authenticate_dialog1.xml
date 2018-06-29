@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="@dimen/x90"
-            android:text="转赠数量:"
+            android:text="预约数量:"
             android:textColor="@color/name_se"
             android:textSize="@dimen/x26"
             android:layout_marginLeft="@dimen/x16"
@@ -44,7 +44,9 @@
                 android:text="1"
                 android:textColor="@color/name_se"
                 android:textSize="@dimen/x26"
-                android:hint="请输入数量"/>
+                android:hint="请输入数量"
+                android:gravity="center_vertical"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,7 +57,7 @@
                     android:id="@+id/take_Authenticate_Dialog1_zuida"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最大转赠数量:0"
+                    android:text="剩余预约数量:0"
                     android:textColor="#E93438"
                     android:textSize="@dimen/x20"
                     android:inputType="number"
@@ -64,7 +66,7 @@
                     android:id="@+id/take_Authenticate_Dialog1_zuixiao"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="最小转赠数量:0"
+                    android:text="最小预约数量:0"
                     android:textColor="#E93438"
                     android:textSize="@dimen/x20"
                     android:inputType="number"
@@ -88,7 +90,7 @@
             android:layout_height="wrap_content"
             android:text="手续费:"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x23"
+            android:textSize="@dimen/x26"
             android:layout_marginLeft="@dimen/x16"
             />
         <TextView
@@ -101,6 +103,39 @@
             android:layout_marginLeft="@dimen/x116"
             />
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x90"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x15"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/x16"
+                android:text="业务密码:"
+                android:textColor="@color/name_se"
+                android:textSize="@dimen/x26" />
+
+            <EditText
+                android:id="@+id/take_Authenticate_Dialog1_yewu_pass"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x70"
+                android:layout_marginLeft="@dimen/x90"
+                android:layout_marginRight="@dimen/x16"
+                android:background="@drawable/tihuo_ed_bg"
+                android:hint="请输入业务密码"
+                android:inputType="numberPassword"
+                android:singleLine="true"
+                android:textColor="@color/name_se"
+                android:textSize="@dimen/x26"
+                android:maxLength="6"
+                android:gravity="center_vertical"
+                />
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -118,6 +153,7 @@
             android:textColor="@color/baise"
             android:layout_marginLeft="@dimen/x20"
             android:background="@drawable/congzhi_bg"
+            android:gravity="center"
             />
         <Button
             android:id="@+id/take_Authenticate_Dialog1_quxiao"
@@ -130,6 +166,7 @@
             android:layout_marginRight="@dimen/x20"
             android:background="@drawable/tixian_bg"
             android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
             />
     </LinearLayout>
 </RelativeLayout>

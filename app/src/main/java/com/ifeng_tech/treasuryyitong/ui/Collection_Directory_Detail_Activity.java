@@ -113,7 +113,7 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
 
             @Override
             public void shibai(String ss) {
-                MyUtils.setToast("藏品详情=="+ss);
+                MyUtils.setToast(""+ss);
             }
         });
 
@@ -121,13 +121,13 @@ public class Collection_Directory_Detail_Activity extends BaseMVPActivity<Collec
 
     private void initView() {
         collection_mulu_detail_Fan = (RelativeLayout) findViewById(R.id.collection_mulu_detail_Fan);
-        collocation_mulu_detail_img = findViewById(R.id.collocation_mulu_detail_img);
+        collocation_mulu_detail_img = (ImageView) findViewById(R.id.collocation_mulu_detail_img);
         collocation_mulu_detail_name = (TextView) findViewById(R.id.collocation_mulu_detail_name);
         collocation_mulu_detail_cword = (TextView) findViewById(R.id.collocation_mulu_detail_cword);
 //        collocation_mulu_detail_guige = (TextView) findViewById(R.id.collocation_mulu_detail_guige);
 //        collocation_mulu_detail_shoujia = (TextView) findViewById(R.id.collocation_mulu_detail_shoujia);
 //        collocation_mulu_detail_faxingliang = (TextView) findViewById(R.id.collocation_mulu_detail_faxingliang);
-        collocation_mulu_detail_listview = findViewById(R.id.collocation_mulu_detail_listview);
+        collocation_mulu_detail_listview = (ListView) findViewById(R.id.collocation_mulu_detail_listview);
         collocation_mulu_detail_jianjie = (TextView) findViewById(R.id.collocation_mulu_detail_jianjie);
 
 

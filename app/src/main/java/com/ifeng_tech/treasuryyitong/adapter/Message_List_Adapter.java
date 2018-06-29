@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
@@ -52,6 +53,7 @@ public class Message_List_Adapter extends BaseAdapter{
         TextView message_lists_item_time = convertView.findViewById(R.id.message_lists_item_time);
         TextView message_lists_item_title = convertView.findViewById(R.id.message_lists_item_title);
         TextView message_lists_item_text = convertView.findViewById(R.id.message_lists_item_text);
+        ImageView message_lists_item_img = convertView.findViewById(R.id.message_lists_item_img);  // 这个箭头设置隐藏/显示
 
         message_lists_item_title.setText(title);
         message_lists_item_text.setText(list.get(position).getContent());
@@ -68,11 +70,17 @@ public class Message_List_Adapter extends BaseAdapter{
             }else{
                 message_lists_item_time.setText("中午 "+simpleDateFormat1.format(date));
             }
-
         }else{
             SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("MM月dd日");
             message_lists_item_time.setText(simpleDateFormat1.format(date));
         }
+        int msgType = list.get(position).getMsgType();
+        if(msgType==1){
+            message_lists_item_img.setVisibility(View.VISIBLE);
+        }else{
+            message_lists_item_img.setVisibility(View.GONE);
+        }
+
         return convertView;
     }
 }

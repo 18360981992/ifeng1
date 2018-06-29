@@ -9,10 +9,11 @@ import java.util.List;
 
 public class Collocation_Subscribe_bean implements Serializable{
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":4,"resultNum":4},"list":[{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1234,"minNumber":11,"inhouseFee":0.02,"deleteStatus":null,"price":null,"commodityCode":null,"id":88,"state":"1","beginTime":null,"applyTime":"2018-06-04/2018-06-30","goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":50,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":888,"minNumber":7,"inhouseFee":0.02,"deleteStatus":null,"price":null,"commodityCode":null,"id":87,"state":"1","beginTime":null,"applyTime":"2018-06-04/2018-06-08","goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":50,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":11,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":839,"applyBeginTime":null,"pmORam":null,"number":100,"minNumber":3,"inhouseFee":0.01,"deleteStatus":null,"price":null,"commodityCode":null,"id":85,"state":"1","beginTime":null,"applyTime":"2018-06-01/2018-06-06","goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","appraisalFee":0.4,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":839,"collectionGuidePrice":20,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"3010070030","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1079900020-1.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":1364,"applyBeginTime":null,"pmORam":null,"number":1000,"minNumber":5,"inhouseFee":0.1,"deleteStatus":null,"price":null,"commodityCode":null,"id":84,"state":"1","beginTime":null,"applyTime":"2018-05-31/2018-06-07","goodsName":"普26民居","appraisalFee":17.2,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":305,"articleId":null,"commodityId":1364,"collectionGuidePrice":86,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"1079900020","commodityName":null}]}
+     * data : {"pageInfo":{"pageNum":1,"pageSize":3,"totalPage":2,"totalNum":4,"resultNum":3},"list":[{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":0.1,"inhouseFee":0.01,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":165,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0,"storageFeeRate":0.01,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":0.1,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":0.1,"inhouseFee":0.01,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":163,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0.01,"storageFeeRate":0.01,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":1,"articleId":null,"commodityId":836,"collectionGuidePrice":1,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":838,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":162,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":14,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070020","commodityName":null}]}
      */
 
     private String code;
@@ -45,8 +46,8 @@ public class Collocation_Subscribe_bean implements Serializable{
 
     public static class DataBean implements Serializable{
         /**
-         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":4,"resultNum":4}
-         * list : [{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1234,"minNumber":11,"inhouseFee":0.02,"deleteStatus":null,"price":null,"commodityCode":null,"id":88,"state":"1","beginTime":null,"applyTime":"2018-06-04/2018-06-30","goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":50,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":888,"minNumber":7,"inhouseFee":0.02,"deleteStatus":null,"price":null,"commodityCode":null,"id":87,"state":"1","beginTime":null,"applyTime":"2018-06-04/2018-06-08","goodsName":"2007-10《中国话剧诞生一百周年》纪念邮票11","appraisalFee":0.5,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":50,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":11,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":839,"applyBeginTime":null,"pmORam":null,"number":100,"minNumber":3,"inhouseFee":0.01,"deleteStatus":null,"price":null,"commodityCode":null,"id":85,"state":"1","beginTime":null,"applyTime":"2018-06-01/2018-06-06","goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","appraisalFee":0.4,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":839,"collectionGuidePrice":20,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"3010070030","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1079900020-1.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":1364,"applyBeginTime":null,"pmORam":null,"number":1000,"minNumber":5,"inhouseFee":0.1,"deleteStatus":null,"price":null,"commodityCode":null,"id":84,"state":"1","beginTime":null,"applyTime":"2018-05-31/2018-06-07","goodsName":"普26民居","appraisalFee":17.2,"address":null,"orderNo":null,"passnumber":null,"pictureUrl":null,"count":305,"articleId":null,"commodityId":1364,"collectionGuidePrice":86,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":20,"endTime":null,"goodsCode":"1079900020","commodityName":null}]
+         * pageInfo : {"pageNum":1,"pageSize":3,"totalPage":2,"totalNum":4,"resultNum":3}
+         * list : [{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":0.1,"inhouseFee":0.01,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":165,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0,"storageFeeRate":0.01,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":0,"articleId":null,"commodityId":836,"collectionGuidePrice":0.1,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":836,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":0.1,"inhouseFee":0.01,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":163,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","appraisalFee":0.01,"storageFeeRate":0.01,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":1,"articleId":null,"commodityId":836,"collectionGuidePrice":1,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070130","commodityName":null},{"insurance":null,"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070020.jpg","applyEndTime":null,"trusteeTime":null,"addTime":null,"goodsId":838,"applyBeginTime":null,"pmORam":null,"number":1000,"appraisalFeeRate":0.01,"minNumber":1,"guidingPrice":80,"inhouseFee":0.02,"deleteStatus":null,"price":null,"freeTime":null,"commodityCode":null,"id":162,"state":"1","beginTime":null,"applyTime":"2018-06-29/2018-06-29","goodsName":"2007-1《丁亥年》特种邮票","appraisalFee":0.8,"storageFeeRate":0.02,"address":null,"orderNo":null,"isTransfer":1,"passnumber":null,"pictureUrl":null,"count":14,"articleId":null,"commodityId":838,"collectionGuidePrice":80,"fakepassrate":null,"warehousingFee":null,"unit":null,"firmId":null,"leaseFate":0,"endTime":null,"goodsCode":"3010070020","commodityName":null}]
          */
 
         private PageInfoBean pageInfo;
@@ -71,10 +72,10 @@ public class Collocation_Subscribe_bean implements Serializable{
         public static class PageInfoBean implements Serializable{
             /**
              * pageNum : 1
-             * pageSize : 10
-             * totalPage : 1
+             * pageSize : 3
+             * totalPage : 2
              * totalNum : 4
-             * resultNum : 4
+             * resultNum : 3
              */
 
             private int pageNum;
@@ -127,38 +128,43 @@ public class Collocation_Subscribe_bean implements Serializable{
         public static class ListBean implements Serializable{
             /**
              * insurance : null
-             * goodsImg : http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070120.jpg
+             * goodsImg : http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg
              * applyEndTime : null
              * trusteeTime : null
              * addTime : null
              * goodsId : 836
              * applyBeginTime : null
              * pmORam : null
-             * number : 1234
-             * minNumber : 11
-             * inhouseFee : 0.02
+             * number : 1000
+             * appraisalFeeRate : 0.01
+             * minNumber : 1
+             * guidingPrice : 0.1
+             * inhouseFee : 0.01
              * deleteStatus : null
              * price : null
+             * freeTime : null
              * commodityCode : null
-             * id : 88
+             * id : 165
              * state : 1
              * beginTime : null
-             * applyTime : 2018-06-04/2018-06-30
-             * goodsName : 2007-10《中国话剧诞生一百周年》纪念邮票11
-             * appraisalFee : 0.5
+             * applyTime : 2018-06-29/2018-06-29
+             * goodsName : 2007-11《内蒙古自治区成立六十周年》纪念邮票
+             * appraisalFee : 0.0
+             * storageFeeRate : 0.01
              * address : null
              * orderNo : null
+             * isTransfer : 1
              * passnumber : null
              * pictureUrl : null
              * count : 0
              * articleId : null
              * commodityId : 836
-             * collectionGuidePrice : 50
+             * collectionGuidePrice : 0.1
              * fakepassrate : null
              * warehousingFee : null
              * unit : null
              * firmId : null
-             * leaseFate : 20
+             * leaseFate : 0
              * endTime : null
              * goodsCode : 3010070130
              * commodityName : null
@@ -173,10 +179,13 @@ public class Collocation_Subscribe_bean implements Serializable{
             private Object applyBeginTime;
             private Object pmORam;
             private int number;
+            private double appraisalFeeRate;
             private int minNumber;
+            private double guidingPrice;
             private double inhouseFee;
             private Object deleteStatus;
             private Object price;
+            private Object freeTime;
             private Object commodityCode;
             private int id;
             private String state;
@@ -184,14 +193,16 @@ public class Collocation_Subscribe_bean implements Serializable{
             private String applyTime;
             private String goodsName;
             private double appraisalFee;
+            private double storageFeeRate;
             private Object address;
             private Object orderNo;
+            private int isTransfer;
             private Object passnumber;
             private Object pictureUrl;
             private int count;
             private Object articleId;
             private int commodityId;
-            private int collectionGuidePrice;
+            private double collectionGuidePrice;
             private Object fakepassrate;
             private Object warehousingFee;
             private Object unit;
@@ -273,12 +284,28 @@ public class Collocation_Subscribe_bean implements Serializable{
                 this.number = number;
             }
 
+            public double getAppraisalFeeRate() {
+                return appraisalFeeRate;
+            }
+
+            public void setAppraisalFeeRate(double appraisalFeeRate) {
+                this.appraisalFeeRate = appraisalFeeRate;
+            }
+
             public int getMinNumber() {
                 return minNumber;
             }
 
             public void setMinNumber(int minNumber) {
                 this.minNumber = minNumber;
+            }
+
+            public double getGuidingPrice() {
+                return guidingPrice;
+            }
+
+            public void setGuidingPrice(double guidingPrice) {
+                this.guidingPrice = guidingPrice;
             }
 
             public double getInhouseFee() {
@@ -303,6 +330,14 @@ public class Collocation_Subscribe_bean implements Serializable{
 
             public void setPrice(Object price) {
                 this.price = price;
+            }
+
+            public Object getFreeTime() {
+                return freeTime;
+            }
+
+            public void setFreeTime(Object freeTime) {
+                this.freeTime = freeTime;
             }
 
             public Object getCommodityCode() {
@@ -361,6 +396,14 @@ public class Collocation_Subscribe_bean implements Serializable{
                 this.appraisalFee = appraisalFee;
             }
 
+            public double getStorageFeeRate() {
+                return storageFeeRate;
+            }
+
+            public void setStorageFeeRate(double storageFeeRate) {
+                this.storageFeeRate = storageFeeRate;
+            }
+
             public Object getAddress() {
                 return address;
             }
@@ -375,6 +418,14 @@ public class Collocation_Subscribe_bean implements Serializable{
 
             public void setOrderNo(Object orderNo) {
                 this.orderNo = orderNo;
+            }
+
+            public int getIsTransfer() {
+                return isTransfer;
+            }
+
+            public void setIsTransfer(int isTransfer) {
+                this.isTransfer = isTransfer;
             }
 
             public Object getPassnumber() {
@@ -417,11 +468,11 @@ public class Collocation_Subscribe_bean implements Serializable{
                 this.commodityId = commodityId;
             }
 
-            public int getCollectionGuidePrice() {
+            public double getCollectionGuidePrice() {
                 return collectionGuidePrice;
             }
 
-            public void setCollectionGuidePrice(int collectionGuidePrice) {
+            public void setCollectionGuidePrice(double collectionGuidePrice) {
                 this.collectionGuidePrice = collectionGuidePrice;
             }
 

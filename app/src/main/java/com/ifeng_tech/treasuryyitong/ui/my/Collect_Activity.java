@@ -26,6 +26,7 @@ import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.TakeDonation_Dialog;
@@ -263,10 +264,8 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
                 map.put("goodsId",goodsId);
                 map.put("businessPwd",yewu_pass);
 
-                final ProgressDialog aniDialog = new ProgressDialog(Collect_Activity.this);
-                aniDialog.setCancelable(true);
-                aniDialog.setMessage("正在加载。。。");
-                aniDialog.show();
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Collect_Activity.this, SP_String.JIAZAI);
 
                 myPresenter.postPreContent(APIs.applyCollect, map, new MyInterfaces() {
                     @Override

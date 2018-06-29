@@ -7,6 +7,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Property_list_Bean;
 
 import java.text.SimpleDateFormat;
@@ -28,7 +29,10 @@ public class PropertyListAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return list.size();
+        if(list.size()<5){
+            return list.size();
+        }
+        return 5;
     }
 
     @Override
@@ -50,17 +54,23 @@ public class PropertyListAdapter extends BaseAdapter {
         TextView property_list_title = convertView.findViewById(R.id.property_list_title);
         TextView property_list_time = convertView.findViewById(R.id.property_list_time);
         TextView property_list_detail = convertView.findViewById(R.id.property_list_detail);
-        if(list.get(position).getPaymentType()==1){
-            property_list_title.setText("充值");
-            property_list_detail.setText("+"+list.get(position).getAmount());
-        }else if(list.get(position).getPaymentType()==2){
-            property_list_title.setText("提现");
-            property_list_detail.setText("-"+list.get(position).getAmount());
-        }
 
-        Date date = new Date(list.get(position).getAddTime());
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        property_list_time.setText(simpleDateFormat.format(date));
+
+            String amount = DashApplication.decimalFormat.format(list.get(position).getAmount());
+
+            if(list.get(position).getPaymentType()==1){
+                property_list_title.setText("充值");
+                property_list_detail.setText("+"+amount);
+            }else if(list.get(position).getPaymentType()==2){
+                property_list_title.setText("提现");
+                property_list_detail.setText("-"+amount);
+            }
+
+            Date date = new Date(list.get(position).getAddTime());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            property_list_time.setText(simpleDateFormat.format(date));
+
+
         return convertView;
     }
 }

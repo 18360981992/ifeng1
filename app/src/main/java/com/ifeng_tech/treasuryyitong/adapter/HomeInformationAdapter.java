@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
+import com.ifeng_tech.treasuryyitong.bean.zixun.HotList_Bean;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -23,7 +23,7 @@ import java.util.List;
 
 class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter.ZiXunHolder> {
     Context context;
-    List<Information_Zi_Bean.DataBean.ListBean> informationlist;
+    List<HotList_Bean.DataBean.ListBean> informationlist;
 
     public interface ZiXunAdapterJieKou{
         void ZiXunChuan(int i);
@@ -35,7 +35,7 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
         this.ziXunAdapterJieKou = ziXunAdapterJieKou;
     }
 
-    public HomeInformationAdapter(Context context, List<Information_Zi_Bean.DataBean.ListBean> informationlist) {
+    public HomeInformationAdapter(Context context, List<HotList_Bean.DataBean.ListBean> informationlist) {
         this.context = context;
         this.informationlist = informationlist;
     }
@@ -50,11 +50,21 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
     @Override
     public void onBindViewHolder(ZiXunHolder holder, final int position) {
 
-        String text="全部\t\t"+informationlist.get(position).getTitle();
+        String top="";
+        String name = informationlist.get(position).getName();
+        if(name!=null){
+           top=name;
+        }else{
+            top="null";
+        }
+        String text=top+"\t\t"+informationlist.get(position).getTitle();
+//        String text=informationlist.get(position).getTitle();
+//        holder.home_zixun_text.setText(text);
+
         SpannableStringBuilder builder = new SpannableStringBuilder(text);
         // 设置textview 的富文本颜色
         ForegroundColorSpan span = new ForegroundColorSpan(context.getResources().getColor(R.color.zhuse));
-        builder.setSpan(span, 0, "全部".length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        builder.setSpan(span, 0, top.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.home_zixun_text.setText(builder);
 
         Date date = new Date(informationlist.get(position).getAddTime());
@@ -67,12 +77,14 @@ class HomeInformationAdapter extends RecyclerView.Adapter<HomeInformationAdapter
                 ziXunAdapterJieKou.ZiXunChuan(position);
             }
         });
-
     }
 
     @Override
     public int getItemCount() {
-        return informationlist.size();
+        if(informationlist.size()<3){
+            return informationlist.size();
+        }
+        return 3;
     }
 
 

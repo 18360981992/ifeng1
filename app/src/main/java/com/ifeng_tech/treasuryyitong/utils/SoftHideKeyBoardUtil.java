@@ -11,6 +11,8 @@ import android.widget.FrameLayout;
 
 /**
  * Created by zzt on 2018/5/17.
+ *
+ *  解决键盘挡住输入框
  */
 
 public class SoftHideKeyBoardUtil {
@@ -75,12 +77,16 @@ public class SoftHideKeyBoardUtil {
             if (heightDifference > (usableHeightSansKeyboard/4)) {
                 // 6､键盘弹出了，Activity的xml布局高度应当减去键盘高度
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference +statusBarHeight;
+                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference + statusBarHeight;
+//                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
                 } else {
                     frameLayoutParams.height = usableHeightSansKeyboard - heightDifference ;
+//                    frameLayoutParams.height = usableHeightSansKeyboard;
                 }
-            } else {
+            }
+            else {
                 frameLayoutParams.height = contentHeight;
+//                frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
             }
             //7､ 重绘Activity的xml布局
             mChildOfContent.requestLayout();

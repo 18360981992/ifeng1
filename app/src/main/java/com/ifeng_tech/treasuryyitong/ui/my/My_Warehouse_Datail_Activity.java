@@ -8,12 +8,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.My_Warehouse_Datail_Bean;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
+import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.ui.Goods_QR_Activity;
+import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -32,6 +43,7 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
     private Button my_Warehouse_Datail_tihuo;
     private WarehouseBean.DataBean.ListBean warehouseBean;
     private ImageView my_warehouse_datail_erweima;
+    private WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean maxTrasferableAmountAndFeeBean;
 
     @Override
     public MyPresenter<My_Warehouse_Datail_Activity> initPresenter() {
@@ -46,8 +58,9 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my__warehouse__datail_);
         initView();
-
-        warehouseBean = (WarehouseBean.DataBean.ListBean) getIntent().getSerializableExtra("WarehouseBean");
+        Intent intent = getIntent();
+        warehouseBean = (WarehouseBean.DataBean.ListBean)intent .getSerializableExtra("WarehouseBean");
+        maxTrasferableAmountAndFeeBean = (WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean) intent.getSerializableExtra("MaxTrasferableAmountAndFeeBean");
 
         my_Warehouse_Datail_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,8 +75,6 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
         my_Warehouse_Datail_dongjie_num.setText(""+warehouseBean.getFrozenQty());
         my_Warehouse_Datail_zong_num.setText(""+(warehouseBean.getHoldQty()));
 
-        my_Warehouse_Datail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));
-
         // 点击二维码图标跳转
         my_warehouse_datail_erweima.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,7 +87,42 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
         });
 
     }
+    Map<String, String> map = new HashMap<>();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        map.put("goodsId",warehouseBean.getGoodsId()+"");
+        myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        My_Warehouse_Datail_Bean my_Warehouse_Datail_Bean = new Gson().fromJson(json, My_Warehouse_Datail_Bean.class);
+                        if(my_Warehouse_Datail_Bean.getData().getGoodsCountForStorageFeePayment().size()>0){
+                            double price= my_Warehouse_Datail_Bean.getData().getMaxTrasferableAmountAndFee().getCommonFeeRate()*  // 会员折扣
+                                    my_Warehouse_Datail_Bean.getData().getList().get(0).getGuidingPrice()*  // 指导价
+                                    my_Warehouse_Datail_Bean.getData().getList().get(0).getStorageFeeRate()*  //  仓储费率
+                                    my_Warehouse_Datail_Bean.getData().getGoodsCountForStorageFeePayment().get(0).getHoldQty();  // 数量
+                            my_Warehouse_Datail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(price));
+                        }else{
+                            my_Warehouse_Datail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));
+                        }
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
 
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+            }
+        });
+    }
 
     private void initView() {
         my_Warehouse_Datail_Fan = (RelativeLayout) findViewById(R.id.my_Warehouse_Datail_Fan);
@@ -84,7 +130,6 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
         my_Warehouse_Datail_cword = (TextView) findViewById(R.id.my_Warehouse_Datail_cword);
 //        my_Warehouse_Datail_xiangqing = (TextView) findViewById(R.id.my_Warehouse_Datail_xiangqing);
         my_warehouse_datail_erweima = (ImageView) findViewById(R.id.my_Warehouse_Datail_erweima);
-
         my_Warehouse_Datail_keyong_num = (TextView) findViewById(R.id.my_Warehouse_Datail_keyong_num);
         my_Warehouse_Datail_dongjie_num = (TextView) findViewById(R.id.my_Warehouse_Datail_dongjie_num);
         my_Warehouse_Datail_zong_num = (TextView) findViewById(R.id.my_Warehouse_Datail_zong_num);
@@ -103,7 +148,6 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
 //                MyUtils.setToast("点击转赠");
                 Intent intent = new Intent(My_Warehouse_Datail_Activity.this, Donation_Activity.class);
                 intent.putExtra("WarehouseBean", warehouseBean);
-
                 startActivity(intent);
                 overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 break;
@@ -112,6 +156,7 @@ public class My_Warehouse_Datail_Activity extends BaseMVPActivity<My_Warehouse_D
 
                 Intent intent1 = new Intent(My_Warehouse_Datail_Activity.this, Pick_up_goods_Activity.class);
                 intent1.putExtra("WarehouseBean", warehouseBean);
+                intent1.putExtra("MaxTrasferableAmountAndFeeBean",maxTrasferableAmountAndFeeBean);
                 startActivity(intent1);
                 overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 break;

@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Colloction_Bean;
+import com.ifeng_tech.treasuryyitong.utils.ApplicationFormEnum;
 
 import java.util.List;
 
@@ -20,9 +21,9 @@ import java.util.List;
 
 public class My_Collocation_list_Adapter extends BaseAdapter{
     Context context;
-    List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list;
+    List<My_Colloction_Bean.DataBean.ListBean> list;
 
-    public My_Collocation_list_Adapter(Context context, List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list) {
+    public My_Collocation_list_Adapter(Context context, List<My_Colloction_Bean.DataBean.ListBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -59,8 +60,8 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
         my_collocation_list_danhao.setText(list.get(position).getOrderNo());
         my_collocation_list_cword.setText(""+list.get(position).getGoodsCode());
 
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>15){
+            String name = list.get(position).getGoodsName().substring(0, 15);
             my_collocation_list_name.setText(name+"...");
         }else{
             my_collocation_list_name.setText(list.get(position).getGoodsName());
@@ -77,6 +78,9 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
         }else{
             my_collocation_list_time.setText(list.get(position).getTrusteeTime()+" 下午");
         }
+
+        Integer state = Integer.valueOf(list.get(position).getState());
+        my_collocation_list_type.setText(ApplicationFormEnum.getName(state)); // 为状态赋值
 
 
 //        if(list.get(position).getType()==0){

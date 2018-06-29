@@ -10,16 +10,13 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Message_List_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
-import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Message_Lists_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import org.json.JSONException;
@@ -114,7 +111,7 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
                         list.clear();
                         list.addAll(zilist);
 
-                        DashApplication.edit_message_chongzhi.putInt(SP_String.NEWS_CHONGZHI_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
+//                        DashApplication.edit_message_chongzhi.putInt(SP_String.NEWS_CHONGZHI_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
 
                         setMessageAdapter();
 
@@ -136,6 +133,7 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
         });
     }
 
+    boolean isFlag=true;
     private void getNextConect() {
         myPresenter.postPreContent(APIs.getMessageList, map, new MyInterfaces() {
             @Override
@@ -146,8 +144,13 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
                     if(code.equals("2000")){
                         Message_Lists_Bean message_lists_bean = new Gson().fromJson(json, Message_Lists_Bean.class);
                         List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
-                        list.addAll(zilist);
-                        setMessageAdapter();
+                        if(zilist.size()>0){
+                            list.addAll(zilist);
+                            setMessageAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
+
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -163,6 +166,7 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
                 recharge_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
             }
         });
+
     }
 
     private void setMessageAdapter() {
@@ -189,16 +193,7 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
         recharge_null = (LinearLayout) findViewById(R.id.recharge_null);
 
         // 设置刷新
-        initRefreshListView();
-    }
-
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        recharge_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = recharge_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
+        initRefreshListView(recharge_pulltoscroll);
     }
 
     @Override

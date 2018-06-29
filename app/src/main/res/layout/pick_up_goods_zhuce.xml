@@ -50,324 +50,285 @@
                 </LinearLayout>
 
                 <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="藏品代码"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"/>
-        <EditText
-            android:id="@+id/up_goods_zhuce_word"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x70"
-            android:hint="请输入藏品代码"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x40"
-            android:layout_marginRight="@dimen/x16"
-            android:background="@drawable/tihuo_ed_bg"
-            android:inputType="number"
-            android:singleLine="true"
-            android:maxLength="10"
-            android:gravity="center_vertical"
-            />
-
-    </LinearLayout>
-
-                 <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="交货仓库"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x40"
-            android:layout_marginRight="@dimen/x16"
-            >
-            <TextView
-                android:id="@+id/up_goods_zhuce_cangku"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x70"
-                android:hint="请选择"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:background="@drawable/tihuo_ed_bg"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                />
-            <LinearLayout
-                android:id="@+id/up_goods_zhuce_cangku_img"
-                android:layout_width="@dimen/x60"
-                android:layout_height="@dimen/x66"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/item_bg"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x2"
-                android:gravity="center"
-                >
-                <ImageView
-                    android:layout_width="@dimen/x20"
-                    android:layout_height="@dimen/x16"
-                    android:background="@drawable/xia_jiantou"
-                    />
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-                <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="交割件数"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"/>
-        <EditText
-            android:id="@+id/up_goods_zhuce_jiaoge_jianshu"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x70"
-            android:hint="您的最大交割件数0"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x40"
-            android:layout_marginRight="@dimen/x16"
-            android:background="@drawable/tihuo_ed_bg"
-            android:inputType="number"
-            android:singleLine="true"
-            android:gravity="center_vertical"
-            />
-    </LinearLayout>
-
-                <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="交割数量"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"/>
-        <EditText
-            android:id="@+id/up_goods_zhuce_jiaoge_shuliang"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x70"
-            android:hint="请输入交割数量"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x40"
-            android:layout_marginRight="@dimen/x16"
-            android:background="@drawable/tihuo_ed_bg"
-            android:gravity="center_vertical"
-            />
-    </LinearLayout>
-
-                <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x90"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="提货日期"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"/>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x40"
-            android:layout_marginRight="@dimen/x16"
-            >
-            <TextView
-                android:id="@+id/up_goods_zhuce_rili"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x70"
-                android:hint="请选择"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:background="@drawable/tihuo_ed_bg"
-                android:layout_centerVertical="true"
-                android:gravity="center_vertical"
-                />
-            <ImageView
-                android:id="@+id/up_goods_zhuce_rili_img"
-                android:layout_width="@dimen/x30"
-                android:layout_height="@dimen/x30"
-                android:background="@drawable/riqi"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/x40"/>
-        </RelativeLayout>
-
-    </LinearLayout>
-
-                 <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="@color/fengouxian1"
-        android:layout_marginTop="@dimen/x20"
-       />
-
-                 <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x240"
-                android:orientation="vertical"
-                android:background="@color/baise"
-                >
-                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
                     >
                     <TextView
-                        style="@style/textview_error_hint"
-                        android:visibility="invisible"
-                        android:text="非法字符"
-                        android:id="@+id/up_goods_zhuce_pass_tishi"/>
-
-                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="藏品代码"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+                    <EditText
+                        android:id="@+id/up_goods_zhuce_word"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="@dimen/x70"
+                        android:hint="请输入藏品代码"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/tihuo_ed_bg"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:maxLength="10"
+                        android:gravity="center_vertical"
+                        />
 
+                </LinearLayout>
+
+                 <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="交货仓库"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        >
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="设置提货密码"
-                            android:textColor="@color/name_se"
-                            android:textSize="@dimen/x24"
-                            android:layout_marginLeft="@dimen/x16"
-                            />
-
-                        <EditText
-                            android:id="@+id/up_goods_zhuce_pass"
+                            android:id="@+id/up_goods_zhuce_cangku"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/x70"
-                            android:hint="6-12个字符,区分大小写"
-                            android:textColor="@color/name_se"
+                            android:hint="请选择"
                             android:textSize="@dimen/x24"
-                            android:maxLength="12"
-                            android:layout_marginLeft="@dimen/x40"
-                            android:layout_marginRight="@dimen/x16"
-                            android:background="@drawable/tihuo_ed_bg"
-                            android:singleLine="true"
+                            android:textColor="@color/name_se"
+                            android:background="@drawable/pick_selector"
+                            android:layout_centerVertical="true"
                             android:gravity="center_vertical"
                             />
-                    </LinearLayout>
+                        <ImageView
+                            android:id="@+id/image_jiantou"
+                            android:layout_width="@dimen/x20"
+                            android:layout_height="@dimen/x16"
+                            android:background="@drawable/xia_jiantou"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_alignParentRight="true"
+                            />
+
+                        <!--<LinearLayout-->
+                            <!--android:id="@+id/up_goods_zhuce_cangku_img"-->
+                            <!--android:layout_width="@dimen/x1"-->
+                            <!--android:layout_height="@dimen/x1"-->
+                            <!--android:layout_alignParentRight="true"-->
+                            <!--android:background="@drawable/item_bg"-->
+                            <!--android:layout_centerVertical="true"-->
+                            <!--android:layout_marginRight="@dimen/x2"-->
+                            <!--&gt;</LinearLayout>-->
+
+
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:layout_marginBottom="@dimen/x16">
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="交割件数"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+                    <EditText
+                        android:id="@+id/up_goods_zhuce_jiaoge_jianshu"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x70"
+                        android:hint="您的最大交割件数0"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/tihuo_ed_bg"
+                        android:inputType="number"
+                        android:singleLine="true"
+                        android:gravity="center_vertical"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="交割数量"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+                    <EditText
+                        android:id="@+id/up_goods_zhuce_jiaoge_shuliang"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x70"
+                        android:hint="请输入交割数量"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/color_999999"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/tihuo_ed_bg"
+                        android:gravity="center_vertical"
+                        android:inputType="number"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center_vertical"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="手续费"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
 
                     <TextView
-                        style="@style/textview_error_hint"
-                        android:visibility="invisible"
-                        android:text="两次输入不一致"
-                        android:id="@+id/up_goods_zhuce_zai_tishi"/>
+                        android:id="@+id/up_goods_zhuce_shouxufei"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="￥0.00"
+                        android:textSize="@dimen/x24"
+                        android:textColor="#E93438"
+                        android:layout_marginLeft="@dimen/x70"
+                        />
+                </LinearLayout>
 
-                    <LinearLayout
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="提货日期"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+                    <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        >
                         <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/x16"
-                            android:text="确认密码"
-                            android:textColor="@color/name_se"
-                            android:textSize="@dimen/x24" />
-
-                        <EditText
-                            android:id="@+id/up_goods_zhuce_zai"
+                            android:id="@+id/up_goods_zhuce_rili"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/x70"
-                            android:hint="请再次输入密码"
-                            android:textColor="@color/name_se"
+                            android:hint="请选择"
                             android:textSize="@dimen/x24"
-                            android:layout_marginLeft="@dimen/x90"
-                            android:layout_marginRight="@dimen/x16"
+                            android:textColor="@color/name_se"
                             android:background="@drawable/tihuo_ed_bg"
-                            android:inputType="textPassword"
-                            android:maxLength="12"
-                            android:singleLine="true"
+                            android:layout_centerVertical="true"
                             android:gravity="center_vertical"
                             />
-                    </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/up_goods_zhuce_rili_img"
+                            android:layout_width="@dimen/x80"
+                            android:layout_height="@dimen/x65"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center"
+                            android:background="@drawable/item_bg"
+                            >
+                            <ImageView
+                                android:layout_width="@dimen/x30"
+                                android:layout_height="@dimen/x30"
+                                android:background="@drawable/riqi"
+                                />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x90"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="业务密码"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x16"/>
+                    <EditText
+                        android:id="@+id/up_goods_zhuce_yewu_pass"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/x70"
+                        android:hint="请输入业务密码"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x40"
+                        android:layout_marginRight="@dimen/x16"
+                        android:background="@drawable/tihuo_ed_bg"
+                        android:gravity="center_vertical"
+                        android:inputType="numberPassword"
+                        android:maxLength="6"
+                        />
+                </LinearLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="@dimen/x16"
+                        android:layout_marginTop="@dimen/x15"
+                        >
+                        <Button
+                            android:id="@+id/up_goods_tijiao"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="@dimen/x70"
+                            android:text="下一步"
+                            android:textSize="@dimen/x28"
+                            android:textColor="@color/baise"
+                            android:layout_marginLeft="@dimen/x20"
+                            android:layout_marginRight="@dimen/x20"
+                            android:background="@drawable/congzhi_bg"
+                            android:gravity="center"
+                            />
+                        <!--<Button-->
+                            <!--android:id="@+id/up_goods_chongzhi"-->
+                            <!--android:layout_width="0dp"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:layout_height="@dimen/x70"-->
+                            <!--android:text="重置"-->
+                            <!--android:textSize="@dimen/x28"-->
+                            <!--android:textColor="@color/baise"-->
+                            <!--android:layout_marginRight="@dimen/x20"-->
+                            <!--android:background="@drawable/congzhi_bg"-->
+                            <!--android:layout_marginLeft="@dimen/x16"-->
+                            <!--android:gravity="center"-->
+                            <!--/>-->
+                    </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/x2"
-                android:background="@color/fengouxian1"
-                android:layout_marginTop="@dimen/x20"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x16"
-            >
-            <Button
-                android:id="@+id/up_goods_tijiao"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/x70"
-                android:text="提交"
-                android:textSize="@dimen/x28"
-                android:textColor="@color/baise"
-                android:layout_marginLeft="@dimen/x20"
-                android:background="@drawable/congzhi_bg"
-                android:gravity="center"
-                />
-            <Button
-                android:id="@+id/up_goods_chongzhi"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="@dimen/x70"
-                android:text="重置"
-                android:textSize="@dimen/x28"
-                android:textColor="@color/baise"
-                android:layout_marginRight="@dimen/x20"
-                android:background="@drawable/congzhi_bg"
-                android:layout_marginLeft="@dimen/x16"
-                android:gravity="center"
-                />
-        </LinearLayout>
-    </RelativeLayout>
-</LinearLayout>
 
             <LinearLayout
                 android:id="@+id/up_goods_zhuce_name_weitanchuan"

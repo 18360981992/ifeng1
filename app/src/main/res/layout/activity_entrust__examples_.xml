@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_Examples_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/entrust_Examples_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:text="范例图片"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x32" />
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/entrust_Examples_WebView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        ></WebView>
+</LinearLayout>

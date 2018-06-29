@@ -16,7 +16,6 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Colloction_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
@@ -37,7 +36,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
     private RelativeLayout my_collocation_Fan;
     private MyListView my_collocation_MyListView;
     private PullToRefreshScrollView my_collocation_pulltoscroll;
-    List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> list = new ArrayList<>();
+    List<My_Colloction_Bean.DataBean.ListBean> list = new ArrayList<>();
     private My_Collocation_list_Adapter my_collocation_adapter;
     private LinearLayout my_collocation_null;
 
@@ -61,7 +60,6 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
                 finish();
             }
         });
-
 
     }
     HashMap<String, String> map = new HashMap<>();
@@ -116,7 +114,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         My_Colloction_Bean my_Colloction_Bean = new Gson().fromJson(json, My_Colloction_Bean.class);
-                        List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> zilist = my_Colloction_Bean.getData().getPageInfo().getList();
+                        List<My_Colloction_Bean.DataBean.ListBean> zilist = my_Colloction_Bean.getData().getList();
                         list.clear();
                         list.addAll(zilist);
                         // 初始化数据 与适配器
@@ -153,11 +151,15 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         My_Colloction_Bean my_Colloction_Bean = new Gson().fromJson(json, My_Colloction_Bean.class);
-                        List<My_Colloction_Bean.DataBean.PageInfoBean.ListBean> zilist = my_Colloction_Bean.getData().getPageInfo().getList();
-                        list.addAll(zilist);
-                        // 初始化数据 与适配器
-                        setMy_Collocation_list_Adapter();
-
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum) <= my_Colloction_Bean.getData().getPageInfo().getTotalPage()){
+                            List<My_Colloction_Bean.DataBean.ListBean> zilist = my_Colloction_Bean.getData().getList();
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setMy_Collocation_list_Adapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -193,14 +195,6 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         }
     }
 
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        my_collocation_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = my_collocation_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
 
     private void initView() {
         my_collocation_Fan = (RelativeLayout) findViewById(R.id.my_collocation_Fan);
@@ -209,7 +203,7 @@ public class My_Collocation_Activity extends BaseMVPActivity<My_Collocation_Acti
         my_collocation_null = (LinearLayout) findViewById(R.id.my_collocation_null);
 
         // 设置刷新
-        initRefreshListView();
+        initRefreshListView(my_collocation_pulltoscroll);
     }
 
     @Override

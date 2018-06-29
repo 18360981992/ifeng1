@@ -44,7 +44,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="您是否记得当前使用的支付密码"
+        android:text="您是否记得当前使用的业务密码"
         android:textColor="@color/name_se"
         android:textSize="@dimen/x25"
         android:gravity="center"

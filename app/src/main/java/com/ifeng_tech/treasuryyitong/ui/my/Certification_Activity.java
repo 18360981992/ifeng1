@@ -1,15 +1,19 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -33,6 +37,7 @@ import com.ifeng_tech.treasuryyitong.utils.ImageUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.TakePhotosDialog;
 
 import org.json.JSONException;
@@ -113,12 +118,12 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             }
         });
 
-        // 点击刚换图形验证码
-        certification_tu_yan_btn.setOnClickListener(new View.OnClickListener() {
+        // 点击更换图形验证码
+        certification_tu_yan_btn.setOnClickListener(new ForbidClickListener() {
             @Override
-            public void onClick(View v) {
-        //                MyUtils.setToast("请求网络，获取图形验证码。。。");
-                myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+            public void forbidClick(View v) {
+                //                MyUtils.setToast("请求网络，获取图形验证码。。。");
+                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
                     @Override
                     public void chenggong(Bitmap bitmap) {
                         if(bitmap!=null){
@@ -156,26 +161,63 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         certification_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                certification_duan_btn.setText("重新发送" + time + "(s)");
-                certification_duan_btn.setEnabled(false);
-                h.sendEmptyMessageDelayed(0, 1000);
-//                MyUtils.setToast("请求网络，获取短信验证码。。。");
+
+                String yan = certification_tu_yan.getText().toString().trim();
+                if (TextUtils.isEmpty(yan)) {
+                    Toast.makeText(Certification_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 HashMap<String, String> map = new HashMap<>();
-                map.put("mobile", shouji);
-                map.put("codeType","0");  // ("通用", 0)
-                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                map.put("verifyCode",yan);
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Certification_Activity.this, SP_String.JIAZAI);
+
+                myPresenter.postPreContent(APIs.verifyCode, map, new MyInterfaces() {
                     @Override
                     public void chenggong(String json) {
-                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
-                        if(smCodeBean.getCode().equals("2000")){
-                            MyUtils.setToast("短信发送成功");
+                        aniDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("2000")){
+                                certification_duan_btn.setText("重新发送" + time + "(s)");
+                                certification_duan_btn.setEnabled(false);
+                                h.sendEmptyMessageDelayed(0, 1000);
+//                              MyUtils.setToast("请求网络，获取短信验证码。。。");
+                                HashMap<String, String> map = new HashMap<>();
+                                map.put("mobile", shouji);
+                                map.put("codeType","0");  // ("通用", 0)
+                                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                                    @Override
+                                    public void chenggong(String json) {
+                                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                                        if(smCodeBean.getCode().equals("2000")){
+                                            MyUtils.setToast("短信发送成功");
+                                        }else {
+                                            MyUtils.setToast(smCodeBean.getMessage());
+                                        }
+                                    }
+                                    @Override
+                                    public void shibai(String ss) {
+                                        MyUtils.setToast("短信发送失败");
+                                    }
+                                });
+                            }else{
+                                MyUtils.setToast((String) jsonObject.get("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
+
                     @Override
                     public void shibai(String ss) {
-                        MyUtils.setToast("短信发送失败");
+                        aniDialog.dismiss();
+                        MyUtils.setToast(ss);
                     }
                 });
+
             }
         });
     }
@@ -184,7 +226,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
     protected void onResume() {
         super.onResume();
         // 获取图形验证码
-        myPresenter.getPro_TuXingYanZheng(APIs.debugApi + "" + APIs.newImageCode, new MyJieKou() {
+        myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
             @Override
             public void chenggong(Bitmap bitmap) {
                 if(bitmap!=null){
@@ -202,6 +244,11 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         setBuyerJieKou(new BuyerJieKou() {
             @Override
             public void xiangce(ImageView img, int XIANGCE) {
+                // 6.0权限适配
+                if (ActivityCompat.checkSelfPermission(Certification_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                    return;
+                }
                 // 启动相册
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
@@ -210,6 +257,12 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
 
             @Override
             public void xiangji(ImageView img, int XIANGJI) {
+
+                // 6.0权限适配
+                if (ActivityCompat.checkSelfPermission(Certification_Activity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                    return;
+                }
                 // 启动相机
                 Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(intent,XIANGJI);
@@ -232,7 +285,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             getUplode(fileUri,1);  // 上传文件
         }
         if(requestCode==1000&resultCode==RESULT_OK){   // 相机
-            File photos = ImageUtils.getPhotos(data);
+            File photos = getPhotos(data);
             Glide.with(this).load(photos).into(certification_shangchuan_zheng_img);
             getUplode(photos,1);  // 上传文件
         }
@@ -271,6 +324,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
                         String code = (String) jsonObject.get("code");
                         if(code.equals("2000")){
                             UpLode_bean upLode_bean = new Gson().fromJson(json, UpLode_bean.class);
+//                            LogUtils.i("jiba","upLode_bean.getData()===="+upLode_bean.getData());
                             if(i==1){
                                 frontUrl=upLode_bean.getData();
                             }else{
@@ -328,6 +382,10 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.certification_btn:
+                // 点击 强制关闭软键盘
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(certification_duan.getWindowToken(), 0);
+
                 submit();
                 break;
         }
@@ -379,10 +437,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         map.put("verifyCode", yan);
 
         //  进度框
-        final ProgressDialog aniDialog = new ProgressDialog(Certification_Activity.this);
-        aniDialog.setCancelable(true);
-        aniDialog.setMessage("正在加载...");
-        aniDialog.show();
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
 
         // 设置实名认证 确认按钮
         myPresenter.postPreContent(APIs.applyIdentify, map, new MyInterfaces() {

@@ -6,8 +6,15 @@ package com.ifeng_tech.treasuryyitong.utils;
 public enum EPickUpStage {
   // 下拉框可选状态_待审核_审核驳回_停止征集_征集中_未开始
   // 未开始包括发布中_去掉了发布中状态
-  PENDING(0, "已申请"), AUDIT_REBUTTED(1, "等待提货"), WAITING(2, "注销"), ONGOING(3, "已完成"), TIMEOUT(4,
-      "审核驳回"), STOPPED(5, "已逾期");
+// TIMEOUT(4,"审核驳回"),
+//AUDIT_REBUTTED(1, "等待提货"),
+
+      PENDING(0, "等待提货"),
+
+      WAITING(2, "注销"),
+      ONGOING(3, "已完成"),
+
+      STOPPED(5, "已逾期");
 
   public static final int MIN_ID = 0;
   public static final int MAX_ID = 5;

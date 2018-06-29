@@ -3,6 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/baise"
+    xmlns:calendarview="http://schemas.android.com/apk/res-auto"
+    xmlns:weekview="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_main"
     >
 
     <LinearLayout
@@ -10,51 +13,66 @@
         android:layout_height="@dimen/x540"
         android:orientation="vertical">
 
-        <!-- 日历时间选择栏 -->
         <RelativeLayout
-            android:padding="@dimen/x20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/x15"
-            android:layout_marginRight="@dimen/x15"
-            >
+            android:layout_marginTop="@dimen/x15"
+            android:layout_marginBottom="@dimen/x10">
+
             <TextView
-                android:clickable="true"
-                android:id="@+id/tv_pre"
-                android:textColor="#4586ED"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/x24"
-                android:text="7月"
+                android:id="@+id/lastMonth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/x40"
+                android:layout_marginLeft="@dimen/x20"
+                android:text="前一个月"
+                android:textColor="@color/zhuse"
+                android:textSize="@dimen/x23"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                 />
+
             <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/x50"
                 android:layout_centerInParent="true"
-                android:id="@+id/tv_month"
-                android:textColor="#768797"
-                android:layout_centerVertical="true"
                 android:textSize="@dimen/x26"
-                android:text="2016年8月"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:textStyle="bold"
+                android:textColor="@color/zhuse"
+                android:gravity="center"
+                />
+
             <TextView
-                android:clickable="true"
-                android:layout_alignParentRight="true"
-                android:id="@+id/tv_next"
-                android:textColor="#4586ED"
-                android:layout_centerVertical="true"
-                android:textSize="@dimen/x24"
-                android:text="8月"
+                android:id="@+id/nextMonth"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="@dimen/x40"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x20"
+                android:text="后一个月"
+                android:textColor="@color/zhuse"
+                android:textSize="@dimen/x23"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                 />
+
         </RelativeLayout>
 
-        <com.ifeng_tech.treasuryyitong.view.rili.CalendarView
+        <com.othershe.calendarview.weiget.WeekView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x60" />
+
+        <com.othershe.calendarview.weiget.CalendarView
             android:id="@+id/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/x15"
-            android:layout_marginRight="@dimen/x15"
             android:layout_marginBottom="@dimen/x15"
-            />
+            calendarview:choose_type="single"
+            calendarview:show_holiday="true"
+            calendarview:show_lunar="true"
+            calendarview:show_term="true"
+            calendarview:switch_choose="false" />
+
     </LinearLayout>
+
+
 </RelativeLayout>

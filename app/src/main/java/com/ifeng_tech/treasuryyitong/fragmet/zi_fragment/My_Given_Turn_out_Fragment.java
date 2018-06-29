@@ -17,7 +17,6 @@ import com.ifeng_tech.treasuryyitong.adapter.My_Given_list_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.bean.Give_List_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_Datail_Activity;
@@ -67,6 +66,7 @@ public class My_Given_Turn_out_Fragment extends Fragment {
         pageNum=1;
         map.put("pageNum",pageNum+"");
         map.put("pageSize",""+10);
+        map.put("queryMode","1");  // 查询类型 ：0：查询全部与自己有关的 2：查询转入 1：查询转出（必须填参数）
         getFirstConect(map);
 
         my_Given_Turn_out_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -116,13 +116,7 @@ public class My_Given_Turn_out_Fragment extends Fragment {
                         Give_List_Bean give_List_Bean = new Gson().fromJson(json, Give_List_Bean.class);
                         List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
                         list.clear();
-                        if(zilist.size()>0){
-                            for(Give_List_Bean.DataBean.ListBean bean:zilist){
-                                if(bean.getOppositeUserId() != bean.getUserId()){
-                                    list.add(bean);
-                                }
-                            }
-                        }
+                        list.addAll(zilist);
                         setMy_Given_list_Adapter();
 
                     }else{
@@ -154,16 +148,17 @@ public class My_Given_Turn_out_Fragment extends Fragment {
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         Give_List_Bean give_List_Bean = new Gson().fromJson(json, Give_List_Bean.class);
-                        List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
-                        if(zilist.size()>0){
-                            for(Give_List_Bean.DataBean.ListBean bean:zilist){
-                                if(bean.getOppositeUserId() != bean.getUserId()){
-                                    list.add(bean);
-                                }
-                            }
+
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum)<= give_List_Bean.getData().getPageInfo().getTotalPage()){
+                            List<Give_List_Bean.DataBean.ListBean> zilist = give_List_Bean.getData().getList();
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setMy_Given_list_Adapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
                         }
-                        // 初始化数据 与适配器
-                        setMy_Given_list_Adapter();
+
 
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
@@ -206,16 +201,8 @@ public class My_Given_Turn_out_Fragment extends Fragment {
         my_Given_Turn_out_pulltoscroll = (PullToRefreshScrollView) view.findViewById(R.id.my_Given_Turn_out_pulltoscroll);
         my_Given_Turn_out_null = (LinearLayout) view.findViewById(R.id.my_Given_Turn_out_null);
 
-        initRefreshListView();
+        activity.initRefreshListView(my_Given_Turn_out_pulltoscroll);
     }
 
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        my_Given_Turn_out_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = my_Given_Turn_out_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
 
 }

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#F7F7F7"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Withdraw_Activity2">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.Withdraw_Activity2">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -113,7 +113,8 @@
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x28"
                     android:gravity="center_vertical"
-                    android:maxLength="12"
+                    android:maxLength="6"
+                    android:inputType="numberPassword"
                     />
             </LinearLayout>
 

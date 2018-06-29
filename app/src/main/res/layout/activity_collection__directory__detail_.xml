@@ -140,7 +140,7 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="3"
+                android:layout_weight="4"
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/x16"
                 >
@@ -148,7 +148,7 @@
                     android:id="@+id/collocation_mulu_detail_jianjie"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2007年11月26日发行，全套1枚（1-1）帖特6-2007全套1枚邮票 销售日纪念邮戳，首日封、戳设计者：陈曼株"
+                    android:text=""
                     android:textColor="@color/name_se"
                     android:textSize="@dimen/x24"
                     />

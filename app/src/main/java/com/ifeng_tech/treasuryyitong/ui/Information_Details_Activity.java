@@ -20,7 +20,9 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.SelectAdvertise_Bean;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 
 /**
@@ -33,6 +35,7 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
     private ProgressBar information_Details_ProgressBar;
 
     String url = "file:///android_asset/test.html";
+
 
     @Override
     public MyPresenter<Information_Details_Activity> initPresenter() {
@@ -48,7 +51,6 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
         setContentView(R.layout.activity_information__details_);
         initView();
 
-
         information_Details_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +58,17 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
             }
         });
 
-        webView.loadUrl(url);//加载本地路径文件，，url
+        SelectAdvertise_Bean.DataBean.ListBean imagesBean = (SelectAdvertise_Bean.DataBean.ListBean) getIntent().getSerializableExtra("SelectAdvertise_Bean.DataBean.ListBean");
+
+        if(imagesBean==null){
+            String id = getIntent().getStringExtra("id");
+//            LogUtils.i("jiba","==="+APIs.infodetail+""+id);
+
+            webView.loadUrl(APIs.infodetail+""+id);//加载本地路径文件，，url
+        }else{
+            webView.loadUrl(imagesBean.getImgeLink());
+        }
+
     }
 
     @Override
@@ -77,7 +89,10 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
 
         settings.setJavaScriptEnabled(true);//是安卓支持js脚本
 
+        webView.setInitialScale(25);//为25%，最小缩放等级
         settings.setSupportZoom(true);//支持缩放网页
+        settings.setBuiltInZoomControls(true);//支持缩放网页
+        settings.setUseWideViewPort(true);//支持缩放网页
 
         webView.setWebChromeClient(new WebChromeClient());//使安卓支持网页的弹出框
 
@@ -87,7 +102,7 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
             public void onProgressChanged(WebView view, int newProgress) {
                 super.onProgressChanged(view, newProgress);
                 if (newProgress == 100) {
-                    information_Details_ProgressBar.setVisibility(View.INVISIBLE);
+                    information_Details_ProgressBar.setVisibility(View.GONE);
                 } else {
                     information_Details_ProgressBar.setVisibility(View.VISIBLE);
                     information_Details_ProgressBar.setProgress(newProgress);
@@ -100,7 +115,6 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
         // 将object 传递给webview，并指定别名，这样js脚本就可以通过我们给的这个别名来调用我们的方法
         // 在代码中，TestInterface是实例化的对象，testInterface是这个对象在js中的别名
         webView.addJavascriptInterface(new TestInterface(Information_Details_Activity.this), "testInterface");
-
 
     }
 
@@ -142,6 +156,7 @@ public class Information_Details_Activity extends BaseMVPActivity<Information_De
                     Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + 10086));
 
                     if (ActivityCompat.checkSelfPermission(context, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                        ActivityCompat.requestPermissions(Information_Details_Activity.this,new String[]{Manifest.permission.CALL_PHONE}, 0);
                         return;
                     }
                     context.startActivity(intent);

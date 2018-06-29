@@ -14,7 +14,6 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Collect_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
@@ -140,9 +139,14 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
                         My_Collect_Bean my_collect_bean = new Gson().fromJson(json, My_Collect_Bean.class);
-                        List<My_Collect_Bean.DataBean.ListBean> zilist = my_collect_bean.getData().getList();
-                        list.addAll(zilist);
-                        setAdapter();
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum)<= my_collect_bean.getData().getPageInfo().getTotalPage()){
+                            List<My_Collect_Bean.DataBean.ListBean> zilist = my_collect_bean.getData().getList();
+                            list.addAll(zilist);
+                            setAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
 
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
@@ -184,17 +188,9 @@ public class MyCollectActivity extends BaseMVPActivity<MyCollectActivity, MyPres
         mycollect_pulltoscroll = (PullToRefreshScrollView) findViewById(R.id.mycollect_pulltoscroll);
         mycollect_null = (LinearLayout) findViewById(R.id.mycollect_null);
         // 设置刷新
-        initRefreshListView();
+        initRefreshListView(mycollect_pulltoscroll);
     }
 
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        mycollect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = mycollect_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
 
 
     @Override

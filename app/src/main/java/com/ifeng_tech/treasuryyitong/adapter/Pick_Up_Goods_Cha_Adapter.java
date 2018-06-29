@@ -61,8 +61,8 @@ public class Pick_Up_Goods_Cha_Adapter extends BaseAdapter{
 
         pick_up_goods_cha_list_danhao.setText(list.get(position).getBillId());  // 提货单号
         pick_up_goods_cha_list_cword.setText(""+list.get(position).getGoodsCode());
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>18){
+            String name = list.get(position).getGoodsName().substring(0, 18);
             pick_up_goods_cha_list_name.setText(name+"...");
         }else{
             pick_up_goods_cha_list_name.setText(list.get(position).getGoodsName());

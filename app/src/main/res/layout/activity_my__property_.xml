@@ -6,7 +6,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.My_Property_Activity"
     android:background="@color/baise"
     >
 
@@ -49,16 +49,16 @@
                     android:layout_marginBottom="@dimen/x16"
                     android:layout_centerHorizontal="true"/>
 
-                <ImageView
-                    android:id="@+id/property_zhangdan"
-                    android:layout_width="@dimen/x30"
-                    android:layout_height="@dimen/x40"
-                    android:background="@drawable/iv_news_normal"
-                    android:layout_alignParentRight="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/x16"
-                    android:layout_marginRight="@dimen/x20"
-                    />
+                <!--<ImageView-->
+                    <!--android:id="@+id/property_zhangdan"-->
+                    <!--android:layout_width="@dimen/x30"-->
+                    <!--android:layout_height="@dimen/x40"-->
+                    <!--android:background="@drawable/iv_news_normal"-->
+                    <!--android:layout_alignParentRight="true"-->
+                    <!--android:layout_alignParentBottom="true"-->
+                    <!--android:layout_marginBottom="@dimen/x16"-->
+                    <!--android:layout_marginRight="@dimen/x20"-->
+                    <!--/>-->
             </RelativeLayout>
 
             <LinearLayout
@@ -224,18 +224,18 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/x16"
         >
-        <Button
-            android:id="@+id/property_tixian"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="@dimen/x70"
-            android:text="提现"
-            android:textSize="@dimen/x28"
-            android:textColor="@color/baise"
-            android:layout_marginLeft="@dimen/x20"
-            android:background="@drawable/congzhi_bg"
-            android:gravity="center"
-            />
+        <!--<Button-->
+            <!--android:id="@+id/property_tixian"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_height="@dimen/x70"-->
+            <!--android:text="提现"-->
+            <!--android:textSize="@dimen/x28"-->
+            <!--android:textColor="@color/baise"-->
+            <!--android:layout_marginLeft="@dimen/x20"-->
+            <!--android:background="@drawable/congzhi_bg"-->
+            <!--android:gravity="center"-->
+            <!--/>-->
         <Button
             android:id="@+id/property_congzhi"
             android:layout_width="0dp"

@@ -2,12 +2,14 @@ package com.ifeng_tech.treasuryyitong.ui;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -23,7 +25,6 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.login.LoginBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Retrieve_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -78,7 +79,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, Login_Register_Activity.class);
                 startActivityForResult(intent, DashApplication.LOGIN_TO_REGISTER_req);
-
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -90,6 +91,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
                 intent.putExtra("type",1);  // 用于手机验证页面的下次跳转识别码  1==到找回密码
                 intent.putExtra("select",1);   //  用于手机验证页面中的手机号输入框的隐藏/显示  1==有输入框
                 startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -97,7 +99,10 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         logo_to_unlock.setmCallBack(new CustomSlideToUnlockView.CallBack() {
             @Override
             public void onSlide(int distance) {
-
+//                LogUtils.i("jiba","distance==="+distance);
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(logo_pass.getWindowToken(), 0);
             }
 
             @Override
@@ -165,12 +170,11 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
             return;
         }
 
-        if (pass.length()<6) {
-            Toast.makeText(this, "请输入6-12位的密码", Toast.LENGTH_SHORT).show();
+        if (MyUtils.isPassWord(pass)==false) {
+            Toast.makeText(this, SP_String.IS_PASS, Toast.LENGTH_SHORT).show();
             logo_to_unlock.resetView();  // 将滑动条重置
             return;
         }
-
 
         // TODO validate success, do something
         HashMap<String, String> map = new HashMap<>();
@@ -179,10 +183,7 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
         map.put("loginType","0");
 
         //  进度框
-        final ProgressDialog aniDialog = new ProgressDialog(LoginActivity.this);
-        aniDialog.setCancelable(true);
-        aniDialog.setMessage("正在登录...");
-        aniDialog.show();
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, "正在登录...");
 
         myPresenter.postPreContent(APIs.login, map, new MyInterfaces() {
             @Override
@@ -192,16 +193,33 @@ public class LoginActivity extends BaseMVPActivity<LoginActivity, MyPresenter<Lo
                 Gson gson = new Gson();
                 LoginBean loginBean = gson.fromJson(json, LoginBean.class);
                 if(loginBean.getCode().equals("2000")){
+
+                    // 创建保存消息的本地文件
+                    SharedPreferences sp_message = getSharedPreferences("ifeng_message_" + loginBean.getData().getUser().getId(), MODE_PRIVATE);
+                    SharedPreferences.Editor edit_message = sp_message.edit();
+
+                    String uid = DashApplication.sp.getString(SP_String.UID, "");
+                    setTagAndAlias(uid);  // 注册极光的别名
+
                     finish();
-                    startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
+
                     DashApplication.edit.putString(SP_String.SHOUJI, loginBean.getData().getUser().getMobile())
                             .putString(SP_String.PASS,pass)
                             .putBoolean(SP_String.ISLOGIN,true)
                             .putString(SP_String.UID,loginBean.getData().getUser().getId()+"")
                             .putString(SP_String.USERCODE,loginBean.getData().getUser().getUserCode()+"")
                             .commit();
+//                    DashApplication.sp_message_xitong = getSharedPreferences("ifeng_message_xitong"+loginBean.getData().getUser().getMobile(), MODE_PRIVATE);
+//                    DashApplication.edit_message_xitong = sp_message_xitong.edit();
+//
+//                    DashApplication.sp_message_chongzhi = getSharedPreferences("ifeng_message_chongzhi"+loginBean.getData().getUser().getMobile(), MODE_PRIVATE);
+//                    DashApplication.edit_message_chongzhi = sp_message_chongzhi.edit();
+//
+//                    DashApplication.sp_message_anquan = getSharedPreferences("ifeng_message_anquan"+loginBean.getData().getUser().getMobile(), MODE_PRIVATE);
+//                    DashApplication.edit_message_anquan = sp_message_anquan.edit();
+//
+//                    startService(new Intent(LoginActivity.this, HeartbeatService.class));  // 启动心跳
                 }else{
-
                     logo_to_unlock.resetView();  // 将滑动条重置
                     MyUtils.setObjectAnimator(login_weitanchuan,
                             login_weitanchuan_img,

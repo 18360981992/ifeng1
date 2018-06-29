@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/warehouse_shopping_name"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:text="世博四连体"
             android:textSize="@dimen/x26"
@@ -31,7 +31,7 @@
             android:textSize="@dimen/x26"
             android:textColor="@color/color_666666"
             android:gravity="end|center_vertical"
-            android:layout_marginRight="@dimen/x60"
+            android:layout_marginRight="@dimen/x30"
             />
     </LinearLayout>
 

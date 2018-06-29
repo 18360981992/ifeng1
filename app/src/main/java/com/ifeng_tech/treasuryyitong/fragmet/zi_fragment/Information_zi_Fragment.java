@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Information_zi_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
-import com.ifeng_tech.treasuryyitong.bean.Information_Zi_Bean;
+import com.ifeng_tech.treasuryyitong.bean.zixun.Information_Zi_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
@@ -24,6 +24,7 @@ import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.Information_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import org.json.JSONException;
@@ -74,13 +75,10 @@ public class Information_zi_Fragment extends Fragment {
         //获取传递的top值，，
         id = getArguments().getString("id");
         type = getArguments().getString("type");
-        top = getArguments().getString("top");
+        top = getArguments().getString("top");  // 暂时不用
 
         //  进度框
-        final ProgressDialog aniDialog = new ProgressDialog(activity);
-        aniDialog.setCancelable(true);
-        aniDialog.setMessage("正在加载...");
-//        aniDialog.show();
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(activity, SP_String.JIAZAI);
 
         if(type.equals("1")){  // 查询全部
             HashMap<String, String> map = new HashMap<>();
@@ -146,11 +144,9 @@ public class Information_zi_Fragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 //                MyUtils.setToast("点击了=="+topList.get(position).getTop()+"的第"+position+"条");
-
                 Intent intent = new Intent(activity, Information_Details_Activity.class);
-//                intent.putExtra("InformationBean",topList.get(postion));
+                intent.putExtra("id",list.get(position).getId()+"");
                 activity.startActivity(intent);
-
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
@@ -204,12 +200,16 @@ public class Information_zi_Fragment extends Fragment {
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
-                        List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum)<=information_Zi_Bean.getData().getPageInfo().getTotalPage()){
+                            List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
 
-                        list.addAll(zilist);
-                        // 初始化数据 与适配器
-                        setInformation_Adapter(top);
-
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setInformation_Adapter(top);
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -252,16 +252,21 @@ public class Information_zi_Fragment extends Fragment {
         information_zi_fragment_pulltoscroll = (PullToRefreshScrollView) view.findViewById(R.id.information_zi_fragment_pulltoscroll);
         information_zi_null = view.findViewById(R.id.information_zi_null);
         // 设置刷新
-        initRefreshListView();
+        initRefreshListView(information_zi_fragment_pulltoscroll);
     }
 
-    private void initRefreshListView() {
+    public void initRefreshListView(PullToRefreshScrollView my_collocation_pulltoscroll) {
         /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        information_zi_fragment_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = information_zi_fragment_pulltoscroll.getLoadingLayoutProxy(true, false);
+        my_collocation_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
+        ILoadingLayout Labels = my_collocation_pulltoscroll.getLoadingLayoutProxy(true, false);
         Labels.setPullLabel("下拉刷新...");
         Labels.setRefreshingLabel("正在刷新...");
         Labels.setReleaseLabel("放开刷新...");
+
+        ILoadingLayout Labels1 = my_collocation_pulltoscroll.getLoadingLayoutProxy(false, true);
+        Labels1.setPullLabel("上拉加载...");
+        Labels1.setRefreshingLabel("正在加载...");
+        Labels1.setReleaseLabel("放开刷新...");
     }
 
 }

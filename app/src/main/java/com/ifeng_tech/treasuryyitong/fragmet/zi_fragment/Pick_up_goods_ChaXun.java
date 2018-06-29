@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
@@ -32,6 +33,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import static android.content.Context.INPUT_METHOD_SERVICE;
+
 /**
  * Created by zzt on 2018/5/14.
  *
@@ -54,20 +57,26 @@ public class Pick_up_goods_ChaXun extends Fragment {
         initView(view);
         activity = (Pick_up_goods_Activity) getActivity();
 
+
         return view;
     }
 
     HashMap<String, String> map = new HashMap<>();
     int start=1;
 
+
     @Override
     public void onResume() {
         super.onResume();
+        // 让键盘隐藏
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
+//        imm.toggleSoftInput(0, InputMethodManager.HIDE_NOT_ALWAYS);
+        imm.hideSoftInputFromWindow(pick_up_goods_cha_null.getWindowToken(), 0);
+
         start=1;
         map.put("start",start+"");
         map.put("number",""+10);
         getFirstConect(map);
-
 
         // 刷新 加载
         pick_up_goods_cha_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -137,37 +146,49 @@ public class Pick_up_goods_ChaXun extends Fragment {
     }
 
     // 下拉加载更多
+    boolean isFlag=true;
     private void getNextConect(final HashMap<String, String> map) {
-        activity.myPresenter.postPreContent(APIs.getTakeDeliveryList, map, new MyInterfaces() {
-            @Override
-            public void chenggong(String json) {
-                try {
-                    JSONObject jsonObject = new JSONObject(json);
-                    String code = (String) jsonObject.get("code");
-                    if(code.equals("2000")){
+        if(isFlag){
+            activity.myPresenter.postPreContent(APIs.getTakeDeliveryList, map, new MyInterfaces() {
+                @Override
+                public void chenggong(String json) {
+                    try {
+                        JSONObject jsonObject = new JSONObject(json);
+                        String code = (String) jsonObject.get("code");
+                        if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
-                        Pick_Up_Goods_Bean pick_Up_Goods_Bean = new Gson().fromJson(json, Pick_Up_Goods_Bean.class);
-                        List<Pick_Up_Goods_Bean.DataBean.ListBean> zilist = pick_Up_Goods_Bean.getData().getList();
-                        list.addAll(zilist);
-                        // 初始化数据 与适配器
-                        setPick_Up_Goods_Cha_Adapter();
+                            Pick_Up_Goods_Bean pick_Up_Goods_Bean = new Gson().fromJson(json, Pick_Up_Goods_Bean.class);
+                            if(pick_Up_Goods_Bean.getData().getPageInfo().getTotalPage()>1){
 
-                    }else{
-                        MyUtils.setToast((String) jsonObject.get("message"));
+                                List<Pick_Up_Goods_Bean.DataBean.ListBean> zilist = pick_Up_Goods_Bean.getData().getList();
+                                list.addAll(zilist);
+                                // 初始化数据 与适配器
+                                setPick_Up_Goods_Cha_Adapter();
+                            }
+                            if(pick_Up_Goods_Bean.getData().getPageInfo().getPageNum()==pick_Up_Goods_Bean.getData().getPageInfo().getTotalPage()){
+                                isFlag=false;
+                            }
+                        }else{
+                            MyUtils.setToast((String) jsonObject.get("message"));
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    pick_up_goods_cha_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
                 }
-                pick_up_goods_cha_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
 
-            @Override
-            public void shibai(String ss) {
-                MyUtils.setToast(ss);
-                pick_up_goods_cha_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-            }
-        });
+                @Override
+                public void shibai(String ss) {
+                    MyUtils.setToast(ss);
+                    pick_up_goods_cha_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                }
+            });
+        }else{
+            MyUtils.setToast("没有更多数据");
+            pick_up_goods_cha_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+        }
+
     }
 
     // 初始化 适配器
@@ -194,16 +215,20 @@ public class Pick_up_goods_ChaXun extends Fragment {
         pick_up_goods_cha_pulltoscroll = (PullToRefreshScrollView) view.findViewById(R.id.pick_up_goods_cha_pulltoscroll);
         pick_up_goods_cha_null = (LinearLayout) view.findViewById(R.id.pick_up_goods_cha_null);
         // 设置刷新
-        initRefreshListView();
+        initRefreshListView(pick_up_goods_cha_pulltoscroll);
     }
 
-    private void initRefreshListView() {
+    public void initRefreshListView(PullToRefreshScrollView my_collocation_pulltoscroll) {
         /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        pick_up_goods_cha_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = pick_up_goods_cha_pulltoscroll.getLoadingLayoutProxy(true, false);
+        my_collocation_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
+        ILoadingLayout Labels = my_collocation_pulltoscroll.getLoadingLayoutProxy(true, false);
         Labels.setPullLabel("下拉刷新...");
         Labels.setRefreshingLabel("正在刷新...");
         Labels.setReleaseLabel("放开刷新...");
-    }
 
+        ILoadingLayout Labels1 = my_collocation_pulltoscroll.getLoadingLayoutProxy(false, true);
+        Labels1.setPullLabel("上拉加载...");
+        Labels1.setRefreshingLabel("正在加载...");
+        Labels1.setReleaseLabel("放开刷新...");
+    }
 }

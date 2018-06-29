@@ -12,7 +12,6 @@ import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Message_Lists_Bean;
 import com.ifeng_tech.treasuryyitong.utils.BaseServer;
-import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.RetrofitFacety;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -67,6 +66,17 @@ public class HeartbeatService extends Service {
         HeartbeatService.hearbeatJieKou = hearbeatJieKou;
     }
 
+
+    public interface Hearbeat_Home_JieKou{
+        void hearbeat_Home_Chuan(int num);
+    }
+
+    public static Hearbeat_Home_JieKou hearbeat_Home_JieKou;
+
+    public static void setHearbeat_Home_JieKou(Hearbeat_Home_JieKou hearbeat_Home_JieKou) {
+        HeartbeatService.hearbeat_Home_JieKou = hearbeat_Home_JieKou;
+    }
+
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -109,7 +119,7 @@ public class HeartbeatService extends Service {
 
                                 int totalNum = message_lists_bean.getData().getPageInfo().getTotalNum();
                                 // 比较消息的总数目
-                                LogUtils.i("jiba","time_xitong==数目=="+ DashApplication.sp_message_xitong.getInt(SP_String.NEWS_XITONG_NUM,0));
+//                                LogUtils.i("jiba","time_xitong==数目=="+ DashApplication.sp_message_xitong.getInt(SP_String.NEWS_XITONG_NUM,0));
                                 if( totalNum== DashApplication.sp_message_xitong.getInt(SP_String.NEWS_XITONG_NUM,0)){ // 如果网络获取到的数据和本地保存的相同，继续下次的心跳
 
                                     h.sendEmptyMessageDelayed(0,time_xitong*1000);
@@ -135,12 +145,12 @@ public class HeartbeatService extends Service {
 
                                     int type=1;
                                     hearbeatJieKou.hearbeatChuan(type,num);
-
+                                    hearbeat_Home_JieKou.hearbeat_Home_Chuan(num);
                                     getXiTong();
                                 }
 
                             }else{
-                                MyUtils.setToast((String) jsonObject.get("message"));
+                                MyUtils.setToast("心跳包="+(String) jsonObject.get("message"));
                             }
 
                         } catch (JSONException e) {
@@ -195,11 +205,12 @@ public class HeartbeatService extends Service {
 
                                     int type=2;
                                     hearbeatJieKou.hearbeatChuan(type,num);
+                                    hearbeat_Home_JieKou.hearbeat_Home_Chuan(num);
                                     getChongZhi();
                                 }
 
                             }else{
-                                MyUtils.setToast((String) jsonObject.get("message"));
+                                MyUtils.setToast("心跳包="+(String) jsonObject.get("message"));
                             }
 
                         } catch (JSONException e) {
@@ -256,11 +267,12 @@ public class HeartbeatService extends Service {
 
                                     int type=3;
                                     hearbeatJieKou.hearbeatChuan(type,num);
+                                    hearbeat_Home_JieKou.hearbeat_Home_Chuan(num);
                                     getAnQuan();
                                 }
 
                             }else{
-                                MyUtils.setToast((String) jsonObject.get("message"));
+                                MyUtils.setToast("心跳包="+(String) jsonObject.get("message"));
                             }
 
                         } catch (JSONException e) {

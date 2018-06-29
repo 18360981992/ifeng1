@@ -17,14 +17,18 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.adapter.Authenticate_Details_list_Adapter;
 import com.ifeng_tech.treasuryyitong.api.APIs;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Time_Bean;
 import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
+import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 import com.ifeng_tech.treasuryyitong.view.Take_Authenticate_Dialog1;
 import com.ifeng_tech.treasuryyitong.view.Take_Authenticate_Dialog2;
 
@@ -153,197 +157,234 @@ public class Authenticate_Details_Activity extends BaseMVPActivity<Authenticate_
         authenticate_details_list_adapter.setAuthenticate_details_list_jieKou(new Authenticate_Details_list_Adapter.Authenticate_Details_list_JieKou() {
             @Override
             public void shangWu(final int postion) { // 点击上午
-                //设置dialog的样式
-                final Take_Authenticate_Dialog1 dialog = new Take_Authenticate_Dialog1(Authenticate_Details_Activity.this, R.style.dialog_setting);
-                MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this,dialog); // 设置dialog弹出框弹出时的动画
+                String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                if(yewu_pass.equals("0")) {
+                    //设置dialog的样式
+                    final Take_Authenticate_Dialog1 dialog = new Take_Authenticate_Dialog1(Authenticate_Details_Activity.this, R.style.dialog_setting);
+                    MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this, dialog); // 设置dialog弹出框弹出时的动画
 
-                if(list.get(postion).getRestNumber_am()==null){
-                    dialog.setTake_authenticate_dialog1_zuida(100);  // 最大数量
-                }else{
-                    dialog.setTake_authenticate_dialog1_zuida(Integer.valueOf(list.get(postion).getRestNumber_am()));
-                }
-
-                dialog.setTake_authenticate_dialog1_zuixiao(authenticate_details_time_bean.getData().getTrusteeInfo().getMinNumber());
-
-                double price = authenticate_details_time_bean.getData().getTrusteeInfo().getCollectionGuidePrice() * authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee();
-                dialog.setTake_authenticate_dialog1_shouxufei(price); // 传递手续费  只传费率
-
-
-                // 第一次弹出框的接口回调
-                dialog.setTake_Authenticate_Dialog1_JieKou(new Take_Authenticate_Dialog1.Take_Authenticate_Dialog1_JieKou() {
-                    @Override
-                    public void QuanRen(final int num) {  // num是输入框中的值
-                        dialog.dismiss();
-
-                        //设置dialog的样式
-                        final Take_Authenticate_Dialog2 dialog = new Take_Authenticate_Dialog2(Authenticate_Details_Activity.this, R.style.dialog_setting);
-                        MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this,dialog); // 设置dialog弹出框弹出时的动画
-
-                        Date date1 = new Date(list.get(postion).getOrderDate());
-                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-                        dialog.setTake_Authenticate_Dialog2_time(simpleDateFormat1.format(date1)+" 上午");
-
-                        dialog.setTake_Authenticate_Dialog2_shuliang(num);
-                        double price = authenticate_details_time_bean.getData().getTrusteeInfo().getCollectionGuidePrice() * authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee()*num;
-                        dialog.setTtake_Authenticate_Dialog2_shouxufei(price);
-
-                        dialog.setTake_Authenticate_Dialog2_JieKou(new Take_Authenticate_Dialog2.Take_Authenticate_Dialog2_JieKou() {
-                            @Override
-                            public void QuanRen() {
-//                                MyUtils.setToast("点击确认按钮，进行支付交易。。。");
-                                HashMap<String, String> map = new HashMap<>();
-                                map.put("amount",num+"");
-                                map.put("ReservationHostingId",trusteeshipId);
-//                                map.put("goodsId",goodsId);
-
-                                //  进度框
-                                final ProgressDialog aniDialog = new ProgressDialog(Authenticate_Details_Activity.this);
-                                aniDialog.setCancelable(true);
-                                aniDialog.setMessage("正在加载...");
-                                aniDialog.show();
-
-                                myPresenter.postPreContent(APIs.applyTrusteeship, map, new MyInterfaces() {
-                                    @Override
-                                    public void chenggong(String json) {
-                                        aniDialog.dismiss();
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(json);
-                                            String code = (String) jsonObject.get("code");
-                                            if(code.equals("2000")) {
-                                                dialog.dismiss();
-                                                // 微弹窗
-                                                MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                        authenticate_details_weitanchuan_img,
-                                                        authenticate_details_weitanchuan_text,
-                                                        weitanchuan_height,
-                                                        true,"预约成功!");
-                                            }else{
-                                                dialog.dismiss();
-                                                // 微弹窗
-                                                MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                        authenticate_details_weitanchuan_img,
-                                                        authenticate_details_weitanchuan_text,
-                                                        weitanchuan_height,
-                                                        false,(String) jsonObject.get("message"));
-                                            }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void shibai(String ss) {
-                                        aniDialog.dismiss();
-                                        // 微弹窗
-                                        MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                authenticate_details_weitanchuan_img,
-                                                authenticate_details_weitanchuan_text,
-                                                weitanchuan_height,
-                                                false,ss);
-                                    }
-                                });
-                            }
-                        });
-
+                    if (list.get(postion).getRestNumber_am() == null) {
+                        dialog.setTake_authenticate_dialog1_zuida(100);  // 最大数量
+                    } else {
+                        dialog.setTake_authenticate_dialog1_zuida(Integer.valueOf(list.get(postion).getRestNumber_am()));
                     }
-                });
+
+                    dialog.setTake_authenticate_dialog1_zuixiao(authenticate_details_time_bean.getData().getTrusteeInfo().getMinNumber());
+
+                    double price = authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee();
+                    dialog.setTake_authenticate_dialog1_shouxufei(price); // 传递手续费  只传费率  这里的费率已经算好了 直接传走
+
+                    // 第一次弹出框的接口回调
+                    dialog.setTake_Authenticate_Dialog1_JieKou(new Take_Authenticate_Dialog1.Take_Authenticate_Dialog1_JieKou() {
+                        @Override
+                        public void QuanRen(final int num, final String pass) {  // num是输入框中的值
+                            dialog.dismiss();
+
+                            //设置dialog的样式
+                            final Take_Authenticate_Dialog2 dialog = new Take_Authenticate_Dialog2(Authenticate_Details_Activity.this, R.style.dialog_setting);
+                            MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this, dialog); // 设置dialog弹出框弹出时的动画
+
+                            Date date1 = new Date(list.get(postion).getOrderDate());
+                            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                            dialog.setTake_Authenticate_Dialog2_time(simpleDateFormat1.format(date1) + " 上午");
+
+                            dialog.setTake_Authenticate_Dialog2_shuliang(num);
+                            double price = authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee() * num;
+                            dialog.setTtake_Authenticate_Dialog2_shouxufei(price);
+
+                            dialog.setTake_Authenticate_Dialog2_JieKou(new Take_Authenticate_Dialog2.Take_Authenticate_Dialog2_JieKou() {
+                                @Override
+                                public void QuanRen() {
+//                                MyUtils.setToast("点击确认按钮，进行支付交易。。。");
+                                    HashMap<String, String> map = new HashMap<>();
+                                    map.put("amount", num + "");
+                                    map.put("ReservationHostingId", trusteeshipId);
+                                    map.put("businessPwd", pass);
+
+                                    //  进度框
+                                    final ProgressDialog aniDialog = MyUtils.getProgressDialog(Authenticate_Details_Activity.this, SP_String.JIAZAI);
+
+                                    myPresenter.postPreContent(APIs.applyTrusteeship, map, new MyInterfaces() {
+                                        @Override
+                                        public void chenggong(String json) {
+                                            aniDialog.dismiss();
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                String code = (String) jsonObject.get("code");
+                                                if (code.equals("2000")) {
+                                                    dialog.dismiss();
+                                                    // 微弹窗
+                                                    MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                            authenticate_details_weitanchuan_img,
+                                                            authenticate_details_weitanchuan_text,
+                                                            weitanchuan_height,
+                                                            true, "预约成功!");
+                                                } else {
+                                                    dialog.dismiss();
+                                                    // 微弹窗
+                                                    MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                            authenticate_details_weitanchuan_img,
+                                                            authenticate_details_weitanchuan_text,
+                                                            weitanchuan_height,
+                                                            false, (String) jsonObject.get("message"));
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        }
+
+                                        @Override
+                                        public void shibai(String ss) {
+                                            aniDialog.dismiss();
+                                            // 微弹窗
+                                            MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                    authenticate_details_weitanchuan_img,
+                                                    authenticate_details_weitanchuan_text,
+                                                    weitanchuan_height,
+                                                    false, ss);
+                                        }
+                                    });
+                                }
+                            });
+
+                        }
+                    });
+                }else{
+                    // 使用自定义的dialog框
+                    final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(Authenticate_Details_Activity.this, R.style.dialog_setting,"请先设置业务密码！");
+                    MyUtils.getPuTongDiaLog(Authenticate_Details_Activity.this,takeCommonDialog);
+                    takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
+                        @Override
+                        public void quxiao() {
+                            takeCommonDialog.dismiss();
+                        }
+
+                        @Override
+                        public void queren() {
+                            takeCommonDialog.dismiss();
+                            Intent intent = new Intent(Authenticate_Details_Activity.this, Bind_Email_Activity1.class);
+                            intent.putExtra("title","业务密码（设置）");
+                            intent.putExtra("select",SP_String.YEWUMIMA);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                    });
+                }
             }
 
             @Override
             public void xiaWu(final int postion) { // 点击下午
-                //设置dialog的样式
-                final Take_Authenticate_Dialog1 dialog = new Take_Authenticate_Dialog1(Authenticate_Details_Activity.this, R.style.dialog_setting);
-                MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this,dialog); // 设置dialog弹出框弹出时的动画
+                String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                if(yewu_pass.equals("0")) {
+                    //设置dialog的样式
+                    final Take_Authenticate_Dialog1 dialog = new Take_Authenticate_Dialog1(Authenticate_Details_Activity.this, R.style.dialog_setting);
+                    MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this, dialog); // 设置dialog弹出框弹出时的动画
 
-                if(list.get(postion).getRestNumber_pm()==null){
-                    dialog.setTake_authenticate_dialog1_zuida(100);  // 最大数量
-                }else{
                     dialog.setTake_authenticate_dialog1_zuida(Integer.valueOf(list.get(postion).getRestNumber_pm()));  // 最大数量
-                }
 
-                dialog.setTake_authenticate_dialog1_zuixiao(authenticate_details_time_bean.getData().getTrusteeInfo().getMinNumber());  // 最小数量
+                    dialog.setTake_authenticate_dialog1_zuixiao(authenticate_details_time_bean.getData().getTrusteeInfo().getMinNumber());  // 最小数量
 
-                double price = authenticate_details_time_bean.getData().getTrusteeInfo().getCollectionGuidePrice() * authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee();
-                dialog.setTake_authenticate_dialog1_shouxufei(price); // 传递手续费
+                    double price = authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee();
+                    dialog.setTake_authenticate_dialog1_shouxufei(price); // 传递手续费
 
-                dialog.setTake_Authenticate_Dialog1_JieKou(new Take_Authenticate_Dialog1.Take_Authenticate_Dialog1_JieKou() {
-                    @Override
-                    public void QuanRen(final int num) {
-                        dialog.dismiss();
-                        //设置dialog的样式
-                        final Take_Authenticate_Dialog2 dialog = new Take_Authenticate_Dialog2(Authenticate_Details_Activity.this, R.style.dialog_setting);
-                        MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this,dialog); // 设置dialog弹出框弹出时的动画
+                    dialog.setTake_Authenticate_Dialog1_JieKou(new Take_Authenticate_Dialog1.Take_Authenticate_Dialog1_JieKou() {
+                        @Override
+                        public void QuanRen(final int num, final String pass) {
+                            dialog.dismiss();
+                            //设置dialog的样式
+                            final Take_Authenticate_Dialog2 dialog = new Take_Authenticate_Dialog2(Authenticate_Details_Activity.this, R.style.dialog_setting);
+                            MyUtils.getDiaLogDiBu(Authenticate_Details_Activity.this, dialog); // 设置dialog弹出框弹出时的动画
 
-                        Date date1 = new Date(list.get(postion).getOrderDate());
-                        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
-                        dialog.setTake_Authenticate_Dialog2_time(simpleDateFormat1.format(date1)+" 下午");
+                            Date date1 = new Date(list.get(postion).getOrderDate());
+                            SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                            dialog.setTake_Authenticate_Dialog2_time(simpleDateFormat1.format(date1) + " 下午");
 
-                        dialog.setTake_Authenticate_Dialog2_shuliang(num);
+                            dialog.setTake_Authenticate_Dialog2_shuliang(num);
 
-                        double price = authenticate_details_time_bean.getData().getTrusteeInfo().getCollectionGuidePrice() * authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee()*num;
-                        dialog.setTtake_Authenticate_Dialog2_shouxufei(price);
+                            double price = authenticate_details_time_bean.getData().getTrusteeInfo().getAppraisalFee() * num;
+                            dialog.setTtake_Authenticate_Dialog2_shouxufei(price);
 
-                        dialog.setTake_Authenticate_Dialog2_JieKou(new Take_Authenticate_Dialog2.Take_Authenticate_Dialog2_JieKou() {
-                            @Override
-                            public void QuanRen() {
+                            dialog.setTake_Authenticate_Dialog2_JieKou(new Take_Authenticate_Dialog2.Take_Authenticate_Dialog2_JieKou() {
+                                @Override
+                                public void QuanRen() {
 //                                MyUtils.setToast("点击确认按钮，进行支付交易。。。");
-                                HashMap<String, String> map = new HashMap<>();
-                                map.put("amount",num+"");
-                                map.put("ReservationHostingId",trusteeshipId);
-//                                map.put("goodsId",goodsId);
+                                    HashMap<String, String> map = new HashMap<>();
+                                    map.put("amount", num + "");
+                                    map.put("ReservationHostingId", trusteeshipId);
+                                    map.put("businessPwd", pass);
 
-                                //  进度框
-                                final ProgressDialog aniDialog = new ProgressDialog(Authenticate_Details_Activity.this);
-                                aniDialog.setCancelable(true);
-                                aniDialog.setMessage("正在加载...");
-                                aniDialog.show();
+                                    //  进度框
+                                    final ProgressDialog aniDialog = MyUtils.getProgressDialog(Authenticate_Details_Activity.this, SP_String.JIAZAI);
 
-                                myPresenter.postPreContent(APIs.applyTrusteeship, map, new MyInterfaces() {
-                                    @Override
-                                    public void chenggong(String json) {
-                                        aniDialog.dismiss();
-                                        try {
-                                            JSONObject jsonObject = new JSONObject(json);
-                                            String code = (String) jsonObject.get("code");
-                                            if(code.equals("2000")) {
-                                                dialog.dismiss();
-                                                // 微弹窗
-                                                MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                        authenticate_details_weitanchuan_img,
-                                                        authenticate_details_weitanchuan_text,
-                                                        weitanchuan_height,
-                                                        true,"预约成功!");
-                                            }else{
-                                                dialog.dismiss();
-                                                // 微弹窗
-                                                MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                        authenticate_details_weitanchuan_img,
-                                                        authenticate_details_weitanchuan_text,
-                                                        weitanchuan_height,
-                                                        false,(String) jsonObject.get("message"));
+                                    myPresenter.postPreContent(APIs.applyTrusteeship, map, new MyInterfaces() {
+                                        @Override
+                                        public void chenggong(String json) {
+                                            aniDialog.dismiss();
+                                            try {
+                                                JSONObject jsonObject = new JSONObject(json);
+                                                String code = (String) jsonObject.get("code");
+                                                if (code.equals("2000")) {
+                                                    dialog.dismiss();
+                                                    // 微弹窗
+                                                    MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                            authenticate_details_weitanchuan_img,
+                                                            authenticate_details_weitanchuan_text,
+                                                            weitanchuan_height,
+                                                            true, "预约成功!");
+                                                } else {
+                                                    dialog.dismiss();
+                                                    // 微弹窗
+                                                    MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                            authenticate_details_weitanchuan_img,
+                                                            authenticate_details_weitanchuan_text,
+                                                            weitanchuan_height,
+                                                            false, (String) jsonObject.get("message"));
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
                                             }
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
                                         }
-                                    }
 
-                                    @Override
-                                    public void shibai(String ss) {
-                                        aniDialog.dismiss();
-                                        // 微弹窗
-                                        MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
-                                                authenticate_details_weitanchuan_img,
-                                                authenticate_details_weitanchuan_text,
-                                                weitanchuan_height,
-                                                false,ss);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                });
+                                        @Override
+                                        public void shibai(String ss) {
+                                            aniDialog.dismiss();
+                                            // 微弹窗
+                                            MyUtils.setObjectAnimator(authenticate_details_weitanchuan,
+                                                    authenticate_details_weitanchuan_img,
+                                                    authenticate_details_weitanchuan_text,
+                                                    weitanchuan_height,
+                                                    false, ss);
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }else{
+                    // 使用自定义的dialog框
+                    final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(Authenticate_Details_Activity.this, R.style.dialog_setting,"请先设置业务密码！");
+                    MyUtils.getPuTongDiaLog(Authenticate_Details_Activity.this,takeCommonDialog);
+                    takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
+                        @Override
+                        public void quxiao() {
+                            takeCommonDialog.dismiss();
+                        }
+
+                        @Override
+                        public void queren() {
+                            takeCommonDialog.dismiss();
+                            Intent intent = new Intent(Authenticate_Details_Activity.this, Bind_Email_Activity1.class);
+                            intent.putExtra("title","业务密码（设置）");
+                            intent.putExtra("select",SP_String.YEWUMIMA);
+                            startActivity(intent);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                    });
+                }
             }
+
         });
+
 
     }
 

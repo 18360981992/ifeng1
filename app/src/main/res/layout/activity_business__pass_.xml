@@ -88,7 +88,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="新交易密码"
+                    android:text="新业务密码"
                     android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x16"/>
@@ -96,17 +96,17 @@
                     android:id="@+id/business_pass_new_pass"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x70"
-                    android:hint="请输入交易密码"
+                    android:hint="请输入业务密码"
                     android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x30"
                     android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
-                    android:inputType="textPassword"
+                    android:inputType="numberPassword"
                     android:singleLine="true"
                     android:textColorHint="@color/color_999999"
                     android:gravity="center_vertical"
-                    android:maxLength="12"
+                    android:maxLength="6"
                     />
 
             </LinearLayout>
@@ -128,17 +128,17 @@
                     android:id="@+id/business_pass_zaici_pass"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/x70"
-                    android:hint="请再次输入交易密码"
+                    android:hint="请再次输入业务密码"
                     android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
                     android:layout_marginLeft="@dimen/x56"
                     android:layout_marginRight="@dimen/x16"
                     android:background="@drawable/tihuo_ed_bg"
-                    android:inputType="textPassword"
+                    android:inputType="numberPassword"
                     android:singleLine="true"
                     android:textColorHint="@color/color_999999"
                     android:gravity="center_vertical"
-                    android:maxLength="12"
+                    android:maxLength="6"
                     />
 
             </LinearLayout>

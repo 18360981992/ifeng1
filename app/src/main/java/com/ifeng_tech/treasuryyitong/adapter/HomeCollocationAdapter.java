@@ -45,13 +45,13 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
     @Override
     public void onBindViewHolder(HomeTuoGuan holder, final int position) {
         if(list.get(position).getGoodsImg()==null){
-            holder.home_tuoguan_img.setImageResource(R.drawable.guangao);
+            holder.home_tuoguan_img.setImageResource(R.drawable.img_erroy);
         }else{
             Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(holder.home_tuoguan_img);
         }
 
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>18){
+            String name = list.get(position).getGoodsName().substring(0, 18);
             holder.home_tuoguan_name.setText(name+"...");
         }else{
             holder.home_tuoguan_name.setText(list.get(position).getGoodsName());

@@ -5,12 +5,39 @@
     android:orientation="vertical"
     >
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/shouye_RecyclerView"
+    <View
+        android:id="@+id/shouye_view_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x60"
+        android:visibility="gone"
+        />
+
+    <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
+        android:id="@+id/shouye_pulltoscroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never"
-        android:fitsSystemWindows="true"
-        ></android.support.v7.widget.RecyclerView>
+        android:scrollbars="none"
+        android:fillViewport="true"
+        >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants">
 
+
+            <View
+                android:id="@+id/shouye_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/shouye_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:fitsSystemWindows="true"
+                ></android.support.v7.widget.RecyclerView>
+
+        </RelativeLayout>
+    </com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView>
 </LinearLayout>

@@ -30,14 +30,18 @@ import com.ifeng_tech.treasuryyitong.ui.my.ADVP_R_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Certification_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
+import com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_List_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
+import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -91,7 +95,6 @@ public class MyFragmet extends Fragment {
             }
         });
 
-
         /**
          * 点击认证按钮需要判断当前状态
          */
@@ -105,14 +108,14 @@ public class MyFragmet extends Fragment {
                         // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
                         intent = new Intent(activity, ADVP_R_Activity.class);
                         intent.putExtra("rengzheng_type",1);
-                        startActivity(intent);
+                        activity.startActivity(intent);
                         activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     case 0:// 认证失败
                         // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
                         intent = new Intent(activity, ADVP_R_Activity.class);
                         intent.putExtra("rengzheng_type",2);
-                        startActivity(intent);
+                        activity.startActivity(intent);
                         activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
                     default: // 未认证
@@ -148,6 +151,7 @@ public class MyFragmet extends Fragment {
         }else{
             wode_denglu.setVisibility(View.GONE);
             wode_weidenglu.setVisibility(View.VISIBLE);
+            wode_weirenzheng.setVisibility(View.GONE);
             wode_touxiang.setImageResource(R.drawable.wode_weidenglu_img);
         }
 
@@ -195,14 +199,50 @@ public class MyFragmet extends Fragment {
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
                         case 4:   // 提货注册
-                            intent = new Intent(activity, Pick_up_goods_Activity.class);
+
+                            // 判断是否有绑定过业务密码
+                            String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                            if(yewu_pass.equals("0")){
+                                intent = new Intent(activity, Pick_up_goods_Activity.class);
+                                activity.startActivity(intent);
+                                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }else{
+                                // 使用自定义的dialog框
+                                final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(activity, R.style.dialog_setting,"请先设置业务密码！");
+                                MyUtils.getPuTongDiaLog(activity,takeCommonDialog);
+                                takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
+                                    @Override
+                                    public void quxiao() {
+                                        takeCommonDialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void queren() {
+                                        takeCommonDialog.dismiss();
+                                        intent = new Intent(activity, Bind_Email_Activity1.class);
+                                        intent.putExtra("title","业务密码（设置）");
+                                        intent.putExtra("select",SP_String.YEWUMIMA);
+                                        activity.startActivity(intent);
+                                        activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                    }
+                                });
+                            }
+
+                            break;
+                        case 5:    // 委托申请
+                            intent = new Intent(activity, Entrust_Activity.class);
+                            activity.startActivity(intent);
+                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            break;
+                        case 6:    // 委托列表
+                            intent = new Intent(activity, Entrust_List_Activity.class);
                             activity.startActivity(intent);
                             activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                             break;
                     }
                 }else{ // 没登录直接跳到登录页面
                     intent = new Intent(activity, LoginActivity.class);
-                    startActivity(intent);
+                    activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
             }
@@ -217,10 +257,9 @@ public class MyFragmet extends Fragment {
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{ // 没登录直接跳到登录页面
                     intent = new Intent(activity, LoginActivity.class);
-                    startActivity(intent);
+                    activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
-
             }
         });
 
@@ -234,13 +273,21 @@ public class MyFragmet extends Fragment {
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{ // 没登录直接跳到登录页面
                     intent = new Intent(activity, LoginActivity.class);
-                    startActivity(intent);
+                    activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
+            }
+        });
 
+        Setting_Activity.setSetting_JieKou(new Setting_Activity.Setting_JieKou() {
+            @Override
+            public void chuan() {
+                wode_yirenzheng.setVisibility(View.GONE);
+                wode_weirenzheng.setVisibility(View.GONE);
             }
         });
     }
+
 
     // 获取用户信息
     private void getUser() {
@@ -251,9 +298,10 @@ public class MyFragmet extends Fragment {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
                     if(code.equals("2000")){
+//                        LogUtils.i("jiba","===="+json);
                         PersonalUserAccount_Bean userBean = new Gson().fromJson(json, PersonalUserAccount_Bean.class);
                         wode_hao.setText(userBean.getData().getUser().getUserCode()+"");
-                        shiming_type=userBean.getData().getAccountInfo().getVerified();   // 获取个人认证状态
+                        shiming_type=userBean.getData().getAccountInfo().getInfoState();   // 获取个人认证状态
 
                         DashApplication.edit
                                 .putString(SP_String.ISUSERYEWUPASS,userBean.getData().getAccountInfo().getIsNoBusinessPwd()+"")
@@ -284,21 +332,22 @@ public class MyFragmet extends Fragment {
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
                                 wode_weirenzheng.setText("认证中...");
-                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
-                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
+//                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
+//                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
                                 wode_weirenzheng.setEnabled(true);
                                 break;
                             case 0:// 认证失败
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
                                 wode_weirenzheng.setText("认证失败");
-                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
-                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
+//                                wode_weirenzheng.setTextColor(getResources().getColor(R.color.name_se));
+//                                wode_weirenzheng.setBackgroundColor(getResources().getColor(R.color.fengouxian));
                                 wode_weirenzheng.setEnabled(true);
                                 break;
                             default:  // 未认证
                                 wode_weirenzheng.setVisibility(View.VISIBLE);
                                 wode_yirenzheng.setVisibility(View.GONE);
+                                wode_weirenzheng.setText("未认证");
                                 wode_weirenzheng.setEnabled(true);
                                 break;
                         }
@@ -344,5 +393,7 @@ public class MyFragmet extends Fragment {
 //        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"出库管理"));
         myListBeen.add(new MyListBean(R.drawable.wode_cangku, "我的仓库"));
         myListBeen.add(new MyListBean(R.drawable.wode_tihuo, "提货查询"));
+        myListBeen.add(new MyListBean(R.drawable.weituo_shenqing, "委托申请"));
+        myListBeen.add(new MyListBean(R.drawable.weituo_liebiao, "委托列表"));
     }
 }

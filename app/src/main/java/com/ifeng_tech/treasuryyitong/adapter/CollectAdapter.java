@@ -61,8 +61,8 @@ public class CollectAdapter extends BaseAdapter{
             Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(collect_img);
         }
 
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>18){
+            String name = list.get(position).getGoodsName().substring(0, 18);
             collect_name.setText(name+"...");
         }else{
             collect_name.setText(list.get(position).getGoodsName());

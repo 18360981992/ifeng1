@@ -41,16 +41,16 @@
             android:layout_marginBottom="@dimen/x16"
             android:layout_centerHorizontal="true"/>
 
-        <ImageView
-            android:id="@+id/my_warehouse_zhangdan"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x40"
-            android:background="@drawable/iv_news_normal"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x16"
-            android:layout_marginRight="@dimen/x20"
-            />
+        <!--<ImageView-->
+            <!--android:id="@+id/my_warehouse_zhangdan"-->
+            <!--android:layout_width="@dimen/x30"-->
+            <!--android:layout_height="@dimen/x40"-->
+            <!--android:background="@drawable/iv_news_normal"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_marginBottom="@dimen/x16"-->
+            <!--android:layout_marginRight="@dimen/x20"-->
+            <!--/>-->
 
     </RelativeLayout>
 

@@ -122,7 +122,7 @@
                         android:layout_width="@dimen/x120"
                         android:layout_height="@dimen/x36"
                         android:layout_marginRight="@dimen/x20"
-                        android:background="@drawable/shangwu_kuang"
+                        android:background="@drawable/shangpin_xiangqing_kuang"
                         android:gravity="center"
                         android:text="商品详情"
                         android:textColor="@color/zhuse"
@@ -175,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="仓库"
+                        android:text="数量"
                         android:textSize="@dimen/x22"
                         android:textColor="@color/color_999999"
                         android:layout_marginLeft="@dimen/x20"
@@ -184,7 +184,7 @@
                         android:id="@+id/my_Given_Datail_cangku"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="福丽特仓库"
+                        android:text=""
                         android:textSize="@dimen/x24"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x140"
@@ -260,6 +260,53 @@
                         />
                 </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x16"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="对方账户"
+                        android:textSize="@dimen/x22"
+                        android:textColor="@color/color_999999"
+                        android:layout_marginLeft="@dimen/x20"
+                        />
+                    <TextView
+                        android:id="@+id/my_Given_Datail_duifang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0000000000"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x97"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x16"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="转赠日期"
+                        android:textSize="@dimen/x22"
+                        android:textColor="@color/color_999999"
+                        android:layout_marginLeft="@dimen/x20"
+                        />
+                    <TextView
+                        android:id="@+id/my_Given_Datail_riqi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2018-06-14"
+                        android:textSize="@dimen/x24"
+                        android:textColor="@color/name_se"
+                        android:layout_marginLeft="@dimen/x97"
+                        />
+                </LinearLayout>
             </LinearLayout>
 
             <RelativeLayout

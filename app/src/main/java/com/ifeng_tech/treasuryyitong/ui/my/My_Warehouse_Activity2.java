@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -19,10 +20,10 @@ import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.bean.my.QR_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import org.json.JSONException;
@@ -32,6 +33,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *  我的仓库2  用于转赠的跳转
+ */
 public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activity2, MyPresenter<My_Warehouse_Activity2>> {
 
     private RelativeLayout my_warehouse_Fan2;
@@ -43,6 +47,8 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
     List<WarehouseBean.DataBean.ListBean> list = new ArrayList<WarehouseBean.DataBean.ListBean>();
     private WarehouseBean warehouseBean;
     Warehouse_Adapter warehouse_adapter;
+    private ProgressDialog aniDialog;
+
     @Override
     public MyPresenter<My_Warehouse_Activity2> initPresenter() {
         if (myPresenter == null) {
@@ -64,12 +70,12 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
             }
         });
 
-        my_warehouse_zhangdan2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                MyUtils.setToast("点击了账单。。。");
-            }
-        });
+//        my_warehouse_zhangdan2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+////                MyUtils.setToast("点击了账单。。。");
+//            }
+//        });
     }
 
     HashMap<String, String> map = new HashMap<>();
@@ -80,6 +86,10 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
         pageNum=1;
         map.put("pageNum",pageNum+"");
         map.put("pageSize",""+10);
+
+        //  进度框
+        aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
+
         getFirstConect(map);
 
         my_warehouse_pulltoscroll2.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
@@ -114,7 +124,10 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
                     setResult( DashApplication.ZHUAN_TO_CANGKU_res,intent);
                     finish();
                 }else if(intent.getStringExtra("select").equals("提货")){
+
+                    WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean maxTrasferableAmountAndFee = warehouseBean.getData().getMaxTrasferableAmountAndFee();
                     intent.putExtra("WarehouseBean", list.get(position));
+                    intent.putExtra("MaxTrasferableAmountAndFeeBean",maxTrasferableAmountAndFee);
                     setResult(DashApplication.TIHUO_TO_CANGKU_res,intent);
                     finish();
                 }
@@ -130,6 +143,7 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
         myPresenter.postPreContent(APIs.getHoldList, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
+                aniDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
@@ -154,6 +168,7 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
 
             @Override
             public void shibai(String ss) {
+                aniDialog.dismiss();
                 MyUtils.setToast(ss);
                 my_warehouse_pulltoscroll2.onRefreshComplete();//完成刷新,关闭刷新
             }
@@ -171,10 +186,16 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         warehouseBean = new Gson().fromJson(json, WarehouseBean.class);
-                        List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
-                        list.addAll(zilist);
-                        // 初始化数据 与适配器
-                        setWarehouseAdapter();
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum)<=warehouseBean.getData().getPageInfo().getTotalPage()){
+                            List<WarehouseBean.DataBean.ListBean> zilist = warehouseBean.getData().getList();
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setWarehouseAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
+
 
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
@@ -202,7 +223,7 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
             my_warehouse_pulltoscroll2.setVisibility(View.VISIBLE);
 
             if (warehouse_adapter == null) {
-                warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity2.this, list);
+                warehouse_adapter = new Warehouse_Adapter(My_Warehouse_Activity2.this, list,warehouseBean);
                 my_warehouse_MyListView2.setAdapter(warehouse_adapter);
             } else {
                 warehouse_adapter.notifyDataSetChanged();
@@ -215,7 +236,7 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
 
     private void initView() {
         my_warehouse_Fan2 = (RelativeLayout) findViewById(R.id.my_warehouse_Fan2);
-        my_warehouse_zhangdan2 = (ImageView) findViewById(R.id.my_warehouse_zhangdan2);
+//        my_warehouse_zhangdan2 = (ImageView) findViewById(R.id.my_warehouse_zhangdan2);
         wview2 = (View) findViewById(R.id.wview2);
         my_warehouse_MyListView2 = (MyListView) findViewById(R.id.my_warehouse_MyListView2);
         my_warehouse_pulltoscroll2 = (PullToRefreshScrollView) findViewById(R.id.my_warehouse_pulltoscroll2);
@@ -228,18 +249,9 @@ public class My_Warehouse_Activity2 extends BaseMVPActivity<My_Warehouse_Activit
         wview2.setFocusableInTouchMode(true);
         wview2.requestFocus();
 
-        initRefreshListView();
+        initRefreshListView(my_warehouse_pulltoscroll2);
     }
 
-
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        my_warehouse_pulltoscroll2.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = my_warehouse_pulltoscroll2.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
     @Override
     public void finish() {
         super.finish();

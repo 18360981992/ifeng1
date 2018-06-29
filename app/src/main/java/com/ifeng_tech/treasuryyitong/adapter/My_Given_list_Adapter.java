@@ -58,8 +58,8 @@ public class My_Given_list_Adapter extends BaseAdapter {
         TextView my_given_list_zhuanru_text = convertView.findViewById(R.id.my_given_list_zhuanru_text);
 
         my_given_list_cword.setText(""+list.get(position).getGoodsCode());
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>15){
+            String name = list.get(position).getGoodsName().substring(0, 15);
             my_given_list_name.setText(name+"...");
         }else{
             my_given_list_name.setText(list.get(position).getGoodsName());
@@ -68,8 +68,9 @@ public class My_Given_list_Adapter extends BaseAdapter {
         my_given_list_num.setText(list.get(position).getAmount()+"");
 
         double price=list.get(position).getFee()*list.get(position).getProfit();
-        my_given_list_dfuid.setText("￥"+ DashApplication.decimalFormat.format(price));
-        my_given_list_zhuanru_text.setText(EGiven_ListStage.getName(list.get(position).getStatus()));
+        my_given_list_dfuid.setText("￥"+ DashApplication.decimalFormat.format(price));   // 对方id换成钱
+
+        my_given_list_zhuanru_text.setText(EGiven_ListStage.getName(list.get(position).getStatus()));  // 枚举类状态
 
         Date date = new Date(list.get(position).getAddTime());
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

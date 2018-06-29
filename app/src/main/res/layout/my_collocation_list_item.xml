@@ -51,7 +51,7 @@
                 android:text="世博四连体"
                 android:textSize="@dimen/x24"
                 android:textColor="@color/name_se"
-                android:layout_marginTop="@dimen/x10"
+                android:layout_marginTop="@dimen/x18"
                 />
 
         </LinearLayout>

@@ -10,6 +10,8 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.my.My_Colloction_Bean;
+import com.ifeng_tech.treasuryyitong.ui.Collection_Directory_Detail_Activity;
+import com.ifeng_tech.treasuryyitong.utils.ApplicationFormEnum;
 
 /**
  *  托管详情
@@ -44,13 +46,13 @@ public class My_Collocation_Detail_Activity extends AppCompatActivity {
          * 以下都是模拟数据
          */
         Intent intent = getIntent();
-        My_Colloction_Bean.DataBean.PageInfoBean.ListBean collocation_list_bean = (My_Colloction_Bean.DataBean.PageInfoBean.ListBean) intent.getSerializableExtra("Collocation_list_Bean");
+        final My_Colloction_Bean.DataBean.ListBean collocation_list_bean = (My_Colloction_Bean.DataBean.ListBean) intent.getSerializableExtra("Collocation_list_Bean");
 
         my_collocation_detail_name.setText(collocation_list_bean.getGoodsName());
         my_collocation_detail_cword.setText(""+collocation_list_bean.getGoodsCode());
         my_collocation_detail_danwei.setText("枚");
         my_collocation_detail_jiandingfei.setText(DashApplication.decimalFormat.format(collocation_list_bean.getAppraisalFee()));
-        my_collocation_detail_tianshu.setText(""+collocation_list_bean.getLeaseFate());
+        my_collocation_detail_tianshu.setText(""+collocation_list_bean.getLeaseFate());  // 预收仓储天数
 
         if(collocation_list_bean.getPmORam().equals("am")){
             my_collocation_detail_kaishi_time.setText(collocation_list_bean.getTrusteeTime()+" 上午");
@@ -58,12 +60,29 @@ public class My_Collocation_Detail_Activity extends AppCompatActivity {
             my_collocation_detail_kaishi_time.setText(collocation_list_bean.getTrusteeTime()+" 下午");
         }
 
+        my_collocation_detail_dizhi.setText(collocation_list_bean.getAddress()+"");
+
+        Integer state = Integer.valueOf(collocation_list_bean.getState());   // 为状态赋值
+        my_collocation_detail_type.setText(ApplicationFormEnum.getName(state));
 
 //        if(collocation_list_bean.getType()==0){ // 这里的type和my_colloction_list_adapter中的type是不一样的，这里是模拟数据
 //            my_collocation_detail_type.setText("等待鉴定");
 //        }else{
 //            my_collocation_detail_type.setText("未开始");
 //        }
+
+
+        // 托管详情中的 商品详情 跳到 藏品详情
+        my_collocation_detail_xiangqing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int goodsId = collocation_list_bean.getGoodsId();
+                Intent intent = new Intent(My_Collocation_Detail_Activity.this, Collection_Directory_Detail_Activity.class);
+                intent.putExtra("goodsId",""+goodsId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
     }
 
 

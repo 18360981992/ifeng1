@@ -1,8 +1,16 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.LocalBroadcastManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -15,19 +23,27 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.jpush.JPush_Bean;
 import com.ifeng_tech.treasuryyitong.bean.my.QR_Bean;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.WarehouseFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
 import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
 import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
-import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.ifeng_tech.treasuryyitong.utils.SignUtils;
+import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
+import com.jwsd.libzxing.OnQRCodeListener;
+import com.jwsd.libzxing.QRCodeManager;
+
+import cn.jpush.android.api.JPushInterface;
+
+import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresenter<HomePageActivity>> {
 
@@ -52,13 +68,17 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     private LinearLayout wode;
     private FragmentManager fragmentManager;
 
-    HomeFragmet homeFragmet = new HomeFragmet();  // 首页
-    WarehouseFragment treasuryFragmet = new WarehouseFragment();  // 仓库
-//    CollectFragmet collectFragmet = new CollectFragmet(); // 征集
-    MessageFragmet authenticateFragmet = new MessageFragmet();  // 消息
-    MyFragmet myFragmet = new MyFragmet();  // 我的
-
     long exitTim=0;
+    private HomeFragmet homeFragmet;
+    private WarehouseFragment treasuryFragmet;
+    private MessageFragmet authenticateFragmet;
+    private MyFragmet myFragmet;
+    private boolean aBoolean;
+    private TextView xiaoxi_shumu;
+
+    public static boolean isForeground = false;
+    private SharedPreferences sp_message;
+    private SharedPreferences.Editor edit;
 
     public interface HomePageActivity_JieKou{
         void chuan(int i);
@@ -84,17 +104,28 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         setContentView(R.layout.activity_home_page);
 
         initView();
+        registerMessageReceiver();  // 动态注册广播
+
+        // 首页
+        homeFragmet = new HomeFragmet();
+        // 仓库
+        treasuryFragmet = new WarehouseFragment();
+//      CollectFragmet collectFragmet = new CollectFragmet(); // 征集
+        // 消息
+        authenticateFragmet = new MessageFragmet();
+        // 我的
+        myFragmet = new MyFragmet();
 
         setBeiJing(true,false,false,false,false);
 
         fragmentManager = getSupportFragmentManager();
 
         fragmentManager.beginTransaction()
-                .add(R.id.homepage_FrameLayout,homeFragmet)
-                .add(R.id.homepage_FrameLayout,treasuryFragmet)
+                .add(R.id.homepage_FrameLayout, homeFragmet)
+                .add(R.id.homepage_FrameLayout, treasuryFragmet)
 //                .add(R.id.homepage_FrameLayout,collectFragmet)
-                .add(R.id.homepage_FrameLayout,authenticateFragmet)
-                .add(R.id.homepage_FrameLayout,myFragmet)
+                .add(R.id.homepage_FrameLayout, authenticateFragmet)
+                .add(R.id.homepage_FrameLayout, myFragmet)
                 .show(homeFragmet)
                 .hide(treasuryFragmet)
 //                .hide(collectFragmet)
@@ -102,17 +133,42 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 .hide(myFragmet)
                 .commit();
 
-        boolean aBoolean = DashApplication.sp.getBoolean(SP_String.ISLOGIN, false);
-
-        if(aBoolean){
-            startService(new Intent(HomePageActivity.this, HeartbeatService.class));  // 启动心跳
-        }
 
     }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        isForeground = true;
+        sp = getSharedPreferences("ifeng", MODE_PRIVATE);
+        aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
+        if(aBoolean){
+            String uid = DashApplication.sp.getString(SP_String.UID, "");
+            setTagAndAlias(uid);  // 注册极光的别名
+
+            // 获取本地的消息总数目 并设置隐藏/显示
+            // 创建保存消息的本地文件
+            sp_message = getSharedPreferences("ifeng_message_" + uid, MODE_PRIVATE);
+            edit = sp_message.edit();
+            String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+            setExtras(extras);  // 解析推送过来的消息，并进行ui更新
+        }
+//        if(aBoolean){
+//            startService(new Intent(HomePageActivity.this, HeartbeatService.class));  // 启动心跳
+//            HeartbeatService.setHearbeat_Home_JieKou(new HeartbeatService.Hearbeat_Home_JieKou() {
+//                @Override
+//                public void hearbeat_Home_Chuan(int num) {
+//                    String s = xiaoxi_shumu.getText().toString();
+//                    cound=Integer.valueOf(s);
+//                    cound=num+cound;
+//                    xiaoxi_shumu.setText(cound+"");
+//                    xiaoxi_shumu.setVisibility(View.VISIBLE);
+//                }
+//            });
+//
+//        }
+
         shouye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -215,6 +271,130 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         startActivity(intent2);
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         break;
+                    case 4:  // 点击了扫一扫
+                        if(aBoolean){
+                            if (ActivityCompat.checkSelfPermission(HomePageActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                                ActivityCompat.requestPermissions(HomePageActivity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                return;
+                            }
+                            QRCodeManager.getInstance()
+                                    .with(HomePageActivity.this)
+                                    .setReqeustType(DashApplication.ERWIMA_SAOMIAO_req)
+                                //                .setRequestCode(1001)
+                                    .scanningQRCode(new OnQRCodeListener() {
+                                        @Override
+                                        public void onCompleted(String des) {
+                                            LogUtils.i("jiba","home==="+des);
+                                            String result = null;
+                                            try {
+                                                result = SignUtils.decode(des);
+                                                if(result.contains(SP_String.QR_ZHUANZENG)){
+                                                    if(result.length()>20){
+                                                        String path = result.substring(0, result.indexOf("?"));
+                                                        LogUtils.i("jiba","path===="+path);
+                                                        String referralCode = result.substring(result.indexOf("=")+1, result.length());
+
+//                            LogUtils.i("jiba","referralCode===="+referralCode);
+                                                        QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
+
+                                                        if(path.equals(SP_String.QR_ZHUANZENG)){
+                                                            Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
+                                                            intent.putExtra("QR_Bean", referralCode);
+                                                            if(qr_bean.getGoodsInfo()==null) intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
+
+                                                            else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+
+                                                            startActivity(intent);
+                                                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                                        }
+                                                    }else{
+                                                        MyUtils.setToast(des);
+                                                    }
+                                                }else{
+                                                    MyUtils.setToast(des);
+                                                }
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                                MyUtils.setToast(des);
+                                            }
+                                        }
+
+                                        @Override
+                                        public void onError(Throwable errorMsg) {
+                                            MyUtils.setToast("解析二维码失败");
+                                        }
+
+                                        @Override
+                                        public void onCancel() {
+                                            MyUtils.setToast("扫描任务取消了");
+                                        }
+
+                                        /**
+                                         * 当点击手动添加时回调
+                                         *
+                                         * @param requestCode
+                                         * @param resultCode
+                                         * @param data
+                                         */
+                                        @Override
+                                        public void onManual(int requestCode, int resultCode, Intent data) {
+                                            LogUtils.i("jiba","点击了手动添加了");
+                                        }
+
+
+                                    });
+                        }else{
+                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            startActivity(intent4);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                        break;
+                    case 5:   //  点击了收货
+                        if(aBoolean){
+                            Intent intent3 = new Intent(HomePageActivity.this, Delivery_Activity.class);
+                            startActivity(intent3);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }else{
+                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            startActivity(intent4);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                        break;
+                    case 6:   //  转赠
+                        if(aBoolean){
+                            // 判断是否有绑定过业务密码
+                            String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                            if(yewu_pass.equals("0")) {
+                                Intent intent3 = new Intent(HomePageActivity.this, Donation_Activity.class);
+                                startActivity(intent3);
+                                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                            }else{
+                                // 使用自定义的dialog框
+                                final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(HomePageActivity.this, R.style.dialog_setting,"请先设置业务密码！");
+                                MyUtils.getPuTongDiaLog(HomePageActivity.this,takeCommonDialog);
+                                takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
+                                    @Override
+                                    public void quxiao() {
+                                        takeCommonDialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void queren() {
+                                        takeCommonDialog.dismiss();
+                                        Intent intent = new Intent(HomePageActivity.this, Bind_Email_Activity1.class);
+                                        intent.putExtra("title","业务密码（设置）");
+                                        intent.putExtra("select",SP_String.YEWUMIMA);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                    }
+                                });
+                            }
+                        }else{
+                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            startActivity(intent4);
+                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                        }
+                        break;
                 }
             }
         });
@@ -224,43 +404,92 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode==DashApplication.ERWIMA_SAOMIAO_req){
-            if (null != data) {
-                Bundle bundle = data.getExtras();
-                if (bundle == null) {
-                    return;
-                }
-                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
-                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+        //注册onActivityResult
+        QRCodeManager.getInstance().with(this).onActivityResult(requestCode, resultCode, data);
+    }
 
-                    if(result.length()>20){
-                        String path = result.substring(0, result.indexOf("?"));
-                        String referralCode = result.substring(result.indexOf("=")+1, result.length());
+    @Override
+    protected void onPause() {
+//        isForeground = false;
+        super.onPause();
+    }
 
-                        LogUtils.i("jiba","referralCode===="+referralCode);
+    @Override
+    protected void onDestroy() {
+//        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
+        super.onDestroy();
+    }
 
-                        QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
-                        if(path.equals(SP_String.QR_ZHUANZENG)){
-                            Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
-                            intent.putExtra("QR_Bean", referralCode);
-                            if(qr_bean.getGoodsInfo()==null) intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
 
-                            else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+    //for receive customer msg from jpush server
+    private MessageReceiver mMessageReceiver;
+    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+    public static final String KEY_TITLE = "title";
+    public static final String KEY_MESSAGE = "message";
+    public static final String KEY_EXTRAS = "extras";
 
-                            startActivity(intent);
-                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                        }
-                    }else{
-                        MyUtils.setToast(result);
+    public void registerMessageReceiver() {
+        mMessageReceiver = new MessageReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+        filter.addAction(MESSAGE_RECEIVED_ACTION);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
+    }
+
+    public class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            try {
+                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+                    String messge = intent.getStringExtra(KEY_MESSAGE);
+                    String extras = intent.getStringExtra(KEY_EXTRAS);
+                    StringBuilder showMsg = new StringBuilder();
+                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+                    if (extras!=null) {
+                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
                     }
+                    LogUtils.i("jiba","===="+showMsg.toString());
 
+                    edit.putString(SP_String.XIAOXI_SHUMU,extras).commit();
 
-                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
-                    MyUtils.setToast("解析二维码失败");
+                    setExtras(extras);  // 解析推送过来的消息，并进行ui更新
                 }
+            } catch (Exception e){
             }
         }
     }
+
+    private void setExtras(String extras) {
+        if(!extras.equals("")&&extras!=null){
+            JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+            int jNum=jPush_bean.getSafeNum()+jPush_bean.getGoldSum()+jPush_bean.getSysNum();
+
+            LogUtils.i("jiba","jNum===="+jNum);
+            if(jNum>0){
+                xiaoxi_shumu.setText(""+jNum);
+                xiaoxi_shumu.setVisibility(View.VISIBLE);
+                if(jPush_bean.getSysNum()>0){
+                    MessageFragmet.message_xitong_shumu.setText(jPush_bean.getSysNum()+"");
+                    MessageFragmet.message_xitong_shumu.setVisibility(View.VISIBLE);
+                }
+
+                if(jPush_bean.getGoldSum()>0){
+                    MessageFragmet.message_congzhi_shumu.setText(jPush_bean.getGoldSum()+"");
+                    MessageFragmet.message_congzhi_shumu.setVisibility(View.VISIBLE);
+                }
+
+                if(jPush_bean.getSafeNum()>0){
+                    MessageFragmet.message_anquan_shumu.setText(jPush_bean.getSafeNum()+"");
+                    MessageFragmet.message_anquan_shumu.setVisibility(View.VISIBLE);
+                }
+            }else{
+                xiaoxi_shumu.setVisibility(View.GONE);
+            }
+        }
+
+    }
+
 
     //主页面点击切换视图
     public void setBeiJing(boolean syFlag, boolean zxFlag, boolean zjFlag,boolean xxFlag,boolean wdFlag) {
@@ -329,6 +558,9 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         wodeName = (TextView) findViewById(R.id.wodeName);
         wode = (LinearLayout) findViewById(R.id.wode);
 
+        xiaoxi_shumu = (TextView)findViewById(R.id.xiaoxi_shumu);
+
+        JPushInterface.init(getApplicationContext());// 初始化 JPushs。如果已经初始化，但没有登录成功，则执行重新登录。
     }
 
 
@@ -345,4 +577,6 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         }
         return super.onKeyDown(keyCode, event);
     }
+
+
 }

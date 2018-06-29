@@ -107,6 +107,7 @@
             android:textColor="@color/baise"
             android:layout_marginLeft="@dimen/x20"
             android:background="@drawable/congzhi_bg"
+            android:gravity="center"
             />
         <Button
             android:id="@+id/take_Authenticate_Dialog2_quxiao"
@@ -119,6 +120,7 @@
             android:layout_marginRight="@dimen/x20"
             android:background="@drawable/tixian_bg"
             android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
             />
     </LinearLayout>
 </RelativeLayout>

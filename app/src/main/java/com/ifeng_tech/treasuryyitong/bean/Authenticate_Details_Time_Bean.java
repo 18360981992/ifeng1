@@ -9,10 +9,11 @@ import java.util.List;
 
 public class Authenticate_Details_Time_Bean implements Serializable{
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"count":1,"list":[{"weeks":"星期五","restNumber_pm":null,"addTime":null,"trusteeship_id":null,"pmoram_pm":null,"ids_pm":null,"pmoram_am":"am","curNumber":null,"pmORam":"am","ids_am":"110","number":null,"restNumber_am":"111","deleteStatus":null,"restNumber":"111","ids":"110","id":null,"orderDate":1530806400000}],"trusteeInfo":{"insurance":null,"applyEndTime":1530288000000,"addTime":1528103792000,"totalTrusteeFee":null,"applyBeginTime":1528041600000,"orderinfo":null,"number":1234,"minNumber":11,"inhouseFee":0.02,"deleteStatus":false,"freeTime":null,"commodityCode":null,"orderEndTime":1530806400000,"id":88,"passNumber":0,"appraisalFee":0.5,"publishTime":1528041600000,"address":"福利特","fakePassrate":0,"applyState":false,"articleId":null,"count":null,"commodityId":836,"collectionGuidePrice":50,"warehousingFee":null,"curNum":null,"leaseFate":20,"orderBeginTime":1530806400000}}
+     * data : {"count":1,"list":[{"weeks":"星期六","restNumber_pm":null,"addTime":null,"trusteeship_id":null,"pmoram_pm":null,"ids_pm":null,"pmoram_am":"am","curNumber":null,"pmORam":"am","ids_am":"225","number":null,"restNumber_am":"1000","deleteStatus":null,"restNumber":"1000","ids":"225","id":null,"orderDate":1530288000000}],"trusteeInfo":{"insurance":null,"applyEndTime":1530201600000,"addTime":1530237929000,"totalTrusteeFee":null,"applyBeginTime":1530201600000,"orderinfo":null,"number":1000,"minNumber":1,"inhouseFee":0.02,"deleteStatus":false,"freeTime":null,"commodityCode":null,"orderEndTime":1530288000000,"id":162,"passNumber":0,"appraisalFee":0.8,"publishTime":1530201600000,"address":"11","fakePassrate":0,"applyState":0,"articleId":null,"count":null,"commodityId":838,"collectionGuidePrice":80,"warehousingFee":null,"curNum":null,"leaseFate":0,"orderBeginTime":1530288000000}}
      */
 
     private String code;
@@ -43,11 +44,11 @@ public class Authenticate_Details_Time_Bean implements Serializable{
         this.data = data;
     }
 
-    public static class DataBean implements Serializable{
+    public static class DataBean {
         /**
          * count : 1
-         * list : [{"weeks":"星期五","restNumber_pm":null,"addTime":null,"trusteeship_id":null,"pmoram_pm":null,"ids_pm":null,"pmoram_am":"am","curNumber":null,"pmORam":"am","ids_am":"110","number":null,"restNumber_am":"111","deleteStatus":null,"restNumber":"111","ids":"110","id":null,"orderDate":1530806400000}]
-         * trusteeInfo : {"insurance":null,"applyEndTime":1530288000000,"addTime":1528103792000,"totalTrusteeFee":null,"applyBeginTime":1528041600000,"orderinfo":null,"number":1234,"minNumber":11,"inhouseFee":0.02,"deleteStatus":false,"freeTime":null,"commodityCode":null,"orderEndTime":1530806400000,"id":88,"passNumber":0,"appraisalFee":0.5,"publishTime":1528041600000,"address":"福利特","fakePassrate":0,"applyState":false,"articleId":null,"count":null,"commodityId":836,"collectionGuidePrice":50,"warehousingFee":null,"curNum":null,"leaseFate":20,"orderBeginTime":1530806400000}
+         * list : [{"weeks":"星期六","restNumber_pm":null,"addTime":null,"trusteeship_id":null,"pmoram_pm":null,"ids_pm":null,"pmoram_am":"am","curNumber":null,"pmORam":"am","ids_am":"225","number":null,"restNumber_am":"1000","deleteStatus":null,"restNumber":"1000","ids":"225","id":null,"orderDate":1530288000000}]
+         * trusteeInfo : {"insurance":null,"applyEndTime":1530201600000,"addTime":1530237929000,"totalTrusteeFee":null,"applyBeginTime":1530201600000,"orderinfo":null,"number":1000,"minNumber":1,"inhouseFee":0.02,"deleteStatus":false,"freeTime":null,"commodityCode":null,"orderEndTime":1530288000000,"id":162,"passNumber":0,"appraisalFee":0.8,"publishTime":1530201600000,"address":"11","fakePassrate":0,"applyState":0,"articleId":null,"count":null,"commodityId":838,"collectionGuidePrice":80,"warehousingFee":null,"curNum":null,"leaseFate":0,"orderBeginTime":1530288000000}
          */
 
         private int count;
@@ -78,42 +79,42 @@ public class Authenticate_Details_Time_Bean implements Serializable{
             this.list = list;
         }
 
-        public static class TrusteeInfoBean implements Serializable{
+        public static class TrusteeInfoBean {
             /**
              * insurance : null
-             * applyEndTime : 1530288000000
-             * addTime : 1528103792000
+             * applyEndTime : 1530201600000
+             * addTime : 1530237929000
              * totalTrusteeFee : null
-             * applyBeginTime : 1528041600000
+             * applyBeginTime : 1530201600000
              * orderinfo : null
-             * number : 1234
-             * minNumber : 11
+             * number : 1000
+             * minNumber : 1
              * inhouseFee : 0.02
              * deleteStatus : false
              * freeTime : null
              * commodityCode : null
-             * orderEndTime : 1530806400000
-             * id : 88
+             * orderEndTime : 1530288000000
+             * id : 162
              * passNumber : 0
-             * appraisalFee : 0.5
-             * publishTime : 1528041600000
-             * address : 福利特
-             * fakePassrate : 0
-             * applyState : false
+             * appraisalFee : 0.8
+             * publishTime : 1530201600000
+             * address : 11
+             * fakePassrate : 0.0
+             * applyState : 0
              * articleId : null
              * count : null
-             * commodityId : 836
-             * collectionGuidePrice : 50
+             * commodityId : 838
+             * collectionGuidePrice : 80.0
              * warehousingFee : null
              * curNum : null
-             * leaseFate : 20
-             * orderBeginTime : 1530806400000
+             * leaseFate : 0
+             * orderBeginTime : 1530288000000
              */
 
             private Object insurance;
             private long applyEndTime;
             private long addTime;
-            private Object totalTrusteeFee;
+            private double totalTrusteeFee;
             private long applyBeginTime;
             private Object orderinfo;
             private int number;
@@ -128,13 +129,13 @@ public class Authenticate_Details_Time_Bean implements Serializable{
             private double appraisalFee;
             private long publishTime;
             private String address;
-            private int fakePassrate;
-            private boolean applyState;
+            private double fakePassrate;
+            private int applyState;
             private Object articleId;
             private Object count;
             private int commodityId;
             private double collectionGuidePrice;
-            private Object warehousingFee;
+            private double warehousingFee;
             private Object curNum;
             private int leaseFate;
             private long orderBeginTime;
@@ -163,11 +164,11 @@ public class Authenticate_Details_Time_Bean implements Serializable{
                 this.addTime = addTime;
             }
 
-            public Object getTotalTrusteeFee() {
+            public double getTotalTrusteeFee() {
                 return totalTrusteeFee;
             }
 
-            public void setTotalTrusteeFee(Object totalTrusteeFee) {
+            public void setTotalTrusteeFee(double totalTrusteeFee) {
                 this.totalTrusteeFee = totalTrusteeFee;
             }
 
@@ -283,19 +284,19 @@ public class Authenticate_Details_Time_Bean implements Serializable{
                 this.address = address;
             }
 
-            public int getFakePassrate() {
+            public double getFakePassrate() {
                 return fakePassrate;
             }
 
-            public void setFakePassrate(int fakePassrate) {
+            public void setFakePassrate(double fakePassrate) {
                 this.fakePassrate = fakePassrate;
             }
 
-            public boolean isApplyState() {
+            public int getApplyState() {
                 return applyState;
             }
 
-            public void setApplyState(boolean applyState) {
+            public void setApplyState(int applyState) {
                 this.applyState = applyState;
             }
 
@@ -331,11 +332,11 @@ public class Authenticate_Details_Time_Bean implements Serializable{
                 this.collectionGuidePrice = collectionGuidePrice;
             }
 
-            public Object getWarehousingFee() {
+            public double getWarehousingFee() {
                 return warehousingFee;
             }
 
-            public void setWarehousingFee(Object warehousingFee) {
+            public void setWarehousingFee(double warehousingFee) {
                 this.warehousingFee = warehousingFee;
             }
 
@@ -364,9 +365,9 @@ public class Authenticate_Details_Time_Bean implements Serializable{
             }
         }
 
-        public static class ListBean implements Serializable{
+        public static class ListBean {
             /**
-             * weeks : 星期五
+             * weeks : 星期六
              * restNumber_pm : null
              * addTime : null
              * trusteeship_id : null
@@ -375,14 +376,14 @@ public class Authenticate_Details_Time_Bean implements Serializable{
              * pmoram_am : am
              * curNumber : null
              * pmORam : am
-             * ids_am : 110
+             * ids_am : 225
              * number : null
-             * restNumber_am : 111
+             * restNumber_am : 1000
              * deleteStatus : null
-             * restNumber : 111
-             * ids : 110
+             * restNumber : 1000
+             * ids : 225
              * id : null
-             * orderDate : 1530806400000
+             * orderDate : 1530288000000
              */
 
             private String weeks;

@@ -60,8 +60,8 @@ public class Collocation_Subscribe_list_Adapter extends BaseAdapter {
         }else{
             Glide.with(context).load(list.get(position).getGoodsImg()).error(R.drawable.img_erroy).into(collocation_Subscribe_list_img);
         }
-        if(list.get(position).getGoodsName().length()>10){
-            String name = list.get(position).getGoodsName().substring(0, 10);
+        if(list.get(position).getGoodsName().length()>18){
+            String name = list.get(position).getGoodsName().substring(0, 18);
             collocation_Subscribe_list_name.setText(name+"...");
         }else{
             collocation_Subscribe_list_name.setText(list.get(position).getGoodsName());

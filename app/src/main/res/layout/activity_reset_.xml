@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="原登录密码"
-                android:textSize="@dimen/x27"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x16"
                 />
@@ -71,16 +71,17 @@
                 android:id="@+id/reset_old"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
                 android:layout_marginLeft="@dimen/x30"
-                android:maxLength="12"
-                android:textSize="@dimen/x27"
-                android:textColor="@color/name_se"
-                android:hint="原登录密码"
-                android:textColorHint="@color/color_999999"
                 android:layout_marginRight="@dimen/x16"
-                android:singleLine="true"
+                android:background="@null"
                 android:gravity="center_vertical"
+                android:hint="原登录密码"
+                android:maxLength="16"
+                android:singleLine="true"
+                android:textColor="@color/name_se"
+                android:textColorHint="@color/color_999999"
+                android:textSize="@dimen/x28"
+                android:inputType="textPassword"
                 />
         </LinearLayout>
 
@@ -100,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="新登录密码"
-                android:textSize="@dimen/x27"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x16"
                 />
@@ -111,13 +112,14 @@
                 android:background="@null"
                 android:layout_marginLeft="@dimen/x30"
                 android:maxLength="12"
-                android:textSize="@dimen/x27"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:hint="新登录密码"
                 android:textColorHint="@color/color_999999"
                 android:layout_marginRight="@dimen/x16"
                 android:singleLine="true"
                 android:gravity="center_vertical"
+                android:inputType="textPassword"
                 />
         </LinearLayout>
 
@@ -137,7 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="确认新密码"
-                android:textSize="@dimen/x27"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:layout_marginLeft="@dimen/x16"
                 />
@@ -148,7 +150,7 @@
                 android:background="@null"
                 android:layout_marginLeft="@dimen/x30"
                 android:maxLength="12"
-                android:textSize="@dimen/x27"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:hint="确认新密码"
                 android:textColorHint="@color/color_999999"

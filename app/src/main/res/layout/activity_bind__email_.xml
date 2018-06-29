@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Bind_Email_Activity1">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,6 +29,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/bind_email_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -102,7 +103,7 @@
                         android:id="@+id/bind_email_shoujihao"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x56"
+                        android:layout_marginLeft="@dimen/x58"
                         android:text="183*****992"
                         android:textColor="@color/name_se"
                         android:textSize="@dimen/x26"
@@ -165,7 +166,6 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:gravity="center"
-                                android:background="@drawable/tu_yan"
                                 />
                         </LinearLayout>
 
@@ -201,7 +201,7 @@
                             android:background="@null"
                             android:hint="请输入短信验证码"
                             android:inputType="number"
-                            android:maxLength="6"
+                            android:maxLength="4"
                             android:singleLine="true"
                             android:textColor="@color/name_se"
                             android:textSize="@dimen/x26"

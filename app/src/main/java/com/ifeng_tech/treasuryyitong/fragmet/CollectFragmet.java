@@ -20,7 +20,6 @@ import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
-import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
@@ -292,19 +291,11 @@ public class CollectFragmet extends Fragment {
         collect_null = view.findViewById(R.id.collect_null);
 
         // 设置刷新
-        initRefreshListView();
+        activity.initRefreshListView(collect_pulltoscroll);
 
         imgs.add(R.mipmap.band1);
         imgs.add(R.mipmap.band2);
 
     }
 
-    private void initRefreshListView() {
-        /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */
-        collect_pulltoscroll.setMode(PullToRefreshBase.Mode.BOTH);
-        ILoadingLayout Labels = collect_pulltoscroll.getLoadingLayoutProxy(true, false);
-        Labels.setPullLabel("下拉刷新...");
-        Labels.setRefreshingLabel("正在刷新...");
-        Labels.setReleaseLabel("放开刷新...");
-    }
 }

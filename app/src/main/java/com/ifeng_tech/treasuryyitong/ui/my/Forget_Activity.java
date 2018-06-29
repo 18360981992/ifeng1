@@ -1,5 +1,6 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -7,6 +8,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,12 +24,15 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+
+import static com.ifeng_tech.treasuryyitong.R.id.logo_pass;
 
 /**
  *  找回密码
@@ -69,6 +74,10 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
         forget_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(forget_queren.getWindowToken(), 0);
+
                 submit();
             }
         });
@@ -76,6 +85,8 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
         Intent intent = getIntent();
         mobile = intent.getStringExtra("mobile");
         smsCode = intent.getStringExtra("smsCode");
+
+        isPass_Old_New(forget_queren,forget_new);
     }
 
     private void initView() {
@@ -110,8 +121,13 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
             Toast.makeText(this, "新登录密码", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (MyUtils.isPassWord(news)==false) {
+            Toast.makeText(this, SP_String.IS_PASS, Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        String queren = forget_queren.getText().toString().trim();
+
+        final String queren = forget_queren.getText().toString().trim();
         if (TextUtils.isEmpty(queren)) {
             Toast.makeText(this, "确认新密码", Toast.LENGTH_SHORT).show();
             return;
@@ -126,12 +142,16 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
 
         HashMap<String, String> map = new HashMap<>();
         map.put("mobile",mobile);
-        map.put("password","");
+        map.put("password",queren);
         map.put("smsCode",smsCode);
+
+        //  进度框
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
 
         myPresenter.postPreContent(APIs.modifyPasswordByMobile, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
+                aniDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
@@ -141,12 +161,16 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
                                 forget_weitanchuan_img,
                                 forget_weitanchuan_text,
                                 weitanchuan_height,
-                                true, "找回密码成功,2秒跳回...");
+                                true, "找回密码成功!");
 
                         // 微弹窗消失后的接口回调
                         MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
                             @Override
                             public void chuan() {
+                                DashApplication.edit
+                                        .putString(SP_String.PASS,queren)
+                                        .commit();
+
                                 setResult(DashApplication.RETRIEVE_TO_FORGET_res);
                                 finish();
                             }
@@ -165,6 +189,7 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
 
             @Override
             public void shibai(String ss) {
+                aniDialog.dismiss();
                 MyUtils.setObjectAnimator(forget_weitanchuan,
                         forget_weitanchuan_img,
                         forget_weitanchuan_text,

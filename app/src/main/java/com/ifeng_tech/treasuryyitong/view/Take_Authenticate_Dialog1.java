@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.StyleRes;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
@@ -35,6 +36,7 @@ public class Take_Authenticate_Dialog1 extends Dialog {
     int minNum=0;  // 记录最小
     int maxNum=0;  // 记录最大
     int shuliang=0;  // 记住输入的数量
+    private EditText take_authenticate_dialog1_yewu_pass;
 
     public Take_Authenticate_Dialog1(@NonNull Context context) {
         super(context);
@@ -54,12 +56,32 @@ public class Take_Authenticate_Dialog1 extends Dialog {
         take_authenticate_dialog1_queren.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(shuliang>=minNum&&shuliang<=maxNum){
-                    Integer num = Integer.valueOf(take_authenticate_dialog1_shuliang.getText().toString());
-                    take_Authenticate_Dialog1_JieKou.QuanRen(num);
-                }else{
-                    MyUtils.setToast("输入的数量不合格...");
+
+                final String pass = take_authenticate_dialog1_yewu_pass.getText().toString().trim();
+                if (TextUtils.isEmpty(pass)) {
+                    MyUtils.setToast("业务密码不能为空!");
+                    return;
                 }
+
+                if(pass.length()!=6){
+                    MyUtils.setToast("请输入6位数的业务密码！");
+                    return;
+                }
+
+
+                final String shu = take_authenticate_dialog1_shuliang.getText().toString().trim();
+                if (TextUtils.isEmpty(shu)) {
+                    MyUtils.setToast("请输入数量");
+                    return;
+                }
+
+                if(shuliang < minNum||shuliang > maxNum){
+                    MyUtils.setToast("输入的数量不合格...");
+                    return;
+                }
+
+                Integer num = Integer.valueOf(shu);
+                take_Authenticate_Dialog1_JieKou.QuanRen(num,pass);
             }
         });
 
@@ -84,8 +106,10 @@ public class Take_Authenticate_Dialog1 extends Dialog {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.toString().length()>0){
-                    shuliang= Integer.valueOf(s.toString());
-                    setTake_authenticate_dialog1_shouxufei(price);
+                    if(s.toString().length()<10){
+                        shuliang= Integer.valueOf(s.toString().trim());
+                        setTake_authenticate_dialog1_shouxufei(price);
+                    }
                 }
             }
         });
@@ -97,6 +121,7 @@ public class Take_Authenticate_Dialog1 extends Dialog {
         take_authenticate_dialog1_shuliang = findViewById(take_Authenticate_Dialog1_shuliang);
         take_authenticate_dialog1_zuida = findViewById(R.id.take_Authenticate_Dialog1_zuida);
         take_authenticate_dialog1_shouxufei = findViewById(R.id.take_Authenticate_Dialog1_shouxufei);
+        take_authenticate_dialog1_yewu_pass = findViewById(R.id.take_Authenticate_Dialog1_yewu_pass);
         take_authenticate_dialog1_queren = findViewById(R.id.take_Authenticate_Dialog1_queren);
         take_authenticate_dialog1_quxiao = findViewById(R.id.take_Authenticate_Dialog1_quxiao);
         take_authenticate_dialog1_zuixiao = findViewById(R.id.take_Authenticate_Dialog1_zuixiao);
@@ -104,13 +129,13 @@ public class Take_Authenticate_Dialog1 extends Dialog {
 
     public void setTake_authenticate_dialog1_zuida(int num) {
         this.maxNum=num;
-        take_authenticate_dialog1_zuida.setText("最大转赠数量:"+num);
+        take_authenticate_dialog1_zuida.setText("剩余预约数量:"+num);
     }
 
     public void setTake_authenticate_dialog1_zuixiao(int num) {
         this.minNum=num;
         this.shuliang=num;
-        take_authenticate_dialog1_zuixiao.setText("最小转赠数量:"+num);
+        take_authenticate_dialog1_zuixiao.setText("最小预约数量:"+num);
         take_authenticate_dialog1_shuliang.setText(num+"");
         take_authenticate_dialog1_shuliang.setSelection(String.valueOf(num).length());
     }
@@ -126,7 +151,7 @@ public class Take_Authenticate_Dialog1 extends Dialog {
          *
          * @param num  第一次弹出框的数量
          */
-        void QuanRen(int num);
+        void QuanRen(int num,String pass);
     }
     Take_Authenticate_Dialog1_JieKou take_Authenticate_Dialog1_JieKou;
 

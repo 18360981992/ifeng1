@@ -54,8 +54,8 @@ public class Collection_directory_Adapter extends BaseAdapter{
         }else{
             Glide.with(context).load(topList.get(position).getCommodityLink()).error(R.drawable.img_erroy).into(collection_mulu_item_img);
         }
-        if(topList.get(position).getCommodityName().length()>10){
-            String name = topList.get(position).getCommodityName().substring(0, 10);
+        if(topList.get(position).getCommodityName().length()>18){
+            String name = topList.get(position).getCommodityName().substring(0, 18);
             collection_mulu_item_name.setText(name+"...");
         }else{
             collection_mulu_item_name.setText(topList.get(position).getCommodityName());

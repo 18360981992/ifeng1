@@ -8,10 +8,11 @@ import java.util.List;
 
 public class Message_Lists_Bean {
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"pageInfo":{"pageNum":2,"pageSize":10,"totalPage":4,"totalNum":46,"resultNum":11},"list":[{"readTimeStr":null,"readState":0,"addTime":1527648209000,"messageId":263,"readTime":null,"type":0,"userId":123,"content":"预约托管商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:43:29"},{"readTimeStr":null,"readState":0,"addTime":1527648161000,"messageId":262,"readTime":null,"type":0,"userId":123,"content":"参与申请征集商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:42:41"},{"readTimeStr":null,"readState":0,"addTime":1527648152000,"messageId":261,"readTime":null,"type":0,"userId":123,"content":"参与申请征集商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:42:32"},{"readTimeStr":null,"readState":0,"addTime":1527586019000,"messageId":245,"readTime":null,"type":0,"userId":123,"content":"高温预警","url":null,"addTimeStr":"2018-05-29 17:26:59"},{"readTimeStr":null,"readState":0,"addTime":1527586017000,"messageId":244,"readTime":null,"type":0,"userId":123,"content":"高温预警","url":null,"addTimeStr":"2018-05-29 17:26:57"},{"readTimeStr":null,"readState":0,"addTime":1527582854000,"messageId":241,"readTime":null,"type":0,"userId":123,"content":"修改登录密码","url":null,"addTimeStr":"2018-05-29 16:34:14"},{"readTimeStr":null,"readState":0,"addTime":1527582755000,"messageId":240,"readTime":null,"type":0,"userId":123,"content":"修改密码","url":null,"addTimeStr":"2018-05-29 16:32:35"},{"readTimeStr":null,"readState":0,"addTime":1527556227000,"messageId":225,"readTime":null,"type":0,"userId":123,"content":"\n今日生活指数\n洗车指数： \t较不宜\n旅游指数： \t适宜\n紫外线指数： \t很强\n感冒指数： \t少发\n运动指数： \t较适宜 ","url":null,"addTimeStr":"2018-05-29 09:10:27"},{"readTimeStr":null,"readState":0,"addTime":1527556221000,"messageId":224,"readTime":null,"type":0,"userId":123,"content":"\n今日生活指数\n洗车指数： \t较不宜\n旅游指数： \t适宜\n紫外线指数： \t很强\n感冒指数： \t少发\n运动指数： \t较适宜 ","url":null,"addTimeStr":"2018-05-29 09:10:21"},{"readTimeStr":null,"readState":0,"addTime":1527504200000,"messageId":223,"readTime":null,"type":0,"userId":123,"content":"000000000000000000222","url":null,"addTimeStr":"2018-05-28 18:43:20"},{"readTimeStr":null,"readState":null,"addTime":1527476690000,"messageId":222,"readTime":null,"type":0,"userId":123,"content":"测试000000000000005554","url":null,"addTimeStr":"2018-05-28 11:04:50"}]}
+     * data : {"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":2,"totalNum":24,"resultNum":10},"list":[{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150893000,"messageId":60,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:54:52","url":"/user/transfer","addTimeStr":"2018-06-28 09:54:53"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150812000,"messageId":59,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:53:32","url":"/user/transfer","addTimeStr":"2018-06-28 09:53:32"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150701000,"messageId":57,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000005向您发起转赠申请，藏品名称：特6-2007《中国探月首飞成功纪念》邮票，数量：1。请及时处理。2018-06-28 09:51:41","url":"/user/transfer","addTimeStr":"2018-06-28 09:51:41"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530149698000,"messageId":55,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:34:58","url":"/user/transfer","addTimeStr":"2018-06-28 09:34:58"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530149666000,"messageId":54,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:34:25","url":"/user/transfer","addTimeStr":"2018-06-28 09:34:26"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086911000,"messageId":46,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:08:30","url":"/user/transfer","addTimeStr":"2018-06-27 16:08:31"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086890000,"messageId":45,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:08:10","url":"/user/transfer","addTimeStr":"2018-06-27 16:08:10"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086622000,"messageId":43,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:03:41","url":"/user/transfer","addTimeStr":"2018-06-27 16:03:42"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530085867000,"messageId":41,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000002向您发起转赠申请，藏品名称：2007-11《内蒙古自治区成立六十周年》纪念邮票，数量：11。请及时处理。2018-06-27 15:51:07","url":"/user/transfer","addTimeStr":"2018-06-27 15:51:07"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530085744000,"messageId":39,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000002向您发起转赠申请，藏品名称：2007-11《内蒙古自治区成立六十周年》纪念邮票，数量：1。请及时处理。2018-06-27 15:49:04","url":"/user/transfer","addTimeStr":"2018-06-27 15:49:04"}]}
      */
 
     private String code;
@@ -44,8 +45,8 @@ public class Message_Lists_Bean {
 
     public static class DataBean {
         /**
-         * pageInfo : {"pageNum":2,"pageSize":10,"totalPage":4,"totalNum":46,"resultNum":11}
-         * list : [{"readTimeStr":null,"readState":0,"addTime":1527648209000,"messageId":263,"readTime":null,"type":0,"userId":123,"content":"预约托管商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:43:29"},{"readTimeStr":null,"readState":0,"addTime":1527648161000,"messageId":262,"readTime":null,"type":0,"userId":123,"content":"参与申请征集商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:42:41"},{"readTimeStr":null,"readState":0,"addTime":1527648152000,"messageId":261,"readTime":null,"type":0,"userId":123,"content":"参与申请征集商品3010070030，10张成功","url":null,"addTimeStr":"2018-05-30 10:42:32"},{"readTimeStr":null,"readState":0,"addTime":1527586019000,"messageId":245,"readTime":null,"type":0,"userId":123,"content":"高温预警","url":null,"addTimeStr":"2018-05-29 17:26:59"},{"readTimeStr":null,"readState":0,"addTime":1527586017000,"messageId":244,"readTime":null,"type":0,"userId":123,"content":"高温预警","url":null,"addTimeStr":"2018-05-29 17:26:57"},{"readTimeStr":null,"readState":0,"addTime":1527582854000,"messageId":241,"readTime":null,"type":0,"userId":123,"content":"修改登录密码","url":null,"addTimeStr":"2018-05-29 16:34:14"},{"readTimeStr":null,"readState":0,"addTime":1527582755000,"messageId":240,"readTime":null,"type":0,"userId":123,"content":"修改密码","url":null,"addTimeStr":"2018-05-29 16:32:35"},{"readTimeStr":null,"readState":0,"addTime":1527556227000,"messageId":225,"readTime":null,"type":0,"userId":123,"content":"\n今日生活指数\n洗车指数： \t较不宜\n旅游指数： \t适宜\n紫外线指数： \t很强\n感冒指数： \t少发\n运动指数： \t较适宜 ","url":null,"addTimeStr":"2018-05-29 09:10:27"},{"readTimeStr":null,"readState":0,"addTime":1527556221000,"messageId":224,"readTime":null,"type":0,"userId":123,"content":"\n今日生活指数\n洗车指数： \t较不宜\n旅游指数： \t适宜\n紫外线指数： \t很强\n感冒指数： \t少发\n运动指数： \t较适宜 ","url":null,"addTimeStr":"2018-05-29 09:10:21"},{"readTimeStr":null,"readState":0,"addTime":1527504200000,"messageId":223,"readTime":null,"type":0,"userId":123,"content":"000000000000000000222","url":null,"addTimeStr":"2018-05-28 18:43:20"},{"readTimeStr":null,"readState":null,"addTime":1527476690000,"messageId":222,"readTime":null,"type":0,"userId":123,"content":"测试000000000000005554","url":null,"addTimeStr":"2018-05-28 11:04:50"}]
+         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":2,"totalNum":24,"resultNum":10}
+         * list : [{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150893000,"messageId":60,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:54:52","url":"/user/transfer","addTimeStr":"2018-06-28 09:54:53"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150812000,"messageId":59,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:53:32","url":"/user/transfer","addTimeStr":"2018-06-28 09:53:32"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530150701000,"messageId":57,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000005向您发起转赠申请，藏品名称：特6-2007《中国探月首飞成功纪念》邮票，数量：1。请及时处理。2018-06-28 09:51:41","url":"/user/transfer","addTimeStr":"2018-06-28 09:51:41"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530149698000,"messageId":55,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:34:58","url":"/user/transfer","addTimeStr":"2018-06-28 09:34:58"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530149666000,"messageId":54,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:34:25","url":"/user/transfer","addTimeStr":"2018-06-28 09:34:26"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086911000,"messageId":46,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:08:30","url":"/user/transfer","addTimeStr":"2018-06-27 16:08:31"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086890000,"messageId":45,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:08:10","url":"/user/transfer","addTimeStr":"2018-06-27 16:08:10"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530086622000,"messageId":43,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-27 16:03:41","url":"/user/transfer","addTimeStr":"2018-06-27 16:03:42"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530085867000,"messageId":41,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000002向您发起转赠申请，藏品名称：2007-11《内蒙古自治区成立六十周年》纪念邮票，数量：11。请及时处理。2018-06-27 15:51:07","url":"/user/transfer","addTimeStr":"2018-06-27 15:51:07"},{"readTimeStr":null,"readState":0,"msgType":1,"addTime":1530085744000,"messageId":39,"readTime":null,"type":0,"userId":4,"content":"【宝库易通】000000000002向您发起转赠申请，藏品名称：2007-11《内蒙古自治区成立六十周年》纪念邮票，数量：1。请及时处理。2018-06-27 15:49:04","url":"/user/transfer","addTimeStr":"2018-06-27 15:49:04"}]
          */
 
         private PageInfoBean pageInfo;
@@ -69,11 +70,11 @@ public class Message_Lists_Bean {
 
         public static class PageInfoBean {
             /**
-             * pageNum : 2
+             * pageNum : 1
              * pageSize : 10
-             * totalPage : 4
-             * totalNum : 46
-             * resultNum : 11
+             * totalPage : 2
+             * totalNum : 24
+             * resultNum : 10
              */
 
             private int pageNum;
@@ -127,25 +128,27 @@ public class Message_Lists_Bean {
             /**
              * readTimeStr : null
              * readState : 0
-             * addTime : 1527648209000
-             * messageId : 263
+             * msgType : 1
+             * addTime : 1530150893000
+             * messageId : 60
              * readTime : null
              * type : 0
-             * userId : 123
-             * content : 预约托管商品3010070030，10张成功
-             * url : null
-             * addTimeStr : 2018-05-30 10:43:29
+             * userId : 4
+             * content : 【宝库易通】您向用户000000000005发起的转赠已成功。2018-06-28 09:54:52
+             * url : /user/transfer
+             * addTimeStr : 2018-06-28 09:54:53
              */
 
             private Object readTimeStr;
             private int readState;
+            private int msgType;
             private long addTime;
             private int messageId;
             private Object readTime;
             private int type;
             private int userId;
             private String content;
-            private Object url;
+            private String url;
             private String addTimeStr;
 
             public Object getReadTimeStr() {
@@ -162,6 +165,14 @@ public class Message_Lists_Bean {
 
             public void setReadState(int readState) {
                 this.readState = readState;
+            }
+
+            public int getMsgType() {
+                return msgType;
+            }
+
+            public void setMsgType(int msgType) {
+                this.msgType = msgType;
             }
 
             public long getAddTime() {
@@ -212,11 +223,11 @@ public class Message_Lists_Bean {
                 this.content = content;
             }
 
-            public Object getUrl() {
+            public String getUrl() {
                 return url;
             }
 
-            public void setUrl(Object url) {
+            public void setUrl(String url) {
                 this.url = url;
             }
 

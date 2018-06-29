@@ -105,6 +105,7 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
         if(position==0){
             setSelected(0);
         }else{
+
             setSelected(1);
         }
     }
@@ -113,8 +114,11 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == DashApplication.TIHUO_TO_CANGKU_req&&resultCode==DashApplication.TIHUO_TO_CANGKU_res){
+            // 商品
             WarehouseBean.DataBean.ListBean warehouseBean = (WarehouseBean.DataBean.ListBean)data.getSerializableExtra("WarehouseBean");
-            pick_up_goods_Activity_JieKou.chuan(warehouseBean);
+            // 手续费
+            WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean maxTrasferableAmountAndFeeBean = (WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean)data.getSerializableExtra("MaxTrasferableAmountAndFeeBean");
+            pick_up_goods_Activity_JieKou.chuan(warehouseBean,maxTrasferableAmountAndFeeBean);
         }
     }
 
@@ -147,7 +151,7 @@ public class Pick_up_goods_Activity extends BaseMVPActivity<Pick_up_goods_Activi
     }
 
     public interface Pick_up_goods_Activity_JieKou{
-        void chuan(WarehouseBean.DataBean.ListBean warehouseBean);
+        void chuan(WarehouseBean.DataBean.ListBean warehouseBean,WarehouseBean.DataBean.MaxTrasferableAmountAndFeeBean maxTrasferableAmountAndFee);
     }
 
     public  Pick_up_goods_Activity_JieKou pick_up_goods_Activity_JieKou;

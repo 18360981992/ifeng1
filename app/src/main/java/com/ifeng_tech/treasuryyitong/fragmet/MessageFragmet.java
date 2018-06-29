@@ -1,7 +1,5 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -14,18 +12,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
-import com.ifeng_tech.treasuryyitong.service.HeartbeatService;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
+import com.ifeng_tech.treasuryyitong.bean.jpush.JPush_Bean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.Recharge_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Safety_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.System_Message_Activity;
-import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import static android.content.Context.MODE_PRIVATE;
-import static android.content.Context.NOTIFICATION_SERVICE;
 import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 /**
@@ -42,14 +40,16 @@ public class MessageFragmet extends Fragment {
     private ImageView message_anquan_img;
     private RelativeLayout message_anquan;
     private ImageView xitong_jiantou;
-    private TextView message_xitong_shumu;
+    public static TextView message_xitong_shumu;
     private ImageView congzhi_jiantou;
-    private TextView message_congzhi_shumu;
+    public static TextView message_congzhi_shumu;
     private ImageView anquan_jiantou;
-    private TextView message_anquan_shumu;
+    public static TextView message_anquan_shumu;
     private HomePageActivity activity;
     private boolean aBoolean;
     private SharedPreferences.Editor edit;
+    private SharedPreferences sp_message;
+    private SharedPreferences.Editor edit1;
 
     @Nullable
     @Override
@@ -71,30 +71,30 @@ public class MessageFragmet extends Fragment {
         edit = sp.edit();
 
         aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
-        // 心跳监听回调
-        HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
-            @Override
-            public void hearbeatChuan(int type,int num) {
-                MyUtils.setToast("有新的消息,更新ui界面。。。");
-                switch (type){
-                    case 1:
-                        setNotification("系统消息");
-                        message_xitong_shumu.setVisibility(View.VISIBLE);
-                        message_xitong_shumu.setText(""+num);
-                        break;
-                    case 2:
-                        setNotification("充值提醒");
-                        message_congzhi_shumu.setVisibility(View.VISIBLE);
-                        message_congzhi_shumu.setText(""+num);
-                        break;
-                    case 3:
-                        setNotification("安全设置");
-                        message_anquan_shumu.setVisibility(View.VISIBLE);
-                        message_anquan_shumu.setText(""+num);
-                        break;
-                }
-            }
-        });
+//        // 心跳监听回调
+//        HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
+//            @Override
+//            public void hearbeatChuan(int type,int num) {
+//                MyUtils.setToast("有新的消息,更新ui界面。。。");
+//                switch (type){
+//                    case 1:
+//                        setNotification("系统消息");
+//                        message_xitong_shumu.setVisibility(View.VISIBLE);
+//                        message_xitong_shumu.setText(""+num);
+//                        break;
+//                    case 2:
+//                        setNotification("充值提现");
+//                        message_congzhi_shumu.setVisibility(View.VISIBLE);
+//                        message_congzhi_shumu.setText(""+num);
+//                        break;
+//                    case 3:
+//                        setNotification("安全设置");
+//                        message_anquan_shumu.setVisibility(View.VISIBLE);
+//                        message_anquan_shumu.setText(""+num);
+//                        break;
+//                }
+//            }
+//        });
 
         message_xitong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +102,20 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了系统消息。。。");
                 if(aBoolean){
                     message_xitong_shumu.setVisibility(View.GONE);
+                    // 获取本地的消息总数目 并设置隐藏/显示
+                    // 创建保存消息的本地文件
+                    String uid = DashApplication.sp.getString(SP_String.UID, "");
+                    sp_message = activity.getSharedPreferences("ifeng_message_" + uid, MODE_PRIVATE);
+                    edit1 = sp_message.edit();
+                    String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+                    JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+                    if(jPush_bean!=null){
+                        jPush_bean.setSysNum(0);
+                        String json = new Gson().toJson(jPush_bean);
+                        edit1.putString(SP_String.XIAOXI_SHUMU,json).commit();
+                    }
+
+
                     Intent intent = new Intent(activity, System_Message_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -120,6 +134,20 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了充值消息。。。");
                 if(aBoolean){
                     message_congzhi_shumu.setVisibility(View.GONE);
+
+                    // 获取本地的消息总数目 并设置隐藏/显示
+                    // 创建保存消息的本地文件
+                    String uid = DashApplication.sp.getString(SP_String.UID, "");
+                    sp_message = activity.getSharedPreferences("ifeng_message_"+uid, MODE_PRIVATE);
+                    edit1 = sp_message.edit();
+                    String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+                    JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+                    if(jPush_bean!=null) {
+                        jPush_bean.setGoldSum(0);
+                        String json = new Gson().toJson(jPush_bean);
+                        edit1.putString(SP_String.XIAOXI_SHUMU, json).commit();
+                    }
+
                     Intent intent = new Intent(activity, Recharge_Message_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -137,6 +165,20 @@ public class MessageFragmet extends Fragment {
 //                MyUtils.setToast("点击了安全消息。。。");
                 if(aBoolean){
                     message_anquan_shumu.setVisibility(View.GONE);
+                    // 获取本地的消息总数目 并设置隐藏/显示
+                    // 创建保存消息的本地文件
+                    String uid = DashApplication.sp.getString(SP_String.UID, "");
+                    sp_message = activity.getSharedPreferences("ifeng_message_"+uid, MODE_PRIVATE);
+                    edit1 = sp_message.edit();
+
+                    String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+                    JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+                    if(jPush_bean!=null) {
+                        jPush_bean.setSafeNum(0);
+                        String json = new Gson().toJson(jPush_bean);
+                        edit1.putString(SP_String.XIAOXI_SHUMU, json).commit();
+                    }
+
                     Intent intent = new Intent(activity, Safety_Message_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -150,30 +192,30 @@ public class MessageFragmet extends Fragment {
 
     }
 
-    private  void setNotification(String ss) {
-        // 发送通知,通知都将在状态栏
-        NotificationManager notiManager = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE); // 常量字符串
-        // 创建通知
-        Notification.Builder builder = new Notification.Builder(activity)
-                .setContentTitle("您有一条新的消息！")
-                .setContentText(ss+": 有新消息")
-                .setSmallIcon(R.drawable.logo)
-                .setAutoCancel(true)
-                .setTicker("宝库易通：有一条新消息。。。")
-                .setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);  //震动和声音
-//        Intent intent = new Intent(this, HomePageActivity.class);
-//        intent.putExtra("xiaoxi","message");
-//        long time = new Date().getTime() / 1000;  //以时间戳为请求唯一值
-//        Log.i("jiba","时间戳===="+time);
-//        PendingIntent pintIntent = PendingIntent
-//                .getActivity(this, (int) time, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-//        //参数: PendingIntent
-//        builder.setContentIntent(pintIntent);
-        builder.setAutoCancel(true);  //单击后,状态栏的图标消失
-        Notification notification = builder.build();
-        // 管理器,进行让通知进行在状态栏出现
-        notiManager.notify(1, notification);
-    }
+//    private  void setNotification(String ss) {
+//        // 发送通知,通知都将在状态栏
+//        NotificationManager notiManager = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE); // 常量字符串
+//        // 创建通知
+//        Notification.Builder builder = new Notification.Builder(activity)
+//                .setContentTitle("您有一条新的消息！")
+//                .setContentText(ss+": 有新消息")
+//                .setSmallIcon(R.drawable.logo)
+//                .setAutoCancel(true)
+//                .setTicker("宝库易通：有一条新消息。。。")
+//                .setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);  //震动和声音
+////        Intent intent = new Intent(this, HomePageActivity.class);
+////        intent.putExtra("xiaoxi","message");
+////        long time = new Date().getTime() / 1000;  //以时间戳为请求唯一值
+////        Log.i("jiba","时间戳===="+time);
+////        PendingIntent pintIntent = PendingIntent
+////                .getActivity(this, (int) time, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+////        //参数: PendingIntent
+////        builder.setContentIntent(pintIntent);
+//        builder.setAutoCancel(true);  //单击后,状态栏的图标消失
+//        Notification notification = builder.build();
+//        // 管理器,进行让通知进行在状态栏出现
+//        notiManager.notify(1, notification);
+//    }
 
 
     private void initView(View view) {

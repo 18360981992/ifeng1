@@ -1,7 +1,9 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -10,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,6 +28,7 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.login.SmsCodeBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
+import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -80,6 +84,9 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     ("更换绑定手机", 6),("绑定新手机", 7),("绑定邮箱", 8),("设置交易密码", 9),("重置交易密码", 10);
      */
     String codeType="0";
+    private EditText retrieve_tu_yan;
+    private ImageView retrieve_tu_yan_img;
+
     @Override
     public MyPresenter<Retrieve_Activity> initPresenter() {
         if (myPresenter == null) {
@@ -102,20 +109,24 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         // 用于判断手机号码的输入框 的隐藏/显示
         select = intent.getIntExtra("select", 0);
 
-        if (select == 1) {
+
+        if (type==1&&select == 1) {
             retrieve_shoujihao.setVisibility(View.GONE);
             retrieve_shoujihao_shuru.setVisibility(View.VISIBLE);
-            codeType="3";   // 根据select来设定codetype的值
+            codeType="5";   // 根据select来设定codetype的值
         } else {
             retrieve_shoujihao.setVisibility(View.VISIBLE);
             retrieve_shoujihao_shuru.setVisibility(View.GONE);
-
             String shouji = DashApplication.sp.getString(SP_String.SHOUJI, "");
             mobile=shouji;
             String tou = shouji.substring(0, 3);
             String wei = shouji.substring(8, shouji.length());
             retrieve_shoujihao.setText(tou + "*****" + wei);
-            codeType="6";
+            if(type==1){
+                codeType="5";  // 找回密码和忘记密码的状态是相同的 都是5
+            }else{
+                codeType="6";
+            }
         }
 
 
@@ -145,26 +156,92 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                     mobile=shuru ;
                 }
 
-                retrieve_duan_btn.setText("重新发送" + time + "(s)");
-                retrieve_duan_btn.setEnabled(false);
-                h.sendEmptyMessageDelayed(0, 1000);
+                String yan = retrieve_tu_yan.getText().toString().trim();
+                if (TextUtils.isEmpty(yan)) {
+                    Toast.makeText(Retrieve_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
-//                MyUtils.setToast("请求网络。。。");
                 HashMap<String, String> map = new HashMap<>();
-                map.put("mobile",mobile);
-                map.put("codeType",codeType);
-                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                map.put("verifyCode",yan);
+                //  进度框
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Retrieve_Activity.this, SP_String.JIAZAI);
+
+                myPresenter.postPreContent(APIs.verifyCode, map, new MyInterfaces() {
                     @Override
                     public void chenggong(String json) {
-                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
-                        if(smCodeBean.getCode().equals("2000")){
-                            MyUtils.setToast("短信发送成功");
+                        aniDialog.dismiss();
+                        try {
+                            JSONObject jsonObject = new JSONObject(json);
+                            String code = (String) jsonObject.get("code");
+                            if(code.equals("2000")){
+                                retrieve_duan_btn.setText("重新发送" + time + "(s)");
+                                retrieve_duan_btn.setEnabled(false);
+                                h.sendEmptyMessageDelayed(0, 1000);
+
+//                              MyUtils.setToast("请求网络。。。");
+
+                                HashMap<String, String> map = new HashMap<>();
+                                map.put("mobile",mobile);
+                                map.put("codeType",codeType);
+                                myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
+                                    @Override
+                                    public void chenggong(String json) {
+                                        SmsCodeBean smCodeBean = new Gson().fromJson(json, SmsCodeBean.class);
+                                        if(smCodeBean.getCode().equals("2000")){
+                                            MyUtils.setToast("短信发送成功");
+                                        }else{
+                                            MyUtils.setToast(smCodeBean.getMessage()+"");
+                                        }
+                                    }
+
+                                    @Override
+                                    public void shibai(String ss) {
+                                        MyUtils.setToast("短信发送失败");
+                                    }
+                                });
+                            }else{
+                                MyUtils.setObjectAnimator(retrieve_weitanchuan,
+                                        retrieve_weitanchuan_img,
+                                        retrieve_weitanchuan_text,
+                                        weitanchuan_height,
+                                        false, (String) jsonObject.get("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
                     }
 
                     @Override
                     public void shibai(String ss) {
-                        MyUtils.setToast("短信发送失败");
+                        aniDialog.dismiss();
+                        MyUtils.setObjectAnimator(retrieve_weitanchuan,
+                                retrieve_weitanchuan_img,
+                                retrieve_weitanchuan_text,
+                                weitanchuan_height,
+                                false, ss);
+                    }
+                });
+
+
+            }
+        });
+
+
+        retrieve_tu_yan_img.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                // 初始化图形验证码
+                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
+                    @Override
+                    public void chenggong(Bitmap bitmap) {
+                        if(bitmap!=null){
+                            retrieve_tu_yan_img.setImageBitmap(bitmap);
+                        }
+                    }
+                    @Override
+                    public void shibai(String ss) {
+                        MyUtils.setToast("图形验证码获取失败！");
                     }
                 });
             }
@@ -174,11 +251,32 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         retrieve_btn.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(retrieve_tu_yan.getWindowToken(), 0);
                 submit();
             }
         });
 
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // 初始化图形验证码
+        myPresenter.getPro_TuXingYanZheng( APIs.newImageCode, new MyJieKou() {
+            @Override
+            public void chenggong(Bitmap bitmap) {
+                if(bitmap!=null){
+                    retrieve_tu_yan_img.setImageBitmap(bitmap);
+                }
+            }
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast("图形验证码获取失败！");
+            }
+        });
     }
 
     @Override
@@ -191,10 +289,16 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     private void initView() {
         retrieve_Fan = (RelativeLayout) findViewById(R.id.retrieve_Fan);
         retrieve_duan = (EditText) findViewById(R.id.retrieve_duan);
+
+        retrieve_tu_yan = (EditText) findViewById(R.id.retrieve_tu_yan);
+        retrieve_tu_yan_img = (ImageView) findViewById(R.id.retrieve_tu_yan_img);
+
         retrieve_duan_btn = (TextView) findViewById(R.id.retrieve_duan_btn);
         retrieve_btn = (Button) findViewById(R.id.retrieve_btn);
 
         retrieve_shoujihao = (TextView) findViewById(R.id.retrieve_shoujihao);
+
+
         retrieve_weitanchuan_img = (ImageView) findViewById(R.id.retrieve_weitanchuan_img);
         retrieve_weitanchuan_text = (TextView) findViewById(R.id.retrieve_weitanchuan_text);
         retrieve_weitanchuan = (LinearLayout) findViewById(R.id.retrieve_weitanchuan);
@@ -241,6 +345,12 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             }
         }
 
+        String yan = retrieve_tu_yan.getText().toString().trim();
+        if (TextUtils.isEmpty(yan)) {
+            Toast.makeText(this, "请输入验证码", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         String duan = retrieve_duan.getText().toString().trim();
         if (TextUtils.isEmpty(duan)) {
             Toast.makeText(this, "短信验证码不能为空", Toast.LENGTH_SHORT).show();
@@ -256,9 +366,13 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
     // 下一步 的点击接口调用
     private void setXiaYiBu(final HashMap<String, String> map, final String duan) {
+        //  进度框
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
+
         myPresenter.postPreContent(APIs.verifySmsCode, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
+                aniDialog.dismiss();
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
@@ -292,6 +406,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
 
             @Override
             public void shibai(String ss) {
+                aniDialog.dismiss();
                 MyUtils.setObjectAnimator(retrieve_weitanchuan,
                     retrieve_weitanchuan_img,
                     retrieve_weitanchuan_text,

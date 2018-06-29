@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
-import com.ifeng_tech.treasuryyitong.bean.Information_LanMu_Bean;
+import com.ifeng_tech.treasuryyitong.bean.zixun.Information_LanMu_Bean;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.Information_zi_Fragment;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
@@ -131,8 +131,9 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
     }
 
     //设置传值方法
+    int id=0;
     private void setSelected(String value) {
-        int id=0;
+
         String type="";
         if(value.equals("全部")){
             id=147;

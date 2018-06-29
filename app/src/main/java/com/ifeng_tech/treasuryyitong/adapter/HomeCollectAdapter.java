@@ -62,8 +62,8 @@ public class HomeCollectAdapter extends RecyclerView.Adapter<HomeCollectAdapter.
             Glide.with(context).load(collectlist.get(position).getGoodsImg()).error(R.drawable.img_erroy).into( holder.home_zhengji_img);
         }
 
-        if(collectlist.get(position).getGoodsName().length()>10){
-            String name = collectlist.get(position).getGoodsName().substring(0, 10);
+        if(collectlist.get(position).getGoodsName().length()>18){
+            String name = collectlist.get(position).getGoodsName().substring(0, 18);
             holder.home_daohang_name.setText(name+"...");
         }else{
             holder.home_daohang_name.setText(collectlist.get(position).getGoodsName());

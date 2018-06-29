@@ -28,6 +28,7 @@
     <color name="zhuse_ziti">#6A6A6A</color>
     <color name="name_se">#333333</color>
     <color name="text_se">#FFB50D</color>
+    <color name="zhu_beigingse">#F7F7F7</color>
 
     <!--仓库浅蓝-->
     <color name="cangku_qianlan">#D5E8F2</color>
@@ -50,4 +51,9 @@
 
     <!--微弹窗-->
     <color name="weitanchuang">#ee5576E2</color>
+
+    <!--委托状态 颜色-->
+    <color name="shenhe">#FFB800</color>
+    <color name="chuli">#5074EB</color>
+    <color name="shibai">#E93438</color>
 </resources>

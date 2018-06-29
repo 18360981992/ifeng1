@@ -10,11 +10,11 @@ import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.api.APIs;
-import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.Pick_Up_Goods_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.ui.Collection_Directory_Detail_Activity;
 import com.ifeng_tech.treasuryyitong.utils.EPickUpStage;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
@@ -87,7 +87,7 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
                     @Override
                     public void queren() {
                         HashMap<String, String> map = new HashMap<>();
-                        map.put("orderId",pick_up_goods_bean.getId()+"");
+                        map.put("orderNo",pick_up_goods_bean.getBillId()+"");
                         myPresenter.postPreContent(APIs.cancelTakeDeliveryOrder, map, new MyInterfaces() {
                             @Override
                             public void chenggong(String json) {
@@ -147,7 +147,7 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         getTiHuo_ShouXuFei(map,pick_up_goods_detail_shouxufei);  // 提货手续费
 
 
-        pick_up_goods_detail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));  // 仓储费  暂无数据
+//        pick_up_goods_detail_cangchufei.setText("￥"+ DashApplication.decimalFormat.format(0));  // 仓储费  暂无数据
 
         pick_up_goods_detail_type.setText(EPickUpStage.getName(pick_up_goods_bean.getBillStage()));
 
@@ -157,6 +157,18 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
             pick_up_goods_detail_anniu.setVisibility(View.GONE);
         }
 
+
+        // 提货单详情中的 商品详情跳到 藏品目录详情
+        pick_up_goods_detail_xiangqing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int goodsId = pick_up_goods_bean.getGoodsId();
+                Intent intent = new Intent(Pick_Up_Goods_Detail_Activity.this, Collection_Directory_Detail_Activity.class);
+                intent.putExtra("goodsId",""+goodsId);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
 
     }
 
@@ -172,7 +184,7 @@ public class Pick_Up_Goods_Detail_Activity extends BaseMVPActivity<Pick_Up_Goods
         pick_up_goods_detail_jianshu = (TextView) findViewById(R.id.pick_up_goods_detail_jianshu);
         pick_up_goods_detail_shuliang = (TextView) findViewById(R.id.pick_up_goods_detail_shuliang);
         pick_up_goods_detail_shouxufei = (TextView) findViewById(R.id.pick_up_goods_detail_shouxufei);
-        pick_up_goods_detail_cangchufei = (TextView) findViewById(R.id.pick_up_goods_detail_cangchufei);
+//        pick_up_goods_detail_cangchufei = (TextView) findViewById(R.id.pick_up_goods_detail_cangchufei);
         pick_up_goods_detail_type = (TextView) findViewById(R.id.pick_up_goods_detail_type);
         pick_up_goods_detail_zhuxiao = (Button) findViewById(R.id.pick_up_goods_detail_zhuxiao);
         pick_up_goods_detail_anniu = (LinearLayout)findViewById(R.id.pick_up_goods_detail_anniu);

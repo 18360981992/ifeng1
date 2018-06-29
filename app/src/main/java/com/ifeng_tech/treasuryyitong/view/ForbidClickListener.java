@@ -9,13 +9,13 @@ import android.view.View;
  */
 
 public abstract class ForbidClickListener implements View.OnClickListener{
-    public static int MIN_CLICK_TIME=1800;
+    public static int MIN_CLICK_TIME=1200;
     private long lastTime=0;
 
     @Override
     public void onClick(View v) {
 
-        if ((System.currentTimeMillis() - lastTime) > 1800) {
+        if ((System.currentTimeMillis() - lastTime) > 1200) {
 //            LogUtils.i("jiba","点击了几次");
             lastTime = System.currentTimeMillis();
             forbidClick(v);

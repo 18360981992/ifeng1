@@ -1,5 +1,8 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,11 +16,12 @@ import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
-import com.ifeng_tech.treasuryyitong.view.AniDialog;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 /**
  *  设置
@@ -56,6 +60,9 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
             @Override
             public void onClick(View v) {
 //                MyUtils.setToast("点击了关于我们。。。");
+                Intent intent = new Intent(Setting_Activity.this, About_My_Activity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
 
@@ -75,8 +82,8 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
 
 //                MyUtils.setToast("退出登录。。。");
                 //  进度框
-                final AniDialog aniDialog = new AniDialog(Setting_Activity.this, null);
-                aniDialog.show();
+                final ProgressDialog aniDialog = MyUtils.getProgressDialog(Setting_Activity.this, "正在退出...");
+
                 myPresenter.getPreContent(APIs.logout, new MyInterfaces() {
                     @Override
                     public void chenggong(String json) {
@@ -85,10 +92,10 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
                             String code = (String) jsonObject.get("code");
                             if(code.equals("2000")){
                                 aniDialog.dismiss();
-                                DashApplication.edit.clear().commit();
-                                finish();
-                            }else if(code.equals("4001")){
-                                DashApplication.edit.clear().commit();
+                                DashApplication.sp = getSharedPreferences("ifeng", MODE_PRIVATE);
+                                SharedPreferences.Editor edit = sp.edit();
+                                edit.clear().commit();
+                                setting_JieKou.chuan();
                                 finish();
                             }else{
                                 aniDialog.dismiss();
@@ -121,7 +128,7 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
         setting_guanyu = (RelativeLayout) findViewById(R.id.setting_guanyu);
         setting_banben = (RelativeLayout) findViewById(R.id.setting_banben);
         setting_btn = (Button) findViewById(R.id.setting_btn);
-        setting_banben_code = findViewById(R.id.setting_banben_code);
+        setting_banben_code = (TextView) findViewById(R.id.setting_banben_code);
     }
 
 
@@ -129,5 +136,14 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
     public void finish() {
         super.finish();
         overridePendingTransition(R.anim.xiao_in_kuai, R.anim.xiao_out_kuai);
+    }
+
+    public interface Setting_JieKou{
+        void chuan();
+    }
+    public static Setting_JieKou setting_JieKou;
+
+    public static void setSetting_JieKou(Setting_JieKou setting_JieKou) {
+        Setting_Activity.setting_JieKou = setting_JieKou;
     }
 }

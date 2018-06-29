@@ -29,8 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/baise"
-        android:paddingLeft="@dimen/x16"
-        android:paddingRight="@dimen/x16"
+        android:paddingLeft="@dimen/x30"
+        android:paddingRight="@dimen/x45"
         android:paddingTop="@dimen/x20"
         android:paddingBottom="@dimen/x20"
         android:orientation="vertical"
@@ -58,12 +58,15 @@
     </LinearLayout>
 
         <ImageView
+            android:id="@+id/message_lists_item_img"
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x24"
             android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/x16"/>
+            android:layout_marginRight="@dimen/x16"
+            android:visibility="gone"
+            />
 
     </RelativeLayout>
 

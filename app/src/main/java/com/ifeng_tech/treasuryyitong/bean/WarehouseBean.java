@@ -14,7 +14,7 @@ public class WarehouseBean implements Serializable{
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"deliveryFee":5.2,"pageInfo":{"pageNum":1,"pageSize":4,"totalPage":1,"totalNum":4,"resultNum":4},"list":[{"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527498162000,"lockQty":0,"holdQty":148,"goodsId":839,"accountType":null,"holdFunds":0,"commodityId":839,"userId":123,"userCode":"000000000123","frozenQty":50,"id":93,"availableQty":98,"goodsCode":"3010070030","goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","evenPrice":0},{"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070040.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527498168000,"lockQty":0,"holdQty":192,"goodsId":840,"accountType":null,"holdFunds":0,"commodityId":840,"userId":123,"userCode":"000000000123","frozenQty":90,"id":94,"availableQty":102,"goodsCode":"3010070040","goodsName":"2007-3《石湾陶瓷》特种邮票","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527677372000,"lockQty":0,"holdQty":10,"goodsId":1374,"accountType":null,"holdFunds":0,"commodityId":1374,"userId":123,"userCode":"000000000123","frozenQty":0,"id":114,"availableQty":10,"goodsCode":"1070020030","goodsName":"普31中国鸟（第一组）","evenPrice":0},{"goodsImg":null,"canReWarehousing":0,"clearDate":null,"addTime":1527677562000,"lockQty":0,"holdQty":70,"goodsId":1419,"accountType":null,"holdFunds":0,"commodityId":1419,"userId":123,"userCode":"000000000123","frozenQty":0,"id":115,"availableQty":70,"goodsCode":"050701","goodsName":"测试商品0507","evenPrice":0}]}
+     * data : {"MaxTrasferableAmountAndFee":{"deliveryFee":10,"commonFeeRate":0.55,"TransferFee":6.1,"availableQty":"10"},"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":3,"resultNum":3},"list":[{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980005.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341035000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1434,"accountType":null,"holdFunds":0,"commodityId":1434,"userId":123,"userCode":"000000000123","frozenQty":0,"id":141,"availableQty":10,"goodsCode":"1980005","goodsName":"1980年第四套人民币伍元","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980001.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341039000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1433,"accountType":null,"holdFunds":0,"commodityId":1433,"userId":123,"userCode":"000000000123","frozenQty":0,"id":142,"availableQty":10,"goodsCode":"1980001","goodsName":"1980年第四套人民币一元","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980002.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341042000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1432,"accountType":null,"holdFunds":0,"commodityId":1432,"userId":123,"userCode":"000000000123","frozenQty":0,"id":143,"availableQty":10,"goodsCode":"1980002","goodsName":"1980年第四套人民币两角","evenPrice":0}]}
      */
 
     private String code;
@@ -47,21 +47,21 @@ public class WarehouseBean implements Serializable{
 
     public static class DataBean implements Serializable{
         /**
-         * deliveryFee : 5.2
-         * pageInfo : {"pageNum":1,"pageSize":4,"totalPage":1,"totalNum":4,"resultNum":4}
-         * list : [{"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527498162000,"lockQty":0,"holdQty":148,"goodsId":839,"accountType":null,"holdFunds":0,"commodityId":839,"userId":123,"userCode":"000000000123","frozenQty":50,"id":93,"availableQty":98,"goodsCode":"3010070030","goodsName":"2007-2《第六届亚洲冬季运动会》纪念邮票","evenPrice":0},{"goodsImg":"http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070040.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527498168000,"lockQty":0,"holdQty":192,"goodsId":840,"accountType":null,"holdFunds":0,"commodityId":840,"userId":123,"userCode":"000000000123","frozenQty":90,"id":94,"availableQty":102,"goodsCode":"3010070040","goodsName":"2007-3《石湾陶瓷》特种邮票","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","canReWarehousing":0,"clearDate":null,"addTime":1527677372000,"lockQty":0,"holdQty":10,"goodsId":1374,"accountType":null,"holdFunds":0,"commodityId":1374,"userId":123,"userCode":"000000000123","frozenQty":0,"id":114,"availableQty":10,"goodsCode":"1070020030","goodsName":"普31中国鸟（第一组）","evenPrice":0},{"goodsImg":null,"canReWarehousing":0,"clearDate":null,"addTime":1527677562000,"lockQty":0,"holdQty":70,"goodsId":1419,"accountType":null,"holdFunds":0,"commodityId":1419,"userId":123,"userCode":"000000000123","frozenQty":0,"id":115,"availableQty":70,"goodsCode":"050701","goodsName":"测试商品0507","evenPrice":0}]
+         * MaxTrasferableAmountAndFee : {"deliveryFee":10,"commonFeeRate":0.55,"TransferFee":6.1,"availableQty":"10"}
+         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":3,"resultNum":3}
+         * list : [{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980005.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341035000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1434,"accountType":null,"holdFunds":0,"commodityId":1434,"userId":123,"userCode":"000000000123","frozenQty":0,"id":141,"availableQty":10,"goodsCode":"1980005","goodsName":"1980年第四套人民币伍元","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980001.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341039000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1433,"accountType":null,"holdFunds":0,"commodityId":1433,"userId":123,"userCode":"000000000123","frozenQty":0,"id":142,"availableQty":10,"goodsCode":"1980001","goodsName":"1980年第四套人民币一元","evenPrice":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980002.jpg","canReWarehousing":0,"clearDate":null,"addTime":1528341042000,"lockQty":0,"holdQty":10,"isTransfer":1,"goodsId":1432,"accountType":null,"holdFunds":0,"commodityId":1432,"userId":123,"userCode":"000000000123","frozenQty":0,"id":143,"availableQty":10,"goodsCode":"1980002","goodsName":"1980年第四套人民币两角","evenPrice":0}]
          */
 
-        private double deliveryFee;
+        private MaxTrasferableAmountAndFeeBean MaxTrasferableAmountAndFee;
         private PageInfoBean pageInfo;
         private List<ListBean> list;
 
-        public double getDeliveryFee() {
-            return deliveryFee;
+        public MaxTrasferableAmountAndFeeBean getMaxTrasferableAmountAndFee() {
+            return MaxTrasferableAmountAndFee;
         }
 
-        public void setDeliveryFee(double deliveryFee) {
-            this.deliveryFee = deliveryFee;
+        public void setMaxTrasferableAmountAndFee(MaxTrasferableAmountAndFeeBean MaxTrasferableAmountAndFee) {
+            this.MaxTrasferableAmountAndFee = MaxTrasferableAmountAndFee;
         }
 
         public PageInfoBean getPageInfo() {
@@ -80,13 +80,59 @@ public class WarehouseBean implements Serializable{
             this.list = list;
         }
 
+        public static class MaxTrasferableAmountAndFeeBean implements Serializable{
+            /**
+             * deliveryFee : 10
+             * commonFeeRate : 0.55
+             * TransferFee : 6.1
+             * availableQty : 10
+             */
+
+            private double deliveryFee;
+            private double commonFeeRate;
+            private double TransferFee;
+            private String availableQty;
+
+            public double getDeliveryFee() {
+                return deliveryFee;
+            }
+
+            public void setDeliveryFee(double deliveryFee) {
+                this.deliveryFee = deliveryFee;
+            }
+
+            public double getCommonFeeRate() {
+                return commonFeeRate;
+            }
+
+            public void setCommonFeeRate(double commonFeeRate) {
+                this.commonFeeRate = commonFeeRate;
+            }
+
+            public double getTransferFee() {
+                return TransferFee;
+            }
+
+            public void setTransferFee(double TransferFee) {
+                this.TransferFee = TransferFee;
+            }
+
+            public String getAvailableQty() {
+                return availableQty;
+            }
+
+            public void setAvailableQty(String availableQty) {
+                this.availableQty = availableQty;
+            }
+        }
+
         public static class PageInfoBean implements Serializable{
             /**
              * pageNum : 1
-             * pageSize : 4
+             * pageSize : 10
              * totalPage : 1
-             * totalNum : 4
-             * resultNum : 4
+             * totalNum : 3
+             * resultNum : 3
              */
 
             private int pageNum;
@@ -138,54 +184,54 @@ public class WarehouseBean implements Serializable{
 
         public static class ListBean implements Serializable{
             /**
-             * goodsImg : http://ifeng-shop.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/3010070030.jpg
+             * goodsImg : http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1980005.jpg
              * canReWarehousing : 0
              * clearDate : null
-             * addTime : 1527498162000
+             * addTime : 1528341035000
              * lockQty : 0
-             * holdQty : 148
-             * goodsId : 839
+             * holdQty : 10
+             * isTransfer : 1
+             * goodsId : 1434
              * accountType : null
              * holdFunds : 0
-             * commodityId : 839
+             * commodityId : 1434
              * userId : 123
              * userCode : 000000000123
-             * frozenQty : 50
-             * id : 93
-             * availableQty : 98
-             * goodsCode : 3010070030
-             * goodsName : 2007-2《第六届亚洲冬季运动会》纪念邮票
+             * frozenQty : 0
+             * id : 141
+             * availableQty : 10
+             * goodsCode : 1980005
+             * goodsName : 1980年第四套人民币伍元
              * evenPrice : 0
              */
 
             boolean flag=false;
-
             private String goodsImg;
             private int canReWarehousing;
             private Object clearDate;
             private long addTime;
             private int lockQty;
             private int holdQty;
+            private int isTransfer;
             private int goodsId;
             private Object accountType;
             private int holdFunds;
             private int commodityId;
             private int userId;
             private String userCode;
-            private int frozenQty;  // 冻结
+            private int frozenQty;
             private int id;
-            private int availableQty;  // 可用
+            private int availableQty;
             private String goodsCode;
             private String goodsName;
             private int evenPrice;
 
-            public void setFlag(boolean flag) {
-                this.flag = flag;
+            public boolean isFlag() {
+                return flag;
             }
 
-            public boolean isFlag() {
-
-                return flag;
+            public void setFlag(boolean flag) {
+                this.flag = flag;
             }
 
             public String getGoodsImg() {
@@ -234,6 +280,14 @@ public class WarehouseBean implements Serializable{
 
             public void setHoldQty(int holdQty) {
                 this.holdQty = holdQty;
+            }
+
+            public int getIsTransfer() {
+                return isTransfer;
+            }
+
+            public void setIsTransfer(int isTransfer) {
+                this.isTransfer = isTransfer;
             }
 
             public int getGoodsId() {

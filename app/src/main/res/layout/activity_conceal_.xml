@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/baise"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.Conceal_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/conceal_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:text="隐私政策"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x32" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/x15"
+            android:layout_marginRight="@dimen/x15"
+            android:orientation="vertical">
+            <!--第一条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:text="一、特别申明"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diyitiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diyitiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第二条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="二、用户条款"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diertiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diertiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diertiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第三条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="三、会员注册及实名认证"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disantiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disantiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第四条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="四、保管服务"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_liu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_qi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_ba"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_jiu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/disitiao_shi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+            </LinearLayout>
+
+            <!--第五条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="五、鉴定预约服务"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diwutiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diwutiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diwutiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diwutiao_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第六条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="六、使用规则"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_liu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_qi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_ba"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_jiu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_shi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_shiyi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_shier"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_yi_shisan"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diliutiao_wu_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第七条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="七、会员稳私政策"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_yi_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_liu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_qi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_ba"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/diqitiao_jiu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第八条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="八、知识产权声明"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dibatiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dibatiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第九条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="九、免责声明"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_si"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_wu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_liu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_qi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_ba"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dijiutiao_jiu"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第十条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="十、通告"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dishitiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第十一条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="十一、违约赔偿及责任限制"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dishiyitiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <!--第十二条-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x20"
+                    android:text="十二、法律监管"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x26" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dishiertiao_yi"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dishiertiao_er"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/x8"
+                    android:lineSpacingExtra="@dimen/x4"
+                    android:text="@string/dishiertiao_san"
+                    android:textColor="@color/name_se"
+                    android:textSize="@dimen/x22" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/conceal_btn"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x70"
+                android:layout_marginBottom="@dimen/x16"
+                android:layout_marginLeft="@dimen/x16"
+                android:layout_marginRight="@dimen/x16"
+                android:layout_marginTop="@dimen/x40"
+                android:background="@drawable/huadong_bg"
+                android:text="确认"
+                android:textColor="@color/baise"
+                android:textSize="@dimen/x28"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

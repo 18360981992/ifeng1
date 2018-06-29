@@ -7,6 +7,8 @@ package com.ifeng_tech.treasuryyitong.utils;
  */
 
 public class SP_String {
+    public static String JIAZAI="正在加载...";
+
     public static String SHOUJI="手机";
     public static String PASS="密码";
     public static String ISLOGIN="是否登录";
@@ -27,8 +29,24 @@ public class SP_String {
 
     public static String ZHUANRU="转入";
 
-    public static String COOKIE="cookie";   // 获取cookie
+//    public static String COOKIE="cookie";   // 获取cookie
 
     public static String QR_ZHUANZENG="transfer";
+
+    public static String IS_PASS="请输入8-12位的密码,且不包括特殊字符";
+
+    public static String SHOUYE_BANNER="首页轮播图缓存";
+
+    public static String SHOUYE_ZHENGJI="首页征集缓存";
+
+    public static String SHOUYE_TUOGUAN="首页托管缓存";
+
+    public static String SHOUYE_ZIXUN="首页资讯缓存";
+
+    public static String YEWUMIMA="业务密码";
+    public static String YOUXIANG="绑定邮箱";
+
+    public static String XIAOXI_SHUMU="总消息数目";
+
 
 }
