@@ -1,279 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/baise"
+    android:fillViewport="true"
+    android:scrollbars="none"
+    android:background="@color/fuise_dabg"
     tools:context="com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x120"
-        android:background="@drawable/zichan_jianbian">
-
-        <RelativeLayout
-            android:id="@+id/bind_email_Fan"
-            android:layout_width="@dimen/x60"
-            android:layout_height="match_parent"
-            android:background="@drawable/fanhui_bg">
-
-            <ImageView
-                android:layout_width="@dimen/x16"
-                android:layout_height="@dimen/x28"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="@dimen/x20"
-                android:layout_marginLeft="@dimen/x30"
-                android:background="@drawable/btn_back" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/bind_email_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/x16"
-            android:text="绑定邮箱（设置）"
-            android:textColor="@color/baise"
-            android:textSize="@dimen/x32" />
-
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
-            android:scrollbars="none"
-            >
-            <LinearLayout
+            android:orientation="vertical">
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="@dimen/x120"
+                android:background="@drawable/zichan_jianbian">
 
+                <RelativeLayout
+                    android:id="@+id/bind_email_Fan"
+                    android:layout_width="@dimen/x60"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/fanhui_bg">
+
+                    <ImageView
+                        android:layout_width="@dimen/x16"
+                        android:layout_height="@dimen/x28"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginBottom="@dimen/x20"
+                        android:layout_marginLeft="@dimen/x30"
+                        android:background="@drawable/btn_back" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/bind_email_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="@dimen/x16"
+                    android:text="绑定邮箱（设置）"
+                    android:textColor="@color/baise"
+                    android:textSize="@dimen/x32" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:gravity="center"
-                    android:layout_marginTop="@dimen/x50"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
                     >
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="邮箱地址"
-                        android:textSize="@dimen/x26"
-                        android:textColor="@color/name_se"
-                        android:layout_marginLeft="@dimen/x16"/>
-                    <EditText
-                        android:id="@+id/bind_email_youxiang"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
-                        android:hint="请输入邮箱地址"
-                        android:textSize="@dimen/x26"
-                        android:textColor="@color/name_se"
-                        android:layout_marginLeft="@dimen/x56"
-                        android:layout_marginRight="@dimen/x16"
-                        android:background="@drawable/tihuo_ed_bg"
-                        android:singleLine="true"
-                        android:textColorHint="@color/color_999999"
-                        android:gravity="center_vertical"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:layout_marginTop="@dimen/x16"
-                    android:gravity="center_vertical"
-                    >
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="手机号码"
-                        android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
-
-                    <TextView
-                        android:id="@+id/bind_email_shoujihao"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x58"
-                        android:text="183*****992"
-                        android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26"
-                        />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:layout_marginTop="@dimen/x16"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="验证码"
-                        android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
-                        android:layout_marginLeft="@dimen/x82"
-                        android:layout_marginRight="@dimen/x16"
-                        android:background="@drawable/tihuo_ed_bg">
+                        android:layout_height="@dimen/x620"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/x20"
+                        android:layout_marginLeft="@dimen/x20"
+                        android:layout_marginTop="@dimen/x60"
+                        android:background="@color/baise">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            >
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="邮箱地址"
+                                android:textSize="@dimen/x28"
+                                android:textColor="@color/name_se"
+                                android:layout_marginLeft="@dimen/x30"/>
+                            <EditText
+                                android:id="@+id/bind_email_youxiang"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/x70"
+                                android:hint="请输入邮箱地址"
+                                android:textSize="@dimen/x28"
+                                android:textColor="@color/name_se"
+                                android:layout_marginLeft="@dimen/x56"
+                                android:layout_marginRight="@dimen/x30"
+                                android:singleLine="true"
+                                android:textColorHint="@color/color_999999"
+                                android:gravity="center_vertical"
+                                android:background="@null"
+                                />
+                            <!--android:background="@drawable/tihuo_ed_bg"-->
 
-                        <EditText
-                            android:id="@+id/bind_email_tu_yan"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.3"
-                            android:background="@null"
-                            android:hint="请输入验证码"
-                            android:maxLength="4"
-                            android:singleLine="true"
-                            android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
-                            android:gravity="center_vertical"
-                            />
+                        </LinearLayout>
 
                         <View
-                            android:layout_width="@dimen/x2"
-                            android:layout_height="@dimen/x40"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="@dimen/x4"
-                            android:background="@color/color_e5e5e5" />
-
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x2"
+                            android:background="@color/fengouxian"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x30"
+                            />
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
                             android:layout_weight="1"
-                            android:paddingBottom="@dimen/x6"
-                            android:paddingTop="@dimen/x6"
-                            android:paddingLeft="@dimen/x10"
-                            android:paddingRight="@dimen/x12"
+                            android:gravity="center_vertical"
                             >
-                            <ImageView
-                                android:id="@+id/bind_email_tu_yan_img"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center"
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:text="手机号码"
+                                android:textColor="@color/name_se"
+                                android:textSize="@dimen/x28" />
+
+                            <TextView
+                                android:id="@+id/bind_email_shoujihao"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x58"
+                                android:text=""
+                                android:textColor="@color/name_se"
+                                android:textSize="@dimen/x28"
                                 />
                         </LinearLayout>
 
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x2"
+                            android:background="@color/fengouxian"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x30"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:text="验证码"
+                                android:textColor="@color/name_se"
+                                android:textSize="@dimen/x28" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/x80"
+                                android:layout_marginLeft="@dimen/x82"
+                                android:layout_marginRight="@dimen/x30"
+                                >
+                                <!--android:background="@drawable/tihuo_ed_bg"-->
+                                <EditText
+                                    android:id="@+id/bind_email_tu_yan"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.3"
+                                    android:background="@null"
+                                    android:hint="请输入验证码"
+                                    android:maxLength="4"
+                                    android:singleLine="true"
+                                    android:textColor="@color/name_se"
+                                    android:textSize="@dimen/x28"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <View
+                                    android:layout_width="@dimen/x2"
+                                    android:layout_height="@dimen/x40"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="@dimen/x4"
+                                    android:background="@color/color_e5e5e5" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:paddingBottom="@dimen/x6"
+                                    android:paddingTop="@dimen/x6"
+                                    android:paddingLeft="@dimen/x10"
+                                    android:paddingRight="@dimen/x12"
+                                    >
+                                    <ImageView
+                                        android:id="@+id/bind_email_tu_yan_img"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center"
+                                        />
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x2"
+                            android:background="@color/fengouxian"
+                            android:layout_marginRight="@dimen/x30"
+                            android:layout_marginLeft="@dimen/x30"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:text="短信验证码"
+                                android:textColor="@color/name_se"
+                                android:textSize="@dimen/x28" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/x70"
+                                android:layout_marginLeft="@dimen/x30"
+                                android:layout_marginRight="@dimen/x30"
+                                >
+                                <!--android:background="@drawable/tihuo_ed_bg"-->
+                                <EditText
+                                    android:id="@+id/bind_email_duan"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1.3"
+                                    android:background="@null"
+                                    android:hint="请输入短信验证码"
+                                    android:inputType="number"
+                                    android:maxLength="4"
+                                    android:singleLine="true"
+                                    android:textColor="@color/name_se"
+                                    android:textSize="@dimen/x28"
+                                    android:gravity="center_vertical"
+                                    />
+
+                                <View
+                                    android:layout_width="@dimen/x2"
+                                    android:layout_height="@dimen/x40"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="@dimen/x4"
+                                    android:background="@color/color_e5e5e5" />
+
+                                <TextView
+                                    android:id="@+id/bind_email_duan_btn"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="center"
+                                    android:text="点击发送"
+                                    android:textColor="@color/name_se"
+                                    android:textSize="@dimen/x26" />
+                            </LinearLayout>
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                        <Button
+                            android:id="@+id/bind_email_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/x80"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginBottom="@dimen/x16"
+                            android:layout_marginLeft="@dimen/x16"
+                            android:layout_marginRight="@dimen/x16"
+                            android:layout_marginTop="@dimen/x15"
+                            android:background="@drawable/congzhi_bg"
+                            android:text="下一步"
+                            android:textColor="@color/baise"
+                            android:textSize="@dimen/x30"
+                            android:gravity="center"
+                            />
+                    </RelativeLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/bind_email_weitanchuan"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/x90"
-                    android:layout_marginTop="@dimen/x16"
-                    android:gravity="center_vertical">
-
+                    android:layout_height="@dimen/x60"
+                    android:background="@color/weitanchuang"
+                    android:gravity="center_vertical"
+                    android:visibility="invisible"
+                    >
+                    <ImageView
+                        android:id="@+id/bind_email_weitanchuan_img"
+                        android:layout_width="@dimen/x40"
+                        android:layout_height="@dimen/x40"
+                        android:layout_marginLeft="@dimen/x16"
+                        />
                     <TextView
+                        android:id="@+id/bind_email_weitanchuan_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:text="短信验证码"
-                        android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
-                        android:layout_marginLeft="@dimen/x30"
-                        android:layout_marginRight="@dimen/x16"
-                        android:background="@drawable/tihuo_ed_bg">
-
-                        <EditText
-                            android:id="@+id/bind_email_duan"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1.3"
-                            android:background="@null"
-                            android:hint="请输入短信验证码"
-                            android:inputType="number"
-                            android:maxLength="4"
-                            android:singleLine="true"
-                            android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
-                            android:gravity="center_vertical"
-                            />
-
-                        <View
-                            android:layout_width="@dimen/x2"
-                            android:layout_height="@dimen/x40"
-                            android:layout_gravity="center_vertical"
-                            android:layout_margin="@dimen/x4"
-                            android:background="@color/color_e5e5e5" />
-
-                        <TextView
-                            android:id="@+id/bind_email_duan_btn"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="点击发送"
-                            android:textColor="@color/name_se"
-                            android:textSize="@dimen/x24" />
-                    </LinearLayout>
-                </LinearLayout>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    >
-                    <Button
-                        android:id="@+id/bind_email_btn"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="@dimen/x16"
-                        android:layout_marginLeft="@dimen/x16"
-                        android:layout_marginRight="@dimen/x16"
-                        android:background="@drawable/congzhi_bg"
-                        android:text="下一步"
+                        android:text="设置失败"
                         android:textColor="@color/baise"
                         android:textSize="@dimen/x28"
-                        android:gravity="center"
-                        />
-                </RelativeLayout>
+                        android:layout_marginLeft="@dimen/x16"/>
 
-            </LinearLayout>
-        </ScrollView>
-
-        <LinearLayout
-            android:id="@+id/bind_email_weitanchuan"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x60"
-            android:background="@color/weitanchuang"
-            android:gravity="center_vertical"
-            android:visibility="invisible"
-            >
-            <ImageView
-                android:id="@+id/bind_email_weitanchuan_img"
-                android:layout_width="@dimen/x40"
-                android:layout_height="@dimen/x40"
-                android:layout_marginLeft="@dimen/x16"
-                />
-            <TextView
-                android:id="@+id/bind_email_weitanchuan_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="设置失败"
-                android:textColor="@color/baise"
-                android:textSize="@dimen/x28"
-                android:layout_marginLeft="@dimen/x16"/>
+                </LinearLayout>
+            </RelativeLayout>
 
         </LinearLayout>
-    </RelativeLayout>
 
-</LinearLayout>
+    </RelativeLayout>
+</ScrollView>

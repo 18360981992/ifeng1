@@ -13,7 +13,7 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -59,18 +59,22 @@ public class Warehouse_Adapter extends BaseAdapter{
 
 
         convertView=View.inflate(context,R.layout.warehouse_xrecycle_item,null);
+
+        TextView warehouse_shopping_cword = convertView.findViewById(R.id.warehouse_shopping_cword);
         TextView warehouse_shopping_name = convertView.findViewById(R.id.warehouse_shopping_name);
         TextView warehouse_keyong_num = convertView.findViewById(R.id.warehouse_keyong_num);
         LinearLayout warehouse_item_touming = convertView.findViewById(R.id.warehouse_item_touming);
         TextView warehouse_item_zhuanzeng = convertView.findViewById(R.id.warehouse_item_zhuanzeng);
         TextView warehouse_item_tihuo = convertView.findViewById(R.id.warehouse_item_tihuo);
 
-        if(warehouselist.get(position).getGoodsName().length()>18){
-            String name = warehouselist.get(position).getGoodsName().substring(0, 18);
+        if(warehouselist.get(position).getGoodsName().length()>20){
+            String name = warehouselist.get(position).getGoodsName().substring(0, 20);
             warehouse_shopping_name.setText(name+"...");
         }else{
             warehouse_shopping_name.setText(warehouselist.get(position).getGoodsName());
         }
+
+        warehouse_shopping_cword.setText("编号："+warehouselist.get(position).getGoodsCode());
 
         warehouse_keyong_num.setText(warehouselist.get(position).getAvailableQty()+"（枚）");
 

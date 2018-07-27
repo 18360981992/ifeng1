@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
-import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Authenticate_Details_Activity;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 
@@ -58,21 +58,24 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
         }
 
         String[] times = list.get(position).getApplyTime().split("\\/");
-        holder.home_tuoguan_time.setText("截止时间:"+times[1]);
+        holder.home_tuoguan_time.setText("截止日期:"+times[1]);
 
         holder.home_tuoguan_text.setText("托管进度:"+list.get(position).getCount()+"/"+list.get(position).getNumber());
 
-        if(list.get(position).getState().equals("1")){ // 1==等待 2==未开始
-            holder.home_tuoguan_imgflag.setImageResource(R.drawable.dengdai);
+        if(list.get(position).getState().equals("1")){ // 1==正在 2==等待
+            holder.home_tuoguan_imgflag.setText("正在申请");
+            holder.home_tuoguan_imgflag.setTextColor(context.getResources().getColor(R.color.zhuse));
+            holder.home_tuoguan_imgflag.setBackground(context.getResources().getDrawable(R.drawable.zhengzai_shenqing));
         }else{
-            holder.home_tuoguan_imgflag.setImageResource(R.drawable.kaishi);
+            holder.home_tuoguan_imgflag.setText("等待申请");
+            holder.home_tuoguan_imgflag.setTextColor(context.getResources().getColor(R.color.color_666666));
+            holder.home_tuoguan_imgflag.setBackground(context.getResources().getDrawable(R.drawable.dengdai_shenqing));
         }
-
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) { // 首页 中征集的点击
-            if(list.get(position).getState().equals("1")){ // 0==等待 1==未开始
+            if(list.get(position).getState().equals("1")){ // 1==正在 2==等待
                 Intent intent = new Intent(context, Authenticate_Details_Activity.class);
                 intent.putExtra("CollocationBean",list.get(position));
                 context.startActivity(intent);
@@ -97,7 +100,7 @@ public class HomeCollocationAdapter extends RecyclerView.Adapter<HomeCollocation
         public TextView home_tuoguan_name;
         public TextView home_tuoguan_time;
         public TextView home_tuoguan_text;
-        public ImageView home_tuoguan_imgflag;
+        public TextView home_tuoguan_imgflag;
 
         public HomeTuoGuan(View itemView) {
             super(itemView);

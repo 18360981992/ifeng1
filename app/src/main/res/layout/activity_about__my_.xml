@@ -52,14 +52,14 @@
             android:layout_centerHorizontal="true"
             >
             <ImageView
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/x120"
+                android:layout_width="@dimen/x130"
+                android:layout_height="@dimen/x130"
                 android:background="@drawable/logo"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="宝库易通"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/zhuse"
                 android:textStyle="bold"
                 android:layout_marginTop="@dimen/x8"
@@ -78,7 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/guanyu_my"
-            android:textSize="@dimen/x24"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
             android:lineSpacingExtra="@dimen/x10"
             />

@@ -11,6 +11,7 @@ public class SP_String {
 
     public static String SHOUJI="手机";
     public static String PASS="密码";
+    public static String TOKEN="android设备号";
     public static String ISLOGIN="是否登录";
     public static String UID="用户id";
     public static String USERCODE="内部用户code";  // 用户会员号
@@ -33,7 +34,7 @@ public class SP_String {
 
     public static String QR_ZHUANZENG="transfer";
 
-    public static String IS_PASS="请输入8-12位的密码,且不包括特殊字符";
+    public static String IS_PASS="密码必须为8-12位字符";
 
     public static String SHOUYE_BANNER="首页轮播图缓存";
 

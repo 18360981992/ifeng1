@@ -25,18 +25,16 @@ import com.ifeng_tech.treasuryyitong.bean.MyListBean;
 import com.ifeng_tech.treasuryyitong.bean.my.PersonalUserAccount_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
+import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.ADVP_R_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Certification_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
-import com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_List_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.cangku.My_Warehouse_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -47,7 +45,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -62,7 +62,7 @@ import static com.ifeng_tech.treasuryyitong.appliction.DashApplication.sp;
 
 public class MyFragmet extends Fragment {
     private ImageView wode_touxiang;
-    private TextView wode_name;
+//    private TextView wode_name;
     private TextView wode_hao;
     private TextView wode_weirenzheng;
     private ListView wode_MyListView;
@@ -85,11 +85,10 @@ public class MyFragmet extends Fragment {
         initView(view);
 
         activity = (HomePageActivity) getActivity();
-
         wode_weidenglu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(activity, LoginActivity.class);
+                intent = new Intent(activity, Login_New_Activity.class);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
@@ -105,7 +104,7 @@ public class MyFragmet extends Fragment {
                     case 2:// 已认证
                         break;
                     case 1:// 认证中
-                        // 根据状态 选择隐藏/显示  1== 认证中 2==认证失败
+                        // 根据状态 选择隐藏/显示  1== 认证中
                         intent = new Intent(activity, ADVP_R_Activity.class);
                         intent.putExtra("rengzheng_type",1);
                         activity.startActivity(intent);
@@ -152,7 +151,12 @@ public class MyFragmet extends Fragment {
             wode_denglu.setVisibility(View.GONE);
             wode_weidenglu.setVisibility(View.VISIBLE);
             wode_weirenzheng.setVisibility(View.GONE);
-            wode_touxiang.setImageResource(R.drawable.wode_weidenglu_img);
+//            wode_touxiang.setImageResource(R.drawable.wode_weidenglu_img); // 以前的未登录
+
+            Glide.with(activity)
+                    .load(R.drawable.guangao)
+                    .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
+                    .into(wode_touxiang);
         }
 
         wode_MyListView.setAdapter(new MyListAdapter(activity, myListBeen));
@@ -229,19 +233,20 @@ public class MyFragmet extends Fragment {
                             }
 
                             break;
-                        case 5:    // 委托申请
-                            intent = new Intent(activity, Entrust_Activity.class);
-                            activity.startActivity(intent);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            break;
-                        case 6:    // 委托列表
-                            intent = new Intent(activity, Entrust_List_Activity.class);
-                            activity.startActivity(intent);
-                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                            break;
+//                        case 5:    // 委托申请
+//                           // intent = new Intent(activity, Entrust_Activity.class);
+//                            intent = new Intent(activity, Entrust_PT_Activity.class);
+//                            activity.startActivity(intent);
+//                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//                            break;
+//                        case 6:    // 委托列表
+//                            intent = new Intent(activity, Entrust_List_Activity.class);
+//                            activity.startActivity(intent);
+//                            activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+//                            break;
                     }
                 }else{ // 没登录直接跳到登录页面
-                    intent = new Intent(activity, LoginActivity.class);
+                    intent = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -256,7 +261,7 @@ public class MyFragmet extends Fragment {
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{ // 没登录直接跳到登录页面
-                    intent = new Intent(activity, LoginActivity.class);
+                    intent = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -272,26 +277,28 @@ public class MyFragmet extends Fragment {
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{ // 没登录直接跳到登录页面
-                    intent = new Intent(activity, LoginActivity.class);
+                    intent = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
             }
         });
 
-        Setting_Activity.setSetting_JieKou(new Setting_Activity.Setting_JieKou() {
-            @Override
-            public void chuan() {
-                wode_yirenzheng.setVisibility(View.GONE);
-                wode_weirenzheng.setVisibility(View.GONE);
-            }
-        });
+//        Setting_Activity.setSetting_JieKou(new Setting_Activity.Setting_JieKou() {
+//            @Override
+//            public void chuan() {
+//                wode_yirenzheng.setVisibility(View.GONE);
+//                wode_weirenzheng.setVisibility(View.GONE);
+//            }
+//        });
     }
 
-
+    Map<String, String> map = new HashMap<>();
     // 获取用户信息
     private void getUser() {
-        activity.myPresenter.getPreContent(APIs.findPersonalUserAccount, new MyInterfaces() {
+        map.clear();
+        map.put("","");
+        activity.myPresenter.postPreContent(APIs.findPersonalUserAccount,map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -308,6 +315,7 @@ public class MyFragmet extends Fragment {
                                 .putString(SP_String.EMAIL,userBean.getData().getAccountInfo().getEmail()+"")
                                 .commit();
 
+                        // 设置个人头像
                         if(userBean.getData().getAccountInfo().getImgUrl()==null){
                             Glide.with(activity)
                                     .load(R.drawable.guangao)
@@ -316,8 +324,8 @@ public class MyFragmet extends Fragment {
                         }else{
                             DashApplication.edit.putString(SP_String.USERIMG,userBean.getData().getAccountInfo().getImgUrl()).commit();
                             Glide.with(activity)
-                                    .load(userBean.getData().getAccountInfo().getImgUrl())
-                                    .error(R.drawable.wode_weidenglu_img)
+                                    .load(R.drawable.guangao)  // 成功
+                                    .error(R.drawable.guangao)  // 失败
                                     .bitmapTransform(new CropCircleTransformation(DashApplication.getAppContext()))
                                     .into(wode_touxiang);
                         }
@@ -371,7 +379,7 @@ public class MyFragmet extends Fragment {
 
     private void initView(View view) {
         wode_touxiang = (ImageView) view.findViewById(R.id.wode_touxiang);
-        wode_name = (TextView) view.findViewById(R.id.wode_name);
+//        wode_name = (TextView) view.findViewById(R.id.wode_name);
         wode_hao = (TextView) view.findViewById(R.id.wode_hao);
         wode_weirenzheng = (TextView) view.findViewById(R.id.wode_weirenzheng);
         wode_MyListView = (MyListView) view.findViewById(R.id.wode_MyListView);
@@ -381,6 +389,13 @@ public class MyFragmet extends Fragment {
         wode_weidenglu = (LinearLayout) view.findViewById(R.id.wode_weidenglu);
         wode_yirenzheng = (ImageView) view.findViewById(R.id.wode_yirenzheng);
 
+        /**
+         * 解决scrollview 显示不在顶部问题
+         */
+        wode_touxiang.setFocusable(true);
+        wode_touxiang.setFocusableInTouchMode(true);
+        wode_touxiang.requestFocus();
+
         initData();
     }
 
@@ -388,12 +403,12 @@ public class MyFragmet extends Fragment {
         myListBeen.add(new MyListBean(R.drawable.wode_zican, "我的资产"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_zhengji, "我的征集"));
         myListBeen.add(new MyListBean(R.drawable.wode_tuoguan, "我的托管"));
-        myListBeen.add(new MyListBean(R.drawable.wode_zhuanzeng, "转赠列表"));
+        myListBeen.add(new MyListBean(R.drawable.wode_zhuanzeng, "转让列表"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_ruku,"入库管理"));
 //        myListBeen.add(new MyListBean(R.drawable.wode_chuku,"出库管理"));
-        myListBeen.add(new MyListBean(R.drawable.wode_cangku, "我的仓库"));
+        myListBeen.add(new MyListBean(R.drawable.wode_cangku, "我的宝库"));
         myListBeen.add(new MyListBean(R.drawable.wode_tihuo, "提货查询"));
-        myListBeen.add(new MyListBean(R.drawable.weituo_shenqing, "委托申请"));
-        myListBeen.add(new MyListBean(R.drawable.weituo_liebiao, "委托列表"));
+//        myListBeen.add(new MyListBean(R.drawable.weituo_shenqing, "委托申请"));
+//        myListBeen.add(new MyListBean(R.drawable.weituo_liebiao, "委托列表"));
     }
 }

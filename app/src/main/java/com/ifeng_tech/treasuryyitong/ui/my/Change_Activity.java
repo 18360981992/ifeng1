@@ -58,15 +58,20 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                change_duan_btn.setText("点击发送");
-                change_duan_btn.setEnabled(true);
-            } else {
-                change_duan_btn.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    change_duan_btn.setText("点击发送");
+                    change_duan_btn.setEnabled(true);
+                } else {
+                    change_duan_btn.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
+            }else{
+                submit();
             }
+
         }
     };
     private String oldSmsCode;   // 旧手机的短信验证码
@@ -112,7 +117,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                     return;
                 }
 
-                String yan = change_tu_yan.getText().toString().trim();
+                final String yan = change_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Change_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -138,6 +143,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile",shuru);
                                 map.put("codeType","7");  // ("绑定新手机", 7)
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -145,11 +151,19 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                                         if(smCodeBean.getCode().equals("2000")){
                                             MyUtils.setToast("短信发送成功");
                                         }else{
+                                            time = 60;
+                                            change_duan_btn.setText("点击发送");
+                                            change_duan_btn.setEnabled(true);
+                                            h.removeMessages(0);
                                             MyUtils.setToast(smCodeBean.getMessage()+"");
                                         }
                                     }
                                     @Override
                                     public void shibai(String ss) {
+                                        time = 60;
+                                        change_duan_btn.setText("点击发送");
+                                        change_duan_btn.setEnabled(true);
+                                        h.removeMessages(0);
                                         MyUtils.setToast("短信发送失败");
                                     }
                                 });
@@ -183,18 +197,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
             @Override
             public void onClick(View v) {
                 // 初始化图形验证码
-                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
-                    @Override
-                    public void chenggong(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            change_tu_yan_img.setImageBitmap(bitmap);
-                        }
-                    }
-                    @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast("图形验证码获取失败！");
-                    }
-                });
+                getTuXing_Code();
             }
         });
 
@@ -205,7 +208,8 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(change_duan.getWindowToken(), 0);
-                submit();
+                h.sendEmptyMessageDelayed(1,200);
+                //submit();
             }
         });
     }
@@ -213,7 +217,10 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
     @Override
     protected void onResume() {
         super.onResume();
-
+        getTuXing_Code();// 初始化图形验证码
+    }
+    // 初始化图形验证码
+    private void getTuXing_Code() {
         // 初始化图形验证码
         myPresenter.getPro_TuXingYanZheng( APIs.newImageCode, new MyJieKou() {
             @Override
@@ -327,6 +334,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
                             }
                         });
                     }else{
+                        getTuXing_Code();// 初始化图形验证码
                         MyUtils.setObjectAnimator(change_weitanchuan,
                                 change_weitanchuan_img,
                                 change_weitanchuan_text,
@@ -341,6 +349,7 @@ public class Change_Activity extends BaseMVPActivity<Change_Activity,MyPresenter
             @Override
             public void shibai(String ss) {
                 aniDialog.dismiss();
+                getTuXing_Code();// 初始化图形验证码
                 MyUtils.setObjectAnimator(change_weitanchuan,
                         change_weitanchuan_img,
                         change_weitanchuan_text,

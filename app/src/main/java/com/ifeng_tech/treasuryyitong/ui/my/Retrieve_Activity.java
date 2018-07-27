@@ -55,15 +55,20 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                retrieve_duan_btn.setText("点击发送");
-                retrieve_duan_btn.setEnabled(true);
-            } else {
-                retrieve_duan_btn.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    retrieve_duan_btn.setText("点击发送");
+                    retrieve_duan_btn.setEnabled(true);
+                } else {
+                    retrieve_duan_btn.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
+            }else{
+                submit();
             }
+
         }
     };
     private SharedPreferences sp;
@@ -156,7 +161,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                     mobile=shuru ;
                 }
 
-                String yan = retrieve_tu_yan.getText().toString().trim();
+                final String yan = retrieve_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Retrieve_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -184,6 +189,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile",mobile);
                                 map.put("codeType",codeType);
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -191,12 +197,20 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                                         if(smCodeBean.getCode().equals("2000")){
                                             MyUtils.setToast("短信发送成功");
                                         }else{
+                                            time = 60;
+                                            retrieve_duan_btn.setText("点击发送");
+                                            retrieve_duan_btn.setEnabled(true);
+                                            h.removeMessages(0);
                                             MyUtils.setToast(smCodeBean.getMessage()+"");
                                         }
                                     }
 
                                     @Override
                                     public void shibai(String ss) {
+                                        time = 60;
+                                        retrieve_duan_btn.setText("点击发送");
+                                        retrieve_duan_btn.setEnabled(true);
+                                        h.removeMessages(0);
                                         MyUtils.setToast("短信发送失败");
                                     }
                                 });
@@ -232,18 +246,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             @Override
             public void forbidClick(View v) {
                 // 初始化图形验证码
-                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
-                    @Override
-                    public void chenggong(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            retrieve_tu_yan_img.setImageBitmap(bitmap);
-                        }
-                    }
-                    @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast("图形验证码获取失败！");
-                    }
-                });
+                getTuXing_Code();
             }
         });
 
@@ -254,7 +257,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(retrieve_tu_yan.getWindowToken(), 0);
-                submit();
+                h.sendEmptyMessageDelayed(1,200);
             }
         });
 
@@ -263,7 +266,10 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     @Override
     protected void onResume() {
         super.onResume();
+        getTuXing_Code(); // 初始化图形验证码
+    }
 
+    private void getTuXing_Code() {
         // 初始化图形验证码
         myPresenter.getPro_TuXingYanZheng( APIs.newImageCode, new MyJieKou() {
             @Override
@@ -322,6 +328,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == DashApplication.RETRIEVE_TO_FORGET_req && resultCode == DashApplication.RETRIEVE_TO_FORGET_res) {
+            setResult(DashApplication.LOGIN_TO_RETRIEVE_res);
             finish();
         }
         if (requestCode == DashApplication.RETRIEVE_TO_CHANGE_req && resultCode == DashApplication.RETRIEVE_TO_CHANGE_res) {
@@ -391,6 +398,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
 
                     }else{
+                        getTuXing_Code(); // 初始化图形验证码
                         MyUtils.setObjectAnimator(retrieve_weitanchuan,
                                 retrieve_weitanchuan_img,
                                 retrieve_weitanchuan_text,
@@ -407,6 +415,7 @@ public class Retrieve_Activity extends BaseMVPActivity<Retrieve_Activity, MyPres
             @Override
             public void shibai(String ss) {
                 aniDialog.dismiss();
+                getTuXing_Code(); // 初始化图形验证码
                 MyUtils.setObjectAnimator(retrieve_weitanchuan,
                     retrieve_weitanchuan_img,
                     retrieve_weitanchuan_text,

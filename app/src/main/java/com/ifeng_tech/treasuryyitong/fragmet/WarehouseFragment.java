@@ -23,8 +23,8 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Datail_Activity;
+import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.cangku.My_Warehouse_Datail_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
@@ -231,7 +231,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
         if (list.size() > 0) {
             warehouse_fra_null.setVisibility(View.GONE);
             warehouse_fra_pulltoscroll.setVisibility(View.VISIBLE);
-
+            warehouse_adapter=null;
             if (warehouse_adapter == null) {
                 warehouse_adapter = new Warehouse_Adapter(activity, list,warehouseBean);
                 warehouse_fra_MyListView.setAdapter(warehouse_adapter);
@@ -272,7 +272,7 @@ public class WarehouseFragment extends Fragment implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.warehouse_fra_btn:
-                Intent intent = new Intent(activity, LoginActivity.class);
+                Intent intent = new Intent(activity, Login_New_Activity.class);
                 startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 break;

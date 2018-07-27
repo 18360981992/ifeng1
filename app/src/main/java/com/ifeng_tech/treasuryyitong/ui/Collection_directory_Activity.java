@@ -50,16 +50,6 @@ public class Collection_directory_Activity extends BaseMVPActivity<Collection_di
         setContentView(R.layout.activity_collection_directory_);
         initView();
 
-        //设置tablayout的横杆器的长度
-        collection_mulu_TabLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                MyTabLayout.reflex(collection_mulu_TabLayout);
-            }
-        });
-
-
-
         collection_mulu_Fan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,6 +104,15 @@ public class Collection_directory_Activity extends BaseMVPActivity<Collection_di
     @Override
     protected void onResume() {
         super.onResume();
+
+        //设置tablayout的横杆器的长度
+        collection_mulu_TabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                MyTabLayout.reflex(collection_mulu_TabLayout);
+            }
+        });
+
 
         //设置tab的点击监听器
         collection_mulu_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {

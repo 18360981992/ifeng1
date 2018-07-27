@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.cangku.My_Warehouse_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -98,6 +98,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none"
+        android:fillViewport="true"
         >
         <LinearLayout
             android:layout_width="match_parent"

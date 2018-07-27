@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/pop_item_kuang"
+    >
+
+    <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
+        android:id="@+id/search_pop_shua_pulltoscroll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <com.ifeng_tech.treasuryyitong.view.MyListView
+                android:id="@+id/search_pop_shua_MyListView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="none"
+                android:divider="@null"
+                ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+        </LinearLayout>
+    </com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView>
+
+</LinearLayout>

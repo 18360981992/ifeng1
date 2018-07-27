@@ -13,7 +13,6 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
@@ -22,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,8 +31,11 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.my.UpLode_bean;
+import com.ifeng_tech.treasuryyitong.bean.weituo.Entrust_ClientGoodsByClientCode_Bean;
+import com.ifeng_tech.treasuryyitong.bean.weituo.Entrust_Client_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
 import com.ifeng_tech.treasuryyitong.utils.ImageUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
@@ -84,11 +87,20 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
 
     String idCardUrl="";  // 上传图片路径
 
-    List<String> list = new ArrayList<>();
+    List<Entrust_Client_Bean.DataBean.ClientBean> list = new ArrayList<>();
+    List<Entrust_ClientGoodsByClientCode_Bean.DataBean.ListBean> list_code=new ArrayList<>();
     private Search_Pop_View search_pop_view;
-
+    private Search_Pop_View search_pop_view1;
     // 设置下载路径
-    public static final String WORD_PATH = Environment.getExternalStorageDirectory() + "/Download/fanli_wendang";
+    private  final String WORD_PATH = Environment.getExternalStorageDirectory() + "/Download/fanli_wendang";
+    private TextView entrust_cname;
+    private EditText entrust_shuliang;
+    private int cname_measuredWidth;
+    private String clientCode="";
+    private ImageView entrust_cname_jiantou;
+    private String orgCode;
+    private String goodsCode;
+    private ScrollView entrust_scrollView;
 
     @Override
     public MyPresenter<Entrust_Activity> initPresenter() {
@@ -106,6 +118,16 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
         this.entrust_Activity_JieKou = entrust_Activity_JieKou;
     }
 
+    public interface Entrust_Client_Activity_JieKou{
+        void chuan( );
+    }
+    Entrust_Client_Activity_JieKou entrust_Client_Activity_JieKou;
+
+    public void setEntrust_Client_Activity_JieKou(Entrust_Client_Activity_JieKou entrust_Client_Activity_JieKou) {
+        this.entrust_Client_Activity_JieKou = entrust_Client_Activity_JieKou;
+    }
+
+    int pageNum=1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -120,11 +142,101 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
             }
         });
 
-        // 选择平台
-        entrust_pingtai.setOnClickListener(new View.OnClickListener() {
+        // 选择平台  entrust_Activity_JieKou.chuan();
+        entrust_pingtai.setOnClickListener(new ForbidClickListener() {
             @Override
-            public void onClick(View v) {
-                entrust_Activity_JieKou.chuan();
+            public void forbidClick(View v) {
+                Map<String, String> map = new HashMap<>();
+                map.put("","");
+                if(search_pop_view==null){
+                    final ProgressDialog aniDialog = MyUtils.getProgressDialog(Entrust_Activity.this, SP_String.JIAZAI);
+                    myPresenter.postPreContent(APIs.getClient, map, new MyInterfaces() {
+                        @Override
+                        public void chenggong(String json) {
+                            aniDialog.dismiss();
+                            try {
+                                JSONObject jsonObject = new JSONObject(json);
+                                String code = (String) jsonObject.get("code");
+                                if(code.equals("2000")){
+                                    Entrust_Client_Bean entrust_client_bean = new Gson().fromJson(json, Entrust_Client_Bean.class);
+                                    List<Entrust_Client_Bean.DataBean.ClientBean> zilist = entrust_client_bean.getData().getClient();
+                                    if(zilist.size()>0){
+                                        list.clear();
+                                        list.addAll(zilist);
+                                        entrust_Activity_JieKou.chuan();
+                                    }
+                                }else{
+                                    MyUtils.setToast((String) jsonObject.get("message"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void shibai(String ss) {
+                            aniDialog.dismiss();
+                            MyUtils.setToast(ss);
+                        }
+                    });
+                }else{
+                    if(list.size()>0){
+                        entrust_Activity_JieKou.chuan();
+                    }
+                }
+            }
+        });
+
+        // 藏品名称点击
+        entrust_cname.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                if(clientCode.equals("")){
+                    MyUtils.setToast("请先选择交货平台!");
+                }else{
+                    Map<String, String> map = new HashMap<>();
+                    map.put("clientCode",clientCode);
+                    map.put("pageNum",pageNum+"");
+                    map.put("pageSize","10");
+//                    if(search_pop_view1==null){
+                        final ProgressDialog aniDialog = MyUtils.getProgressDialog(Entrust_Activity.this, SP_String.JIAZAI);
+                        myPresenter.postPreContent(APIs.getClientGoodsByClientCode, map, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                aniDialog.dismiss();
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    String code = (String) jsonObject.get("code");
+                                    if(code.equals("2000")){
+                                        Entrust_ClientGoodsByClientCode_Bean entrust_clientGoodsByClientCode_bean = new Gson().fromJson(json, Entrust_ClientGoodsByClientCode_Bean.class);
+                                        List<Entrust_ClientGoodsByClientCode_Bean.DataBean.ListBean> zilist = entrust_clientGoodsByClientCode_bean.getData().getList();
+                                        list_code.clear();
+                                        if(zilist.size()>0){
+                                            list_code.addAll(zilist);
+                                            entrust_Client_Activity_JieKou.chuan();
+                                        }else{
+                                            MyUtils.setToast("该平台中暂无藏品");
+                                        }
+                                    }else{
+                                        MyUtils.setToast((String) jsonObject.get("message"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+                                aniDialog.dismiss();
+                                MyUtils.setToast(ss);
+                            }
+                        });
+//                    }else{
+//                        if(list_code.size()>0){
+//                            entrust_Client_Activity_JieKou.chuan();
+//                        }
+//                    }
+                }
             }
         });
 
@@ -194,8 +306,87 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
 
                 search_pop_view.setSearch_Pop_JieKou_String(new Search_Pop_View.Search_Pop_JieKou_String() {
                     @Override
-                    public void chuan(List<String> list, int postion) {
-                        entrust_pingtai.setText(list.get(postion));
+                    public void chuan(List<Entrust_Client_Bean.DataBean.ClientBean> list, int postion) {
+                        if(!list.get(postion).getClientName().equals(entrust_pingtai.getText().toString().trim())){
+                            entrust_cname.setText("");
+                        }
+                        entrust_pingtai.setText(list.get(postion).getClientName()+"");
+                        clientCode = list.get(postion).getClientCode()+"";
+                        orgCode = list.get(postion).getClientCode()+"";  // 平台code
+
+                    }
+                });
+            }
+        });
+
+        // 选择藏品名称 回调接口
+        setEntrust_Client_Activity_JieKou(new Entrust_Client_Activity_JieKou() {
+            @Override
+            public void chuan() {
+
+                if(search_pop_view1!=null&&search_pop_view1.isShowing()){
+                    search_pop_view1.dismiss();
+                }else if(search_pop_view1!=null&&!search_pop_view1.isShowing()) {
+                    search_pop_view1.showAsDropDown(entrust_cname);
+                }else{
+                    search_pop_view1 = new Search_Pop_View(Entrust_Activity.this);
+                    search_pop_view1.Search_Pop_View_Code(Entrust_Activity.this,cname_measuredWidth,list_code,entrust_cname_jiantou);
+                    search_pop_view1.setBackgroundDrawable(new BitmapDrawable());
+                    search_pop_view1.showAsDropDown(entrust_cname);
+                }
+
+                search_pop_view1.setSearch_Pop_Code_JieKou_String(new Search_Pop_View.Search_Pop_Code_JieKou_String() {
+                    @Override
+                    public void chuan(List<Entrust_ClientGoodsByClientCode_Bean.DataBean.ListBean> list, int postion) {
+                        entrust_cname.setText(list.get(postion).getCommodityName()+"");
+                        goodsCode = list.get(postion).getCommodityCode()+"";  // 藏品code
+                    }
+                });
+
+                search_pop_view1.setSearch_Pop_Code_Shua_JieKou(new Search_Pop_View.Search_Pop_Code_Shua_JieKou() {
+                    @Override
+                    public void chuan(final PullToRefreshScrollView search_pop_shua_pulltoscroll) {
+                        final Map<String, String> map = new HashMap<>();
+                        pageNum++;
+                        map.put("clientCode",clientCode);
+                        map.put("pageNum",pageNum+"");
+                        map.put("pageSize","10");
+                        myPresenter.postPreContent(APIs.getClientGoodsByClientCode, map, new MyInterfaces() {
+                            @Override
+                            public void chenggong(String json) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(json);
+                                    String code = (String) jsonObject.get("code");
+                                    if(code.equals("2000")){
+                                        Entrust_ClientGoodsByClientCode_Bean entrust_clientGoodsByClientCode_bean = new Gson().fromJson(json, Entrust_ClientGoodsByClientCode_Bean.class);
+                                        String pageNum = map.get("pageNum");
+                                        if(Integer.valueOf(pageNum) <= entrust_clientGoodsByClientCode_bean.getData().getPageInfo().getPageCount()){
+                                            List<Entrust_ClientGoodsByClientCode_Bean.DataBean.ListBean> zilist = entrust_clientGoodsByClientCode_bean.getData().getList();
+                                            if(zilist.size()>0){
+                                                list_code.addAll(zilist);
+//                                                entrust_Client_Activity_JieKou.chuan();
+                                                search_pop_view1.setPop_Shua_Adapter(Entrust_Activity.this,list_code);
+                                            }
+                                        }else{
+                                            MyUtils.setToast("没有更多数据了");
+                                        }
+
+                                    }else{
+                                        MyUtils.setToast((String) jsonObject.get("message"));
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }finally {
+                                    search_pop_shua_pulltoscroll.onRefreshComplete();
+                                }
+                            }
+
+                            @Override
+                            public void shibai(String ss) {
+                                search_pop_shua_pulltoscroll.onRefreshComplete();
+                                MyUtils.setToast(ss);
+                            }
+                        });
                     }
                 });
             }
@@ -240,11 +431,14 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
         if(requestCode==100&resultCode==RESULT_OK){
             Uri uri = data.getData();
             File fileUri = ImageUtils.getFileUri(uri, this); // 将uri转成file
-            entrust_img.setImageURI(uri);
-            getUplode(fileUri);  // 上传文件
+            File photos = getPhotos(fileUri); // 将相册中获取到的照片重新选择路径存储
+            entrust_img.setBackgroundResource(0);
+            Glide.with(this).load(photos).into(entrust_img);
+            getUplode(photos);  // 上传文件
         }
         if(requestCode==1000&resultCode==RESULT_OK){   // 相机
-            File photos = getPhotos(data);
+            File photos = getPhotos(data); // 将相机中拍摄到的照片重新选择路径存储
+            entrust_img.setBackgroundResource(0);
             Glide.with(this).load(photos).into(entrust_img);
             getUplode(photos);  // 上传文件
         }
@@ -268,8 +462,12 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
     }
 
     private void initView() {
+        entrust_scrollView = findViewById(R.id.entrust_ScrollView);
         entrust_Fan = (RelativeLayout) findViewById(R.id.entrust_Fan);
         entrust_pingtai = (TextView) findViewById(R.id.entrust_pingtai);
+        entrust_cname = (TextView) findViewById(R.id.entrust_cname);
+        entrust_cname_jiantou = (ImageView) findViewById(R.id.entrust_cname_jiantou);
+        entrust_shuliang = (EditText) findViewById(R.id.entrust_shuliang);
         entrust_jiantou = (ImageView) findViewById(R.id.entrust_jiantou);
         entrust_tihuo_danhao = (EditText) findViewById(R.id.entrust_tihuo_danhao);
         entrust_pass = (EditText) findViewById(R.id.entrust_pass);
@@ -295,8 +493,10 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
                 entrust_pingtai.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                 //获取平台的宽度
                 measuredWidth = entrust_pingtai.getMeasuredWidth();
+                cname_measuredWidth = entrust_cname.getMeasuredWidth();
             }
         });
+
 
         //通过设置监听来获取 微弹窗 控件的高度
         entrust_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -309,10 +509,6 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
             }
         });
 
-
-
-        list.clear();
-        list.add("北交所福丽特邮币卡交易平台");
     }
 
 
@@ -321,6 +517,20 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
         String pingtai = entrust_pingtai.getText().toString().trim();
         if (TextUtils.isEmpty(pingtai)) {
             Toast.makeText(this, "请选择平台", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String cname = entrust_cname.getText().toString().trim();
+        if (TextUtils.isEmpty(cname)) {
+            Toast.makeText(this, "请选择藏品名称", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String shuliang = entrust_shuliang.getText().toString().trim();
+        if (TextUtils.isEmpty(shuliang)) {
+            Toast.makeText(this, "请输入数量", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(Integer.valueOf(shuliang)==0){
+            MyUtils.setToast("数量不能小于0");
             return;
         }
 
@@ -363,8 +573,13 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
             MyUtils.setToast("请选择身份信息上传");
             return;
         }
+
+        entrust_scrollView.smoothScrollTo(0,0); // scrollview滚动到顶部
         // TODO validate success, do something
         Map<String, String> map = new HashMap<>();
+        map.put("orgCode",orgCode);
+        map.put("goodsCode",goodsCode);
+        map.put("amount",shuliang);
         map.put("deliveryNo",danhao);
         map.put("deliveryPwd",pass);
         map.put("deliveryDate",rili);
@@ -428,6 +643,8 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
      */
     FinalHttp fh = new FinalHttp();  // 框架的实例化
     private void getUplode(File fileUri) {
+        //  进度框
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(this, SP_String.JIAZAI);
         AjaxParams params = new AjaxParams();
         try {
             params.put("file", fileUri);
@@ -435,6 +652,7 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
                 @Override
                 public void onSuccess(String json) {
                     super.onSuccess(json);
+                    aniDialog.dismiss();
                     try {
                         JSONObject jsonObject = new JSONObject(json);
                         String code = (String) jsonObject.get("code");
@@ -456,6 +674,7 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
                 @Override
                 public void onFailure(Throwable t, int errorNo, String strMsg) {
                     super.onFailure(t, errorNo, strMsg);
+                    aniDialog.dismiss();
                     MyUtils.setToast("上传失败！");
                 }
             });
@@ -492,7 +711,7 @@ public class Entrust_Activity extends BaseMVPActivity<Entrust_Activity,MyPresent
 
             @Override
             public void onLoading(long count, long current) {
-                Log.i("jiba", "onLoading: 走了。。。");
+//                Log.i("jiba", "onLoading: 走了。。。");
                 double cou = count / 100;
                 double curr = current / cou;
 

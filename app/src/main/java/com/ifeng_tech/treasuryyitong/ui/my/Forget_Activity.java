@@ -32,8 +32,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import static com.ifeng_tech.treasuryyitong.R.id.logo_pass;
-
 /**
  *  找回密码
  */
@@ -168,6 +166,7 @@ public class Forget_Activity extends BaseMVPActivity<Forget_Activity,MyPresenter
                             @Override
                             public void chuan() {
                                 DashApplication.edit
+                                        .putString(SP_String.SHOUJI,mobile)
                                         .putString(SP_String.PASS,queren)
                                         .commit();
 

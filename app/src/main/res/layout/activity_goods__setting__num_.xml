@@ -59,7 +59,7 @@
             android:id="@+id/goods_setting_num_shuliang"
             android:layout_width="match_parent"
             android:layout_height="@dimen/x75"
-            android:layout_marginLeft="@dimen/x97"
+            android:layout_marginLeft="@dimen/x30"
             android:layout_marginRight="@dimen/x16"
             android:background="@drawable/tihuo_ed_bg"
             android:hint="请输入数量"
@@ -74,7 +74,7 @@
     <Button
         android:id="@+id/goods_setting_num_btn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x70"
+        android:layout_height="@dimen/x80"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/x16"
         android:layout_marginLeft="@dimen/x16"
@@ -82,7 +82,7 @@
         android:background="@drawable/congzhi_bg"
         android:text="确定"
         android:textColor="@color/baise"
-        android:textSize="@dimen/x28"
+        android:textSize="@dimen/x30"
         android:gravity="center"
         android:layout_marginTop="@dimen/x100"
         />

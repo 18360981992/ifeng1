@@ -44,7 +44,7 @@
         android:id="@+id/zixun_TabLayout"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
+        android:layout_height="@dimen/x90"
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/zhuse"
         app:tabMode="scrollable"

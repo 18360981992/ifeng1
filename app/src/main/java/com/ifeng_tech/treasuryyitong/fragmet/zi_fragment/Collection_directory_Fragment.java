@@ -60,13 +60,6 @@ public class Collection_directory_Fragment extends Fragment {
         activity = (Collection_directory_Activity) getActivity();
         //获取传递的top值，，，
         top = getArguments().getString("top");
-        return view;
-    }
-
-    int pageNum=1;
-    @Override
-    public void onResume() {
-        super.onResume();
 
         pageNum=1;
         String url = APIs.queryCommodityList(pageNum, getTopList(top));
@@ -74,6 +67,14 @@ public class Collection_directory_Fragment extends Fragment {
         aniDialog = MyUtils.getProgressDialog(activity, SP_String.JIAZAI);
 
         getFristConect(url);  // 进入页面首次获取数据
+
+        return view;
+    }
+
+    int pageNum=1;
+    @Override
+    public void onResume() {
+        super.onResume();
 
         // 下拉刷新  加载
         collection_mulu_fragment_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {

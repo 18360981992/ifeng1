@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="绑定邮箱（设置）"
+            android:text="业务密码重置"
             android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_alignParentBottom="true"
@@ -66,19 +66,21 @@
                 android:gravity="center"
                 android:layout_marginLeft="@dimen/x16"
                 android:layout_marginRight="@dimen/x16"
-                android:layout_marginTop="@dimen/x40"
+                android:layout_marginTop="@dimen/x80"
                 />
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x90"
-                android:layout_marginTop="@dimen/x36"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/x40"
                 android:gravity="center_vertical">
 
                 <LinearLayout
-                    android:layout_width="@dimen/x500"
-                    android:layout_height="@dimen/x70"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x120"
                     android:background="@drawable/tihuo_ed_bg"
                     android:layout_centerInParent="true"
+                    android:layout_marginRight="@dimen/x20"
+                    android:layout_marginLeft="@dimen/x20"
                     >
 
                     <EditText
@@ -92,8 +94,9 @@
                         android:maxLength="4"
                         android:singleLine="true"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/x20"
                         />
 
                     <View
@@ -111,7 +114,7 @@
                         android:gravity="center"
                         android:text="再发一封"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x24" />
+                        android:textSize="@dimen/x26" />
                 </LinearLayout>
             </RelativeLayout>
             <RelativeLayout

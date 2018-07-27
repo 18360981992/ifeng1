@@ -391,7 +391,7 @@ public class Authenticate_Details_Time_Bean implements Serializable{
             private Object addTime;
             private Object trusteeship_id;
             private Object pmoram_pm;
-            private Object ids_pm;
+            private String ids_pm;
             private String pmoram_am;
             private Object curNumber;
             private String pmORam;
@@ -444,11 +444,11 @@ public class Authenticate_Details_Time_Bean implements Serializable{
                 this.pmoram_pm = pmoram_pm;
             }
 
-            public Object getIds_pm() {
+            public String getIds_pm() {
                 return ids_pm;
             }
 
-            public void setIds_pm(Object ids_pm) {
+            public void setIds_pm(String ids_pm) {
                 this.ids_pm = ids_pm;
             }
 

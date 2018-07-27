@@ -43,12 +43,12 @@
     <RelativeLayout
         android:id="@+id/safe_chongzhi"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80">
+        android:layout_height="@dimen/x90">
 
         <ImageView
             android:id="@+id/img1"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
             android:background="@drawable/chongzhi"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x16"
@@ -57,9 +57,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="重置密码"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x25"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img1"
             />
@@ -86,12 +86,12 @@
     <RelativeLayout
         android:id="@+id/safe_zhaohui"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80">
+        android:layout_height="@dimen/x90">
 
         <ImageView
             android:id="@+id/img2"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
             android:background="@drawable/zhaohui"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x16"
@@ -100,9 +100,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="找回密码"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x25"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img2"
             />
@@ -129,11 +129,11 @@
     <RelativeLayout
         android:id="@+id/safe_geng_shouji"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80">
+        android:layout_height="@dimen/x90">
         <ImageView
             android:id="@+id/img3"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x38"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x45"
             android:background="@drawable/genggai"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x16"
@@ -143,11 +143,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="更改绑定手机号"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"
             android:layout_toRightOf="@+id/img3"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x25"
             />
 
         <ImageView
@@ -172,11 +172,11 @@
     <RelativeLayout
         android:id="@+id/safe_yewu_pass"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80">
+        android:layout_height="@dimen/x90">
         <ImageView
             android:id="@+id/img4"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
+            android:layout_width="@dimen/x35"
+            android:layout_height="@dimen/x35"
             android:background="@drawable/yewu_pass"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x16"
@@ -186,11 +186,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="业务密码"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"
             android:layout_toRightOf="@+id/img4"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginLeft="@dimen/x25"
             />
 
         <ImageView
@@ -215,43 +215,42 @@
     <RelativeLayout
         android:id="@+id/safe_bind_youxiang"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x80">
+        android:layout_height="@dimen/x90">
+
         <ImageView
             android:id="@+id/img5"
-            android:layout_width="@dimen/x30"
-            android:layout_height="@dimen/x30"
-            android:background="@drawable/youxiang"
+            android:layout_width="@dimen/x40"
+            android:layout_height="@dimen/x35"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x16"
-            />
+            android:background="@drawable/youxiang" />
 
         <TextView
+            android:id="@+id/safe_bind_youxiang_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="绑定邮箱"
-            android:textSize="@dimen/x26"
-            android:textColor="@color/name_se"
-            android:layout_toRightOf="@+id/img5"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/x20"
-            />
+            android:layout_toRightOf="@+id/img5"
+            android:text="绑定邮箱"
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x29" />
 
         <ImageView
             android:layout_width="@dimen/x20"
             android:layout_height="@dimen/x26"
-            android:background="@drawable/jiantou"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/x20"
-            />
+            android:background="@drawable/jiantou" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/x2"
+            android:layout_alignParentBottom="true"
             android:layout_marginLeft="@dimen/x20"
             android:layout_marginRight="@dimen/x20"
-            android:background="@color/fengouxian1"
-            android:layout_alignParentBottom="true"
-            />
+            android:background="@color/fengouxian1" />
 
     </RelativeLayout>
 

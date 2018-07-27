@@ -50,7 +50,7 @@ public class Information_zi_Fragment extends Fragment {
     List<Information_Zi_Bean.DataBean.ListBean> list = new ArrayList<>();
 
     private Information_zi_Adapter information_zi_adapter;
-    private String id;
+    public  String  id;
     private String type;
     private String top;
 
@@ -67,13 +67,12 @@ public class Information_zi_Fragment extends Fragment {
 
     int pageNum_Quanbu=1;
     int pageNum_LanMu=1;
-
     @Override
     public void onResume() {
         super.onResume();
 
         //获取传递的top值，，
-        id = getArguments().getString("id");
+        id = getArguments().getString("id");  // id = 147
         type = getArguments().getString("type");
         top = getArguments().getString("top");  // 暂时不用
 
@@ -81,18 +80,19 @@ public class Information_zi_Fragment extends Fragment {
         final ProgressDialog aniDialog = MyUtils.getProgressDialog(activity, SP_String.JIAZAI);
 
         if(type.equals("1")){  // 查询全部
-            HashMap<String, String> map = new HashMap<>();
-            map.put("mainColumnId", id);
-            map.put("pageNum", pageNum_Quanbu+"");
-            map.put("pageSize", 10+"");
-
-            getFirstConect(map,APIs.getArticleListByMainColumnId,top,aniDialog);
+//            HashMap<String, String> map = new HashMap<>();
+//            map.put("mainColumnId", id);
+//            map.put("pageNum", pageNum_Quanbu+"");
+//            map.put("pageSize", 10+"");
+            String articleListByMainColumnId = APIs.getArticleListByMainColumnId(id, pageNum_Quanbu, 10);
+            getFirstConect(articleListByMainColumnId,top,aniDialog);  // get请求
         }else{
             HashMap<String, String> map = new HashMap<>();
             map.put("subColumnId", id);
             map.put("pageNum", pageNum_LanMu+"");
             map.put("pageSize", 10+"");
-            getFirstConect(map,APIs.getArticleListBySubColumnId,top,aniDialog);
+//            String articleListByMainColumnId = APIs.getArticleListBySubColumnId(id, pageNum_LanMu, 10);
+            getFirstConect1(map,APIs.getArticleListBySubColumnId,top,aniDialog);  // post请求
         }
 
 
@@ -101,19 +101,23 @@ public class Information_zi_Fragment extends Fragment {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {
 //                MyUtils.setToast("下拉了。。。");
-
+                int pageNum_Quanbu=1;
+                int pageNum_LanMu=1;
                 if(type.equals("1")){  // 查询全部
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("mainColumnId", id);
-                    map.put("pageNum", pageNum_Quanbu+"");
-                    map.put("pageSize", 10+"");
-                    getFirstConect(map,APIs.getArticleListByMainColumnId,top,aniDialog);
+//                    HashMap<String, String> map = new HashMap<>();
+//                    map.put("mainColumnId", id);
+//                    map.put("pageNum", pageNum_Quanbu+"");
+//                    map.put("pageSize", 10+"");
+
+                    String articleListByMainColumnId = APIs.getArticleListByMainColumnId(id, pageNum_Quanbu, 10);
+                    getFirstConect(articleListByMainColumnId,top,aniDialog);
                 }else{
                     HashMap<String, String> map = new HashMap<>();
                     map.put("subColumnId", id);
                     map.put("pageNum", pageNum_LanMu+"");
                     map.put("pageSize", 10+"");
-                    getFirstConect(map,APIs.getArticleListBySubColumnId,top,aniDialog);
+//                    String articleListByMainColumnId = APIs.getArticleListBySubColumnId(id, pageNum_LanMu, 10);
+                    getFirstConect1(map,APIs.getArticleListBySubColumnId,top,aniDialog);  // post请求
                 }
 
             }
@@ -122,18 +126,20 @@ public class Information_zi_Fragment extends Fragment {
             public void onPullUpToRefresh(PullToRefreshBase<ScrollView> refreshView) {
                 if(type.equals("1")){  // 查询全部
                     pageNum_Quanbu++;
-                    HashMap<String, String> map = new HashMap<>();
-                    map.put("mainColumnId", id);
-                    map.put("pageNum", pageNum_Quanbu+"");
-                    map.put("pageSize", 10+"");
-                    getNextConect(map,APIs.getArticleListByMainColumnId,top);
+//                    HashMap<String, String> map = new HashMap<>();
+//                    map.put("mainColumnId", id);
+//                    map.put("pageNum", pageNum_Quanbu+"");
+//                    map.put("pageSize", 10+"");
+                    String articleListByMainColumnId = APIs.getArticleListByMainColumnId(id, pageNum_Quanbu, 10);
+                    getNextConect(pageNum_Quanbu,articleListByMainColumnId,top);
                 }else{
                     pageNum_LanMu++;
                     HashMap<String, String> map = new HashMap<>();
                     map.put("subColumnId", id);
                     map.put("pageNum", pageNum_LanMu+"");
                     map.put("pageSize", 10+"");
-                    getNextConect(map,APIs.getArticleListBySubColumnId,top);
+//                    String articleListByMainColumnId = APIs.getArticleListBySubColumnId(id, pageNum_Quanbu, 10);
+                    getNextConect1(map,APIs.getArticleListBySubColumnId,top);  // post请求
                 }
             }
         });
@@ -141,20 +147,63 @@ public class Information_zi_Fragment extends Fragment {
         // 条目点击事件
         information_zi_fragment_MyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id1) {
 
 //                MyUtils.setToast("点击了=="+topList.get(position).getTop()+"的第"+position+"条");
                 Intent intent = new Intent(activity, Information_Details_Activity.class);
+
+                intent.putExtra("type","all");
                 intent.putExtra("id",list.get(position).getId()+"");
+                intent.putExtra("index",list.get(position).getRowno()+"");
+                intent.putExtra("mainId",id+"");
+                if(!id.equals("147")){
+                    intent.putExtra("subId",id);
+                }
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }
 
-    // 首次进入页面获取列表
-    private void getFirstConect(final HashMap<String, String> map , String url, final String top,final ProgressDialog aniDialog) {
-        activity.myPresenter.postPreContent(url, map, new MyInterfaces() {
+    // 首次进入页面获取列表  get请求
+    private void getFirstConect( String url, final String top,final ProgressDialog aniDialog) {
+        activity.myPresenter.getPreContent(url, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
+                        List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
+                        list.clear();
+                        list.addAll(zilist);
+                        // 初始化数据 与适配器
+                        setInformation_Adapter(top);
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setToast(ss);
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
+
+    // 首次进入页面获取列表  post请求
+    private void getFirstConect1(  HashMap<String, String> map,String url, final String top,final ProgressDialog aniDialog) {
+        activity.myPresenter.postPreContent(url,map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 aniDialog.dismiss();
@@ -189,9 +238,9 @@ public class Information_zi_Fragment extends Fragment {
     }
 
 
-    // 下拉加载更多
-    private void getNextConect(final HashMap<String, String> map , String url,final String top) {
-        activity.myPresenter.postPreContent(url, map, new MyInterfaces() {
+    // 下拉加载更多  get请求
+    private void getNextConect(final int pageNum_Quanbu,String url,final String top) {
+        activity.myPresenter.getPreContent(url, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -200,10 +249,9 @@ public class Information_zi_Fragment extends Fragment {
                     if(code.equals("2000")){
 //                        LogUtils.i("jiba","==="+json);
                         Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
-                        String pageNum = map.get("pageNum");
-                        if(Integer.valueOf(pageNum)<=information_Zi_Bean.getData().getPageInfo().getTotalPage()){
+//                        String pageNum = map.get("pageNum");
+                        if(pageNum_Quanbu<=information_Zi_Bean.getData().getPageInfo().getTotalPage()){
                             List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
-
                             list.addAll(zilist);
                             // 初始化数据 与适配器
                             setInformation_Adapter(top);
@@ -228,6 +276,43 @@ public class Information_zi_Fragment extends Fragment {
         });
     }
 
+    // 下拉加载更多  post请求
+    private void getNextConect1(final HashMap<String, String> map,String url,final String top) {
+        activity.myPresenter.postPreContent(url,map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+//                        LogUtils.i("jiba","==="+json);
+                        Information_Zi_Bean information_Zi_Bean = new Gson().fromJson(json, Information_Zi_Bean.class);
+                        String pageNum = map.get("pageNum");
+                        if(Integer.valueOf(pageNum)<=information_Zi_Bean.getData().getPageInfo().getTotalPage()){
+                            List<Information_Zi_Bean.DataBean.ListBean> zilist = information_Zi_Bean.getData().getList();
+                            list.addAll(zilist);
+                            // 初始化数据 与适配器
+                            setInformation_Adapter(top);
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+
+            @Override
+            public void shibai(String ss) {
+                MyUtils.setToast(ss);
+                information_zi_fragment_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+            }
+        });
+    }
 
     // 初始化适配器
     private void setInformation_Adapter(String top) {

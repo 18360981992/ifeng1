@@ -7,12 +7,20 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,18 +33,22 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
 import com.ifeng_tech.treasuryyitong.bean.jpush.JPush_Bean;
 import com.ifeng_tech.treasuryyitong.bean.my.QR_Bean;
+import com.ifeng_tech.treasuryyitong.fragmet.FindFragment;
 import com.ifeng_tech.treasuryyitong.fragmet.HomeFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.WarehouseFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
-import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
+import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
+import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Collocation_Subscribe_Activity;
 import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SignUtils;
+import com.ifeng_tech.treasuryyitong.utils.SoundCtrol;
 import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 import com.jwsd.libzxing.OnQRCodeListener;
 import com.jwsd.libzxing.QRCodeManager;
@@ -69,16 +81,27 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     private FragmentManager fragmentManager;
 
     long exitTim=0;
-    private HomeFragmet homeFragmet;
-    private WarehouseFragment treasuryFragmet;
-    private MessageFragmet authenticateFragmet;
-    private MyFragmet myFragmet;
     private boolean aBoolean;
     private TextView xiaoxi_shumu;
 
     public static boolean isForeground = false;
     private SharedPreferences sp_message;
     private SharedPreferences.Editor edit;
+    private ImageView faxianImg;
+    private TextView faxianName;
+    private LinearLayout faxian;
+
+    // 首页
+    HomeFragmet homeFragmet = new HomeFragmet();
+    // 仓库
+    WarehouseFragment treasuryFragmet = new WarehouseFragment();
+//      CollectFragmet collectFragmet = new CollectFragmet(); // 征集
+    // 消息
+    MessageFragmet authenticateFragmet = new MessageFragmet();
+    // 发现
+    FindFragment findFragment = new FindFragment();
+    // 我的
+    MyFragmet myFragmet = new MyFragmet();
 
     public interface HomePageActivity_JieKou{
         void chuan(int i);
@@ -106,34 +129,24 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         initView();
         registerMessageReceiver();  // 动态注册广播
 
-        // 首页
-        homeFragmet = new HomeFragmet();
-        // 仓库
-        treasuryFragmet = new WarehouseFragment();
-//      CollectFragmet collectFragmet = new CollectFragmet(); // 征集
-        // 消息
-        authenticateFragmet = new MessageFragmet();
-        // 我的
-        myFragmet = new MyFragmet();
-
-        setBeiJing(true,false,false,false,false);
+        setBeiJing(true,false,false,false,false,false);
 
         fragmentManager = getSupportFragmentManager();
-
+//        fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,homeFragmet).commit();
         fragmentManager.beginTransaction()
                 .add(R.id.homepage_FrameLayout, homeFragmet)
                 .add(R.id.homepage_FrameLayout, treasuryFragmet)
 //                .add(R.id.homepage_FrameLayout,collectFragmet)
                 .add(R.id.homepage_FrameLayout, authenticateFragmet)
+                .add(R.id.homepage_FrameLayout,findFragment)
                 .add(R.id.homepage_FrameLayout, myFragmet)
                 .show(homeFragmet)
                 .hide(treasuryFragmet)
 //                .hide(collectFragmet)
                 .hide(authenticateFragmet)
+                .hide(findFragment)
                 .hide(myFragmet)
                 .commit();
-
-
     }
 
 
@@ -154,44 +167,35 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
             setExtras(extras);  // 解析推送过来的消息，并进行ui更新
         }
-//        if(aBoolean){
-//            startService(new Intent(HomePageActivity.this, HeartbeatService.class));  // 启动心跳
-//            HeartbeatService.setHearbeat_Home_JieKou(new HeartbeatService.Hearbeat_Home_JieKou() {
-//                @Override
-//                public void hearbeat_Home_Chuan(int num) {
-//                    String s = xiaoxi_shumu.getText().toString();
-//                    cound=Integer.valueOf(s);
-//                    cound=num+cound;
-//                    xiaoxi_shumu.setText(cound+"");
-//                    xiaoxi_shumu.setVisibility(View.VISIBLE);
-//                }
-//            });
-//
-//        }
 
         shouye.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBeiJing(true,false,false,false,false);
+                setBeiJing(true,false,false,false,false,false);
+//                fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,homeFragmet).commit();
                 fragmentManager.beginTransaction()
                         .show(homeFragmet)
                         .hide(treasuryFragmet)
 //                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
+                        .hide(findFragment)
                         .hide(myFragmet)
                         .commit();
             }
         });
 
+        // 仓库
         zixun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBeiJing(false,true,false,false,false);
+                setBeiJing(false,true,false,false,false,false);
+//                fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,treasuryFragmet).commit();
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .show(treasuryFragmet)
 //                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
+                        .hide(findFragment)
                         .hide(myFragmet)
                         .commit();
             }
@@ -200,7 +204,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 //        zhengji.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                setBeiJing(false,false,true,false,false);
+//                setBeiJing(false,false,true,false,false,false);
 //                fragmentManager.beginTransaction()
 //                        .hide(homeFragmet)
 //                        .hide(treasuryFragmet)
@@ -214,12 +218,30 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         xiaoxi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBeiJing(false,false,false,true,false);
+                setBeiJing(false,false,false,true,false,false);
+//                fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,authenticateFragmet).commit();
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .hide(treasuryFragmet)
 //                        .hide(collectFragmet)
                         .show(authenticateFragmet)
+                        .hide(findFragment)
+                        .hide(myFragmet)
+                        .commit();
+            }
+        });
+
+        faxian.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setBeiJing(false,false,false,false,true,false);
+//                fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,authenticateFragmet).commit();
+                fragmentManager.beginTransaction()
+                        .hide(homeFragmet)
+                        .hide(treasuryFragmet)
+//                        .hide(collectFragmet)
+                        .hide(authenticateFragmet)
+                        .show(findFragment)
                         .hide(myFragmet)
                         .commit();
             }
@@ -228,12 +250,14 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         wode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                setBeiJing(false,false,false,false,true);
+                setBeiJing(false,false,false,false,false,true);
+//                fragmentManager.beginTransaction().replace(R.id.homepage_FrameLayout,myFragmet).commit();
                 fragmentManager.beginTransaction()
                         .hide(homeFragmet)
                         .hide(treasuryFragmet)
 //                        .hide(collectFragmet)
                         .hide(authenticateFragmet)
+                        .hide(findFragment)
                         .show(myFragmet)
                         .commit();
             }
@@ -244,7 +268,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             public void chuan(int i) {
                 switch (i){
                     case 0: // 跳转 征集列表
-                        setBeiJing(false,false,true,false,false);
+                        setBeiJing(false,false,true,false,false,false);
                         fragmentManager.beginTransaction()
                                 .hide(homeFragmet)
                                 .hide(treasuryFragmet)
@@ -273,78 +297,104 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                         break;
                     case 4:  // 点击了扫一扫
                         if(aBoolean){
-                            if (ActivityCompat.checkSelfPermission(HomePageActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                                ActivityCompat.requestPermissions(HomePageActivity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                                return;
-                            }
-                            QRCodeManager.getInstance()
-                                    .with(HomePageActivity.this)
-                                    .setReqeustType(DashApplication.ERWIMA_SAOMIAO_req)
-                                //                .setRequestCode(1001)
-                                    .scanningQRCode(new OnQRCodeListener() {
-                                        @Override
-                                        public void onCompleted(String des) {
-                                            LogUtils.i("jiba","home==="+des);
-                                            String result = null;
-                                            try {
-                                                result = SignUtils.decode(des);
-                                                if(result.contains(SP_String.QR_ZHUANZENG)){
-                                                    if(result.length()>20){
-                                                        String path = result.substring(0, result.indexOf("?"));
-                                                        LogUtils.i("jiba","path===="+path);
-                                                        String referralCode = result.substring(result.indexOf("=")+1, result.length());
+                            // 判断是否有绑定过业务密码
+                            String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
+                            if(yewu_pass.equals("0")){
+                                if (ActivityCompat.checkSelfPermission(HomePageActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                                    ActivityCompat.requestPermissions(HomePageActivity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+                                    return;
+                                }
+                                QRCodeManager.getInstance()
+                                        .with(HomePageActivity.this)
+                                        .setReqeustType(DashApplication.ERWIMA_SAOMIAO_req)
+                                        //                .setRequestCode(1001)
+                                        .scanningQRCode(new OnQRCodeListener() {
+                                            @Override
+                                            public void onCompleted(String des) {
+                                                LogUtils.i("jiba","home==="+des);
+                                                String result = null;
+                                                try {
+                                                    result = SignUtils.decode(des);
+                                                    if(result.contains(SP_String.QR_ZHUANZENG)){
+                                                        if(result.length()>20){
+                                                            String path = result.substring(0, result.indexOf("?"));
+                                                            LogUtils.i("jiba","path===="+path);
+                                                            String referralCode = result.substring(result.indexOf("=")+1, result.length());
 
 //                            LogUtils.i("jiba","referralCode===="+referralCode);
-                                                        QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
+                                                            QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
 
-                                                        if(path.equals(SP_String.QR_ZHUANZENG)){
-                                                            Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
-                                                            intent.putExtra("QR_Bean", referralCode);
-                                                            if(qr_bean.getGoodsInfo()==null) intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
+                                                            if(path.equals(SP_String.QR_ZHUANZENG)){
+                                                                Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
+                                                                intent.putExtra("QR_Bean", referralCode);
+                                                                if(qr_bean.getGoodsInfo()==null||qr_bean.getGoodsInfo().getGoodsNum().equals(""))
+                                                                    intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
 
-                                                            else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+                                                                else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
 
-                                                            startActivity(intent);
-                                                            overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                                                startActivity(intent);
+                                                                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                                            }
+                                                        }else{
+                                                            MyUtils.setToast(des);
                                                         }
                                                     }else{
                                                         MyUtils.setToast(des);
                                                     }
-                                                }else{
+                                                } catch (Exception e) {
+                                                    e.printStackTrace();
                                                     MyUtils.setToast(des);
                                                 }
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                                MyUtils.setToast(des);
                                             }
-                                        }
 
-                                        @Override
-                                        public void onError(Throwable errorMsg) {
-                                            MyUtils.setToast("解析二维码失败");
-                                        }
+                                            @Override
+                                            public void onError(Throwable errorMsg) {
+                                                MyUtils.setToast("解析二维码失败");
+                                            }
 
-                                        @Override
-                                        public void onCancel() {
-                                            MyUtils.setToast("扫描任务取消了");
-                                        }
+                                            @Override
+                                            public void onCancel() {
+                                                MyUtils.setToast("扫描任务取消了");
+                                            }
 
-                                        /**
-                                         * 当点击手动添加时回调
-                                         *
-                                         * @param requestCode
-                                         * @param resultCode
-                                         * @param data
-                                         */
-                                        @Override
-                                        public void onManual(int requestCode, int resultCode, Intent data) {
-                                            LogUtils.i("jiba","点击了手动添加了");
-                                        }
+                                            /**
+                                             * 当点击手动添加时回调
+                                             *
+                                             * @param requestCode
+                                             * @param resultCode
+                                             * @param data
+                                             */
+                                            @Override
+                                            public void onManual(int requestCode, int resultCode, Intent data) {
+                                                LogUtils.i("jiba","点击了手动添加了");
+                                            }
 
 
-                                    });
+                                        });
+                            }else{
+                                // 使用自定义的dialog框
+                                final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(HomePageActivity.this, R.style.dialog_setting,"请先设置业务密码！");
+                                MyUtils.getPuTongDiaLog(HomePageActivity.this,takeCommonDialog);
+                                takeCommonDialog.setCommonJieKou(new TakeCommonDialog.CommonJieKou() {
+                                    @Override
+                                    public void quxiao() {
+                                        takeCommonDialog.dismiss();
+                                    }
+
+                                    @Override
+                                    public void queren() {
+                                        takeCommonDialog.dismiss();
+                                        Intent intent = new Intent(HomePageActivity.this, Bind_Email_Activity1.class);
+                                        intent.putExtra("title","业务密码（设置）");
+                                        intent.putExtra("select",SP_String.YEWUMIMA);
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                    }
+                                });
+                            }
+
                         }else{
-                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            Intent intent4 = new Intent(HomePageActivity.this, Login_New_Activity.class);
                             startActivity(intent4);
                             overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         }
@@ -355,7 +405,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                             startActivity(intent3);
                             overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         }else{
-                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            Intent intent4 = new Intent(HomePageActivity.this, Login_New_Activity.class);
                             startActivity(intent4);
                             overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         }
@@ -390,7 +440,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                                 });
                             }
                         }else{
-                            Intent intent4 = new Intent(HomePageActivity.this, LoginActivity.class);
+                            Intent intent4 = new Intent(HomePageActivity.this, Login_New_Activity.class);
                             startActivity(intent4);
                             overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                         }
@@ -398,13 +448,25 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                 }
             }
         });
+
+
+        // 退出登录的接口回调 退出登录直接跳到登录页面
+        Setting_Activity.setSetting_JieKou(new Setting_Activity.Setting_JieKou() {
+            @Override
+            public void chuan() {
+                Intent intent = new Intent(HomePageActivity.this, Login_New_Activity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        //注册onActivityResult
+        //注册onActivityResult  二维码注册
         QRCodeManager.getInstance().with(this).onActivityResult(requestCode, resultCode, data);
     }
 
@@ -449,10 +511,13 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                     if (extras!=null) {
                         showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
                     }
-                    LogUtils.i("jiba","===="+showMsg.toString());
+                    LogUtils.i("jba","===="+showMsg.toString());
 
                     edit.putString(SP_String.XIAOXI_SHUMU,extras).commit();
+                    MediaPlayer mediaPlayer = new MediaPlayer();//这个我定义了一个成员函数
 
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    SoundCtrol.playSound(HomePageActivity.this,mediaPlayer);
                     setExtras(extras);  // 解析推送过来的消息，并进行ui更新
                 }
             } catch (Exception e){
@@ -465,7 +530,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
             int jNum=jPush_bean.getSafeNum()+jPush_bean.getGoldSum()+jPush_bean.getSysNum();
 
-            LogUtils.i("jiba","jNum===="+jNum);
+            LogUtils.i("jba","jNum===="+jNum);
             if(jNum>0){
                 xiaoxi_shumu.setText(""+jNum);
                 xiaoxi_shumu.setVisibility(View.VISIBLE);
@@ -490,9 +555,49 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     }
 
+    // 设置状态栏  渐变色
+    private void setActionBar() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+        View statusBarView = new View(window.getContext());
+        int statusBarHeight = getStatusBarHeight(window.getContext());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+        params.gravity = Gravity.TOP;
+        statusBarView.setLayoutParams(params);
+        statusBarView.setBackground(getResources().getDrawable(R.drawable.zichan_jianbian));
+        decorViewGroup.addView(statusBarView);
+    }
+
+    // 设置状态栏  深蓝色
+    private void setActionBar1() {
+        Window window = getWindow();
+        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
+        View statusBarView = new View(window.getContext());
+        int statusBarHeight = getStatusBarHeight(window.getContext());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
+        params.gravity = Gravity.TOP;
+        statusBarView.setLayoutParams(params);
+        statusBarView.setBackgroundColor(getResources().getColor(R.color.shenlan));
+        decorViewGroup.addView(statusBarView);
+    }
+    // 获取状态栏高度
+    private int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = res.getDimensionPixelSize(resourceId);
+        }
+        if("Meizu".equals(android.os.Build.MANUFACTURER)){
+            return statusBarHeight+5;
+        }
+        return statusBarHeight;
+    }
 
     //主页面点击切换视图
-    public void setBeiJing(boolean syFlag, boolean zxFlag, boolean zjFlag,boolean xxFlag,boolean wdFlag) {
+    public void setBeiJing(boolean syFlag, boolean zxFlag, boolean zjFlag,boolean xxFlag,boolean fxFlag,boolean wdFlag) {
         if (syFlag) {
             shouyeImg.setImageResource(R.drawable.shouye_lan);
             shouyeName.setTextColor(getResources().getColor(R.color.zhuse));
@@ -505,7 +610,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         if (zxFlag) {
             zixunImg.setImageResource(R.drawable.cangku_lan);
             zixunName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("仓库");
+            homepage_title.setText("宝库");
         } else {
             zixunImg.setImageResource(R.drawable.cangku_hui);
             zixunName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
@@ -526,13 +631,31 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             xiaoxiImg.setImageResource(R.drawable.xiaoxi_hui);
             xiaoxiName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
         }
+
+        if (fxFlag) {
+            faxianImg.setImageResource(R.drawable.faxian_lan);
+            faxianName.setTextColor(getResources().getColor(R.color.zhuse));
+            homepage_title.setText("发现");
+        } else {
+            faxianImg.setImageResource(R.drawable.faxian_hui);
+            faxianName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+        }
+
         if (wdFlag) {
             wodeImg.setImageResource(R.drawable.wode_lan);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse));
-            homepage_title.setText("个人中心");
+//            homepage_title.setText("个人中心");
+            homepage_RelativeLayout.setVisibility(View.GONE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                setActionBar1();
+            }
+
         } else {
             wodeImg.setImageResource(R.drawable.wode_hui);
             wodeName.setTextColor(getResources().getColor(R.color.zhuse_ziti));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+                setActionBar();
+            }
         }
     }
 
@@ -554,6 +677,10 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         xiaoxiImg = (ImageView) findViewById(R.id.xiaoxiImg);
         xiaoxiName = (TextView) findViewById(R.id.xiaoxiName);
         xiaoxi = (LinearLayout) findViewById(R.id.xiaoxi);
+        faxianImg = (ImageView) findViewById(R.id.faxianImg);
+        faxianName = (TextView) findViewById(R.id.faxianName);
+        faxian = (LinearLayout) findViewById(R.id.faxian);
+
         wodeImg = (ImageView) findViewById(R.id.wodeImg);
         wodeName = (TextView) findViewById(R.id.wodeName);
         wode = (LinearLayout) findViewById(R.id.wode);

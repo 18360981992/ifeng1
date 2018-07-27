@@ -13,9 +13,8 @@ public enum EPickUpStage {
 
       WAITING(2, "注销"),
       ONGOING(3, "已完成"),
-
-      STOPPED(5, "已逾期");
-
+      STOPPED(5, "已逾期"),
+      TIMEOUT(6, "已完成");
   public static final int MIN_ID = 0;
   public static final int MAX_ID = 5;
   private int id;

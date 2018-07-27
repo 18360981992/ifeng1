@@ -74,9 +74,11 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
         myPresenter.setonDestroy();
     }
 
+    public static double shouxufei=0;
 
+    public static int zhuidashuliang=0;
     // 获取转赠手续费   在刚进来调用一次   根据藏品代码再调一次
-    public void getShouXuFei(HashMap<String, String> map, final TextView textView,final TextView textView1) {
+    public void getShouXuFei(HashMap<String, String> map, final EditText textView) {
         myPresenter.postPreContent(APIs.findTransferFee, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
@@ -86,9 +88,9 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
                     if(code.equals("2000")){
                         TransferFee_Bean transferFee_bean = new Gson().fromJson(json, TransferFee_Bean.class);
                         double price = transferFee_bean.getData().getTransferFee() * transferFee_bean.getData().getCommonFeeRate();
-                        textView.setText("￥"+ DashApplication.decimalFormat.format(price)); // 这里是手续费
-
-                        textView1.setText("最大转赠数量:"+transferFee_bean.getData().getAvailableQty());
+                        shouxufei = price; // 这里是手续费
+                        textView.setHint("最大转让数量:"+transferFee_bean.getData().getAvailableQty());
+                        zhuidashuliang = Integer.valueOf(transferFee_bean.getData().getAvailableQty());
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
@@ -181,7 +183,7 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
                     .getPackageInfo(DashApplication.getAppContext().getPackageName(), 0);
              localVersionName = packageInfo.versionName;
              localVersionCode = packageInfo.versionCode;
-            LogUtils.i("jiba", "本软件的版本号。。" + localVersionName+"."+localVersionCode);
+            LogUtils.i("jba", "本软件的版本号。。" + localVersionName+"."+localVersionCode);
             localVersionName=localVersionName+"."+localVersionCode;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
@@ -256,6 +258,8 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
         //上下文、别名【Sting行】、标签【Set型】、回调
         JPushInterface.setAliasAndTags(BaseMVPActivity.this,uid, tags, mAliasCallback);
 
+        String rid = JPushInterface.getRegistrationID(getApplicationContext());
+        LogUtils.e("jba", "JPushInterface===="+rid);
     }
 
 

@@ -61,15 +61,20 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                bind_email_duan_btn.setText("点击发送");
-                bind_email_duan_btn.setEnabled(true);
-            } else {
-                bind_email_duan_btn.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    bind_email_duan_btn.setText("点击发送");
+                    bind_email_duan_btn.setEnabled(true);
+                } else {
+                    bind_email_duan_btn.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
+            }else{
+                submit();
             }
+
         }
     };
     private int weitanchuan_height;
@@ -102,18 +107,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
             @Override
             public void forbidClick(View v) {
                 //                MyUtils.setToast("点击了图形验证。。。");
-                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
-                    @Override
-                    public void chenggong(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            bind_email_tu_yan_img.setImageBitmap(bitmap);
-                        }
-                    }
-                    @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast("图形验证码获取失败！");
-                    }
-                });
+                getTuXing_Code();
             }
         });
 
@@ -122,7 +116,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
             @Override
             public void onClick(View v) {
 
-                String yan = bind_email_tu_yan.getText().toString().trim();
+                final String yan = bind_email_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     MyUtils.setToast("请输入验证码");
                     return;
@@ -146,6 +140,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                                 h.sendEmptyMessageDelayed(0, 1000);
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile", shouji);
+                                map.put("verifyCode",yan);
                                 if(select.equals(SP_String.YEWUMIMA)){
                                     map.put("codeType","9");  //  业务密码设置
                                 }else {
@@ -160,11 +155,19 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                                         if(smCodeBean.getCode().equals("2000")){
                                             MyUtils.setToast("短信发送成功");
                                         }else{
+                                            time = 60;
+                                            bind_email_duan_btn.setText("点击发送");
+                                            bind_email_duan_btn.setEnabled(true);
+                                            h.removeMessages(0);
                                             MyUtils.setToast(smCodeBean.getMessage()+"");
                                         }
                                     }
                                     @Override
                                     public void shibai(String ss) {
+                                        time = 60;
+                                        bind_email_duan_btn.setText("点击发送");
+                                        bind_email_duan_btn.setEnabled(true);
+                                        h.removeMessages(0);
                                         MyUtils.setToast("短信发送失败");
                                     }
                                 });
@@ -174,6 +177,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                                         bind_email_weitanchuan_text,
                                         weitanchuan_height,
                                         false, (String) jsonObject.get("message"));
+                                getTuXing_Code(); // 重新刷新图形
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -200,7 +204,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(bind_email_duan.getWindowToken(), 0);
-                submit();
+                h.sendEmptyMessageDelayed(1,300);
             }
         });
     }
@@ -218,7 +222,12 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
         String tou = shouji.substring(0, 3);
         String wei = shouji.substring(8, shouji.length());
         bind_email_shoujihao.setText(tou + "*****" + wei);
+        getTuXing_Code();// 初始化图形验证码
 
+
+    }
+    // 初始化图形验证码
+    private void getTuXing_Code() {
         // 初始化图形验证码
         myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
             @Override
@@ -233,7 +242,6 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                 MyUtils.setToast("图形验证码获取失败！");
             }
         });
-
     }
 
     @Override
@@ -264,7 +272,6 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
         bind_email_weitanchuan_text = (TextView) findViewById(R.id.bind_email_weitanchuan_text);
         bind_email_weitanchuan = (LinearLayout) findViewById(R.id.bind_email_weitanchuan);
 
-//        bind_email_btn.setOnClickListener(this);
         SoftHideKeyBoardUtil.assistActivity(this);  // 键盘挡住输入框
 
         //通过设置监听来获取 微弹窗 控件的高度
@@ -331,6 +338,7 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
                         startActivityForResult(intent,DashApplication.EMAIL1_TO_EMAIL2_req);
                         overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                     }else{
+                        getTuXing_Code();// 初始化图形验证码
                         MyUtils.setObjectAnimator(bind_email_weitanchuan,
                                 bind_email_weitanchuan_img,
                                 bind_email_weitanchuan_text,
@@ -345,11 +353,13 @@ public class Bind_Email_Activity1 extends BaseMVPActivity<Bind_Email_Activity1, 
             @Override
             public void shibai(String ss) {
                 aniDialog.dismiss();
+                getTuXing_Code();// 初始化图形验证码
                 MyUtils.setObjectAnimator(bind_email_weitanchuan,
                         bind_email_weitanchuan_img,
                         bind_email_weitanchuan_text,
                         weitanchuan_height,
                         false, "邮件发送失败!");
+
             }
         });
 

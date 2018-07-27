@@ -247,7 +247,7 @@ public class Collect_Activity extends BaseMVPActivity<Collect_Activity,MyPresent
         final TakeDonation_Dialog dialog = new TakeDonation_Dialog(this, R.style.dialog_setting);
         MyUtils.getDiaLogDiBu(this,dialog);
         dialog.setTitle("确认转赠信息");
-        dialog.setFeiName("上盘费");
+        //dialog.setFeiName("上盘费");
         dialog.setWord(zhanghu);
         dialog.setShuLiang(Integer.valueOf(shuliang));
         dialog.setZongJia(collect_ac_daijia.getText().toString());

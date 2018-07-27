@@ -9,10 +9,11 @@ import java.util.List;
 
 public class Give_List_Bean implements Serializable{
 
+
     /**
      * code : 2000
      * message : 操作成功
-     * data : {"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":3,"totalNum":25,"resultNum":10},"list":[{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":20,"orderNo":"00001781526298139000062","addTime":1526298140000,"goodsId":782,"fee":60.5,"updateTime":1526298140000,"userName":null,"userId":178,"userCode":"000000000178","agencyName":"","oppositeUserId":123,"oppositeUserName":null,"deadDay":30,"agencyOrderNo":"","oppositeUserCode":"000000000123","oppositeAgencyName":"","id":95,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":2},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526375569060516","addTime":1526375570000,"goodsId":781,"fee":60.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":120,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231526380171029348","addTime":1526380172000,"goodsId":782,"fee":60.5,"updateTime":1526380257000,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":123,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526535943032014","addTime":1526535944000,"goodsId":781,"fee":50,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":124,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526962885046369","addTime":1526962886000,"goodsId":781,"fee":5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":125,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231527041388047933","addTime":1527041388000,"goodsId":782,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":126,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231527041631072102","addTime":1527041632000,"goodsId":782,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":127,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231527042044032084","addTime":1527042045000,"goodsId":781,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":252,"oppositeUserName":"","deadDay":1,"agencyOrderNo":"","oppositeUserCode":"","oppositeAgencyName":"","id":128,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","orderType":0,"amount":200,"orderNo":"00001231527495620087408","addTime":1527495621000,"goodsId":1374,"fee":7.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":254,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000254","oppositeAgencyName":"","id":145,"goodsCode":"1070020030","profit":0.55,"goodsName":"普31中国鸟（第一组）","status":2},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","orderType":0,"amount":200,"orderNo":"00001231527495641072883","addTime":1527495642000,"goodsId":1374,"fee":7.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":254,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000254","oppositeAgencyName":"","id":146,"goodsCode":"1070020030","profit":0.55,"goodsName":"普31中国鸟（第一组）","status":2}]}
+     * data : {"pageInfo":{"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":9,"resultNum":9},"list":[{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1531118781000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":97,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118781068409","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"8888","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":94,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474046301","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":95,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474030578","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":96,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474001835","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118319000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":93,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118319027720","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":1},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531116579000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":367,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":92,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531116579024587","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000367","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1531103555000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":91,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531103554091065","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1530757620000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":90,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681530757620055649","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1530696917000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":363,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":89,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681530696917001176","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000363","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0}]}
      */
 
     private String code;
@@ -45,8 +46,8 @@ public class Give_List_Bean implements Serializable{
 
     public static class DataBean implements Serializable{
         /**
-         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":3,"totalNum":25,"resultNum":10}
-         * list : [{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":20,"orderNo":"00001781526298139000062","addTime":1526298140000,"goodsId":782,"fee":60.5,"updateTime":1526298140000,"userName":null,"userId":178,"userCode":"000000000178","agencyName":"","oppositeUserId":123,"oppositeUserName":null,"deadDay":30,"agencyOrderNo":"","oppositeUserCode":"000000000123","oppositeAgencyName":"","id":95,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":2},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526375569060516","addTime":1526375570000,"goodsId":781,"fee":60.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":120,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231526380171029348","addTime":1526380172000,"goodsId":782,"fee":60.5,"updateTime":1526380257000,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":123,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526535943032014","addTime":1526535944000,"goodsId":781,"fee":50,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":124,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231526962885046369","addTime":1526962886000,"goodsId":781,"fee":5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":125,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231527041388047933","addTime":1527041388000,"goodsId":782,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":126,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218","orderType":0,"amount":10,"orderNo":"00001231527041631072102","addTime":1527041632000,"goodsId":782,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":178,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000178","oppositeAgencyName":"","id":127,"goodsCode":"003","profit":0.55,"goodsName":"吴映洁","status":1},{"goodsImg":"http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348662720","orderType":0,"amount":10,"orderNo":"00001231527042044032084","addTime":1527042045000,"goodsId":781,"fee":1.235598,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":252,"oppositeUserName":"","deadDay":1,"agencyOrderNo":"","oppositeUserCode":"","oppositeAgencyName":"","id":128,"goodsCode":"002","profit":0.55,"goodsName":"袁娅维","status":5},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","orderType":0,"amount":200,"orderNo":"00001231527495620087408","addTime":1527495621000,"goodsId":1374,"fee":7.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":254,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000254","oppositeAgencyName":"","id":145,"goodsCode":"1070020030","profit":0.55,"goodsName":"普31中国鸟（第一组）","status":2},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/1070020030-1.jpg","orderType":0,"amount":200,"orderNo":"00001231527495641072883","addTime":1527495642000,"goodsId":1374,"fee":7.5,"updateTime":null,"userName":null,"userId":123,"userCode":"000000000123","agencyName":"","oppositeUserId":254,"oppositeUserName":null,"deadDay":1,"agencyOrderNo":"","oppositeUserCode":"000000000254","oppositeAgencyName":"","id":146,"goodsCode":"1070020030","profit":0.55,"goodsName":"普31中国鸟（第一组）","status":2}]
+         * pageInfo : {"pageNum":1,"pageSize":10,"totalPage":1,"totalNum":9,"resultNum":9}
+         * list : [{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1531118781000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":97,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118781068409","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"8888","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":94,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474046301","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":95,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474030578","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118475000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":365,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":96,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118474001835","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000365","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531118319000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":93,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531118319027720","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":1},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1531116579000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":367,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":92,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531116579024587","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000367","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1531103555000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":91,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681531103554091065","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg","orderType":0,"addTime":1530757620000,"goodsId":836,"fee":0,"userCode":"000000000368","isInto":"1","oppositeUserId":368,"appraisalFeeRate":0.012,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":90,"profit":0,"goodsName":"2007-11《内蒙古自治区成立六十周年》纪念邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681530757620055649","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000368","oppositeAgencyName":"","goodsCode":"3010070130","remarks":"","orderSerial":null,"status":0},{"goodsImg":"http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070010.jpg","orderType":0,"addTime":1530696917000,"goodsId":837,"fee":0,"userCode":"000000000368","isInto":"0","oppositeUserId":363,"appraisalFeeRate":0.013000000000000001,"oppositeUserName":null,"guidingPrice":5.38,"deadDay":1,"id":89,"profit":0,"goodsName":"特6-2007《中国探月首飞成功纪念》邮票","storageFeeRate":0.01,"amount":1,"orderNo":"00003681530696917001176","isTransfer":1,"updateTime":null,"userName":null,"userId":368,"agencyName":"","serialNo":"","agencyOrderNo":"","oppositeUserCode":"000000000363","oppositeAgencyName":"","goodsCode":"3010070010","remarks":"","orderSerial":null,"status":0}]
          */
 
         private PageInfoBean pageInfo;
@@ -72,9 +73,9 @@ public class Give_List_Bean implements Serializable{
             /**
              * pageNum : 1
              * pageSize : 10
-             * totalPage : 3
-             * totalNum : 25
-             * resultNum : 10
+             * totalPage : 1
+             * totalNum : 9
+             * resultNum : 9
              */
 
             private int pageNum;
@@ -126,53 +127,69 @@ public class Give_List_Bean implements Serializable{
 
         public static class ListBean implements Serializable{
             /**
-             * goodsImg : http://aixiaoyun.oss-cn-beijing.aliyuncs.com/upload/commodityPicture/1511348719218
+             * goodsImg : http://flt-picture.oss-cn-beijing.aliyuncs.com/postage/3010070130.jpg
              * orderType : 0
-             * amount : 20
-             * orderNo : 00001781526298139000062
-             * addTime : 1526298140000
-             * goodsId : 782
-             * fee : 60.5
-             * updateTime : 1526298140000
-             * userName : null
-             * userId : 178
-             * userCode : 000000000178
-             * agencyName :
-             * oppositeUserId : 123
+             * addTime : 1531118781000
+             * goodsId : 836
+             * fee : 0
+             * userCode : 000000000368
+             * isInto : 1
+             * oppositeUserId : 368
+             * appraisalFeeRate : 0.012
              * oppositeUserName : null
-             * deadDay : 30
+             * guidingPrice : 5.38
+             * deadDay : 1
+             * id : 97
+             * profit : 0
+             * goodsName : 2007-11《内蒙古自治区成立六十周年》纪念邮票
+             * storageFeeRate : 0.01
+             * amount : 1
+             * orderNo : 00003681531118781068409
+             * isTransfer : 1
+             * updateTime : null
+             * userName : null
+             * userId : 368
+             * agencyName :
+             * serialNo :
              * agencyOrderNo :
-             * oppositeUserCode : 000000000123
+             * oppositeUserCode : 000000000368
              * oppositeAgencyName :
-             * id : 95
-             * goodsCode : 003
-             * profit : 0.55
-             * goodsName : 吴映洁
-             * status : 2
+             * goodsCode : 3010070130
+             * remarks : 8888
+             * orderSerial : null
+             * status : 0
              */
 
             private String goodsImg;
             private int orderType;
-            private int amount;
-            private String orderNo;
             private long addTime;
             private int goodsId;
-            private double fee;
-            private long updateTime;
+            private int fee;
+            private String userCode;
+            private String isInto;
+            private int oppositeUserId;
+            private double appraisalFeeRate;
+            private String oppositeUserName;
+            private double guidingPrice;
+            private int deadDay;
+            private int id;
+            private double profit;
+            private String goodsName;
+            private double storageFeeRate;
+            private int amount;
+            private String orderNo;
+            private int isTransfer;
+            private Object updateTime;
             private Object userName;
             private int userId;
-            private String userCode;
             private String agencyName;
-            private int oppositeUserId;
-            private Object oppositeUserName;
-            private int deadDay;
+            private String serialNo;
             private String agencyOrderNo;
             private String oppositeUserCode;
             private String oppositeAgencyName;
-            private int id;
             private String goodsCode;
-            private double profit;
-            private String goodsName;
+            private String remarks;
+            private Object orderSerial;
             private int status;
 
             public String getGoodsImg() {
@@ -191,22 +208,6 @@ public class Give_List_Bean implements Serializable{
                 this.orderType = orderType;
             }
 
-            public int getAmount() {
-                return amount;
-            }
-
-            public void setAmount(int amount) {
-                this.amount = amount;
-            }
-
-            public String getOrderNo() {
-                return orderNo;
-            }
-
-            public void setOrderNo(String orderNo) {
-                this.orderNo = orderNo;
-            }
-
             public long getAddTime() {
                 return addTime;
             }
@@ -223,19 +224,131 @@ public class Give_List_Bean implements Serializable{
                 this.goodsId = goodsId;
             }
 
-            public double getFee() {
+            public int getFee() {
                 return fee;
             }
 
-            public void setFee(double fee) {
+            public void setFee(int fee) {
                 this.fee = fee;
             }
 
-            public long getUpdateTime() {
+            public String getUserCode() {
+                return userCode;
+            }
+
+            public void setUserCode(String userCode) {
+                this.userCode = userCode;
+            }
+
+            public String getIsInto() {
+                return isInto;
+            }
+
+            public void setIsInto(String isInto) {
+                this.isInto = isInto;
+            }
+
+            public int getOppositeUserId() {
+                return oppositeUserId;
+            }
+
+            public void setOppositeUserId(int oppositeUserId) {
+                this.oppositeUserId = oppositeUserId;
+            }
+
+            public double getAppraisalFeeRate() {
+                return appraisalFeeRate;
+            }
+
+            public void setAppraisalFeeRate(double appraisalFeeRate) {
+                this.appraisalFeeRate = appraisalFeeRate;
+            }
+
+            public String getOppositeUserName() {
+                return oppositeUserName;
+            }
+
+            public void setOppositeUserName(String oppositeUserName) {
+                this.oppositeUserName = oppositeUserName;
+            }
+
+            public double getGuidingPrice() {
+                return guidingPrice;
+            }
+
+            public void setGuidingPrice(double guidingPrice) {
+                this.guidingPrice = guidingPrice;
+            }
+
+            public int getDeadDay() {
+                return deadDay;
+            }
+
+            public void setDeadDay(int deadDay) {
+                this.deadDay = deadDay;
+            }
+
+            public int getId() {
+                return id;
+            }
+
+            public void setId(int id) {
+                this.id = id;
+            }
+
+            public double getProfit() {
+                return profit;
+            }
+
+            public void setProfit(double profit) {
+                this.profit = profit;
+            }
+
+            public String getGoodsName() {
+                return goodsName;
+            }
+
+            public void setGoodsName(String goodsName) {
+                this.goodsName = goodsName;
+            }
+
+            public double getStorageFeeRate() {
+                return storageFeeRate;
+            }
+
+            public void setStorageFeeRate(double storageFeeRate) {
+                this.storageFeeRate = storageFeeRate;
+            }
+
+            public int getAmount() {
+                return amount;
+            }
+
+            public void setAmount(int amount) {
+                this.amount = amount;
+            }
+
+            public String getOrderNo() {
+                return orderNo;
+            }
+
+            public void setOrderNo(String orderNo) {
+                this.orderNo = orderNo;
+            }
+
+            public int getIsTransfer() {
+                return isTransfer;
+            }
+
+            public void setIsTransfer(int isTransfer) {
+                this.isTransfer = isTransfer;
+            }
+
+            public Object getUpdateTime() {
                 return updateTime;
             }
 
-            public void setUpdateTime(long updateTime) {
+            public void setUpdateTime(Object updateTime) {
                 this.updateTime = updateTime;
             }
 
@@ -255,14 +368,6 @@ public class Give_List_Bean implements Serializable{
                 this.userId = userId;
             }
 
-            public String getUserCode() {
-                return userCode;
-            }
-
-            public void setUserCode(String userCode) {
-                this.userCode = userCode;
-            }
-
             public String getAgencyName() {
                 return agencyName;
             }
@@ -271,28 +376,12 @@ public class Give_List_Bean implements Serializable{
                 this.agencyName = agencyName;
             }
 
-            public int getOppositeUserId() {
-                return oppositeUserId;
+            public String getSerialNo() {
+                return serialNo;
             }
 
-            public void setOppositeUserId(int oppositeUserId) {
-                this.oppositeUserId = oppositeUserId;
-            }
-
-            public Object getOppositeUserName() {
-                return oppositeUserName;
-            }
-
-            public void setOppositeUserName(Object oppositeUserName) {
-                this.oppositeUserName = oppositeUserName;
-            }
-
-            public int getDeadDay() {
-                return deadDay;
-            }
-
-            public void setDeadDay(int deadDay) {
-                this.deadDay = deadDay;
+            public void setSerialNo(String serialNo) {
+                this.serialNo = serialNo;
             }
 
             public String getAgencyOrderNo() {
@@ -319,14 +408,6 @@ public class Give_List_Bean implements Serializable{
                 this.oppositeAgencyName = oppositeAgencyName;
             }
 
-            public int getId() {
-                return id;
-            }
-
-            public void setId(int id) {
-                this.id = id;
-            }
-
             public String getGoodsCode() {
                 return goodsCode;
             }
@@ -335,20 +416,20 @@ public class Give_List_Bean implements Serializable{
                 this.goodsCode = goodsCode;
             }
 
-            public double getProfit() {
-                return profit;
+            public String getRemarks() {
+                return remarks;
             }
 
-            public void setProfit(double profit) {
-                this.profit = profit;
+            public void setRemarks(String remarks) {
+                this.remarks = remarks;
             }
 
-            public String getGoodsName() {
-                return goodsName;
+            public Object getOrderSerial() {
+                return orderSerial;
             }
 
-            public void setGoodsName(String goodsName) {
-                this.goodsName = goodsName;
+            public void setOrderSerial(Object orderSerial) {
+                this.orderSerial = orderSerial;
             }
 
             public int getStatus() {

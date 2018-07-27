@@ -34,7 +34,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/x16"
-            android:text="业务密码重置"
+            android:text="业务密码修改"
             android:textColor="@color/baise"
             android:textSize="@dimen/x32" />
 

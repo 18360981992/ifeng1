@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Bundle;
@@ -163,6 +164,54 @@ public class ImageUtils {
         }
         File file = new File(photoName);
         return file;
+    }
+
+    // 将相册中获取到的照片重新选择路径存储
+    public static File getPhotos(File url) {
+        Bitmap bitmap= BitmapFactory.decodeFile(url.toString(),getBitmapOption(2)); //将图片的长和宽缩小味原来的1/2
+        FileOutputStream b = null;
+        String photoName = getPhotoName();  // 获取刚拍照片的地址
+        try {
+            b = new FileOutputStream(photoName);
+            /**
+             *   mBitmap.compress 压缩图片
+             *
+             *  Bitmap.CompressFormat.PNG   图片的格式
+             *   100  图片的质量（0-100）
+             *   out  文件输出流
+             */
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                b.flush();
+                b.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        File file = new File(photoName);
+        return file;
+
+    }
+
+
+
+
+    /**
+     * 如果图片过大，可能导致Bitmap对象装不下图片
+     * 将图片的长和宽缩小味原来的1/2
+     * @param inSampleSize
+     * @return
+     */
+    private static BitmapFactory.Options getBitmapOption(int inSampleSize){
+        System.gc();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inPurgeable = true;
+        options.inSampleSize = inSampleSize;
+        return options;
     }
 
     // 封装照片路径

@@ -81,11 +81,18 @@ public class Information_zi_Adapter extends BaseAdapter {
             information_zi_fragment_buju_right_time.setText(simpleDateFormat.format(date));
 
             // 设置文本
-            String text=topList.get(position).getName()+"\t\t"+topList.get(position).getTitle();
+            String top="";
+            String name = topList.get(position).getName();
+            if(name!=null){
+                top=name;
+            }else{
+                top="null";
+            }
+            String text=top+"\t\t"+topList.get(position).getTitle();
             SpannableStringBuilder builder = new SpannableStringBuilder(text);
             // 设置textview 的富文本颜色
             ForegroundColorSpan span = new ForegroundColorSpan(context.getResources().getColor(R.color.zhuse));
-            builder.setSpan(span, 0, topList.get(position).getName().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(span, 0, top.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             information_zi_fragment_buju_right_text.setText(builder);
 
             return convertView1;

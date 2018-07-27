@@ -9,12 +9,19 @@ package com.ifeng_tech.treasuryyitong.utils;
 public enum EGiven_ListStage {
     // 下拉框可选状态_待审核_审核驳回_停止征集_征集中_未开始
     // 未开始包括发布中_去掉了发布中状态
+    /*
+    AUDIT_REBUTTED(1, "已完成"),
+    WAITING(2, "已失败"),
+    ONGOING(3, "已取消"),
+    TIMEOUT(4,"已拒绝"),  // 一拒绝
+    STOPPED(5, "已超时");  // 已超时
+     */
     PENDING(0, "等待确认"),
     AUDIT_REBUTTED(1, "完成"),
     WAITING(2, "失败"),
     ONGOING(3, "取消"),
-    TIMEOUT(4,"拒绝"),
-    STOPPED(5, "已过期");
+    TIMEOUT(4,"拒绝"),  // 一拒绝
+    STOPPED(5, "超时");  // 已超时
 
     public static final int MIN_ID = 0;
     public static final int MAX_ID = 5;

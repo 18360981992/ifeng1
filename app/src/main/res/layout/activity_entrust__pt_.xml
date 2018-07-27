@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fuise_dabg"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_PT_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/entrust_PT_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:text="委托申请"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x32" />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/entrust_PT_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        >
+        <TextView
+            android:id="@+id/textv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="平台名称:"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/name_se"
+            android:layout_marginTop="@dimen/x60"
+            android:layout_marginLeft="@dimen/x20"/>
+
+        <ListView
+            android:id="@+id/entrust_PT_ListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null"
+            android:scrollbars="none"
+            android:layout_marginBottom="@dimen/x110"
+            android:layout_marginTop="@dimen/x30"
+            android:layout_below="@+id/textv"
+            ></ListView>
+
+        <Button
+            android:id="@+id/entrust_PT_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginBottom="@dimen/x15"
+            android:background="@drawable/congzhi_bg"
+            android:text="下一步"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/x20"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/entrust_PT_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="@dimen/x175"
+            android:layout_height="@dimen/x140"
+            android:background="@drawable/zanwu_shuju"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无数据"
+            android:textColor="#999999"
+            android:textSize="@dimen/x30"
+            android:layout_marginTop="@dimen/x10"
+            />
+    </LinearLayout>
+
+
+</LinearLayout>

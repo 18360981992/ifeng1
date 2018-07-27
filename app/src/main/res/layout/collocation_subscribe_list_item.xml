@@ -7,14 +7,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x180"
+        android:layout_height="@dimen/x200"
         android:paddingTop="@dimen/x16"
         >
 
    <ImageView
        android:id="@+id/collocation_Subscribe_list_img"
-       android:layout_width="@dimen/x140"
-       android:layout_height="@dimen/x140"
+       android:layout_width="@dimen/x160"
+       android:layout_height="@dimen/x160"
        android:layout_marginLeft="@dimen/x16"
        />
     <LinearLayout
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="世博四连体"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x24"
+            android:textSize="@dimen/x28"
             android:layout_marginTop="@dimen/x4"
             />
         <TextView
@@ -38,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="659874152"
-            android:textSize="@dimen/x20"
+            android:textSize="@dimen/x26"
             android:textColor="@color/zhuse_ziti"
             android:layout_marginTop="@dimen/x10"
             />
@@ -46,8 +46,8 @@
             android:id="@+id/collocation_Subscribe_list_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始时间:2018-05-18"
-            android:textSize="@dimen/x20"
+            android:text="截止日期:2018-05-18"
+            android:textSize="@dimen/x26"
             android:textColor="@color/text_se"
             android:layout_marginTop="@dimen/x6"
             />
@@ -56,20 +56,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="托管进度10/20"
-            android:textSize="@dimen/x20"
+            android:textSize="@dimen/x26"
             android:textColor="@color/zhuse_ziti"
             android:layout_marginTop="@dimen/x4"
             />
     </LinearLayout>
 
-    <ImageView
+    <TextView
         android:id="@+id/collocation_Subscribe_list_imgflag"
-        android:layout_width="@dimen/x90"
-        android:layout_height="@dimen/x36"
+        android:layout_width="@dimen/x120"
+        android:layout_height="@dimen/x42"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/x20"
         android:layout_marginBottom="@dimen/x16"
+        android:textSize="@dimen/x24"
+        android:gravity="center"
         />
 
     <View

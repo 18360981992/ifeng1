@@ -42,12 +42,7 @@
             android:layout_centerHorizontal="true"/>
 
     </RelativeLayout>
-    <ProgressBar
-        android:visibility="invisible"
-        android:id="@+id/information_Details_ProgressBar"
-        style="?android:attr/progressBarStyleHorizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
     <WebView
         android:id="@+id/information_Details_WebView"
         android:layout_width="match_parent"

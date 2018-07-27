@@ -11,7 +11,7 @@
     <color name="touming1">#33000000</color>
     <color name="color_eeeeee">#eeeeee</color>
     <color name="color_999999">#999999</color>
-    <color name="color_666666">#666666</color>
+    <color name="color_666666">#777777</color>
     <color name="color_333333">#333333</color>
     <color name="color_ffffff">#ffffff</color>
     <color name="color_c61a04">#c61a04</color>
@@ -22,10 +22,13 @@
     <color name="color_000000">#000000</color>
     <color name="color_e5e5e5">#e5e5e5</color>
 
-
+    <color name="fuise_dabg">#F7F7F7</color>
+    <!--渐变颜色-->
+    <color name="shenlan">#4970E1</color>
+    <color name="qianlan">#FF618ADF</color>
     <!--项目主色调  充值-->
     <color name="zhuse">#5576E2</color>
-    <color name="zhuse_ziti">#6A6A6A</color>
+    <color name="zhuse_ziti">#FF383737</color>
     <color name="name_se">#333333</color>
     <color name="text_se">#FFB50D</color>
     <color name="zhu_beigingse">#F7F7F7</color>
@@ -56,4 +59,16 @@
     <color name="shenhe">#FFB800</color>
     <color name="chuli">#5074EB</color>
     <color name="shibai">#E93438</color>
+
+    <color name="zhuanru">#DB3131</color>
+    <color name="zhuanchu">#26C044</color>
+
+    <!--区块链-->
+    <color name="qukuailian">#7680E3</color>
+
+    <!--改版大按钮-->
+    <color name="daanniu">#698BF9</color>
+
+    <!--发现-->
+    <color name="color_6B6B6B">#6B6B6B</color>
 </resources>

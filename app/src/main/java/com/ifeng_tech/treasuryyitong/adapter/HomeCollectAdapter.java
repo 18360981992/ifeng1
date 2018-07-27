@@ -18,7 +18,7 @@ import com.ifeng_tech.treasuryyitong.bean.Collect_Bean;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
+import com.ifeng_tech.treasuryyitong.ui.login.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.my.Collect_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;

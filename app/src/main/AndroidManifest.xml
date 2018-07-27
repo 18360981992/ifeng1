@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.ifeng_tech.treasuryyitong">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
@@ -44,9 +45,11 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_TASKS" />
 
+    <!-- android:hardwareAccelerated="true" 设置app硬件加速 -->
     <application
         android:name=".appliction.DashApplication"
         android:allowBackup="true"
+        android:hardwareAccelerated="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
@@ -54,16 +57,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 启动页 -->
+        <!-- 启动页   android:theme="@style/LauncherTheme" -->
         <activity
-            android:name=".MainActivity"
-            android:screenOrientation="portrait" />
-
-        <!-- 首页展示 -->
-        <activity
-            android:name=".ui.HomePageActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/LauncherTheme">
+            android:name=".ui.login.Start_Up_Activity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"
@@ -75,12 +72,23 @@
             </intent-filter>
         </activity>
 
+        <!-- 老登陆页面 -->
+        <activity
+            android:name=".ui.login.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+
+        <!-- 首页展示 -->
+        <activity
+            android:name=".ui.HomePageActivity"
+            android:screenOrientation="portrait" />
+
         <!-- 心跳服务 -->
         <service android:name=".service.HeartbeatService" />
 
         <!-- 登录/注册 -->
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.zhifu_chongzhi.My_Property_Activity"
@@ -95,11 +103,12 @@
             android:name=".ui.my.MyCollectActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.My_Warehouse_Activity"
+            android:name=".ui.my.cangku.My_Warehouse_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.Pick_up_goods_Activity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.my.tihuo.Pick_up_goods_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.Donation_Activity"
             android:screenOrientation="portrait"
@@ -108,10 +117,10 @@
             android:name=".ui.my.Collect_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.Authenticate_Details_Activity"
+            android:name=".ui.my.tuoguan.Authenticate_Details_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.Collocation_Subscribe_Activity"
+            android:name=".ui.my.tuoguan.Collocation_Subscribe_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.My_Given_list_Activity"
@@ -120,10 +129,10 @@
             android:name=".ui.Information_Details_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.My_Collocation_Activity"
+            android:name=".ui.my.tuoguan.My_Collocation_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.My_Collocation_Detail_Activity"
+            android:name=".ui.my.tuoguan.My_Collocation_Detail_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.Setting_Activity"
@@ -133,16 +142,20 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.Reset_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.Retrieve_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.Change_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.Forget_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.Certification_Activity"
             android:screenOrientation="portrait"
@@ -160,13 +173,13 @@
             android:name=".ui.Safety_Message_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.Login_Register_Activity"
+            android:name=".ui.login.Login_Register_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.Login_Forget_Activity"
+            android:name=".ui.login.Login_Forget_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.Pick_Up_Goods_Detail_Activity"
+            android:name=".ui.my.tihuo.Pick_Up_Goods_Detail_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.Collection_directory_Activity"
@@ -176,13 +189,16 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.yewu_pass.Business_Pass_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.bind_email.Bind_Email_Activity1"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".ui.my.bind_email.Bind_Email_Activity2"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- Bugly升级SDK配置开始 -->
         <activity
@@ -215,8 +231,10 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
+
+
         <activity
-            android:name=".ui.my.My_Warehouse_Datail_Activity"
+            android:name=".ui.my.cangku.My_Warehouse_Datail_Activity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.My_Given_Datail_Activity"
@@ -252,7 +270,7 @@
             android:name=".ui.my.yewu_pass.Remember_Business_Pass_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.my.My_Warehouse_Activity2"
+            android:name=".ui.my.cangku.My_Warehouse_Activity2"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.my.zhifu_chongzhi.Recharge_Activity"
@@ -263,8 +281,13 @@
         <activity
             android:name=".ui.my.bind_email.Bind_Email_Reset_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.Conceal_Activity" />
-        <activity android:name=".ui.my.yewu_pass.Business_Pass_Setting_Activity" />
+        <activity
+            android:name=".ui.Conceal_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.yewu_pass.Business_Pass_Setting_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
 
         <!-- Rich push 核心功能 since 2.0.6 -->
         <activity
@@ -288,10 +311,22 @@
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
+        <!-- <service -->
+        <!-- android:name="cn.jpush.android.service.PushService" -->
+        <!-- android:exported="false" -->
+        <!-- android:process=":mult"> -->
+        <!-- <intent-filter> -->
+        <!-- <action android:name="cn.jpush.android.intent.REGISTER" /> -->
+        <!-- <action android:name="cn.jpush.android.intent.REPORT" /> -->
+        <!-- <action android:name="cn.jpush.android.intent.PushService" /> -->
+        <!-- <action android:name="cn.jpush.android.intent.PUSH_TIME" /> -->
+        <!-- </intent-filter> -->
+        <!-- </service> -->
+
         <service
             android:name="cn.jpush.android.service.PushService"
-            android:exported="false"
-            android:process=":mult">
+            android:process=":mult"
+            tools:node="replace">
             <intent-filter>
                 <action android:name="cn.jpush.android.intent.REGISTER" />
                 <action android:name="cn.jpush.android.intent.REPORT" />
@@ -299,6 +334,7 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
             </intent-filter>
         </service>
+
         <!-- since 3.0.9 Required SDK 核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DataProvider"
@@ -317,6 +353,7 @@
                 <category android:name="com.ifeng_tech.treasuryyitong" />
             </intent-filter>
         </service>
+
         <!-- since 3.1.0 Required SDK 核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DownloadProvider"
@@ -389,7 +426,36 @@
         <activity
             android:name=".ui.my.weituo.Entrust_Examples_Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.my.About_My_Activity"></activity>
+        <activity
+            android:name=".ui.my.About_My_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.cangku.Shop_Detailed_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.cangku.Shop_Detailed_Datail_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.login.Login_New_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.login.Login_New_ZH_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.login.Setting_Pass_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.my.weituo.Entrust_Warehousing_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.weituo.Entrust_PT_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.weituo.Entrust_CP_Activity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.my.weituo.Entrust_SQ_Activity"
+                  android:screenOrientation="portrait"
+                  android:windowSoftInputMode="adjustResize"></activity>
     </application>
 
 </manifest>

@@ -54,9 +54,9 @@ public abstract class PullToRefreshBase<T extends View> extends LinearLayout imp
 
 	static final float FRICTION = 2.0f;
 
-	public static final int SMOOTH_SCROLL_DURATION_MS = 200;
-	public static final int SMOOTH_SCROLL_LONG_DURATION_MS = 325;
-	static final int DEMO_SCROLL_INTERVAL = 225;
+	public static final int SMOOTH_SCROLL_DURATION_MS = 250; // 200
+	public static final int SMOOTH_SCROLL_LONG_DURATION_MS = 375; //325
+	static final int DEMO_SCROLL_INTERVAL = 275; // 225
 
 	static final String STATE_STATE = "ptr_state";
 	static final String STATE_MODE = "ptr_mode";

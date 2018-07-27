@@ -9,13 +9,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
 import android.widget.ScrollView;
 
 import com.google.gson.Gson;
@@ -64,7 +60,6 @@ public class HomeFragmet extends Fragment {
     List<SelectAdvertise_Bean.DataBean.ListBean> imagsList=new ArrayList<>();
     private HomePageActivity activity;
     private PullToRefreshScrollView shouye_pulltoscroll;
-    private View shouye_view_title;
     private HomeAdapter homeAdapter;
 
     @Nullable
@@ -76,39 +71,16 @@ public class HomeFragmet extends Fragment {
         activity = (HomePageActivity) getActivity();
 
         // 设置状态栏
-        setActionBar();
+//        setActionBar();
 
         initView(view);
 
         initData();
 
         shouye_RecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), OrientationHelper.VERTICAL,false));
+        shouye_RecyclerView.setNestedScrollingEnabled(false);  // 让recycleview禁止滑动，避免卡顿
         return view;
     }
-    // 设置状态栏
-    private void setActionBar() {
-        Window window = activity.getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        ViewGroup decorViewGroup = (ViewGroup) window.getDecorView();
-        View statusBarView = new View(window.getContext());
-        int statusBarHeight = getStatusBarHeight(window.getContext());
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, statusBarHeight);
-        params.gravity = Gravity.TOP;
-        statusBarView.setLayoutParams(params);
-        statusBarView.setBackground(getResources().getDrawable(R.drawable.zichan_jianbian));
-        decorViewGroup.addView(statusBarView);
-    }
-    // 获取状态栏高度
-    private int getStatusBarHeight(Context context) {
-        int statusBarHeight = 0;
-        Resources res = context.getResources();
-        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
-        if (resourceId > 0) {
-            statusBarHeight = res.getDimensionPixelSize(resourceId);
-        }
-        return statusBarHeight;
-    }
-
 
     @Override
     public void onResume() {
@@ -118,21 +90,21 @@ public class HomeFragmet extends Fragment {
         shouye_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener<ScrollView>() {
             @Override
             public void onRefresh(PullToRefreshBase<ScrollView> refreshView) {
-                shouye_view_title.setVisibility(View.VISIBLE);
-
-                if(homeAdapter.home_xBanner!=null){
-                    homeAdapter.home_xBanner.stopAutoPlay();
-                    if(homeAdapter.home_xBanner.getRealCount()>0){
-                        //  进度框
-                        ProgressDialog aniDialog = MyUtils.getProgressDialog(activity, SP_String.JIAZAI);
-                        aniDialog.dismiss();
-                        getBannder(aniDialog);  // 轮播图
-                    }else{
-                        shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                try {
+                    if(homeAdapter.home_xBanner!=null){
+                        homeAdapter.home_xBanner.stopAutoPlay();
+                        if(homeAdapter.home_xBanner.getRealCount()>0){
+                            //  进度框
+                            ProgressDialog aniDialog = MyUtils.getProgressDialog(activity, SP_String.JIAZAI);
+                            aniDialog.dismiss();
+                            getBannder(aniDialog);  // 轮播图
+                        }else{
+                            shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
+                        }
                     }
+                }catch (Exception e){
+                    shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
                 }
-
-
             }
         });
     }
@@ -177,7 +149,7 @@ public class HomeFragmet extends Fragment {
             // 导航图
             gpslist.add(new FirstGpsBean(R.drawable.saoyisao,"扫一扫"));
             gpslist.add(new FirstGpsBean(R.drawable.shouhuo,"收货"));
-            gpslist.add(new FirstGpsBean(R.drawable.zhuanzeng,"转赠"));
+            gpslist.add(new FirstGpsBean(R.drawable.zhuanzeng,"转让"));
             gpslist.add(new FirstGpsBean(R.drawable.jianding,"鉴定"));
 
             SelectAdvertise_Bean selectAdvertise_bean = new Gson().fromJson(banner, SelectAdvertise_Bean.class);
@@ -230,14 +202,14 @@ public class HomeFragmet extends Fragment {
         // 导航图
         gpslist.add(new FirstGpsBean(R.drawable.saoyisao,"扫一扫"));
         gpslist.add(new FirstGpsBean(R.drawable.shouhuo,"收货"));
-        gpslist.add(new FirstGpsBean(R.drawable.zhuanzeng,"转赠"));
+        gpslist.add(new FirstGpsBean(R.drawable.zhuanzeng,"转让"));
         gpslist.add(new FirstGpsBean(R.drawable.jianding,"鉴定"));
 
 
         HashMap<String, String> map = new HashMap<>();
         map.put("belongTo","0");
         map.put("position","1");
-
+        map.put("state","2");
         activity.myPresenter.postPreContent(APIs.selectAdvertise, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
@@ -264,7 +236,6 @@ public class HomeFragmet extends Fragment {
 
                     }else{
                         shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                        shouye_view_title.setVisibility(View.GONE);
                         aniDialog.dismiss();
                         MyUtils.setToast("首页轮播图获取错误");
                     }
@@ -276,7 +247,6 @@ public class HomeFragmet extends Fragment {
             @Override
             public void shibai(String ss) {
                 shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                shouye_view_title.setVisibility(View.GONE);
                 aniDialog.dismiss();
                 getHuanCun_SP();   // 网络获取失败的时候 加载缓存
                 MyUtils.setToast("首页轮播图获取错误");
@@ -315,7 +285,6 @@ public class HomeFragmet extends Fragment {
 
                     }else{
                         shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                        shouye_view_title.setVisibility(View.GONE);
                         aniDialog.dismiss();
                         MyUtils.setToast("首页征集列表获取错误");
                     }
@@ -327,7 +296,6 @@ public class HomeFragmet extends Fragment {
             @Override
             public void shibai(String ss) {
                 shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                shouye_view_title.setVisibility(View.GONE);
                 aniDialog.dismiss();
 
                 getHuanCun_SP();   // 网络获取失败的时候 加载缓存
@@ -338,10 +306,8 @@ public class HomeFragmet extends Fragment {
 
     // 托管
     public void getTrusteeshiplist(final ProgressDialog aniDialog){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("pageNum","1");
-        map.put("pageSize","3");
-        activity.myPresenter.postPreContent(APIs.getCurrentTrusteeshipList, map, new MyInterfaces() {
+        String currentTrusteeshipList = APIs.getCurrentTrusteeshipList(1,3);
+        activity.myPresenter.getPreContent(currentTrusteeshipList, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -360,7 +326,6 @@ public class HomeFragmet extends Fragment {
                         getInformationlist(aniDialog);  // 完成以后调资讯
                     }else{
                         shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                        shouye_view_title.setVisibility(View.GONE);
                         aniDialog.dismiss();
                         MyUtils.setToast("首页托管预约列表获取错误");
                     }
@@ -372,7 +337,6 @@ public class HomeFragmet extends Fragment {
             @Override
             public void shibai(String ss) {
                 shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                shouye_view_title.setVisibility(View.GONE);
                 aniDialog.dismiss();
                 getHuanCun_SP();   // 网络获取失败的时候 加载缓存
                 MyUtils.setToast("首页托管预约列表获取错误");
@@ -382,14 +346,13 @@ public class HomeFragmet extends Fragment {
 
     // 获取资讯列表 ====》 热门
     public void getInformationlist(final ProgressDialog aniDialog){
-        HashMap<String, String> map = new HashMap<>();
-        map.put("pageNum", "1");
-        map.put("pageSize", "3");
-        activity.myPresenter.postPreContent(APIs.getHotList, map, new MyInterfaces() {
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("pageNum", "1");
+//        map.put("pageSize", "3");
+        activity.myPresenter.getPreContent(APIs.getHotList(), new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                shouye_view_title.setVisibility(View.GONE);
                 try {
                     JSONObject jsonObject = new JSONObject(json);
                     String code = (String) jsonObject.get("code");
@@ -421,7 +384,6 @@ public class HomeFragmet extends Fragment {
             @Override
             public void shibai(String ss) {
                 shouye_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
-                shouye_view_title.setVisibility(View.GONE);
                 aniDialog.dismiss();
                 getHuanCun_SP();   // 网络获取失败的时候 加载缓存
                 MyUtils.setToast("首页资讯列表获取错误");
@@ -431,7 +393,6 @@ public class HomeFragmet extends Fragment {
 
 
     private void initView(View view) {
-        shouye_view_title = view.findViewById(R.id.shouye_view_title);
         shouye_RecyclerView = (RecyclerView) view.findViewById(R.id.shouye_RecyclerView);
         shouye_pulltoscroll = (PullToRefreshScrollView)view.findViewById(R.id.shouye_pulltoscroll);
         View shouye_view = view.findViewById(R.id.shouye_view);
@@ -445,6 +406,16 @@ public class HomeFragmet extends Fragment {
         shouye_view.requestFocus();
     }
 
+    // 获取状态栏高度
+    private int getStatusBarHeight(Context context) {
+        int statusBarHeight = 0;
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
+            statusBarHeight = res.getDimensionPixelSize(resourceId);
+        }
+        return statusBarHeight;
+    }
 
     public void initRefreshListView(PullToRefreshScrollView my_collocation_pulltoscroll) {
         /*设置pullToRefreshListView的刷新模式，BOTH代表支持上拉和下拉，PULL_FROM_END代表上拉,PULL_FROM_START代表下拉 */

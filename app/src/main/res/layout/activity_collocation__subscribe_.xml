@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Collocation_Subscribe_Activity">
 
     <RelativeLayout
         android:id="@+id/authenticate_Details_Toobar"
@@ -57,7 +57,7 @@
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/collocation_Subscribe_XBanner"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x300"
+                android:layout_height="@dimen/x350"
                 app:pointsPosition="CENTER"
                 app:AutoPlayTime="1500"
                 ></com.stx.xhb.xbanner.XBanner>

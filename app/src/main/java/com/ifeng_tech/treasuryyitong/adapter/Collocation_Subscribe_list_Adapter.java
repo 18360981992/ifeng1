@@ -53,7 +53,7 @@ public class Collocation_Subscribe_list_Adapter extends BaseAdapter {
         TextView collocation_Subscribe_list_cword = convertView.findViewById(R.id.collocation_Subscribe_list_cword);
         TextView collocation_Subscribe_list_time = convertView.findViewById(R.id.collocation_Subscribe_list_time);
         TextView collocation_Subscribe_list_text = convertView.findViewById(R.id.collocation_Subscribe_list_text);
-        ImageView collocation_Subscribe_list_imgflag = convertView.findViewById(R.id.collocation_Subscribe_list_imgflag);
+        TextView collocation_Subscribe_list_imgflag = convertView.findViewById(R.id.collocation_Subscribe_list_imgflag);
 
         if(list.get(position).getGoodsImg()==null){
             collocation_Subscribe_list_img.setImageResource(R.drawable.guangao);
@@ -70,15 +70,21 @@ public class Collocation_Subscribe_list_Adapter extends BaseAdapter {
         collocation_Subscribe_list_cword.setText(""+list.get(position).getGoodsCode());
 
         String[] times = list.get(position).getApplyTime().split("\\/");
-        collocation_Subscribe_list_time.setText("截止时间:"+times[1]);
+        collocation_Subscribe_list_time.setText("截止日期:"+times[1]);
 
 
         collocation_Subscribe_list_text.setText("托管进度:"+list.get(position).getCount()+"/"+list.get(position).getNumber());
 
         if(list.get(position).getState().equals("1")){ // 1==等待 2==未开始
-            collocation_Subscribe_list_imgflag.setImageResource(R.drawable.dengdai);
+//            collocation_Subscribe_list_imgflag.setImageResource(R.drawable.dengdai);
+            collocation_Subscribe_list_imgflag.setText("正在申请");
+            collocation_Subscribe_list_imgflag.setTextColor(context.getResources().getColor(R.color.zhuse));
+            collocation_Subscribe_list_imgflag.setBackground(context.getResources().getDrawable(R.drawable.zhengzai_shenqing));
         }else{
-            collocation_Subscribe_list_imgflag.setImageResource(R.drawable.kaishi);
+//            collocation_Subscribe_list_imgflag.setImageResource(R.drawable.kaishi);
+            collocation_Subscribe_list_imgflag.setText("等待申请");
+            collocation_Subscribe_list_imgflag.setTextColor(context.getResources().getColor(R.color.color_666666));
+            collocation_Subscribe_list_imgflag.setBackground(context.getResources().getDrawable(R.drawable.dengdai_shenqing));
         }
         return convertView;
     }

@@ -66,6 +66,7 @@ public class Goods_QR_Activity extends BaseMVPActivity<Goods_QR_Activity,MyPrese
             goods_qr_title.setText(warehouseBean.getGoodsName());
         }
 
+        // 点击跳转设置数量
         goods_qr_shezhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +83,7 @@ public class Goods_QR_Activity extends BaseMVPActivity<Goods_QR_Activity,MyPrese
             }
         });
 
-        QR_Bean qr_bean = new QR_Bean(DashApplication.sp.getString(SP_String.USERCODE, ""), new QR_Bean.GoodsInfo(warehouseBean.getGoodsId(),warehouseBean.getGoodsCode(),warehouseBean.getGoodsName(),"1"));
+        QR_Bean qr_bean = new QR_Bean(DashApplication.sp.getString(SP_String.USERCODE, ""), new QR_Bean.GoodsInfo(warehouseBean.getGoodsId(),warehouseBean.getGoodsCode(),warehouseBean.getGoodsName(),""));
 
         String json = new Gson().toJson(qr_bean);
 //            String encodeStr = URLEncoder.encode(json, "utf-8");  // json传需要转码

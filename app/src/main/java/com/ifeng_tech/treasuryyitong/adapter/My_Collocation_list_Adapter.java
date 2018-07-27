@@ -49,7 +49,6 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
             convertView = View.inflate(context, R.layout.my_collocation_list_item,null);
         }
 
-        TextView my_collocation_list_danhao = convertView.findViewById(R.id.my_collocation_list_danhao);
         TextView my_collocation_list_cword = convertView.findViewById(R.id.my_collocation_list_cword);
         TextView my_collocation_list_name = convertView.findViewById(R.id.my_collocation_list_name);
         TextView my_collocation_list_num = convertView.findViewById(R.id.my_collocation_list_num);
@@ -57,11 +56,11 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
         TextView my_collocation_list_time = convertView.findViewById(R.id.my_collocation_list_time);
         TextView my_collocation_list_type = convertView.findViewById(R.id.my_collocation_list_type);
 
-        my_collocation_list_danhao.setText(list.get(position).getOrderNo());
+//        my_collocation_list_danhao.setText(list.get(position).getOrderNo());
         my_collocation_list_cword.setText(""+list.get(position).getGoodsCode());
 
-        if(list.get(position).getGoodsName().length()>15){
-            String name = list.get(position).getGoodsName().substring(0, 15);
+        if(list.get(position).getGoodsName().length()>20){
+            String name = list.get(position).getGoodsName().substring(0, 20);
             my_collocation_list_name.setText(name+"...");
         }else{
             my_collocation_list_name.setText(list.get(position).getGoodsName());
@@ -81,13 +80,6 @@ public class My_Collocation_list_Adapter extends BaseAdapter{
 
         Integer state = Integer.valueOf(list.get(position).getState());
         my_collocation_list_type.setText(ApplicationFormEnum.getName(state)); // 为状态赋值
-
-
-//        if(list.get(position).getType()==0){
-//            my_collocation_list_type.setText("已过期");
-//        }else{
-//            my_collocation_list_type.setText("未过期");
-//        }
 
         return convertView;
     }

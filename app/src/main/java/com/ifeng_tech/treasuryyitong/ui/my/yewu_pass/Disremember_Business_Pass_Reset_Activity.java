@@ -10,6 +10,7 @@ import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,7 +41,7 @@ import java.util.HashMap;
 /**
  * 不记得业务密码的重置
  */
-public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Disremember_Business_Pass_Reset_Activity, MyPresenter<Disremember_Business_Pass_Reset_Activity>> implements View.OnClickListener {
+public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Disremember_Business_Pass_Reset_Activity, MyPresenter<Disremember_Business_Pass_Reset_Activity>> {
 
     private RelativeLayout disremember_Business_Pass_Reset_Fan;
     private TextView disremember_Business_Pass_Reset_shoujihao;
@@ -71,6 +72,8 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
                     disremember_Business_Pass_Reset_duan_btn.setText("重新发送" + time + "(s)");
                     h.sendEmptyMessageDelayed(0, 1000);
                 }
+            }else{
+                submit();
             }
 
         }
@@ -129,7 +132,7 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
         disremember_Business_Pass_Reset_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String yan = disremember_Business_Pass_Reset_tu_yan.getText().toString().trim();
+                final String yan = disremember_Business_Pass_Reset_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Disremember_Business_Pass_Reset_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -156,6 +159,7 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile", shouji);
                                 map.put("codeType","10");  // ("重置交易密码", 10);  状态写10 有异常
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -200,6 +204,17 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
         // 再次确认密码的失焦事件
         isPass_Old_New(disremember_Business_Pass_Reset_zaici_pass,disremember_Business_Pass_Reset_new_pass);
 
+
+        disremember_Business_Pass_Reset_btn.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                // 强制关闭输入框
+                InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(disremember_Business_Pass_Reset_duan.getWindowToken(), 0);
+                h.sendEmptyMessageDelayed(1,300);
+            }
+        });
+
     }
 
     @Override
@@ -235,7 +250,6 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
         disremember_Business_Pass_Reset_weitanchuan_text = (TextView) findViewById(R.id.disremember_Business_Pass_Reset_weitanchuan_text);
         disremember_Business_Pass_Reset_weitanchuan = (LinearLayout) findViewById(R.id.disremember_Business_Pass_Reset_weitanchuan);
 
-        disremember_Business_Pass_Reset_btn.setOnClickListener(this);
 
         SoftHideKeyBoardUtil.assistActivity(this);
 
@@ -249,15 +263,6 @@ public class Disremember_Business_Pass_Reset_Activity extends BaseMVPActivity<Di
                 weitanchuan_height = disremember_Business_Pass_Reset_weitanchuan.getMeasuredHeight();
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.disremember_Business_Pass_Reset_btn:
-                submit();
-                break;
-        }
     }
 
     private void submit() {

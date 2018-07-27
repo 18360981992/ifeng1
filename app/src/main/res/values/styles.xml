@@ -17,7 +17,7 @@
 
     <!--tablayout设置字体大小-->
     <style name="TabLayoutTextStyle">
-        <item name="android:textSize">@dimen/x26</item>
+        <item name="android:textSize">@dimen/x30</item>
     </style>
 
     <style name="TabLayoutTextStyle1">

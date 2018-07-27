@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/baise">
+
+    <TextView
+        android:id="@+id/donation_dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100"
+        android:text="确认委托申请"
+        android:textSize="@dimen/x30"
+        android:textColor="@color/name_se"
+        android:gravity="center"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="平台名称"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/color_666666"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"/>
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_ptname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="@dimen/x30"
+            android:textColor="@color/name_se"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/x20"/>
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="藏品名称"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_goodsname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text=""
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="提货单号"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_danhao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text=""
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="提货数量"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_shuliang"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text=""
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="提货时间"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_riqi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text=""
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/x20"
+            android:text="手续费"
+            android:textColor="@color/color_666666"
+            android:textSize="@dimen/x30" />
+
+        <TextView
+            android:id="@+id/take_Entrust_SQ_Dialog_jiandingfei"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/x20"
+            android:text="￥0.00"
+            android:textColor="@color/name_se"
+            android:textSize="@dimen/x30" />
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x2"
+        android:background="@color/fengouxian"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/x16"
+        android:layout_marginTop="@dimen/x80"
+        >
+        <Button
+            android:id="@+id/take_Entrust_SQ_Dialog_queren"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/x80"
+            android:text="确认"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/baise"
+            android:layout_marginLeft="@dimen/x20"
+            android:background="@drawable/congzhi_bg"
+            android:gravity="center"
+            />
+        <Button
+            android:id="@+id/take_Entrust_SQ_Dialog_quxiao"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/x80"
+            android:text="取消"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/baise"
+            android:layout_marginRight="@dimen/x20"
+            android:background="@drawable/tixian_bg"
+            android:layout_marginLeft="@dimen/x16"
+            android:gravity="center"
+            />
+    </LinearLayout>
+</LinearLayout>

@@ -11,6 +11,7 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.api.APIs;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
@@ -21,8 +22,6 @@ public class Entrust_Examples_Activity extends AppCompatActivity {
 
     private RelativeLayout entrust_Examples_Fan;
     private WebView entrust_Examples_WebView;
-
-    String url = "file:///android_asset/shili_img.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class Entrust_Examples_Activity extends AppCompatActivity {
             }
         });
 
-        entrust_Examples_WebView.loadUrl(url);//加载本地路径文件，，url
+        entrust_Examples_WebView.loadUrl(APIs.fanLie_url);//加载本地路径文件，，url
 
         entrust_Examples_WebView.setWebViewClient(new WebViewClient() {
             @Override

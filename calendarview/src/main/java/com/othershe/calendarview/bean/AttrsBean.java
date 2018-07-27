@@ -25,7 +25,7 @@ public class AttrsBean {
 
     private int colorHoliday = Color.parseColor("#EC9729");//节假日的颜色
     private int colorChoose = Color.WHITE;//选中的日期文字颜色
-    private int sizeSolar = 13;//阳历日期文字尺寸
+    private int sizeSolar = 12;//阳历日期文字尺寸
     private int sizeLunar = 10;//阴历日期文字尺寸
     private int dayBg = R.drawable.blue_circle;//选中的背景
     private Map<String, String> specifyMap;//指定日期对应的文字map

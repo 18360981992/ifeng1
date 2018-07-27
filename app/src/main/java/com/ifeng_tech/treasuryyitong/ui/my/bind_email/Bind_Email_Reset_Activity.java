@@ -62,15 +62,20 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                bind_email_reset_duan_btn.setText("点击发送");
-                bind_email_reset_duan_btn.setEnabled(true);
-            } else {
-                bind_email_reset_duan_btn.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    bind_email_reset_duan_btn.setText("点击发送");
+                    bind_email_reset_duan_btn.setEnabled(true);
+                } else {
+                    bind_email_reset_duan_btn.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
+            }else{
+                submit();
             }
+
         }
     };
     private int weitanchuan_height;
@@ -100,7 +105,7 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
         bind_email_reset_duan_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String yan = bind_email_reset_tu_yan.getText().toString().trim();
+                final String yan = bind_email_reset_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Bind_Email_Reset_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -128,6 +133,7 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile", shouji);
                                 map.put("codeType","8");  // ("通用", 0)
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -135,11 +141,19 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
                                         if(smCodeBean.getCode().equals("2000")){
                                             MyUtils.setToast("短信发送成功");
                                         }else{
+                                            time = 60;
+                                            bind_email_reset_duan_btn.setText("点击发送");
+                                            bind_email_reset_duan_btn.setEnabled(true);
+                                            h.removeMessages(0);
                                             MyUtils.setToast(smCodeBean.getMessage()+"");
                                         }
                                     }
                                     @Override
                                     public void shibai(String ss) {
+                                        time = 60;
+                                        bind_email_reset_duan_btn.setText("点击发送");
+                                        bind_email_reset_duan_btn.setEnabled(true);
+                                        h.removeMessages(0);
                                         MyUtils.setToast("短信发送失败");
                                     }
                                 });
@@ -173,18 +187,7 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
             @Override
             public void forbidClick(View v) {
                 //                MyUtils.setToast("点击了图形验证。。。");
-                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
-                    @Override
-                    public void chenggong(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            bind_email_reset_tu_yan_img.setImageBitmap(bitmap);
-                        }
-                    }
-                    @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast("图形验证码获取失败！");
-                    }
-                });
+                getTuXing_Code();
             }
         });
 
@@ -195,7 +198,8 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(bind_email_reset_duan.getWindowToken(), 0);
-                submit();
+//                submit();
+                h.sendEmptyMessageDelayed(1,200);
             }
         });
     }
@@ -207,7 +211,11 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
         String tou = shouji.substring(0, 3);
         String wei = shouji.substring(8, shouji.length());
         bind_email_reset_shoujihao.setText(tou + "*****" + wei);
+        getTuXing_Code(); // 获取图形验证码
 
+    }
+    // 获取图形验证码
+    private void getTuXing_Code() {
         // 初始化图形验证码
         myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
             @Override
@@ -313,6 +321,8 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
 
                         startActivityForResult(intent,DashApplication.EMAIL1_TO_EMAIL2_req);
                     }else{
+                        // 初始化图形验证码
+                        getTuXing_Code();
                         MyUtils.setObjectAnimator(bind_email_reset_weitanchuan,
                                 bind_email_reset_weitanchuan_img,
                                 bind_email_reset_weitanchuan_text,
@@ -327,11 +337,14 @@ public class Bind_Email_Reset_Activity extends BaseMVPActivity<Bind_Email_Reset_
             @Override
             public void shibai(String ss) {
                 aniDialog.dismiss();
+                // 初始化图形验证码
+                getTuXing_Code();
                 MyUtils.setObjectAnimator(bind_email_reset_weitanchuan,
                         bind_email_reset_weitanchuan_img,
                         bind_email_reset_weitanchuan_text,
                         weitanchuan_height,
                         false, "更改邮箱失败!");
+
             }
         });
 

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/x90"
         android:text="提货密码"
-        android:textSize="@dimen/x28"
+        android:textSize="@dimen/x29"
         android:textColor="@color/name_se"
         android:gravity="center"/>
     <View
@@ -129,7 +129,7 @@
             android:id="@+id/up_goods_zhuce_dialog_queren"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/x70"
+            android:layout_height="@dimen/x80"
             android:text="确认"
             android:textSize="@dimen/x28"
             android:textColor="@color/baise"
@@ -141,7 +141,7 @@
             android:id="@+id/up_goods_zhuce_dialog_quxiao"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/x70"
+            android:layout_height="@dimen/x80"
             android:text="取消"
             android:textSize="@dimen/x28"
             android:textColor="@color/baise"

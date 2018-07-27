@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.Authenticate_Details_Time_Bean;
-import com.ifeng_tech.treasuryyitong.ui.Authenticate_Details_Activity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
+import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Authenticate_Details_Activity;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import java.text.SimpleDateFormat;
@@ -91,7 +91,7 @@ public class Authenticate_Details_list_Adapter extends BaseAdapter {
                 if(aBoolean){
                     authenticate_details_list_jieKou.shangWu(position);
                 }else{
-                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    Intent intent1 = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent1);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -105,7 +105,7 @@ public class Authenticate_Details_list_Adapter extends BaseAdapter {
                 if(aBoolean){
                     authenticate_details_list_jieKou.xiaWu(position);
                 }else{
-                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    Intent intent1 = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent1);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }

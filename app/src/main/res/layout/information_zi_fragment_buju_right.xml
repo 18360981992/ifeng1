@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="这是内容。这是内容。这是内容。这是内容。"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
             android:lineSpacingMultiplier="1.1"
             />
@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2018-05-02"
-            android:textSize="@dimen/x22"
+            android:textSize="@dimen/x26"
             android:textColor="@color/name_se"
             android:layout_alignParentBottom="true"
             />
@@ -36,8 +36,8 @@
 
     <ImageView
         android:id="@+id/information_zi_fragment_buju_right_img"
-        android:layout_width="@dimen/x150"
-        android:layout_height="@dimen/x150"
+        android:layout_width="@dimen/x160"
+        android:layout_height="@dimen/x160"
         android:layout_alignParentRight="true"
         android:layout_margin="@dimen/x16"
         />

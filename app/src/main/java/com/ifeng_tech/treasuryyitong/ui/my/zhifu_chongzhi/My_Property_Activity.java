@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -21,12 +20,14 @@ import com.ifeng_tech.treasuryyitong.bean.my.PersonalUserAccount_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
+import com.ifeng_tech.treasuryyitong.view.MyListView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // 我的资产
 
@@ -38,7 +39,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
     private TextView property_dongjie;
     private TextView property_keyong;
     private TextView qiankuan;
-    private ListView property_ListView;
+    private MyListView property_ListView;
     private Button property_tixian;
     private Button property_congzhi;
 
@@ -124,10 +125,11 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
             }
         });
     }
-
+    Map<String, String> map1 = new HashMap<>();
     // 获取个人信息
     private void getUser() {
-        myPresenter.getPreContent(APIs.findPersonalUserAccount, new MyInterfaces() {
+        map1.put("","");
+        myPresenter.postPreContent(APIs.findPersonalUserAccount,map1, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -162,7 +164,7 @@ public class My_Property_Activity extends BaseMVPActivity<My_Property_Activity,M
         property_dongjie = (TextView) findViewById(R.id.property_dongjie);
         property_keyong = (TextView) findViewById(R.id.property_keyong);
         qiankuan = (TextView) findViewById(R.id.qiankuan);
-        property_ListView = (ListView) findViewById(R.id.property_ListView);
+        property_ListView = (MyListView) findViewById(R.id.property_ListView);
 
 //        property_tixian = (Button) findViewById(R.id.property_tixian);
 

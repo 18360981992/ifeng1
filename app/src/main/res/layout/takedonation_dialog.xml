@@ -6,148 +6,231 @@
     android:background="@color/baise"
     >
 
-    <TextView
-        android:id="@+id/donation_dialog_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x70"
-        android:text="确认转赠信息"
-        android:textSize="@dimen/x24"
-        android:textColor="@color/name_se"
-        android:gravity="center"/>
+        android:layout_height="@dimen/x80">
+        <RelativeLayout
+            android:id="@+id/donation_dialog_quxiao"
+            android:layout_width="@dimen/x70"
+            android:layout_height="match_parent"
+            android:background="@drawable/item_bg"
+            >
+            <ImageView
+                android:layout_width="@dimen/x25"
+                android:layout_height="@dimen/x25"
+                android:background="@drawable/zhuanzeng_quxiao"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_centerVertical="true"
+                />
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/donation_dialog_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="确认转让信息"
+            android:textSize="@dimen/x30"
+            android:textColor="@color/name_se"
+            android:layout_centerInParent="true"
+            />
+    </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/x2"
         android:background="@color/fengouxian1"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x70">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="转赠账户"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/color_666666"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x16"
-            />
-        <TextView
-            android:id="@+id/donation_dialog_word"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="62220589"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x16"
-            />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="@color/fengouxian1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/x16"
-            android:layout_marginLeft="@dimen/x16"
-            />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x70">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="转赠数量"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/color_666666"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x16"
-            />
-        <TextView
-            android:id="@+id/donation_dialog_shuliang"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1200"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x16"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="转让藏品"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="一轮生肖猴 整版"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="对方账户"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_word"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="62220589"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="转让数量"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_shuliang"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1200"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+        </RelativeLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/x2"
-            android:background="@color/fengouxian1"
-            android:layout_alignParentBottom="true"
+            android:background="@color/fengouxian"
             android:layout_marginRight="@dimen/x16"
             android:layout_marginLeft="@dimen/x16"
             />
-    </RelativeLayout>
-    <RelativeLayout
+    </LinearLayout>
+
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x70">
-        <TextView
-            android:id="@+id/donation_dialog_feiname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="手续费"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/color_666666"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/x16"
-            />
-        <TextView
-            android:id="@+id/donation_dialog_zongjia"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="￥1200.00"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x16"
-            />
-        <View
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="@color/fengouxian1"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="@dimen/x16"
-            android:layout_marginLeft="@dimen/x16"
-            />
-    </RelativeLayout>
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="本次服务费"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_shouxufei"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥10.00"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="累计欠款"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_qiankuan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥100.00"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x70">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="总计"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/x16"
+                />
+            <TextView
+                android:id="@+id/donation_dialog_zongjia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="￥110.00"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x16"
+                />
+        </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/x16"
-        android:layout_marginTop="@dimen/x60"
+        android:layout_marginTop="@dimen/x80"
         >
         <Button
             android:id="@+id/donation_dialog_queren"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/x70"
-            android:text="确认"
-            android:textSize="@dimen/x28"
+            android:text="确认转让"
+            android:textSize="@dimen/x32"
             android:textColor="@color/baise"
             android:layout_marginLeft="@dimen/x20"
-            android:background="@drawable/congzhi_bg"
-            android:gravity="center"
-            />
-        <Button
-            android:id="@+id/donation_dialog_quxiao"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="@dimen/x70"
-            android:text="取消"
-            android:textSize="@dimen/x28"
-            android:textColor="@color/baise"
             android:layout_marginRight="@dimen/x20"
-            android:background="@drawable/tixian_bg"
-            android:layout_marginLeft="@dimen/x16"
+            android:background="#698BF9"
             android:gravity="center"
             />
     </LinearLayout>

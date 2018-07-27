@@ -21,8 +21,8 @@ import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.pull.ILoadingLayout;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshBase;
 import com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView;
-import com.ifeng_tech.treasuryyitong.ui.my.Pick_Up_Goods_Detail_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_Up_Goods_Detail_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
 

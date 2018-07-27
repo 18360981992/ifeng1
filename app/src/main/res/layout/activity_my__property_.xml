@@ -9,47 +9,54 @@
     tools:context="com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.My_Property_Activity"
     android:background="@color/baise"
     >
-
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <RelativeLayout
+        android:scrollbars="none"
+        android:fillViewport="true"
+        android:layout_marginBottom="@dimen/x110"
+        >
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/x400"
-            android:background="@drawable/zichan_jianbian"
-            >
+            android:layout_height="match_parent"
+            android:orientation="vertical">
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/x120"
+                android:layout_height="@dimen/x400"
+                android:background="@drawable/zichan_jianbian"
                 >
                 <RelativeLayout
-                    android:id="@+id/property_Fan"
-                    android:layout_width="@dimen/x60"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/fanhui_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/x120"
                     >
-                    <ImageView
-                        android:layout_width="@dimen/x16"
-                        android:layout_height="@dimen/x28"
+                    <RelativeLayout
+                        android:id="@+id/property_Fan"
+                        android:layout_width="@dimen/x60"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/fanhui_bg"
+                        >
+                        <ImageView
+                            android:layout_width="@dimen/x16"
+                            android:layout_height="@dimen/x28"
+                            android:layout_alignParentBottom="true"
+                            android:background="@drawable/btn_back"
+                            android:layout_marginBottom="@dimen/x20"
+                            android:layout_marginLeft="@dimen/x30"
+                            />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="我的资产"
+                        android:textSize="@dimen/x32"
+                        android:textColor="@color/baise"
                         android:layout_alignParentBottom="true"
-                        android:background="@drawable/btn_back"
-                        android:layout_marginBottom="@dimen/x20"
-                        android:layout_marginLeft="@dimen/x30"
-                        />
-                </RelativeLayout>
+                        android:layout_marginBottom="@dimen/x16"
+                        android:layout_centerHorizontal="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="我的资产"
-                    android:textSize="@dimen/x32"
-                    android:textColor="@color/baise"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/x16"
-                    android:layout_centerHorizontal="true"/>
-
-                <!--<ImageView-->
+                    <!--<ImageView-->
                     <!--android:id="@+id/property_zhangdan"-->
                     <!--android:layout_width="@dimen/x30"-->
                     <!--android:layout_height="@dimen/x40"-->
@@ -59,164 +66,166 @@
                     <!--android:layout_marginBottom="@dimen/x16"-->
                     <!--android:layout_marginRight="@dimen/x20"-->
                     <!--/>-->
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerInParent="true"
+                    >
+                    <TextView
+                        android:id="@+id/property_money"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:textSize="@dimen/x72"
+                        android:textColor="@color/baise"
+                        />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="账户余额(元)"
+                        android:textSize="@dimen/x28"
+                        android:textColor="@color/baise"
+                        android:gravity="center"
+                        />
+                </LinearLayout>
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_centerInParent="true"
-                >
-                <TextView
-                    android:id="@+id/property_money"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="0.00"
-                    android:textSize="@dimen/x60"
-                    android:textColor="@color/baise"
-                    />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="账户余额(元)"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/baise"
-                    android:gravity="center"
-                    />
-            </LinearLayout>
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x120"
-            android:layout_gravity="center"
-            android:background="@drawable/zichan_kuang"
-            android:layout_marginTop="@dimen/X_20"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginRight="@dimen/x20"
-
-            >
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="冻结资金(元)"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/zhuse_ziti"
-                    />
-                <TextView
-                    android:id="@+id/property_dongjie"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00"
-                    android:layout_marginTop="@dimen/x16"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/name_se"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="可用资金(元)"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/zhuse_ziti"
-                    />
-                <TextView
-                    android:id="@+id/property_keyong"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00"
-                    android:layout_marginTop="@dimen/x16"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/name_se"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="资金欠款(元)"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/zhuse_ziti"
-                    />
-                <TextView
-                    android:id="@+id/qiankuan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="0.00"
-                    android:layout_marginTop="@dimen/x16"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/name_se"
-                    />
-            </LinearLayout>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="资金明细"
-            android:textSize="@dimen/x28"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x20"
-            android:layout_marginTop="@dimen/x30"
-            />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/x2"
-            android:background="@color/fengouxian"
-            android:layout_marginTop="@dimen/x20"
-            android:layout_marginBottom="@dimen/x12"
-            />
-
-        <ListView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/property_ListView"
-            android:scrollbars="none"
-            android:visibility="gone"
-            ></ListView>
-        <LinearLayout
-            android:id="@+id/my_property_null"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:visibility="visible"
-            >
-            <ImageView
-                android:layout_width="@dimen/x158"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/x120"
-                android:background="@drawable/zanwu_shuju"/>
+                android:layout_gravity="center"
+                android:background="@drawable/zichan_kuang"
+                android:layout_marginTop="@dimen/X_20"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"
+
+                >
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="冻结资金(元)"
+                        android:textSize="@dimen/x28"
+                        android:textColor="#FF797979"
+                        />
+                    <TextView
+                        android:id="@+id/property_dongjie"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:layout_marginTop="@dimen/x16"
+                        android:textSize="@dimen/x28"
+                        android:textColor="@color/name_se"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="可用资金(元)"
+                        android:textSize="@dimen/x28"
+                        android:textColor="#FF797979"
+                        />
+                    <TextView
+                        android:id="@+id/property_keyong"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:layout_marginTop="@dimen/x16"
+                        android:textSize="@dimen/x28"
+                        android:textColor="@color/name_se"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="资金欠款(元)"
+                        android:textSize="@dimen/x28"
+                        android:textColor="#FF797979"
+                        />
+                    <TextView
+                        android:id="@+id/qiankuan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0.00"
+                        android:layout_marginTop="@dimen/x16"
+                        android:textSize="@dimen/x28"
+                        android:textColor="@color/name_se"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="暂无数据"
-                android:textColor="#999999"
+                android:text="资金明细"
                 android:textSize="@dimen/x30"
-                android:layout_marginTop="@dimen/x10"
+                android:textColor="@color/name_se"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginTop="@dimen/x30"
                 />
-        </LinearLayout>
-    </LinearLayout>
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/x2"
+                android:background="@color/fengouxian"
+                android:layout_marginTop="@dimen/x20"
+                android:layout_marginBottom="@dimen/x12"
+                />
+
+            <com.ifeng_tech.treasuryyitong.view.MyListView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/property_ListView"
+                android:scrollbars="none"
+                android:visibility="gone"
+                ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+            <LinearLayout
+                android:id="@+id/my_property_null"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:visibility="visible"
+                >
+                <ImageView
+                    android:layout_width="@dimen/x158"
+                    android:layout_height="@dimen/x120"
+                    android:background="@drawable/zanwu_shuju"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="暂无数据"
+                    android:textColor="#999999"
+                    android:textSize="@dimen/x30"
+                    android:layout_marginTop="@dimen/x10"
+                    />
+            </LinearLayout>
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -240,16 +249,16 @@
             android:id="@+id/property_congzhi"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/x70"
+            android:layout_height="@dimen/x80"
             android:text="充值"
-            android:textSize="@dimen/x28"
+            android:textSize="@dimen/x30"
             android:textColor="@color/baise"
             android:layout_marginRight="@dimen/x20"
             android:background="@drawable/congzhi_bg"
             android:layout_marginLeft="@dimen/x16"
+            android:layout_marginTop="@dimen/x15"
             android:gravity="center"
             />
     </LinearLayout>
-
 
 </RelativeLayout>

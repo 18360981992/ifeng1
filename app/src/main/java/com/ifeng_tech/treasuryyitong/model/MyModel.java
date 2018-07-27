@@ -37,12 +37,10 @@ public class MyModel {
 
     private void setLogin_GET(final String url, final MyInterfaces myInterfaces) {
         String shouji = DashApplication.sp.getString(SP_String.SHOUJI,"");
-        String pass = DashApplication.sp.getString(SP_String.PASS,"");
         HashMap<String, String> map = new HashMap<>();
-        map.put("userName",shouji);
-        map.put("password",pass);
-        map.put("loginType","0");
-        postModContent(APIs.login, map, new MyInterfaces() {
+        map.put("account",shouji);
+        map.put("token",DashApplication.android);
+        postModContent(APIs.loginByToken, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -80,12 +78,10 @@ public class MyModel {
 
     private void setLogin_POST(final String url,final Map<String,String> map1, final MyInterfaces myInterfaces) {
         String shouji = DashApplication.sp.getString(SP_String.SHOUJI,"");
-        String pass = DashApplication.sp.getString(SP_String.PASS,"");
         HashMap<String, String> map = new HashMap<>();
-        map.put("userName",shouji);
-        map.put("password",pass);
-        map.put("loginType","0");
-        postModContent(APIs.login, map, new MyInterfaces() {
+        map.put("account",shouji);
+        map.put("token",DashApplication.android);
+        postModContent(APIs.loginByToken, map, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {

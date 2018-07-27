@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.Login_Forget_Activity">
+    tools:context="com.ifeng_tech.treasuryyitong.ui.login.Login_Forget_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"

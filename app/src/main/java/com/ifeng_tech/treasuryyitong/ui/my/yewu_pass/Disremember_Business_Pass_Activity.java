@@ -104,9 +104,8 @@ public class Disremember_Business_Pass_Activity extends BaseMVPActivity<Disremem
                 disremember_business_pass_duan_btn.setText("重新发送" + time + "(s)");
                 disremember_business_pass_duan_btn.setEnabled(false);
                 h.sendEmptyMessageDelayed(0, 1000);
-
 //                MyUtils.setToast("请求网络。。。");
-                HashMap<String, String> map = new HashMap<>();
+                map.clear();
                 map.put("email", email);
                 map.put("type","8");  //
                 myPresenter.postPreContent(APIs.sendMailAgain, map, new MyInterfaces() {
@@ -144,6 +143,38 @@ public class Disremember_Business_Pass_Activity extends BaseMVPActivity<Disremem
             }
         });
 
+    }
+    HashMap<String, String> map = new HashMap<>();
+    @Override
+    protected void onResume() {
+        super.onResume();
+        map.clear();
+        map.put("email", email);
+        map.put("type","8");
+        //  进度框
+        final ProgressDialog aniDialog = MyUtils.getProgressDialog(Disremember_Business_Pass_Activity.this, SP_String.JIAZAI);
+        myPresenter.postPreContent(APIs.sendMailAgain, map, new MyInterfaces() {
+            @Override
+            public void chenggong(String json) {
+                aniDialog.dismiss();
+                try {
+                    JSONObject jsonObject = new JSONObject(json);
+                    String code = (String) jsonObject.get("code");
+                    if(code.equals("2000")){
+                        MyUtils.setToast("邮件发送成功！");
+                    }else{
+                        MyUtils.setToast((String) jsonObject.get("message"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void shibai(String ss) {
+                aniDialog.dismiss();
+                MyUtils.setToast("邮件发送失败！");
+            }
+        });
     }
 
     private void initView() {

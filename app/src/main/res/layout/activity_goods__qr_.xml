@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="扫一扫，向我转赠"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
             android:gravity="center"
             android:layout_margin="@dimen/x50"
@@ -82,7 +82,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="设置数量"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/zhuse"
                 android:gravity="center"
                 />
@@ -97,7 +97,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:text="保存图片"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/zhuse"
                 android:gravity="center"
                 />

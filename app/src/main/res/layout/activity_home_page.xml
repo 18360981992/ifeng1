@@ -84,7 +84,7 @@
                 android:id="@+id/zixunName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="仓库"
+                android:text="宝库"
                 android:textColor="@color/zhuse_ziti"
                 android:textSize="@dimen/x20"
                 android:gravity="center"
@@ -169,6 +169,31 @@
 
             </RelativeLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/faxian"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            >
+            <ImageView
+                android:id="@+id/faxianImg"
+                android:layout_width="@dimen/x36"
+                android:layout_height="@dimen/x36"
+                android:layout_gravity="center"/>
+            <TextView
+                android:id="@+id/faxianName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="发现"
+                android:textColor="@color/zhuse_ziti"
+                android:textSize="@dimen/x20"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/x8"
+                />
         </LinearLayout>
 
         <LinearLayout

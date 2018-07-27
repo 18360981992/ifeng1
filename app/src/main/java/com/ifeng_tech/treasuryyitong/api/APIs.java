@@ -7,13 +7,29 @@ package com.ifeng_tech.treasuryyitong.api;
 public class APIs {
 
 //    public static String debugApi="http://192.168.1.130/";   // 宝库易通  本地
+//    public static String debugApi1="http://192.168.1.130:4200/";
 
-    public static String debugApi="http://192.168.1.134/";   // 宝库易通  测试
+//    public static String debugApi="http://192.168.1.134/";   // 宝库易通  测试
+//    public static String debugApi1="http://192.168.1.134:4200/";
 
-//    public static String debugApi="http://baoku.wjybk.com/";   // 宝库易通  线上
+//    public static String debugApi="http://www.baokuyt.com:8020/";   // 宝库易通  线上测试  175.25.17.52
+//    public static String debugApi1="http://www.baokuyt.com:8020/";  //  192.168.1.192:8020
+
+    public static String debugApi="http://www.baokuyt.com/";   // 宝库易通  线上正式
+    public static String debugApi1="http://www.baokuyt.com/";  // www.baokuyt.com
 
     // 登陆
     public static String login="login/do";
+
+    // 通过token保持登录  user/loginByToken
+    public static String loginByToken="user/loginByToken";
+
+    // 验证短信验证码或者使用手机验证码登录/message/verifySmsCode
+    public static String loginBySmsCode="message/verifySmsCode";
+
+
+    // 根据用户名查询用户手机号(个人用户)/user/getUserByAccount
+    public static String getUserByAccount="user/getUserByAccount";
 
     // 获取短信验证码
     public static String getSmsCode="message/getSmsCode";
@@ -102,7 +118,12 @@ public class APIs {
 
 
     // 托管预约列表  trusteeship/getCurrentTrusteeshipList
-    public static String getCurrentTrusteeshipList = "trusteeship/getCurrentTrusteeshipList";
+   // public static String getCurrentTrusteeshipList = "trusteeship/getCurrentTrusteeshipList";
+    public static String getCurrentTrusteeshipList(int pageNum,int pageSize){
+        String ss=APIs.debugApi+"trusteeship/getCurrentTrusteeshipList?pageNum="+pageNum+"&pageSize="+pageSize;
+        return ss;
+    }
+
 
     // 托管预约详情的时间  trusteeship/getTrusteeshipDetail
     public static String getTrusteeshipDetail = "trusteeship/getTrusteeshipDetail";
@@ -117,30 +138,66 @@ public class APIs {
     // 上传文件
     public static String upload = APIs.debugApi+"file/upload";
 
-    // 实名认证  user/manage/applyIdentify
+    // 实名认证  user/manage/applyIdentify 2862559976
     public static String applyIdentify="user/manage/applyIdentify";
 
 
-    // 资讯  根据主栏目ID查询二级栏目列表  cms/getSubColumnList  id=147
-    public static String getSubColumnList="cms/getSubColumnList";
+    // 资讯  根据主栏目ID查询二级栏目列表  cms/getSubColumnList  id=147   get请求
+    public static String getSubColumnList=APIs.debugApi+"cms/getSubColumnList?mainColumnId=147";
 
-    // 资讯 根据主栏目ID查询文章列表
-    public static String getArticleListByMainColumnId="cms/getArticleListByMainColumnId";
+    // 资讯 根据主栏目ID查询文章列表   查全部
+//    public static String getArticleListByMainColumnId="cms/getArticleListByMainColumnId";
+    public static String getArticleListByMainColumnId(String mainColumnId,int pageNum,int pageSize){
+        String ss=APIs.debugApi+"cms/getArticleListByMainColumnId?mainColumnId="+mainColumnId+"&pageNum="+pageNum+"&pageSize="+pageSize;
+        return ss;
+    }
+
+    // 资讯 根据二级栏目ID查询文章列表  查子栏目 例如：公告
+    public static String getArticleListBySubColumnId="cms/getArticleListBySubColumnId";
+//    public static String getArticleListBySubColumnId(String subColumnId,int pageNum,int pageSize){
+//        String ss=APIs.debugApi+"cms/getArticleListBySubColumnId?subColumnId="+subColumnId+"&pageNum="+pageNum+"&pageSize="+pageSize;
+//        return ss;
+//    }
 
     // 资讯热门  用于首页
-    public static String getHotList="cms/getHotList";
+//    public static String getHotList="cms/getHotList";
+    public static String getHotList(){
+        String ss=APIs.debugApi+"cms/getHotList?pageNum=1&pageSize=3";
+        return ss;
+    }
 
-    // 资讯 根据二级栏目ID查询文章列表
-    public static String getArticleListBySubColumnId="cms/getArticleListBySubColumnId";
 
-    // 文章详情
-    public static String infodetail=APIs.debugApi+"#/app/infodetail?id=";
+
+    /* 文章详情
+        首页进入详情：?id=239&type=home&index=1&plateId=1
+        最新资讯进入详情：?id=239&type=new&index=1&plateId=1
+        主列表进入详情：?id=239&index=1&plateId=1&mainId=147&typeList=list&typeAll=all
+        子列表进入详情：?id=194&index=2&plateId=1&mainId=147&subId=194&typeList=list&typeAll=all
+      */
+
+    // 首页进入详情
+    public static String home_infodetail(String id,String type,String index){
+        String ss=APIs.debugApi1+"#/app/infodetail?id="+id+"&type="+type+"&index="+index+"&plateId=1";
+        return ss;
+    }
+
+    // 子列表进入详情 传入subid
+    public static String zi_infodetail(String id,String index,String subId){
+        String ss=APIs.debugApi1+"#/app/infodetail?id="+id+"&index="+index+"&plateId=1&mainId=147&subId="+subId+"&typeList=list&typeAll=all";
+        return ss;
+    }
+
+    //  主列表进入详情 不传subid
+    public static String zhu_infodetail(String id,String index){
+        String ss=APIs.debugApi1+"#/app/infodetail?id="+id+"&index="+index+"&plateId=1&mainId=147&typeList=list&typeAll=all";
+        return ss;
+    }
 
     // 藏品一级分类
     public static String getFirstCategoryList=APIs.debugApi+"goods/getFirstCategoryList?pageNum=1&pageSize=100";
 
     //  藏品详情
-    public static String getonestamp="goods/getonestamp";
+    public static String getonestamp="goods/getonestamp?commodityId=";
 
     // 显示商品列表、根据商品一级查询商品、商品code模糊查询获取商品信息/goods/queryCommodityList?pageNum=1&pageSize=20&firstCategoryName
     public static String queryCommodityList(int pageNum,String firstCategoryName){
@@ -157,7 +214,7 @@ public class APIs {
     // 充值同步消息
     public static String pullAndUpdatePendingPaymentState="pullAndUpdatePendingPaymentState";
 
-    // 发送邮箱验证码
+    // 校验短信验证码并且发送邮箱验证码（修改绑定邮箱） user/checkSMSVerificationCodeAndSendEmailVerificationCode
     public static String checkSMSVerificationCodeAndSendEmailVerficationCode="user/checkSMSVerificationCodeAndSendEmailVerificationCode";
 
     // 再次发送邮箱
@@ -181,4 +238,21 @@ public class APIs {
     // 下载范例文档
     public static String download="http://flt-picture.oss-cn-beijing.aliyuncs.com/document%2F%E5%A7%94%E6%89%98%E5%8D%8F%E8%AE%AE.rtf";
 
+    // 查看范例文档
+    public static String fanLie_url = "http://flt-picture.oss-cn-beijing.aliyuncs.com/postage%2F%7BB8F3F21F-FF02-6A8F-DE72-04325AAF8D97%7D.jpg";
+
+    // 区块链电子身份信息
+    public static String queryInventory="user/store/queryInventory";
+
+    // 区块链详情
+    public static String queryInventory_Detailed=APIs.debugApi1+"#/phone/product?ReferralCode=";
+
+    // 校验业务密码
+    public static String verifyServicePassword="user/personalcenter/verifyServicePassword";
+
+    // 查询全部第三方平台/   user/depots/getClient
+    public static String getClient="user/depots/getClient";
+
+    // 根据平台code查询藏品信息/   user/depots/getClientGoodsByClientCode
+    public static String getClientGoodsByClientCode="user/depots/getClientGoodsByClientCode";
 }

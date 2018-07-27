@@ -17,10 +17,10 @@ import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.jpush.JPush_Bean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
-import com.ifeng_tech.treasuryyitong.ui.LoginActivity;
 import com.ifeng_tech.treasuryyitong.ui.Recharge_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Safety_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.System_Message_Activity;
+import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -115,12 +115,11 @@ public class MessageFragmet extends Fragment {
                         edit1.putString(SP_String.XIAOXI_SHUMU,json).commit();
                     }
 
-
                     Intent intent = new Intent(activity, System_Message_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
-                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    Intent intent1 = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent1);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -152,7 +151,7 @@ public class MessageFragmet extends Fragment {
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
-                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    Intent intent1 = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent1);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }
@@ -183,7 +182,7 @@ public class MessageFragmet extends Fragment {
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }else{
-                    Intent intent1 = new Intent(activity, LoginActivity.class);
+                    Intent intent1 = new Intent(activity, Login_New_Activity.class);
                     activity.startActivity(intent1);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }

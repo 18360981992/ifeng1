@@ -27,7 +27,7 @@
             android:layout_centerVertical="true"
             android:text="系统消息"
             android:layout_toRightOf="@+id/message_xitong_img"
-            android:textSize="@dimen/x28"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"/>
 
         <ImageView
@@ -79,9 +79,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:text="充值提现"
+            android:text="资金动态"
             android:layout_toRightOf="@+id/message_congzhi_img"
-            android:textSize="@dimen/x28"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"/>
 
         <ImageView
@@ -134,7 +134,7 @@
             android:layout_centerVertical="true"
             android:text="安全设置"
             android:layout_toRightOf="@+id/message_anquan_img"
-            android:textSize="@dimen/x28"
+            android:textSize="@dimen/x29"
             android:textColor="@color/name_se"/>
 
         <ImageView

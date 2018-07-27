@@ -55,7 +55,7 @@
                     android:layout_marginLeft="@dimen/x16"
                     android:layout_marginRight="@dimen/x16"
                     android:text="郑重提示：客户需仔细填写此表格，各项信息会与客户在结算银行开户的信息进行校验，如填写错误，可能导致客户认证失败！"
-                    android:textSize="@dimen/x22"
+                    android:textSize="@dimen/x24"
                     android:textColor="@color/color_999999"
                     android:lineSpacingExtra="@dimen/x4"
                     android:layout_marginTop="@dimen/x20"
@@ -70,7 +70,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="姓名"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"/>
                     <EditText
@@ -78,7 +78,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x70"
                         android:hint="输入您的真实姓名"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x116"
                         android:layout_marginRight="@dimen/x16"
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="证件类型"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"/>
 
@@ -115,7 +115,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/x70"
                             android:text="身份证"
-                            android:textSize="@dimen/x26"
+                            android:textSize="@dimen/x28"
                             android:textColor="@color/name_se"
                             android:background="@drawable/tihuo_ed_bg"
                             android:layout_centerVertical="true"
@@ -153,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="证件号码"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"/>
                     <EditText
@@ -161,7 +161,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x70"
                         android:hint="输入您的身份证号"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x70"
                         android:layout_marginRight="@dimen/x16"
@@ -177,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="1.请上传身份证正反面带有头像或国徽的扫描件或清晰照片"
-                    android:textSize="@dimen/x22"
+                    android:textSize="@dimen/x24"
                     android:textColor="@color/color_999999"
                     android:layout_marginLeft="@dimen/x16"
                     android:layout_marginRight="@dimen/x16"
@@ -187,7 +187,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="注：您的证件不会被其他网友看到，我们将严格保密，请放心上传"
-                    android:textSize="@dimen/x22"
+                    android:textSize="@dimen/x24"
                     android:textColor="#C06102"
                     android:layout_marginRight="@dimen/x16"
                     android:layout_marginLeft="@dimen/x16"
@@ -202,7 +202,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="证件照片"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"
                         />
@@ -278,7 +278,7 @@
                         android:layout_marginLeft="@dimen/x16"
                         android:text="验证码:"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x28" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -297,7 +297,7 @@
                             android:maxLength="4"
                             android:singleLine="true"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
+                            android:textSize="@dimen/x28"
                             android:gravity="center_vertical"
                             />
 
@@ -340,7 +340,7 @@
                         android:layout_marginLeft="@dimen/x16"
                         android:text="手机验证码:"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x28" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -360,7 +360,7 @@
                             android:maxLength="4"
                             android:singleLine="true"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
+                            android:textSize="@dimen/x28"
                             android:gravity="center_vertical"
                             />
 
@@ -379,7 +379,7 @@
                             android:gravity="center"
                             android:text="点击发送"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x24" />
+                            android:textSize="@dimen/x26" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -390,7 +390,7 @@
                     <Button
                         android:id="@+id/certification_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
+                        android:layout_height="@dimen/x80"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="@dimen/x16"
                         android:layout_marginLeft="@dimen/x16"
@@ -398,7 +398,7 @@
                         android:background="@drawable/congzhi_bg"
                         android:text="确认"
                         android:textColor="@color/baise"
-                        android:textSize="@dimen/x28"
+                        android:textSize="@dimen/x30"
                         android:gravity="center"
                         android:layout_marginTop="@dimen/x15"
                         />

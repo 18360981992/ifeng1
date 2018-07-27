@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/baise"
+    android:orientation="vertical"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_Warehousing_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/entrust_Warehousing_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:text="委托入库"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x32" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/entrust_Warehousing_shenqing"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x110"
+        android:background="@drawable/weituoruku_shenqing_shape"
+        android:layout_marginTop="@dimen/x30"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/x60"
+            android:background="@drawable/weituoruku_shenqing"
+            android:layout_marginLeft="@dimen/x38"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="委托申请"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/baise"
+            android:layout_marginLeft="@dimen/x18"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/entrust_Warehousing_liebiao"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x110"
+        android:background="@drawable/weituoruku_liebiao_shape"
+        android:layout_marginTop="@dimen/x30"
+        android:layout_marginRight="@dimen/x20"
+        android:layout_marginLeft="@dimen/x20"
+        android:gravity="center_vertical"
+        >
+        <ImageView
+            android:layout_width="@dimen/x55"
+            android:layout_height="@dimen/x55"
+            android:background="@drawable/weituoruku_liebiao"
+            android:layout_marginLeft="@dimen/x38"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="委托列表"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/baise"
+            android:layout_marginLeft="@dimen/x18"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -154,9 +154,6 @@ public class Entrust_List_Activity extends BaseMVPActivity<Entrust_List_Activity
                         }else{
                             MyUtils.setToast("没有更多数据了");
                         }
-
-
-
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }

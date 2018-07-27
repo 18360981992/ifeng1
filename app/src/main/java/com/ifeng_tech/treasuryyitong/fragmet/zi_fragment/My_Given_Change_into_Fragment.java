@@ -114,7 +114,8 @@ public class My_Given_Change_into_Fragment extends Fragment {
                 Intent intent = new Intent(activity, My_Given_Datail_Activity.class);
                 intent.putExtra("Give_List_Bean",list.get(position));
                 intent.putExtra("leibie",0);
-                startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
             }
         });
     }

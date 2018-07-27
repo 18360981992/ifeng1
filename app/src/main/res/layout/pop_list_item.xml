@@ -6,10 +6,11 @@
     <TextView
         android:id="@+id/pop_list_text"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x60"
-        android:text="35686545568"
-        android:textSize="@dimen/x24"
+        android:layout_height="@dimen/x70"
+        android:text="福利特"
+        android:textSize="@dimen/x26"
         android:textColor="@color/name_se"
         android:gravity="center_vertical"
-        android:layout_marginLeft="@dimen/x16"/>
+        android:layout_marginLeft="@dimen/x5"
+        />
 </LinearLayout>

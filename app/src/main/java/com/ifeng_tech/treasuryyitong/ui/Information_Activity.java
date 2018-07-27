@@ -21,7 +21,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,15 +56,6 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
             }
         });
 
-        //设置tablayout的横杆器的长度
-        zixun_TabLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                MyTabLayout.reflex(zixun_TabLayout);
-            }
-        });
-
-
         //设置tab的点击监听器
         zixun_TabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -84,9 +74,10 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
             }
         });
 
-        HashMap<String, String> map = new HashMap<>();
-        map.put("mainColumnId","147");
-        myPresenter.postPreContent(APIs.getSubColumnList, map, new MyInterfaces() {
+//        HashMap<String, String> map = new HashMap<>();
+//        map.put("mainColumnId","147");
+
+        myPresenter.getPreContent(APIs.getSubColumnList, new MyInterfaces() {
             @Override
             public void chenggong(String json) {
                 try {
@@ -128,9 +119,17 @@ public class Information_Activity extends BaseMVPActivity<Information_Activity, 
     @Override
     public void onResume() {
         super.onResume();
+
+        //设置tablayout的横杆器的长度
+        zixun_TabLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                MyTabLayout.reflex(zixun_TabLayout);
+            }
+        });
     }
 
-    //设置传值方法
+    //设置传值方法  id = 147    id = 194
     int id=0;
     private void setSelected(String value) {
 

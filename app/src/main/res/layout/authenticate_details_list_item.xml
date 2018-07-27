@@ -3,97 +3,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/baise">
+    android:background="@color/fuise_dabg">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:layout_marginTop="@dimen/x10"
-        android:layout_marginBottom="@dimen/x10"
+        android:layout_height="@dimen/x280"
+        android:orientation="vertical"
+        android:layout_marginRight="@dimen/x18"
+        android:layout_marginLeft="@dimen/x18"
+        android:background="@color/baise"
         >
-        <ImageView
-            android:layout_width="@dimen/x40"
-            android:layout_height="@dimen/x40"
-            android:background="@drawable/rili_hong"
-            android:layout_marginLeft="@dimen/x16"
-            />
-        <TextView
-            android:id="@+id/authenticate_Details_list_time"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="2018年05月17日"
-            android:textSize="@dimen/x26"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"
-            />
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_marginBottom="@dimen/x20"
+            >
+            <ImageView
+                android:layout_width="@dimen/x46"
+                android:layout_height="@dimen/x46"
+                android:background="@drawable/rili_hong"
+                android:layout_marginLeft="@dimen/x20"
+                />
+            <TextView
+                android:id="@+id/authenticate_Details_list_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2018年05月17日"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/name_se"
+                android:layout_marginLeft="@dimen/x16"
+                />
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="@color/fengouxian"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!--android:background="@drawable/shangwu_kuang"-->
+            <LinearLayout
+                android:id="@+id/authenticate_Details_list_shangwu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:background="@drawable/item_bg"
+                android:gravity="center"
+                >
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x40"
+                    android:text="上午"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/color_666666"
+                    android:gravity="center"
+                    />
+                <TextView
+                    android:id="@+id/authenticate_Details_list_shangwu_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预约剩余：60"
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/name_se"
+                    android:layout_marginTop="@dimen/x10"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/authenticate_Details_list_xiawu"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/item_bg"
+                >
+                <TextView
+                    android:layout_width="@dimen/x100"
+                    android:layout_height="@dimen/x40"
+                    android:text="下午"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/color_666666"
+                    android:gravity="center"
+                    />
+
+                <TextView
+                    android:id="@+id/authenticate_Details_list_xiawu_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="预约剩余：60"
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/name_se"
+                    android:layout_marginTop="@dimen/x10"
+                    />
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="@color/fengouxian1"
-        android:layout_marginLeft="@dimen/x16"
-        android:layout_marginRight="@dimen/x16"/>
+        android:layout_height="@dimen/x5"
+        android:background="@color/fengouxian"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginRight="@dimen/x18"
+        android:layout_marginBottom="@dimen/x20"
+        />
+    <!--<TextView-->
+        <!--android:layout_width="@dimen/x100"-->
+        <!--android:layout_height="@dimen/x40"-->
+        <!--android:text="上\t午"-->
+        <!--android:textSize="@dimen/x22"-->
+        <!--android:textColor="@color/color_5576E2"-->
+        <!--android:gravity="center"-->
+        <!--android:background="@drawable/shangwu_kuang"-->
+        <!--android:layout_marginLeft="@dimen/x56"-->
+        <!--/>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-        <LinearLayout
-            android:id="@+id/authenticate_Details_list_shangwu"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/x20"
-            android:background="@drawable/item_bg"
-            android:paddingBottom="@dimen/x6"
-            android:paddingTop="@dimen/x6"
-            >
-            <TextView
-                android:layout_width="@dimen/x100"
-                android:layout_height="@dimen/x40"
-                android:text="上\t午"
-                android:textSize="@dimen/x22"
-                android:textColor="@color/color_5576E2"
-                android:gravity="center"
-                android:background="@drawable/shangwu_kuang"
-                android:layout_marginLeft="@dimen/x56"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="预约剩余:"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x16"
-                />
-            <TextView
-                android:id="@+id/authenticate_Details_list_shangwu_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="60"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x6"
-                />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/authenticate_Details_list_xiawu"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/x16"
-            android:layout_marginBottom="@dimen/x16"
-            android:background="@drawable/item_bg"
-            android:paddingBottom="@dimen/x6"
-            android:paddingTop="@dimen/x6"
-            >
-            <TextView
+    <!--<TextView
                 android:layout_width="@dimen/x100"
                 android:layout_height="@dimen/x40"
                 android:text="下\t午"
@@ -102,28 +136,7 @@
                 android:gravity="center"
                 android:background="@drawable/xiawu_kuang"
                 android:layout_marginLeft="@dimen/x56"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="预约剩余:"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x16"
-                />
-            <TextView
-                android:id="@+id/authenticate_Details_list_xiawu_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="60"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x6"
-                />
-        </LinearLayout>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x8"
-        android:background="@color/fengouxian"/>
+                />-->
+
+
 </LinearLayout>

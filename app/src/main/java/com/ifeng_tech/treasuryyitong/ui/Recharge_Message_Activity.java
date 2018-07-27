@@ -174,7 +174,7 @@ public class Recharge_Message_Activity extends BaseMVPActivity<Recharge_Message_
             recharge_null.setVisibility(View.GONE);
             recharge_pulltoscroll.setVisibility(View.VISIBLE);
             if(message_list_adapter==null){
-                message_list_adapter = new Message_List_Adapter(Recharge_Message_Activity.this, list,"充值消息");
+                message_list_adapter = new Message_List_Adapter(Recharge_Message_Activity.this, list,"资金动态");
                 recharge_MyListView.setAdapter(message_list_adapter);
             }else{
                 message_list_adapter.notifyDataSetChanged();

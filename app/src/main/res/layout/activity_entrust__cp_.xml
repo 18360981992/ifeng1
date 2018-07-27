@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/fuise_dabg"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.weituo.Entrust_CP_Activity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x120"
+        android:background="@drawable/zichan_jianbian">
+
+        <RelativeLayout
+            android:id="@+id/entrust_CP_Fan"
+            android:layout_width="@dimen/x60"
+            android:layout_height="match_parent"
+            android:background="@drawable/fanhui_bg">
+
+            <ImageView
+                android:layout_width="@dimen/x16"
+                android:layout_height="@dimen/x28"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginLeft="@dimen/x30"
+                android:background="@drawable/btn_back" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/x16"
+            android:text="委托申请"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x32" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/entrust_CP_RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
+            android:id="@+id/entrust_CP_pulltoscroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none"
+            android:layout_marginBottom="@dimen/x110"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/entrust_CP_goodsCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="325897865894"
+                        android:textSize="@dimen/x30"
+                        android:textColor="@color/name_se"
+                        android:layout_marginTop="@dimen/x60"
+                        android:layout_marginLeft="@dimen/x20"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="藏品名称:"
+                        android:textSize="@dimen/x30"
+                        android:textColor="@color/name_se"
+                        android:layout_marginTop="@dimen/x20"
+                        android:layout_marginLeft="@dimen/x20"/>
+                </LinearLayout>
+
+                <com.ifeng_tech.treasuryyitong.view.MyListView
+                    android:id="@+id/entrust_CP_MyListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="none"
+                    android:divider="@null"
+                    android:layout_marginTop="@dimen/x30"
+                    ></com.ifeng_tech.treasuryyitong.view.MyListView>
+
+            </LinearLayout>
+        </com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView>
+        <Button
+            android:id="@+id/entrust_CP_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x80"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginRight="@dimen/x16"
+            android:layout_marginBottom="@dimen/x15"
+            android:background="@drawable/congzhi_bg"
+            android:text="下一步"
+            android:textColor="@color/baise"
+            android:textSize="@dimen/x30"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/x20"
+            />
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/entrust_CP_null"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="@dimen/x175"
+            android:layout_height="@dimen/x140"
+            android:background="@drawable/zanwu_shuju"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="暂无数据"
+            android:textColor="#999999"
+            android:textSize="@dimen/x30"
+            android:layout_marginTop="@dimen/x10"
+            />
+    </LinearLayout>
+
+</LinearLayout>

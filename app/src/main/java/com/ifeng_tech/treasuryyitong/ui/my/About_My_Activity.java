@@ -7,6 +7,9 @@ import android.widget.RelativeLayout;
 
 import com.ifeng_tech.treasuryyitong.R;
 
+/**
+ * 关于我们
+ */
 public class About_My_Activity extends AppCompatActivity {
 
     private RelativeLayout about_My_Fan;

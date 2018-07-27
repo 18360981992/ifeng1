@@ -3,126 +3,106 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/item_bg"
+    android:background="@drawable/changku_item_bg"
     >
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/fengouxian1"
-        android:paddingTop="@dimen/x6"
-        android:paddingBottom="@dimen/x6"
+        android:layout_height="@dimen/x250"
+        android:background="@drawable/zhuanzeng_list_bg"
+        android:layout_marginTop="@dimen/x30"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginRight="@dimen/x18"
         >
-        <TextView
-            android:id="@+id/my_collocation_list_danhao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2568974156334342342423"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_marginLeft="@dimen/x16"
-            />
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x140"
-        android:paddingBottom="@dimen/x10"
-        >
-        <LinearLayout
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.8"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_marginLeft="@dimen/x16"
+            android:layout_marginLeft="@dimen/x20"
             >
-            <TextView
-                android:id="@+id/my_collocation_list_cword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6589741568971"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                />
             <TextView
                 android:id="@+id/my_collocation_list_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="世博四连体"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_marginTop="@dimen/x18"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:gravity="center_vertical"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/x15"
+                android:layout_marginRight="@dimen/x8"
+                android:lineSpacingExtra="@dimen/x4"
+                />
+            <TextView
+                android:id="@+id/my_collocation_list_cword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编号："
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_999999"
+                android:layout_above="@+id/my_collocation_list_name"
                 />
 
-        </LinearLayout>
-        <TextView
-            android:id="@+id/my_collocation_list_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_centerInParent="true"
-            />
+
+        </RelativeLayout>
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/x16"
-            >
+            android:layout_width="0dp"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent">
             <TextView
-                android:id="@+id/my_collocation_list_price"
+                android:id="@+id/my_collocation_list_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="￥100.00"
-                android:textSize="@dimen/x24"
+                android:text="0"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
-                />
-            <TextView
-                android:id="@+id/my_collocation_list_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2018.05.23 am"
-                android:textSize="@dimen/x20"
-                android:textColor="@color/name_se"
-                android:layout_alignParentRight="true"
-                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
                 />
         </RelativeLayout>
-    </RelativeLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="@color/fengouxian1"
-        android:layout_marginLeft="@dimen/x16"
-        android:layout_marginRight="@dimen/x16"
-        android:layout_alignParentBottom="true"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x68"
-        >
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1.2"
+            android:layout_height="match_parent"
             android:layout_marginRight="@dimen/x16"
-            android:visibility="visible"
             >
-            <TextView
-                android:id="@+id/my_collocation_list_type"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="已过期"
-                android:textSize="@dimen/x20"
-                android:textColor="@color/fengouxian1"
-                />
-        </LinearLayout>
-
-    </RelativeLayout>
-
+                android:orientation="vertical"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="end"
+                >
+                <TextView
+                    android:id="@+id/my_collocation_list_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="￥100.00"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/name_se"
+                    />
+                <TextView
+                    android:id="@+id/my_collocation_list_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="2018.05.23 上午"
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/name_se"
+                    android:layout_marginTop="@dimen/x12"
+                    />
+                <TextView
+                    android:id="@+id/my_collocation_list_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="已过期"
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/fengouxian1"
+                    android:layout_marginTop="@dimen/x12"
+                    />
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
 </LinearLayout>

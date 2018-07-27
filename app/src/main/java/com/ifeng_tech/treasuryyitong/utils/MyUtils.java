@@ -209,6 +209,58 @@ public class MyUtils {
     }
 
     /**
+     *  登录页面的微弹窗
+     * @param linearLayout
+     * @param text
+     * @param height
+     * @param ss
+     */
+    public static void setObjectAnimator_login(final LinearLayout linearLayout, TextView text, int height, String ss){
+
+        text.setText(ss);
+        linearLayout.setVisibility(View.VISIBLE);
+        ObjectAnimator animatorimg2 = ObjectAnimator.ofFloat(linearLayout, "translationY" ,0-height, 0);
+        ObjectAnimator alphaimg2 = ObjectAnimator.ofFloat(linearLayout, "alpha", 0, 1.0f);
+        AnimatorSet animatorSetimg2 = new AnimatorSet();
+        animatorSetimg2.play(alphaimg2).with(animatorimg2);
+        animatorimg2.setDuration(1500);
+        animatorimg2.setInterpolator(new OvershootInterpolator(1));
+        animatorimg2.start();
+
+        animatorimg2.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                DashApplication.getAppHanler().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Thread.sleep(1500);
+                            linearLayout.setVisibility(View.INVISIBLE);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+    }
+
+    /**
      * 转赠等页面专用的微弹窗   只消失微弹窗
      * @param linearLayout
      * @param img

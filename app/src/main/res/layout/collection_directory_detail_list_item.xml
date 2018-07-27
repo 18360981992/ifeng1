@@ -24,7 +24,7 @@
                 android:layout_marginLeft="@dimen/x20"
                 android:text="规格"
                 android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 />
         </LinearLayout>
 
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:text="220mm*110mm"
                 android:textColor="@color/name_se"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 />
         </LinearLayout>
     </LinearLayout>

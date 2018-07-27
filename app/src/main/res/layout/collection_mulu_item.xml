@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/collection_mulu_item_bg"
-    android:paddingTop="@dimen/x8"
+    android:paddingTop="@dimen/x16"
     android:paddingBottom="@dimen/x5"
     >
 
@@ -15,7 +15,7 @@
         />
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/x160"
+        android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/x16"
         >
         <LinearLayout
@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2007-7《扬州园林》特种邮票"
-                android:textSize="@dimen/x26"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 />
             <TextView
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="123456789876"
-                android:textSize="@dimen/x26"
+                android:textSize="@dimen/x28"
                 android:textColor="@color/name_se"
                 android:layout_marginTop="@dimen/x20"
                 />

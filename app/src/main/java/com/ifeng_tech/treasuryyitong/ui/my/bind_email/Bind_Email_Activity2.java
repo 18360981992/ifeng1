@@ -63,15 +63,20 @@ public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, 
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            time--;
-            if (time == 0) {
-                time = 60;
-                bind_email_duan_btn2.setText("再发一封");
-                bind_email_duan_btn2.setEnabled(true);
-            } else {
-                bind_email_duan_btn2.setText("重新发送" + time + "(s)");
-                h.sendEmptyMessageDelayed(0, 1000);
+            if(msg.what==0){
+                time--;
+                if (time == 0) {
+                    time = 60;
+                    bind_email_duan_btn2.setText("再发一封");
+                    bind_email_duan_btn2.setEnabled(true);
+                } else {
+                    bind_email_duan_btn2.setText("重新发送" + time + "(s)");
+                    h.sendEmptyMessageDelayed(0, 1000);
+                }
+            }else{
+                submit_queren();
             }
+
         }
     };
     private String email;
@@ -119,6 +124,10 @@ public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, 
                             if(code.equals("2000")){
                                 MyUtils.setToast("发送成功！");
                             }else{
+                                time = 60;
+                                bind_email_duan_btn2.setText("再发一封");
+                                bind_email_duan_btn2.setEnabled(true);
+                                h.removeMessages(0);
                                 MyUtils.setToast((String) jsonObject.get("message"));
                             }
                         } catch (JSONException e) {
@@ -128,6 +137,10 @@ public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, 
 
                     @Override
                     public void shibai(String ss) {
+                        time = 60;
+                        bind_email_duan_btn2.setText("再发一封");
+                        bind_email_duan_btn2.setEnabled(true);
+                        h.removeMessages(0);
                         MyUtils.setToast(ss);
                     }
                 });
@@ -142,7 +155,7 @@ public class Bind_Email_Activity2 extends BaseMVPActivity<Bind_Email_Activity2, 
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(bind_email_duan2.getWindowToken(), 0);
-                submit_queren();
+                h.sendEmptyMessageDelayed(1,200);
             }
         });
 

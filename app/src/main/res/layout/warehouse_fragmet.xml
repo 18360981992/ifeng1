@@ -28,16 +28,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="登录后显示该页面"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/color_999999"
-                android:layout_marginTop="@dimen/x10"
+                android:layout_marginTop="@dimen/x20"
                 />
             <Button
                 android:id="@+id/warehouse_fra_btn"
                 android:layout_width="@dimen/x360"
                 android:layout_height="@dimen/x70"
                 android:text="确定登录"
-                android:textSize="@dimen/x28"
+                android:textSize="@dimen/x30"
                 android:textColor="@color/baise"
                 android:layout_marginRight="@dimen/x20"
                 android:background="@drawable/congzhi_bg"
@@ -52,48 +52,9 @@
         android:id="@+id/warehouse_fra_denglu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/x70"-->
-            <!--&gt;-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="名称"-->
-                <!--android:textSize="@dimen/x26"-->
-                <!--android:textColor="@color/name_se"-->
-                <!--android:gravity="center_vertical"-->
-                <!--android:layout_marginLeft="@dimen/x20"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="可用数量"-->
-                <!--android:textSize="@dimen/x26"-->
-                <!--android:textColor="@color/name_se"-->
-                <!--android:gravity="center"-->
-                <!--/>-->
-            <!--<TextView-->
-                <!--android:layout_width="0dp"-->
-                <!--android:layout_weight="1"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="冻结数量"-->
-                <!--android:textSize="@dimen/x26"-->
-                <!--android:textColor="@color/name_se"-->
-                <!--android:gravity="end|center_vertical"-->
-                <!--android:layout_marginRight="@dimen/x20"-->
-                <!--/>-->
-        <!--</LinearLayout>-->
-        <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/x2"-->
-            <!--android:layout_alignParentBottom="true"-->
-            <!--android:background="@color/fengouxian" />-->
-
+        android:orientation="vertical"
+        android:background="@color/fuise_dabg"
+        >
         <com.ifeng_tech.treasuryyitong.pull.PullToRefreshScrollView
             android:id="@+id/warehouse_fra_pulltoscroll"
             android:layout_width="match_parent"

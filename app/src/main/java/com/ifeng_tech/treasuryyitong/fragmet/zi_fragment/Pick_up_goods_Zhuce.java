@@ -30,8 +30,8 @@ import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.bean.WarehouseBean;
 import com.ifeng_tech.treasuryyitong.bean.tihuo.DepotListByGoodsId_Bean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
-import com.ifeng_tech.treasuryyitong.ui.my.My_Warehouse_Activity2;
-import com.ifeng_tech.treasuryyitong.ui.my.Pick_up_goods_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.cangku.My_Warehouse_Activity2;
+import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_up_goods_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
@@ -56,7 +56,6 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
  */
 
 public class Pick_up_goods_Zhuce extends Fragment  {
-    public LinearLayout fu;
     private EditText up_goods_zhuce_name;
     private EditText up_goods_zhuce_word;
     private TextView up_goods_zhuce_cangku;
@@ -75,13 +74,9 @@ public class Pick_up_goods_Zhuce extends Fragment  {
     private int goodsId;  // 藏品id
     private String goodsCode; // 藏品code
     private int depotId;    // 仓库id
-    private String takeDate;  // 提货的时间
+    private String takeDate="";  // 提货的时间
     private String deliveryFee;  // 提货手续费  从仓库中获取
 
-    private LinearLayout up_goods_zhuce_name_weitanchuan;
-    private ImageView up_goods_zhuce_name_weitanchuan_img;
-    private TextView up_goods_zhuce_name_weitanchuan_text;
-    private int weitanchuan_height;
     private EditText up_goods_zhuce_yewu_pass;
     private TextView up_goods_zhuce_shouxufei;
     private ImageView image_jiantou;
@@ -195,11 +190,9 @@ public class Pick_up_goods_Zhuce extends Fragment  {
         up_goods_tijiao.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
-//                MyUtils.setToast("点击下一步。。。");
                 // 点击 强制关闭软键盘
                 InputMethodManager imm = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(up_goods_zhuce_yewu_pass.getWindowToken(), 0);
-
                 submit();
             }
         });
@@ -243,7 +236,7 @@ public class Pick_up_goods_Zhuce extends Fragment  {
 
             double v = maxTrasferableAmountAndFeeBean.getCommonFeeRate() * maxTrasferableAmountAndFeeBean.getDeliveryFee(); // 计算提货手续费
             deliveryFee = DashApplication.decimalFormat.format(v);  // 记录提货手续费
-            up_goods_zhuce_shouxufei.setText("￥"+deliveryFee);
+            up_goods_zhuce_shouxufei.setHint("￥"+deliveryFee);
 
             up_goods_zhuce_name.setText(warehouseBean.getGoodsName());  // 藏品名称
             up_goods_zhuce_word.setText(goodsCode);
@@ -264,7 +257,7 @@ public class Pick_up_goods_Zhuce extends Fragment  {
                     goodsCode = warehouseBean.getGoodsCode();// 藏品代码
                     double v = maxTrasferableAmountAndFee.getCommonFeeRate() * maxTrasferableAmountAndFee.getDeliveryFee(); // 计算提货手续费
                     deliveryFee = DashApplication.decimalFormat.format(v);  // 记录提货手续费
-                    up_goods_zhuce_shouxufei.setText("￥"+deliveryFee);
+                    up_goods_zhuce_shouxufei.setHint("￥"+deliveryFee);
                     up_goods_zhuce_name.setText(warehouseBean.getGoodsName());  // 藏品名称
                     up_goods_zhuce_word.setText(goodsCode);
 
@@ -312,7 +305,6 @@ public class Pick_up_goods_Zhuce extends Fragment  {
 
 
     private void initView(View view) {
-        fu = (LinearLayout)view.findViewById(R.id.fu);
         up_goods_zhuce_name = (EditText) view.findViewById(R.id.up_goods_zhuce_name);
         up_goods_zhuce_word = (EditText) view.findViewById(R.id.up_goods_zhuce_word);
 
@@ -334,10 +326,6 @@ public class Pick_up_goods_Zhuce extends Fragment  {
         up_goods_tijiao = (Button) view.findViewById(R.id.up_goods_tijiao);
 //        up_goods_chongzhi = (Button) view.findViewById(R.id.up_goods_chongzhi);
 
-        up_goods_zhuce_name_weitanchuan = (LinearLayout) view.findViewById(R.id.up_goods_zhuce_name_weitanchuan);
-        up_goods_zhuce_name_weitanchuan_img = (ImageView) view.findViewById(R.id.up_goods_zhuce_name_weitanchuan_img);
-        up_goods_zhuce_name_weitanchuan_text = (TextView) view.findViewById(R.id.up_goods_zhuce_name_weitanchuan_text);
-
         //通过设置监听来获取 仓库选择 控件的宽度
         up_goods_zhuce_cangku.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -349,18 +337,6 @@ public class Pick_up_goods_Zhuce extends Fragment  {
             }
         });
 
-        //通过设置监听来获取 微弹窗 控件的高度
-        up_goods_zhuce_name_weitanchuan.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-            @Override
-            public void onGlobalLayout() {
-                up_goods_zhuce_name_weitanchuan.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                //获取ImageView控件的初始高度  用来图片回弹时
-                weitanchuan_height = up_goods_zhuce_name_weitanchuan.getMeasuredHeight();
-            }
-        });
-
-//        SoftHideKeyBoardUtil.assistActivity(activity); // 解决键盘挡住输入框
 
     }
 
@@ -404,6 +380,12 @@ public class Pick_up_goods_Zhuce extends Fragment  {
             return;
         }
 
+        String cangku = up_goods_zhuce_cangku.getText().toString().trim();
+        if (TextUtils.isEmpty(cangku)) {
+            MyUtils.setToast("请选择交货仓库");
+            return;
+        }
+
         final String jianshu = up_goods_zhuce_jiaoge_jianshu.getText().toString().trim();
         if (TextUtils.isEmpty(jianshu)) {
             MyUtils.setToast("您的最大交割件数0");
@@ -435,6 +417,11 @@ public class Pick_up_goods_Zhuce extends Fragment  {
             return;
         }
 
+        if(takeDate.equals("")){
+            MyUtils.setToast("提货时间不能为空");
+            return;
+        }
+
         final String yewu_pass = up_goods_zhuce_yewu_pass.getText().toString().trim();
         if (TextUtils.isEmpty(yewu_pass)) {
             Toast.makeText(getContext(), "请输入业务密码", Toast.LENGTH_SHORT).show();
@@ -446,15 +433,16 @@ public class Pick_up_goods_Zhuce extends Fragment  {
             return;
         }
 
+
         final TakePick_Dialog dialog = new TakePick_Dialog(activity, R.style.dialog_setting);
         MyUtils.getDiaLogDiBu(activity,dialog);
 
         dialog.setTakePick_dialog_JieKou(new TakePick_Dialog.TakePick_dialog_JieKou() {
             @Override
             public void chuan(String tipass) {
-                // 点击 强制关闭软键盘
-                InputMethodManager imm = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(up_goods_zhuce_yewu_pass.getWindowToken(), 0);
+//                // 点击 强制关闭软键盘
+//                InputMethodManager imm = (InputMethodManager) activity.getSystemService(INPUT_METHOD_SERVICE);
+//                imm.hideSoftInputFromWindow(up_goods_zhuce_yewu_pass.getWindowToken(), 0);
 
                 Map<String, String> map = new HashMap<>();
                 map.put("goodsId",goodsId+"");
@@ -477,24 +465,9 @@ public class Pick_up_goods_Zhuce extends Fragment  {
                             JSONObject jsonObject = new JSONObject(json);
                             String code = (String) jsonObject.get("code");
                             if(code.equals("2000")){
-
-                                MyUtils.setObjectAnimator_anquan(up_goods_zhuce_name_weitanchuan,
-                                        up_goods_zhuce_name_weitanchuan_img,
-                                        up_goods_zhuce_name_weitanchuan_text,
-                                        weitanchuan_height,
-                                        true,"提货申请成功!");
-                                MyUtils.setMyUtils_jieKou(new MyUtils.MyUtils_JieKou() {
-                                    @Override
-                                    public void chuan() {
-                                        activity.finish();
-                                    }
-                                });
+                                activity.setWeiTanChuang(true,"提货申请成功!");
                             }else{
-                                MyUtils.setObjectAnimator(up_goods_zhuce_name_weitanchuan,
-                                        up_goods_zhuce_name_weitanchuan_img,
-                                        up_goods_zhuce_name_weitanchuan_text,
-                                        weitanchuan_height,
-                                        false,(String) jsonObject.get("message"));
+                                activity.setWeiTanChuang(false,(String) jsonObject.get("message"));
                             }
 
                         } catch (JSONException e) {
@@ -505,11 +478,7 @@ public class Pick_up_goods_Zhuce extends Fragment  {
                     @Override
                     public void shibai(String ss) {
                         aniDialog.dismiss();
-                        MyUtils.setObjectAnimator(up_goods_zhuce_name_weitanchuan,
-                                up_goods_zhuce_name_weitanchuan_img,
-                                up_goods_zhuce_name_weitanchuan_text,
-                                weitanchuan_height,
-                                false,ss);
+                        activity.setWeiTanChuang(false,ss);
                     }
                 });
 
@@ -544,8 +513,5 @@ public class Pick_up_goods_Zhuce extends Fragment  {
     public void setPick_up_goods_zhuce_jieKou(Pick_up_goods_Zhuce_JieKou pick_up_goods_zhuce_jieKou) {
         this.pick_up_goods_zhuce_jieKou = pick_up_goods_zhuce_jieKou;
     }
-
-
-
 
 }

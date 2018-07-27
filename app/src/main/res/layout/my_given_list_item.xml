@@ -1,107 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/baise"
     >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x110"
-        android:layout_marginTop="@dimen/x16"
+        android:layout_height="@dimen/x250"
+        android:layout_marginTop="@dimen/x30"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginRight="@dimen/x18"
+        android:background="@drawable/zhuanzeng_list_bg"
         >
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:gravity="center_vertical"
             android:layout_marginLeft="@dimen/x16"
+            android:layout_gravity="center_vertical"
             >
-
+            <TextView
+                android:id="@+id/my_given_list_cword"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="编号："
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_999999"
+                />
             <TextView
                 android:id="@+id/my_given_list_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="世博四连体"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                />
-
-            <TextView
-                android:id="@+id/my_given_list_cword"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6589741568971"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
                 android:layout_marginTop="@dimen/x20"
+                android:lineSpacingExtra="@dimen/x4"
                 />
-
-
         </LinearLayout>
-        <TextView
-            android:id="@+id/my_given_list_num"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="20"
-            android:textSize="@dimen/x24"
-            android:textColor="@color/name_se"
-            android:layout_centerInParent="true"
-            />
+
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/x16"
             android:orientation="vertical"
             android:gravity="end|center"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             >
             <TextView
-                android:id="@+id/my_given_list_dfuid"
+                android:id="@+id/my_given_list_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="85.00"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/name_se"
-                android:layout_centerVertical="true"
-                android:layout_alignParentRight="true"
+                android:text="20"
+                android:textSize="@dimen/x28"
+                android:textColor="@color/color_666666"
+                android:layout_centerInParent="true"
                 />
+            <!--<TextView-->
+                <!--android:id="@+id/my_given_list_dfuid"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="85.00"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--/>-->
 
             <TextView
                 android:id="@+id/my_given_list_zhuanru_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="等待确认"
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 android:textColor="#FFB800"
-                android:layout_marginTop="@dimen/x15"
+                android:layout_marginTop="@dimen/x10"
                 />
+
+            <TextView
+                android:id="@+id/my_given_list_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="2018-05-17 10:23:25"
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_999999"
+                android:layout_marginTop="@dimen/x10"
+                android:gravity="end"
+                />
+
         </LinearLayout>
 
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/my_given_list_time"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="2018-05-17 10:23:25"
-        android:textSize="@dimen/x20"
-        android:textColor="@color/name_se"
-        android:layout_marginTop="@dimen/x16"
-        android:layout_marginRight="@dimen/x16"
-        android:gravity="end"
-        />
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x2"
-        android:background="@color/fengouxian1"
-        android:layout_marginLeft="@dimen/x16"
-        android:layout_marginRight="@dimen/x16"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="@dimen/x16"
-        />
-
+        android:layout_height="@dimen/x5"
+        android:background="@color/fengouxian"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginRight="@dimen/x18"/>
 
 </LinearLayout>

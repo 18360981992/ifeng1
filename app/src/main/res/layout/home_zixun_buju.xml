@@ -17,10 +17,10 @@
             android:id="@+id/home_zixun_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="子栏目\t这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。这是内容。"
-            android:textSize="@dimen/x26"
+            android:text=""
+            android:textSize="@dimen/x28"
             android:textColor="@color/name_se"
-            android:lineSpacingMultiplier="1.1"
+            android:lineSpacingExtra="@dimen/x4"
             />
     </RelativeLayout>
 
@@ -28,11 +28,11 @@
         android:id="@+id/home_zixun_time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="时间"
-        android:textSize="@dimen/x22"
+        android:text="2018-05-02"
+        android:textSize="@dimen/x26"
         android:gravity="end"
         android:layout_marginTop="@dimen/x8"
-        android:layout_marginBottom="@dimen/x16"
+        android:layout_marginBottom="@dimen/x20"
         android:layout_marginRight="@dimen/x16"
       />
 

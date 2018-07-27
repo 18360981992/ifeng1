@@ -109,15 +109,11 @@ public class Safety_Message_Activity extends BaseMVPActivity<Safety_Message_Acti
                         List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
                         list.clear();
                         list.addAll(zilist);
-
 //                        DashApplication.edit_message_anquan.putInt(SP_String.NEWS_ANQUAN_NUM,message_lists_bean.getData().getPageInfo().getTotalNum()).commit();
-
                         setMessageAdapter();
-
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }
-
                     safety_pulltoscroll.onRefreshComplete();//完成刷新,关闭刷新
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -142,8 +138,13 @@ public class Safety_Message_Activity extends BaseMVPActivity<Safety_Message_Acti
                     if(code.equals("2000")){
                         Message_Lists_Bean message_lists_bean = new Gson().fromJson(json, Message_Lists_Bean.class);
                         List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
-                        list.addAll(zilist);
-                        setMessageAdapter();
+                        if(zilist.size()>0){
+                            list.addAll(zilist);
+                            setMessageAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
+
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }

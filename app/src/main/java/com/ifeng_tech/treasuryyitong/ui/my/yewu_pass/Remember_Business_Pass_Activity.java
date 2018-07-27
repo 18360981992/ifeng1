@@ -73,6 +73,8 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
                     remember_Business_pass_duan_btn.setText("重新发送" + time + "(s)");
                     h.sendEmptyMessageDelayed(0, 1000);
                 }
+            }else{
+                submit();
             }
 
         }
@@ -104,19 +106,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         remember_Business_pass_tu_yan_img.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
-                myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
-                    @Override
-                    public void chenggong(Bitmap bitmap) {
-                        if(bitmap!=null){
-                            remember_Business_pass_tu_yan_img.setImageBitmap(bitmap);
-                        }
-                    }
-
-                    @Override
-                    public void shibai(String ss) {
-                        MyUtils.setToast("图形验证码获取失败！");
-                    }
-                });
+                getTuXing_Code();
             }
         });
 
@@ -126,7 +116,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
             @Override
             public void onClick(View v) {
 
-                String yan = remember_Business_pass_tu_yan.getText().toString().trim();
+                final String yan = remember_Business_pass_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Remember_Business_Pass_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -151,6 +141,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile",shouji);
                                 map.put("codeType","9");  // ("设置交易密码", 9)  状态写10 有异常
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -158,12 +149,20 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
                                         if(smCodeBean.getCode().equals("2000")){
                                             MyUtils.setToast("短信发送成功");
                                         }else{
+                                            time = 60;
+                                            remember_Business_pass_duan_btn.setText("点击发送");
+                                            remember_Business_pass_duan_btn.setEnabled(true);
+                                            h.removeMessages(0);
                                             MyUtils.setToast(smCodeBean.getMessage()+"");
                                         }
                                     }
 
                                     @Override
                                     public void shibai(String ss) {
+                                        time = 60;
+                                        remember_Business_pass_duan_btn.setText("点击发送");
+                                        remember_Business_pass_duan_btn.setEnabled(true);
+                                        h.removeMessages(0);
                                         MyUtils.setToast("短信发送失败");
                                     }
                                 });
@@ -202,7 +201,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(remember_Business_pass_duan.getWindowToken(), 0);
-                submit();
+                h.sendEmptyMessageDelayed(1,200);
             }
         });
     }
@@ -216,8 +215,12 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
         String tou = shouji.substring(0, 3);
         String wei = shouji.substring(8, shouji.length());
         remember_Business_pass_shoujihao.setText(tou + "*****" + wei);
+        getTuXing_Code(); // 获取图形验证码
 
 
+    }
+    // 获取图形验证码
+    private void getTuXing_Code() {
         // 获取图形验证码
         myPresenter.getPro_TuXingYanZheng(APIs.newImageCode, new MyJieKou() {
             @Override
@@ -345,6 +348,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
                             }
                         });
                     }else{
+                        getTuXing_Code(); // 获取图形验证码
                         MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
                                 remember_Business_pass_weitanchuan_img,
                                 remember_Business_pass_weitanchuan_text,
@@ -359,6 +363,7 @@ public class Remember_Business_Pass_Activity extends BaseMVPActivity<Remember_Bu
             @Override
             public void shibai(String ss) {
                 aniDialog.dismiss();
+                getTuXing_Code(); // 获取图形验证码
                 MyUtils.setObjectAnimator(remember_Business_pass_weitanchuan,
                         remember_Business_pass_weitanchuan_img,
                         remember_Business_pass_weitanchuan_text,

@@ -54,22 +54,60 @@ public class PropertyListAdapter extends BaseAdapter {
         TextView property_list_title = convertView.findViewById(R.id.property_list_title);
         TextView property_list_time = convertView.findViewById(R.id.property_list_time);
         TextView property_list_detail = convertView.findViewById(R.id.property_list_detail);
+        TextView property_list_state = convertView.findViewById(R.id.property_list_state);
 
+        String amount = DashApplication.decimalFormat.format(list.get(position).getAmount());
 
-            String amount = DashApplication.decimalFormat.format(list.get(position).getAmount());
+        if(list.get(position).getPaymentType()==1){
+            property_list_title.setText("充值");
+            property_list_detail.setText("+"+amount);
+        }else if(list.get(position).getPaymentType()==2){
+            property_list_title.setText("提现");
+            property_list_detail.setText("-"+amount);
+        }
 
-            if(list.get(position).getPaymentType()==1){
-                property_list_title.setText("充值");
-                property_list_detail.setText("+"+amount);
-            }else if(list.get(position).getPaymentType()==2){
-                property_list_title.setText("提现");
-                property_list_detail.setText("-"+amount);
-            }
+        Date date = new Date(list.get(position).getAddTime());
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        property_list_time.setText(simpleDateFormat.format(date));
 
-            Date date = new Date(list.get(position).getAddTime());
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            property_list_time.setText(simpleDateFormat.format(date));
-
+        /**
+         * AUDITING(1, "审核中"),
+         * PENDING(2, "待支付"),
+         * ONGOING(3, "支付中"),
+         * AUDIT_REBUT(4, "审核被驳回"),
+         * DONE(5, "支付完成"),
+         * FAILED(6,"支付失败");
+         */
+        switch (list.get(position).getPaymentState()){
+            case 1:
+                property_list_state.setText("提现中");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.shenhe));
+                break;
+            case 2:
+                property_list_state.setText("待充值");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.shenhe));
+                break;
+            case 3:
+                property_list_state.setText("充值中");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.shenhe));
+                break;
+            case 4:
+                property_list_state.setText("提现失败");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.shibai));
+                break;
+            case 5:
+                property_list_state.setText("充值成功");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.color_999999));
+                break;
+            case 6:
+                property_list_state.setText("充值失败");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.shibai));
+                break;
+            default:
+                property_list_state.setText("提现成功");
+                property_list_state.setTextColor(context.getResources().getColor(R.color.color_999999));
+                break;
+        }
 
         return convertView;
     }

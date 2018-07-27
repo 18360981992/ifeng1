@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x120"
+        android:layout_height="@dimen/x180"
         android:background="@drawable/zichan_jianbian"
         >
         <RelativeLayout
@@ -24,7 +24,7 @@
                 android:layout_height="@dimen/x28"
                 android:layout_alignParentBottom="true"
                 android:background="@drawable/btn_back"
-                android:layout_marginBottom="@dimen/x20"
+                android:layout_marginBottom="@dimen/x70"
                 android:layout_marginLeft="@dimen/x30"
                 />
         </RelativeLayout>
@@ -38,10 +38,10 @@
             app:tabMode="fixed"
             app:tabSelectedTextColor="@color/baise"
             app:tabTextColor="@color/fengouxian"
-            app:tabTextAppearance="@style/TabLayoutTextStyle"
+            app:tabTextAppearance="@style/TabLayoutTextStyle1"
             android:layout_toRightOf="@+id/my_Given_Fan"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="@dimen/x10"
+            android:layout_marginBottom="@dimen/x50"
             >
 
         </android.support.design.widget.TabLayout>

@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
@@ -434,8 +433,8 @@ public class Recharge_Activity extends BaseMVPActivity<Recharge_Activity, MyPres
 
                                         //沙箱环境开启沙箱功能
 
-                                        //正式环境不需要下面这行代码
-                                        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
+//                                        //正式环境不需要下面这行代码
+//                                        EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);
                                         // 构造PayTask 对象
                                         PayTask alipay = new PayTask(Recharge_Activity.this);
                                         // 调用支付接口，获取支付结果

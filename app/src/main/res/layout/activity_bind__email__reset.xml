@@ -63,7 +63,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="业务密码"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"/>
                     <EditText
@@ -71,7 +71,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x70"
                         android:hint="请输入业务密码"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x56"
                         android:layout_marginRight="@dimen/x16"
@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="邮箱地址"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x16"/>
                     <EditText
@@ -103,7 +103,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/x70"
                         android:hint="请输入邮箱地址"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         android:textColor="@color/name_se"
                         android:layout_marginLeft="@dimen/x56"
                         android:layout_marginRight="@dimen/x16"
@@ -128,7 +128,7 @@
                         android:layout_marginLeft="@dimen/x16"
                         android:text="手机号码"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x28" />
 
                     <TextView
                         android:id="@+id/bind_email_reset_shoujihao"
@@ -137,7 +137,7 @@
                         android:layout_marginLeft="@dimen/x58"
                         android:text="183*****992"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26"
+                        android:textSize="@dimen/x28"
                         />
                 </LinearLayout>
 
@@ -153,7 +153,7 @@
                         android:layout_marginLeft="@dimen/x16"
                         android:text="验证码"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x28" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                             android:maxLength="4"
                             android:singleLine="true"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
+                            android:textSize="@dimen/x28"
                             android:gravity="center_vertical"
                             />
 
@@ -215,7 +215,7 @@
                         android:layout_marginLeft="@dimen/x16"
                         android:text="短信验证码"
                         android:textColor="@color/name_se"
-                        android:textSize="@dimen/x26" />
+                        android:textSize="@dimen/x28" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -235,7 +235,7 @@
                             android:maxLength="4"
                             android:singleLine="true"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x26"
+                            android:textSize="@dimen/x28"
                             android:gravity="center_vertical"
                             />
 
@@ -254,7 +254,7 @@
                             android:gravity="center"
                             android:text="点击发送"
                             android:textColor="@color/name_se"
-                            android:textSize="@dimen/x24" />
+                            android:textSize="@dimen/x26" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -265,7 +265,7 @@
                     <Button
                         android:id="@+id/bind_email_reset_btn"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/x70"
+                        android:layout_height="@dimen/x80"
                         android:layout_alignParentBottom="true"
                         android:layout_marginBottom="@dimen/x16"
                         android:layout_marginLeft="@dimen/x16"
@@ -273,7 +273,7 @@
                         android:background="@drawable/congzhi_bg"
                         android:text="下一步"
                         android:textColor="@color/baise"
-                        android:textSize="@dimen/x28"
+                        android:textSize="@dimen/x30"
                         android:gravity="center"
                         />
                 </RelativeLayout>

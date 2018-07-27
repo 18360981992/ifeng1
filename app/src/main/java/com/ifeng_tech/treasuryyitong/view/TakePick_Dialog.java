@@ -3,6 +3,8 @@ package com.ifeng_tech.treasuryyitong.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.StyleRes;
@@ -31,6 +33,15 @@ public class TakePick_Dialog extends Dialog {
     private Button up_goods_zhuce_dialog_queren;
     private Button up_goods_zhuce_dialog_quxiao;
     Context context;
+
+    Handler h=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            takePick_dialog_JieKou.chuan(tipass);
+        }
+    };
+    private String tipass;
 
     public TakePick_Dialog(@NonNull Context context) {
         super(context);
@@ -66,7 +77,7 @@ public class TakePick_Dialog extends Dialog {
                 InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(up_goods_zhuce_pass_tishi.getWindowToken(), 0);
 
-                String tipass = up_goods_zhuce_pass.getText().toString().trim();
+                tipass = up_goods_zhuce_pass.getText().toString().trim();
                 if (TextUtils.isEmpty(tipass)) {
                     up_goods_zhuce_pass_tishi.setText("提货密码不能为空");
                     up_goods_zhuce_pass_tishi.setVisibility(View.VISIBLE);
@@ -93,8 +104,7 @@ public class TakePick_Dialog extends Dialog {
                 }
 
                 dismiss();
-                takePick_dialog_JieKou.chuan(tipass);
-
+                h.sendEmptyMessageDelayed(0,500);
             }
         });
 
@@ -102,6 +112,8 @@ public class TakePick_Dialog extends Dialog {
         up_goods_zhuce_dialog_quxiao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager imm = (InputMethodManager) context.getSystemService(INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(up_goods_zhuce_pass_tishi.getWindowToken(), 0);
                 dismiss();
             }
         });

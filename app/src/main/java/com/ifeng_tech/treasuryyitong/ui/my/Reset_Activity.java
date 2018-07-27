@@ -116,7 +116,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
         // validate
         String old = reset_old.getText().toString().trim();
         if (TextUtils.isEmpty(old)) {
-            Toast.makeText(this, "原登录密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入原登录密码", Toast.LENGTH_SHORT).show();
             return;
         }
         if (MyUtils.isPassWord(old)==false) {
@@ -127,7 +127,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
 
         news = reset_new.getText().toString().trim();
         if (TextUtils.isEmpty(news)) {
-            Toast.makeText(this, "新登录密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入新登录密码", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -138,7 +138,7 @@ public class Reset_Activity extends BaseMVPActivity<Reset_Activity, MyPresenter<
 
         String queren = reset_queren.getText().toString().trim();
         if (TextUtils.isEmpty(queren)) {
-            Toast.makeText(this, "确认新密码", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "请输入确认新密码", Toast.LENGTH_SHORT).show();
             return;
         }
 

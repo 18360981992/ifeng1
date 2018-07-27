@@ -14,7 +14,7 @@
         android:gravity="center"
         android:text="05月21日"
         android:textColor="@color/color_999999"
-        android:textSize="@dimen/x20"
+        android:textSize="@dimen/x24"
         android:layout_gravity="center_horizontal"
         />
 
@@ -42,7 +42,7 @@
             android:lineSpacingExtra="@dimen/x4"
             android:text="版本更新提醒"
             android:textColor="@color/name_se"
-            android:textSize="@dimen/x26"
+            android:textSize="@dimen/x28"
             />
         <TextView
             android:id="@+id/message_lists_item_text"
@@ -50,9 +50,9 @@
             android:layout_height="wrap_content"
             android:lineSpacingExtra="@dimen/x4"
             android:text="系统1.1.1已经更新"
-            android:textColor="@color/name_se"
-            android:textSize="@dimen/x22"
-            android:layout_marginTop="@dimen/x8"
+            android:textColor="@color/color_999999"
+            android:textSize="@dimen/x25"
+            android:layout_marginTop="@dimen/x12"
             />
 
     </LinearLayout>

@@ -20,6 +20,10 @@
     <string name="logining">Running in background. Please see log.</string>
     <string name="setting_su">Succeed to set</string>
 
+    <!--设置输入框的输入类型-->
+    <string name="filter_vcode">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <!--区块链信息-->
+    <string name="quuailian_xinxi">每个藏品都拥有唯一的电子身份证信息，通过电子\n身份证可在网页区块链权健中\n查看商品区块链信息。</string>
     <!--关于我们-->
     <string name="guanyu_my">宝库易通是针对性的解决传统收藏品行业中普遍存在的流程繁复、鉴定成本高、藏品信誉度没有保障等问题。操作效率高，数据及时，降低成本，从应用和技术本身出发，在每一个技术环节和应用场景精耕细作，充分发挥技术本身的特点，并切实可行地解决实际问题。</string>
 

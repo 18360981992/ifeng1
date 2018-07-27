@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/baise"
-    tools:context="com.ifeng_tech.treasuryyitong.ui.my.My_Collocation_Detail_Activity">
+    android:background="@color/fuise_dabg"
+    tools:context="com.ifeng_tech.treasuryyitong.ui.my.tuoguan.My_Collocation_Detail_Activity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -42,141 +42,181 @@
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/my_collocation_detail_xiangqing"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/x160"
-        android:layout_marginTop="@dimen/x16"
-        android:layout_marginBottom="@dimen/x16"
+        android:layout_height="@dimen/x210"
+        android:layout_marginTop="@dimen/x30"
+        android:layout_marginRight="@dimen/x18"
+        android:layout_marginLeft="@dimen/x18"
+        android:background="@drawable/zhuanzeng_xiangqing"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/my_collocation_detail_cword"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="编号："
+            android:textSize="@dimen/x26"
+            android:textColor="@color/color_999999"
+            android:layout_marginLeft="@dimen/x30"
+            android:gravity="center_vertical"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="@color/fengouxian"
+            android:layout_marginRight="@dimen/x85"
+            android:layout_marginLeft="@dimen/x30"
+            />
+        <TextView
+            android:id="@+id/my_collocation_detail_name"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1.5"
+            android:text="世博四连体"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/name_se"
+            android:layout_marginLeft="@dimen/x30"
+            android:paddingBottom="@dimen/x35"
+            android:layout_marginRight="@dimen/x80"
+            android:gravity="center_vertical"
+            />
+
+            <!--<TextView-->
+                <!--android:id="@+id/my_collocation_detail_danwei"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="枚"-->
+                <!--android:textSize="@dimen/x24"-->
+                <!--android:textColor="@color/name_se"-->
+                <!--android:layout_marginLeft="@dimen/x40"-->
+                <!--/>-->
+
+           <!---->
+            <!--<TextView-->
+                <!--android:id="@+id/my_collocation_detail_xiangqing"-->
+                <!--android:layout_width="@dimen/x120"-->
+                <!--android:layout_height="@dimen/x36"-->
+                <!--android:layout_marginRight="@dimen/x20"-->
+                <!--android:background="@drawable/shangpin_xiangqing_kuang"-->
+                <!--android:gravity="center"-->
+                <!--android:text="商品详情"-->
+                <!--android:textColor="@color/zhuse"-->
+                <!--android:textSize="@dimen/x20"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_marginTop="@dimen/x18"-->
+                <!--/>-->
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/baise"
+        android:layout_marginRight="@dimen/x18"
+        android:layout_marginLeft="@dimen/x18"
+        android:layout_marginTop="@dimen/x10"
         >
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_weight="4.5"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_marginBottom="@dimen/x20"
             >
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="藏品名称:"
+                    android:text="数量"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/color_666666"
+                    />
+                <TextView
+                    android:id="@+id/my_collocation_detail_shuliang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
                     android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
-                    />
-                <TextView
-                    android:id="@+id/my_collocation_detail_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="世博四连体"
-                    android:textSize="@dimen/x26"
-                    android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x32"
-                    android:lineSpacingExtra="@dimen/x2"
-                    />
-
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:layout_marginTop="@dimen/x18"
-                >
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="藏品代码:"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/color_999999"
-                    />
-                <TextView
-                    android:id="@+id/my_collocation_detail_cword"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="3258947836"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x40"
+                    android:layout_marginTop="@dimen/x8"
                     />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x20"
-                android:layout_marginTop="@dimen/x10"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
                 >
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="计件单位:"
-                    android:textSize="@dimen/x24"
-                    android:textColor="@color/color_999999"
+                    android:text="鉴定费"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/color_666666"
                     />
                 <TextView
-                    android:id="@+id/my_collocation_detail_danwei"
+                    android:id="@+id/my_collocation_detail_jiandingfei"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="枚"
-                    android:textSize="@dimen/x24"
+                    android:text=""
+                    android:textSize="@dimen/x26"
                     android:textColor="@color/name_se"
-                    android:layout_marginLeft="@dimen/x40"
+                    android:layout_marginTop="@dimen/x8"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_horizontal"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="状态"
+                    android:textSize="@dimen/x28"
+                    android:textColor="@color/color_666666"
+                    />
+                <TextView
+                    android:id="@+id/my_collocation_detail_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="@dimen/x26"
+                    android:textColor="@color/name_se"
+                    android:layout_marginTop="@dimen/x8"
                     />
 
             </LinearLayout>
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x2"
+            android:background="@color/fengouxian"
+            android:layout_marginLeft="@dimen/x20"
+            android:layout_marginRight="@dimen/x20"
+            />
+
         <RelativeLayout
-            android:layout_width="0dp"
-            android:layout_weight="1.6"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            >
-            <TextView
-                android:id="@+id/my_collocation_detail_xiangqing"
-                android:layout_width="@dimen/x120"
-                android:layout_height="@dimen/x36"
-                android:layout_marginRight="@dimen/x20"
-                android:background="@drawable/shangpin_xiangqing_kuang"
-                android:gravity="center"
-                android:text="商品详情"
-                android:textColor="@color/zhuse"
-                android:textSize="@dimen/x20"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="@dimen/x18"
-                />
-            <!--<TextView-->
-                <!--android:id="@+id/my_collocation_detail_zong_time"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="2018.05.17 / 2019.05.26"-->
-                <!--android:textSize="@dimen/x24"-->
-                <!--android:textColor="@color/color_999999"-->
-                <!--android:layout_marginRight="@dimen/x20"-->
-                <!--android:layout_marginTop="@dimen/x100"-->
-                <!--android:layout_alignParentRight="true"-->
-                <!--/>-->
-        </RelativeLayout>
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x10"
-        android:background="@color/fengouxian"
-
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/x24">
@@ -185,106 +225,110 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/x20"
-                android:text="鉴定费(元/件)"
-                android:textColor="@color/color_999999"
-                android:textSize="@dimen/x24"
+                android:text="托管单号"
+                android:textColor="@color/color_666666"
+                android:textSize="@dimen/x26"
                  />
 
             <TextView
-                android:id="@+id/my_collocation_detail_jiandingfei"
+                android:id="@+id/my_collocation_detail_danhao"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/x60"
-                android:text="5.00"
+                android:text=""
                 android:textColor="@color/name_se"
-                android:textSize="@dimen/x24" />
-        </LinearLayout>
+                android:textSize="@dimen/x26"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x20"
+                />
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x16"
+            android:layout_marginTop="@dimen/x20"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="预收仓储费天数"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/color_999999"
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_666666"
                 android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_collocation_detail_tianshu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="10"
-                android:textSize="@dimen/x24"
+                android:text=""
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x40"
+                android:layout_marginRight="@dimen/x20"
+                android:layout_alignParentRight="true"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x16"
+            android:layout_marginTop="@dimen/x20"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="状态"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/color_999999"
+                android:text="计件单位"
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_666666"
                 android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
-                android:id="@+id/my_collocation_detail_type"
+                android:id="@+id/my_collocation_detail_danwei"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="等待鉴定"
-                android:textSize="@dimen/x24"
+                android:text="枚"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x160"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x20"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x16"
+            android:layout_marginTop="@dimen/x20"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="托管时间"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/color_999999"
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_666666"
                 android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
                 android:id="@+id/my_collocation_detail_kaishi_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2018.06.25"
-                android:textSize="@dimen/x24"
+                android:text=""
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x110"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x20"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
-
-
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/x16"
+            android:layout_marginTop="@dimen/x20"
+            android:layout_marginBottom="@dimen/x40"
             >
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="鉴定地址"
-                android:textSize="@dimen/x24"
-                android:textColor="@color/color_999999"
+                android:textSize="@dimen/x26"
+                android:textColor="@color/color_666666"
                 android:layout_marginLeft="@dimen/x20"
                 />
             <TextView
@@ -292,11 +336,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
-                android:textSize="@dimen/x24"
+                android:textSize="@dimen/x26"
                 android:textColor="@color/name_se"
-                android:layout_marginLeft="@dimen/x110"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/x20"
                 />
-        </LinearLayout>
+        </RelativeLayout>
 
     </LinearLayout>
 </LinearLayout>

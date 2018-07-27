@@ -105,9 +105,9 @@ public class MonthView extends ViewGroup {
             }
 
             solarDay.setTextColor(mAttrsBean.getColorSolar());
-//            solarDay.setTextSize(mAttrsBean.getSizeSolar());
+            solarDay.setTextSize(mAttrsBean.getSizeSolar());
             lunarDay.setTextColor(mAttrsBean.getColorHoliday());
-//            lunarDay.setTextSize(mAttrsBean.getSizeLunar());
+            lunarDay.setTextSize(mAttrsBean.getSizeLunar());
             if(sevendate.size()>0){
                 //设置上个月和下个月的阳历颜色  设置日历颜色都是灰色的
 //                if (date.getType() == 0 || date.getType() == 2) {

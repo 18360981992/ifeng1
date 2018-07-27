@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ifeng_tech.treasuryyitong.R;
 import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
@@ -29,6 +30,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
     private RelativeLayout safe_geng_shouji;
     private RelativeLayout safe_yewu_pass;
     private RelativeLayout safe_bind_youxiang;
+    private TextView safe_bind_youxiang_text;
 
     @Override
     public MyPresenter<Safe_Activity> initPresenter() {
@@ -124,6 +126,16 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String email = DashApplication.sp.getString(SP_String.EMAIL, "");
+        if(email.equals("")){
+            safe_bind_youxiang_text.setText("绑定邮箱");
+        }else{
+            safe_bind_youxiang_text.setText("更改绑定邮箱");
+        }
+    }
 
     private void initView() {
         safe_Fan = (RelativeLayout) findViewById(R.id.safe_Fan);
@@ -135,6 +147,7 @@ public class Safe_Activity extends BaseMVPActivity<Safe_Activity,MyPresenter<Saf
         safe_geng_shouji = (RelativeLayout) findViewById(R.id.safe_geng_shouji);
         safe_yewu_pass = (RelativeLayout) findViewById(R.id.safe_yewu_pass);
         safe_bind_youxiang = (RelativeLayout) findViewById(R.id.safe_bind_youxiang);
+        safe_bind_youxiang_text = (TextView) findViewById(R.id.safe_bind_youxiang_text);
     }
 
     @Override

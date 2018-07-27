@@ -104,7 +104,6 @@ public class Setting_Activity extends BaseMVPActivity<Setting_Activity,MyPresent
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
                     }
 
                     @Override

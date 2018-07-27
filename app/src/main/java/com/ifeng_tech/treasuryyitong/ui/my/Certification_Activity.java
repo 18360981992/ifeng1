@@ -162,7 +162,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
             @Override
             public void onClick(View v) {
 
-                String yan = certification_tu_yan.getText().toString().trim();
+                final String yan = certification_tu_yan.getText().toString().trim();
                 if (TextUtils.isEmpty(yan)) {
                     Toast.makeText(Certification_Activity.this, "请输入验证码", Toast.LENGTH_SHORT).show();
                     return;
@@ -188,6 +188,7 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
                                 HashMap<String, String> map = new HashMap<>();
                                 map.put("mobile", shouji);
                                 map.put("codeType","0");  // ("通用", 0)
+                                map.put("verifyCode",yan);
                                 myPresenter.postPreContent(APIs.getSmsCode, map, new MyInterfaces() {
                                     @Override
                                     public void chenggong(String json) {
@@ -281,11 +282,14 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         if(requestCode==100&resultCode==RESULT_OK){
             Uri uri = data.getData();
             File fileUri = ImageUtils.getFileUri(uri, this); // 将uri转成file
-            certification_shangchuan_zheng_img.setImageURI(uri);
+            File photos = getPhotos(fileUri); // 将相册中获取到的照片重新选择路径存储
+            certification_shangchuan_zheng_img.setBackgroundResource(0);
+            Glide.with(this).load(photos).into(certification_shangchuan_zheng_img);
             getUplode(fileUri,1);  // 上传文件
         }
         if(requestCode==1000&resultCode==RESULT_OK){   // 相机
             File photos = getPhotos(data);
+            certification_shangchuan_zheng_img.setBackgroundResource(0);
             Glide.with(this).load(photos).into(certification_shangchuan_zheng_img);
             getUplode(photos,1);  // 上传文件
         }
@@ -294,11 +298,14 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         if(requestCode==200&resultCode==RESULT_OK){
             Uri uri = data.getData();
             File fileUri = ImageUtils.getFileUri(uri, this); // 将uri转成file
-            certification_shangchuan_bei_img.setImageURI(uri);
+            File photos = getPhotos(fileUri); // 将相册中获取到的照片重新选择路径存储
+            certification_shangchuan_bei_img.setBackgroundResource(0);
+            Glide.with(this).load(photos).into(certification_shangchuan_bei_img);
             getUplode(fileUri,2);  // 上传文件
         }
         if(requestCode==2000&resultCode==RESULT_OK){
             File photos = getPhotos(data);
+            certification_shangchuan_bei_img.setBackgroundResource(0);
             Glide.with(this).load(photos).into(certification_shangchuan_bei_img);
             getUplode(photos,2);  // 上传文件
         }

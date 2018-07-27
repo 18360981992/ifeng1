@@ -23,7 +23,7 @@ import com.ifeng_tech.treasuryyitong.bean.my.Collocation_Subscribe_bean;
 import com.ifeng_tech.treasuryyitong.bean.zixun.HotList_Bean;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
 import com.ifeng_tech.treasuryyitong.ui.Information_Details_Activity;
-import com.ifeng_tech.treasuryyitong.ui.my.Collocation_Subscribe_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Collocation_Subscribe_Activity;
 import com.stx.xhb.xbanner.XBanner;
 
 import java.util.List;
@@ -158,7 +158,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
 //                    HomePageActivity.homePageActivity_JieKou.chuan(0); // 点击征集
 //                }
 //            });
-        }else if(getItemViewType(position)==3){
+        }else if(getItemViewType(position)==3){// 托管
             RecyclerView home_tuoguan_recyclerView = ((HomeTuoGuan) holder).home_tuoguan_recyclerView;
             RelativeLayout home_tuoguan_RelativeLayout = ((HomeTuoGuan) holder).home_tuoguan_RelativeLayout;
 
@@ -174,7 +174,7 @@ public class HomeAdapter extends RecyclerView.Adapter{
             });
 
         }
-        else if(getItemViewType(position)==4){  // 托管
+        else if(getItemViewType(position)==4){  // 点击广告
 
             ImageView home_guanggao_img = ((HomeGuangGao) holder).home_guanggao_img;
             Integer imguri = (Integer) list.get(position);
@@ -190,7 +190,6 @@ public class HomeAdapter extends RecyclerView.Adapter{
             RelativeLayout home_zixun_relativeLayout = ((HomeZiXun) holder).home_zixun_relativeLayout;
             final List<HotList_Bean.DataBean.ListBean> informationlist = (List<HotList_Bean.DataBean.ListBean>) list.get(position);
             home_zixun_myListView.setLayoutManager(new LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false));
-
             HomeInformationAdapter homeInformationAdapter = new HomeInformationAdapter(context, informationlist);
             home_zixun_myListView.setAdapter(homeInformationAdapter);
 
@@ -199,7 +198,9 @@ public class HomeAdapter extends RecyclerView.Adapter{
                 public void ZiXunChuan(int i) {
 //                    MyUtils.setToast("点击了资讯条目=="+i);
                     Intent intent = new Intent(context, Information_Details_Activity.class);
+                    intent.putExtra("type","new");
                     intent.putExtra("id",informationlist.get(i).getId()+"");
+                    intent.putExtra("index",informationlist.get(i).getRowno()+"");
                     context.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
                 }

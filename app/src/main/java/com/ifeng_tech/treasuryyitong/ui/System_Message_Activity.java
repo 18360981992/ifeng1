@@ -159,8 +159,13 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
                     if(code.equals("2000")){
                         Message_Lists_Bean message_lists_bean = new Gson().fromJson(json, Message_Lists_Bean.class);
                         List<Message_Lists_Bean.DataBean.ListBean> zilist = message_lists_bean.getData().getList();
-                        list.addAll(zilist);
-                        setMessageAdapter();
+                        if(zilist.size()>0){
+                            list.addAll(zilist);
+                            setMessageAdapter();
+                        }else{
+                            MyUtils.setToast("没有更多数据了");
+                        }
+
                     }else{
                         MyUtils.setToast((String) jsonObject.get("message"));
                     }

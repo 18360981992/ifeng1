@@ -181,7 +181,7 @@ public class My_Colloction_Bean implements Serializable{
             private int number;
             private double appraisalFeeRate;
             private int minNumber;
-            private int guidingPrice;
+            private double guidingPrice;
             private double inhouseFee;
             private String deleteStatus;
             private Object price;
@@ -202,7 +202,7 @@ public class My_Colloction_Bean implements Serializable{
             private Object count;
             private Object articleId;
             private int commodityId;
-            private int collectionGuidePrice;
+            private double collectionGuidePrice;
             private Object fakepassrate;
             private Object warehousingFee;
             private Object unit;
@@ -300,11 +300,11 @@ public class My_Colloction_Bean implements Serializable{
                 this.minNumber = minNumber;
             }
 
-            public int getGuidingPrice() {
+            public double getGuidingPrice() {
                 return guidingPrice;
             }
 
-            public void setGuidingPrice(int guidingPrice) {
+            public void setGuidingPrice(double guidingPrice) {
                 this.guidingPrice = guidingPrice;
             }
 
@@ -468,11 +468,11 @@ public class My_Colloction_Bean implements Serializable{
                 this.commodityId = commodityId;
             }
 
-            public int getCollectionGuidePrice() {
+            public double getCollectionGuidePrice() {
                 return collectionGuidePrice;
             }
 
-            public void setCollectionGuidePrice(int collectionGuidePrice) {
+            public void setCollectionGuidePrice(double collectionGuidePrice) {
                 this.collectionGuidePrice = collectionGuidePrice;
             }
 

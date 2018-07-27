@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/baise"
+    android:background="@color/fuise_dabg"
     tools:context="com.ifeng_tech.treasuryyitong.ui.Recharge_Message_Activity">
 
     <RelativeLayout
@@ -34,7 +34,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="@dimen/x16"
-            android:text="充值提醒"
+            android:text="资金动态"
             android:textColor="@color/baise"
             android:textSize="@dimen/x32" />
 

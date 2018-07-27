@@ -67,18 +67,22 @@ public class TakeCalendar_Dialog extends Dialog {
         List<String> dates = new ArrayList<String>();
         final Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
+        int zuida_Day = MaxDayFromDay_OF_MONTH(c.get(Calendar.YEAR), c.get(Calendar.MONTH) + 1);  // 获取当前年当前月的最大天数
         int j=1;
-        for (int i = 0; i < 31; i++) {
+        for (int i = 0; i < 30; i++) {
             String mYear = String.valueOf(c.get(Calendar.YEAR));// 获取当前年份
             String mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
             if(mMonth.length()==1){
                 mMonth="0"+mMonth;
             }
             String mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH) + i);// 获取当前日份的日期号码
+
             if(mDay.length()==1){
                 mDay="0"+mDay;
             }
-            if(Integer.parseInt(mDay) > MaxDayFromDay_OF_MONTH(Integer.parseInt(mYear),(i+1))){
+//            LogUtils.i("jiba","得到当年当月的最大日期==="+ zuida_Day);
+//            LogUtils.i("jiba","获取当前日份的日期号码==="+ Integer.parseInt(mDay));
+            if(Integer.parseInt(mDay) > zuida_Day){
                 mMonth=String.valueOf(c.get(Calendar.MONTH) + 2);
                 if(mMonth.length()==1){
                     mMonth="0"+mMonth;

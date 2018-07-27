@@ -6,8 +6,9 @@ import android.os.Handler;
 import android.os.Process;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
+import com.ifeng_tech.treasuryyitong.utils.CrashHandler;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
 
@@ -40,9 +41,16 @@ public class DashApplication extends TinkerApplication {
      * 屏幕密度
      */
     public static float screenDensity;
+
     public static DecimalFormat decimalFormat; // 全局为double设置精度
 
-    public static int RETRIEVE_TO_FORGET_req=100;
+    public static int LOGINNEW_TO_SETTINGPASS_req=200;  // 登录跳到设置密码  改后的登录页面
+    public static int LOGINNEW_TO_SETTINGPASS_res=201;
+
+    public static int LOGIN_TO_RETRIEVE_req=200;  // 登录其跳到注册
+    public static int LOGIN_TO_RETRIEVE_res=201;
+
+    public static int RETRIEVE_TO_FORGET_req=100;  // 登录跳到忘记
     public static int RETRIEVE_TO_FORGET_res=101;
 
     public static int RETRIEVE_TO_CHANGE_req=100;
@@ -96,6 +104,12 @@ public class DashApplication extends TinkerApplication {
     public static  int ANQUAN_TYPE_ZHAOHUI=1;   // 找回密码/忘记密码  两个用的是相同的
     public static  int ANQUAN_TYPE_GENGGAI=2;  // 更改
 
+    public static int PT_TO_CP_req=100;  // 委托平台跳委托藏品
+    public static int PT_TO_CP_res=101;
+
+    public static int CP_TO_SQ_req=200;  // 委托藏品跳委托申请
+    public static int CP_TO_SQ_res=201;
+
     public static SharedPreferences sp;
     public static SharedPreferences.Editor edit;
 
@@ -108,7 +122,7 @@ public class DashApplication extends TinkerApplication {
         @Override
         public void log(String message) {
             //打印retrofit日志
-            Log.i("RetrofitLog","retrofitBack = "+message);
+            LogUtils.i("RetrofitLog","retrofitBack = "+message);
         }
     });
     public static SharedPreferences sp_message_xitong;
@@ -142,7 +156,7 @@ public class DashApplication extends TinkerApplication {
         mainId = Process.myTid();
 
         // 全局捕获异常
-//        CrashHandler.getInstance().init(getApplicationContext());
+        CrashHandler.getInstance().init(getApplicationContext());
 
         decimalFormat = new DecimalFormat("0.00");// 全局为double设置精度
 
@@ -169,7 +183,6 @@ public class DashApplication extends TinkerApplication {
 
         //获取安卓手机的唯一标识的方法
         android = 'A' + Settings.System.getString(getContentResolver(), Settings.System.ANDROID_ID);
-
 
         // 对log 的初始化
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);

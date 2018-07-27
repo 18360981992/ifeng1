@@ -3,6 +3,8 @@ package com.ifeng_tech.treasuryyitong.ui.my.yewu_pass;
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.RequiresApi;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,6 +49,13 @@ public class Business_Pass_Setting_Activity extends BaseMVPActivity<Business_Pas
     private String email;
     private int weitanchuan_height;
 
+    Handler h=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            submit();
+        }
+    };
     @Override
     public MyPresenter<Business_Pass_Setting_Activity> initPresenter() {
         if (myPresenter == null) {
@@ -61,13 +70,19 @@ public class Business_Pass_Setting_Activity extends BaseMVPActivity<Business_Pas
         setContentView(R.layout.activity_business__pass__setting_);
         initView();
 
+        business_Pass_Setting_Fan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         business_Pass_Setting_btn.setOnClickListener(new ForbidClickListener() {
             @Override
             public void forbidClick(View v) {
                 // 强制关闭输入框
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(business_Pass_Setting_zaici_pass.getWindowToken(), 0);
-                submit();
+                h.sendEmptyMessageDelayed(1,200);
             }
         });
     }
