@@ -77,7 +77,6 @@ public class System_Message_Activity extends BaseMVPActivity<System_Message_Acti
         map.put("messageType","0");
         getFristConect();
 
-
         system_pulltoscroll.setOnRefreshListener(new PullToRefreshBase.OnRefreshListener2<ScrollView>() {
             @Override
             public void onPullDownToRefresh(PullToRefreshBase<ScrollView> refreshView) {

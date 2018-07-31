@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ifeng_tech.treasuryyitong">
 
+    <!-- 拨打电话 -->
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -86,6 +87,9 @@
         <!-- 心跳服务 -->
         <service android:name=".service.HeartbeatService" />
 
+        <!--消息服务-->
+        <service android:name=".service.MessageService"/>
+
         <!-- 登录/注册 -->
         <activity
             android:name=".ui.login.LoginActivity"
@@ -122,9 +126,13 @@
         <activity
             android:name=".ui.my.tuoguan.Collocation_Subscribe_Activity"
             android:screenOrientation="portrait" />
+
+        <!--转赠列表  采用栈顶单例模式-->
         <activity
             android:name=".ui.my.My_Given_list_Activity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleTask"/>
+
         <activity
             android:name=".ui.Information_Details_Activity"
             android:screenOrientation="portrait" />
@@ -231,8 +239,6 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind" />
-
-
         <activity
             android:name=".ui.my.cangku.My_Warehouse_Datail_Activity"
             android:screenOrientation="portrait" />
@@ -447,15 +453,21 @@
             android:name=".ui.login.Setting_Pass_Activity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.my.weituo.Entrust_Warehousing_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.weituo.Entrust_PT_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.weituo.Entrust_CP_Activity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.my.weituo.Entrust_SQ_Activity"
-                  android:screenOrientation="portrait"
-                  android:windowSoftInputMode="adjustResize"></activity>
+        <activity
+            android:name=".ui.my.weituo.Entrust_Warehousing_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.weituo.Entrust_PT_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.weituo.Entrust_CP_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.my.weituo.Entrust_SQ_Activity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.my.bangzhu.Help_Activity" />
+        <activity android:name=".ui.my.bangzhu.Help_Dails_Activity"></activity>
     </application>
 
 </manifest>

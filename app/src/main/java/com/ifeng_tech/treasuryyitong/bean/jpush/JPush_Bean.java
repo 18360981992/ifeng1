@@ -20,6 +20,15 @@ public class JPush_Bean {
     private int safeNum;
     private int goldSum;
     private int goldType;
+    private String msg;
+
+    public String getMsg() {
+        return msg;
+    }
+
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
     public int getSafeType() {
         return safeType;

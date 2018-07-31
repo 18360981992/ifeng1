@@ -7,7 +7,6 @@ import android.os.Process;
 import android.provider.Settings;
 import android.util.DisplayMetrics;
 
-import com.ifeng_tech.treasuryyitong.utils.CrashHandler;
 import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.tencent.tinker.loader.app.TinkerApplication;
 import com.tencent.tinker.loader.shareutil.ShareConstants;
@@ -28,6 +27,12 @@ public class DashApplication extends TinkerApplication {
     private static int mainId;
     private static DashApplication instance;
 
+    /**
+     * 权限标识
+     */
+    public static int CollPhone=0; // 电话标识
+    public static int CAMERA=100; // 相机标识
+    public static int WRITE_EXTERNAL_STORAGE=200; // 储存卡标识
 
     /**
      * 屏幕宽度
@@ -156,7 +161,7 @@ public class DashApplication extends TinkerApplication {
         mainId = Process.myTid();
 
         // 全局捕获异常
-        CrashHandler.getInstance().init(getApplicationContext());
+//        CrashHandler.getInstance().init(getApplicationContext());
 
         decimalFormat = new DecimalFormat("0.00");// 全局为double设置精度
 

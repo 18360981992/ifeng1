@@ -243,7 +243,7 @@ public abstract class BaseMVPActivity<V,T extends MyPresenter<V>> extends AppCom
      */
     public void setTagAndAlias(String uid) {
 
-//        LogUtils.i("jiba","uid==="+uid);
+        LogUtils.i("jba","uid==="+uid);
         /**
          *这里设置了别名，在这里获取的用户登录的信息
          *并且此时已经获取了用户的userId,然后就可以用用户的userId来设置别名了

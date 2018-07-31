@@ -40,7 +40,6 @@
             android:background="@color/fengouxian"
             android:layout_alignParentBottom="true"
             />
-
     </RelativeLayout>
 
 </RelativeLayout>

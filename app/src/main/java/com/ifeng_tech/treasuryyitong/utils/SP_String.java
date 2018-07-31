@@ -7,6 +7,8 @@ package com.ifeng_tech.treasuryyitong.utils;
  */
 
 public class SP_String {
+
+    public static String baoku_kefu="010-59181785"; // 公司客服电话
     public static String JIAZAI="正在加载...";
 
     public static String SHOUJI="手机";

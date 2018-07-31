@@ -21,6 +21,7 @@ import com.ifeng_tech.treasuryyitong.ui.Recharge_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.Safety_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.System_Message_Activity;
 import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -71,30 +72,6 @@ public class MessageFragmet extends Fragment {
         edit = sp.edit();
 
         aBoolean = sp.getBoolean(SP_String.ISLOGIN, false);
-//        // 心跳监听回调
-//        HeartbeatService.setHearbeatJieKou(new HeartbeatService.HearbeatJieKou() {
-//            @Override
-//            public void hearbeatChuan(int type,int num) {
-//                MyUtils.setToast("有新的消息,更新ui界面。。。");
-//                switch (type){
-//                    case 1:
-//                        setNotification("系统消息");
-//                        message_xitong_shumu.setVisibility(View.VISIBLE);
-//                        message_xitong_shumu.setText(""+num);
-//                        break;
-//                    case 2:
-//                        setNotification("充值提现");
-//                        message_congzhi_shumu.setVisibility(View.VISIBLE);
-//                        message_congzhi_shumu.setText(""+num);
-//                        break;
-//                    case 3:
-//                        setNotification("安全设置");
-//                        message_anquan_shumu.setVisibility(View.VISIBLE);
-//                        message_anquan_shumu.setText(""+num);
-//                        break;
-//                }
-//            }
-//        });
 
         message_xitong.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,6 +88,7 @@ public class MessageFragmet extends Fragment {
                     JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
                     if(jPush_bean!=null){
                         jPush_bean.setSysNum(0);
+                        jPush_bean.setMsg("");
                         String json = new Gson().toJson(jPush_bean);
                         edit1.putString(SP_String.XIAOXI_SHUMU,json).commit();
                     }
@@ -175,9 +153,9 @@ public class MessageFragmet extends Fragment {
                     if(jPush_bean!=null) {
                         jPush_bean.setSafeNum(0);
                         String json = new Gson().toJson(jPush_bean);
+                        LogUtils.i("jba","message_anquan===="+json);
                         edit1.putString(SP_String.XIAOXI_SHUMU, json).commit();
                     }
-
                     Intent intent = new Intent(activity, Safety_Message_Activity.class);
                     activity.startActivity(intent);
                     activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
@@ -190,32 +168,6 @@ public class MessageFragmet extends Fragment {
         });
 
     }
-
-//    private  void setNotification(String ss) {
-//        // 发送通知,通知都将在状态栏
-//        NotificationManager notiManager = (NotificationManager) activity.getSystemService(NOTIFICATION_SERVICE); // 常量字符串
-//        // 创建通知
-//        Notification.Builder builder = new Notification.Builder(activity)
-//                .setContentTitle("您有一条新的消息！")
-//                .setContentText(ss+": 有新消息")
-//                .setSmallIcon(R.drawable.logo)
-//                .setAutoCancel(true)
-//                .setTicker("宝库易通：有一条新消息。。。")
-//                .setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);  //震动和声音
-////        Intent intent = new Intent(this, HomePageActivity.class);
-////        intent.putExtra("xiaoxi","message");
-////        long time = new Date().getTime() / 1000;  //以时间戳为请求唯一值
-////        Log.i("jiba","时间戳===="+time);
-////        PendingIntent pintIntent = PendingIntent
-////                .getActivity(this, (int) time, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-////        //参数: PendingIntent
-////        builder.setContentIntent(pintIntent);
-//        builder.setAutoCancel(true);  //单击后,状态栏的图标消失
-//        Notification notification = builder.build();
-//        // 管理器,进行让通知进行在状态栏出现
-//        notiManager.notify(1, notification);
-//    }
-
 
     private void initView(View view) {
         message_xitong_img = (ImageView) view.findViewById(R.id.message_xitong_img);

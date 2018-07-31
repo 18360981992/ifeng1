@@ -35,6 +35,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ *  委托藏品的选择
+ */
 public class Entrust_CP_Activity extends BaseMVPActivity<Entrust_CP_Activity, MyPresenter<Entrust_CP_Activity>>  {
 
     private RelativeLayout entrust_CP_Fan;

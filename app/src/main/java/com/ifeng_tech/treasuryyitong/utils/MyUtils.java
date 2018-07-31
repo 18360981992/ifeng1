@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -34,6 +35,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -511,6 +513,33 @@ public class MyUtils {
         }
         String newEmail=tou+ss+wei;
         return newEmail;
+    }
+
+
+    /**
+     * 判断服务是否开启
+     *
+     * @param mContext
+     * @param className 这里是包名+类名 xxx.xxx.xxx.TestService
+     * @return
+     */
+    public static boolean isServiceRunning(Context mContext,String className) {
+        boolean isRunning = false;
+        ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningServiceInfo> serviceList = activityManager.getRunningServices(Integer.MAX_VALUE);
+
+        if (!(serviceList.size()>0)) {
+            return isRunning;
+        }
+
+        for (int i=0; i < serviceList.size(); i++) {
+            if (serviceList.get(i).service.getClassName().equals(className) == true) {
+                isRunning = true;
+                break;
+            }
+        }
+
+        return isRunning;
     }
 
 

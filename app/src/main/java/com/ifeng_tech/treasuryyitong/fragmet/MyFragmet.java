@@ -1,9 +1,13 @@
 package com.ifeng_tech.treasuryyitong.fragmet;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +35,7 @@ import com.ifeng_tech.treasuryyitong.ui.my.Certification_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Safe_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.bangzhu.Help_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
 import com.ifeng_tech.treasuryyitong.ui.my.cangku.My_Warehouse_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.tihuo.Pick_up_goods_Activity;
@@ -38,7 +43,9 @@ import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.My_Collocation_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.zhifu_chongzhi.My_Property_Activity;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
+import com.ifeng_tech.treasuryyitong.view.ForbidClickListener;
 import com.ifeng_tech.treasuryyitong.view.MyListView;
+import com.ifeng_tech.treasuryyitong.view.TakeCollPhoneDialog;
 import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 
 import org.json.JSONException;
@@ -77,6 +84,8 @@ public class MyFragmet extends Fragment {
     private boolean aBoolean;
     private int shiming_type;   // 0==失败 1 == 认证中 2 == 已认证 3 == 未认证
     private SharedPreferences.Editor edit;
+    public RelativeLayout wode_bangzhu;
+    public RelativeLayout wode_kefu;
 
     @Nullable
     @Override
@@ -268,6 +277,30 @@ public class MyFragmet extends Fragment {
             }
         });
 
+        // 帮助中心点击
+        wode_bangzhu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intent = new Intent(activity, Help_Activity.class);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+            }
+        });
+
+        // 客服电话的点击
+        wode_kefu.setOnClickListener(new ForbidClickListener() {
+            @Override
+            public void forbidClick(View v) {
+                // 6.0权限适配
+                if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(activity,new String[]{Manifest.permission.CALL_PHONE}, DashApplication.CollPhone);
+                }else{
+                    // 使用自定义的dialog框  拨打电话
+                    setCollPhone();
+                }
+            }
+        });
+
         // 设置 点击
         wode_shezhi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -291,6 +324,19 @@ public class MyFragmet extends Fragment {
 //                wode_weirenzheng.setVisibility(View.GONE);
 //            }
 //        });
+    }
+
+    // 使用自定义的dialog框  拨打电话
+    private void setCollPhone() {
+        final TakeCollPhoneDialog takeCollPhoneDialog = new TakeCollPhoneDialog(activity, R.style.dialog_setting);
+        MyUtils.getPuTongDiaLog(activity,takeCollPhoneDialog);
+        takeCollPhoneDialog.setTakeCollPhoneDialog_JieKou(new TakeCollPhoneDialog.TakeCollPhoneDialog_JieKou() {
+            @Override
+            public void chuan() {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + SP_String.baoku_kefu));
+                activity.startActivity(intent);
+            }
+        });
     }
 
     Map<String, String> map = new HashMap<>();
@@ -383,8 +429,12 @@ public class MyFragmet extends Fragment {
         wode_hao = (TextView) view.findViewById(R.id.wode_hao);
         wode_weirenzheng = (TextView) view.findViewById(R.id.wode_weirenzheng);
         wode_MyListView = (MyListView) view.findViewById(R.id.wode_MyListView);
-        wode_anquanbaohu = view.findViewById(R.id.wode_anquanbaohu);
-        wode_shezhi = view.findViewById(R.id.wode_shezhi);
+
+        wode_anquanbaohu = (RelativeLayout)view.findViewById(R.id.wode_anquanbaohu);
+        wode_bangzhu = (RelativeLayout)view.findViewById(R.id.wode_bangzhu);
+        wode_kefu = (RelativeLayout)view.findViewById(R.id.wode_kefu);
+        wode_shezhi = (RelativeLayout)view.findViewById(R.id.wode_shezhi);
+
         wode_denglu = (LinearLayout) view.findViewById(R.id.wode_denglu);
         wode_weidenglu = (LinearLayout) view.findViewById(R.id.wode_weidenglu);
         wode_yirenzheng = (ImageView) view.findViewById(R.id.wode_yirenzheng);

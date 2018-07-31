@@ -224,7 +224,7 @@
             android:id="@+id/donation_dialog_queren"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="@dimen/x70"
+            android:layout_height="@dimen/x82"
             android:text="确认转让"
             android:textSize="@dimen/x32"
             android:textColor="@color/baise"

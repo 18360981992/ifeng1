@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
@@ -120,6 +121,7 @@ public class Entrust_SQ_Activity extends BaseMVPActivity<Entrust_SQ_Activity, My
         entrust_SQ_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Dialog(entrust_SQ_img,100,1000);
             }
         });
@@ -168,26 +170,27 @@ public class Entrust_SQ_Activity extends BaseMVPActivity<Entrust_SQ_Activity, My
             public void xiangce(ImageView img, int XIANGCE) {
                 // 6.0权限适配
                 if (ActivityCompat.checkSelfPermission(Entrust_SQ_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Entrust_SQ_Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-//                    return;
+                    ActivityCompat.requestPermissions(Entrust_SQ_Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, DashApplication.WRITE_EXTERNAL_STORAGE);
+                }else{
+                    // 启动相册
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, XIANGCE);
                 }
-                // 启动相册
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, XIANGCE);
+
             }
 
             @Override
             public void xiangji(ImageView img, int XIANGJI) {
-
                 // 6.0权限适配
                 if (ActivityCompat.checkSelfPermission(Entrust_SQ_Activity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Entrust_SQ_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    return;
+                    ActivityCompat.requestPermissions(Entrust_SQ_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, DashApplication.CAMERA);
+                }else{
+                    // 启动相机
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,XIANGJI);
                 }
-                // 启动相机
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,XIANGJI);
+
             }
         });
     }
@@ -247,6 +250,46 @@ public class Entrust_SQ_Activity extends BaseMVPActivity<Entrust_SQ_Activity, My
                 dialog.dismiss();
             }
         });
+    }
+
+    /**
+     *
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==DashApplication.WRITE_EXTERNAL_STORAGE){  // 写入权限
+            if(grantResults[0]!=-1){
+                // 启动相册
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 100);
+            }else{
+                return;
+            }
+        }
+
+        if(requestCode==DashApplication.CAMERA){  // 吊起相机权限
+            if(grantResults[0]!=-1&&grantResults[1]!=-1){
+                // 启动相机
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,1000);
+            }else{
+                return;
+            }
+        }
+
+        if(requestCode==1001){  // 读取权限
+            if(grantResults[0]!=-1){
+                // 下载文档
+                getXiaZai();
+            }else{
+                return;
+            }
+        }
     }
 
     @Override
@@ -323,8 +366,15 @@ public class Entrust_SQ_Activity extends BaseMVPActivity<Entrust_SQ_Activity, My
     private void getDownLoad() {
         if (ActivityCompat.checkSelfPermission(Entrust_SQ_Activity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(Entrust_SQ_Activity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 1001);
-            return;
+        }else{
+            // 下载文档
+            getXiaZai();
         }
+
+    }
+
+    // 下载文档
+    private void getXiaZai() {
         // 点击下载范例文档
         // 调用download方法开始下载
         final File dirPath=new File(WORD_PATH);

@@ -1,16 +1,22 @@
 package com.ifeng_tech.treasuryyitong.ui.my;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.google.gson.Gson;
 import com.ifeng_tech.treasuryyitong.R;
+import com.ifeng_tech.treasuryyitong.appliction.DashApplication;
 import com.ifeng_tech.treasuryyitong.base.BaseMVPActivity;
+import com.ifeng_tech.treasuryyitong.bean.jpush.JPush_Bean;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.My_Given_Change_into_Fragment;
 import com.ifeng_tech.treasuryyitong.fragmet.zi_fragment.My_Given_Turn_out_Fragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.view.MyTabLayout;
 
 /**
@@ -45,6 +51,18 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
                 finish();
             }
         });
+
+        String uid = DashApplication.sp.getString(SP_String.UID, "");
+        SharedPreferences sp_message = getSharedPreferences("ifeng_message_" + uid, MODE_PRIVATE);
+        SharedPreferences.Editor edit1 = sp_message.edit();
+        String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+        JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+        if(jPush_bean!=null){
+            jPush_bean.setSysNum(0);
+            jPush_bean.setMsg("");
+            String json = new Gson().toJson(jPush_bean);
+            edit1.putString(SP_String.XIAOXI_SHUMU,json).commit();
+        }
 
         //设置tablayout的横杆器的长度
         my_Given_TabLayout.post(new Runnable() {
@@ -105,6 +123,23 @@ public class My_Given_list_Activity extends BaseMVPActivity<My_Given_list_Activi
         }
     }
 
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        String uid = DashApplication.sp.getString(SP_String.UID, "");
+        SharedPreferences sp_message = getSharedPreferences("ifeng_message_" + uid, MODE_PRIVATE);
+        SharedPreferences.Editor edit1 = sp_message.edit();
+        String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+        JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
+        if(jPush_bean!=null){
+            jPush_bean.setSysNum(0);
+            jPush_bean.setMsg("");
+            String json = new Gson().toJson(jPush_bean);
+            edit1.putString(SP_String.XIAOXI_SHUMU,json).commit();
+        }
+    }
 
     private void initView() {
         my_Given_Fan = (RelativeLayout) findViewById(R.id.my_Given_Fan);

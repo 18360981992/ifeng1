@@ -118,30 +118,13 @@ public class MyReceiver extends BroadcastReceiver {
 		if (HomePageActivity.isForeground) {
 			String message = bundle.getString(JPushInterface.EXTRA_MESSAGE);
 			String extras = bundle.getString(JPushInterface.EXTRA_EXTRA);
-			Intent msgIntent = new Intent(HomePageActivity.MESSAGE_RECEIVED_ACTION);
-			msgIntent.putExtra(HomePageActivity.KEY_MESSAGE, message);
+			Intent msgIntent = new Intent(MessageService.MESSAGE_RECEIVED_ACTION);
+			msgIntent.putExtra(MessageService.KEY_MESSAGE, message);
 			if (!ExampleUtil.isEmpty(extras)) {
 				try {
 					JSONObject extraJson = new JSONObject(extras);
 					if (extraJson.length() > 0) {
-						msgIntent.putExtra(HomePageActivity.KEY_EXTRAS, extras);
-
-//						NotificationManager manager = (NotificationManager) context
-//								.getSystemService(Context.NOTIFICATION_SERVICE);
-//
-//						NotificationCompat.Builder builder = new NotificationCompat.Builder(
-//								context);
-//						builder.setContentTitle("宝库易通")
-//								.setContentText(message)
-//								.setSmallIcon(R.drawable.logo)
-//								.setTicker(message)//通知首次出现在通知栏，带上升动画效果的
-//								.setAutoCancel(true)//设置这个标志当用户单击面板就可以让通知将自动取消
-//								.setContentIntent(PendingIntent.getActivity(context, 1, msgIntent, PendingIntent.FLAG_UPDATE_CURRENT));//设置通知栏点击意图
-//
-//
-//						builder.setDefaults(Notification.DEFAULT_SOUND);
-//
-//						manager.notify(2,builder.build());
+						msgIntent.putExtra(MessageService.KEY_EXTRAS, extras);
 					}
 				} catch (JSONException e) {
 

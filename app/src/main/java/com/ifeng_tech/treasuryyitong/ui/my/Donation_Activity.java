@@ -203,6 +203,7 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                     break;
                 }
                 default:
+                    submit();  // 点击提交
                     break;
             }
         }
@@ -375,7 +376,8 @@ public class Donation_Activity extends BaseMVPActivity<Donation_Activity,MyPrese
                 // 点击 强制关闭软键盘
                 InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(donation_yewu_pass.getWindowToken(), 0);
-                submit();
+                mHandler.sendEmptyMessageDelayed(1,200);
+
             }
         });
 

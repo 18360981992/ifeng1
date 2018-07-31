@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/x90"
+        android:background="@color/baise"
+        android:layout_marginLeft="@dimen/x30"
+        android:layout_marginRight="@dimen/x30"
+        >
+        <TextView
+            android:id="@+id/help_two_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="如何注册帐号?"
+            android:textSize="@dimen/x28"
+            android:textColor="@color/color_666666"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/x30"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

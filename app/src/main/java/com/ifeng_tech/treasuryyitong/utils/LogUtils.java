@@ -10,7 +10,7 @@ import android.util.Log;
  */
 public class LogUtils {
     //是否是调试模式
-    public static final  boolean isDebug = false;
+    public static final  boolean isDebug = true;
 
 //    public static void i(String TAG,String info){
 //        if(isDebug){

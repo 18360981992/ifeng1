@@ -32,6 +32,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 委托平台的选择
+ */
 public class Entrust_PT_Activity extends BaseMVPActivity<Entrust_PT_Activity, MyPresenter<Entrust_PT_Activity>> {
 
     private RelativeLayout entrust_PT_Fan;

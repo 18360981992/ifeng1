@@ -28,7 +28,9 @@ import com.ifeng_tech.treasuryyitong.bean.login.LoginNewBean;
 import com.ifeng_tech.treasuryyitong.interfaces.MyInterfaces;
 import com.ifeng_tech.treasuryyitong.interfaces.MyJieKou;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.MessageService;
 import com.ifeng_tech.treasuryyitong.ui.HomePageActivity;
+import com.ifeng_tech.treasuryyitong.utils.LogUtils;
 import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SoftHideKeyBoardUtil;
@@ -101,6 +103,13 @@ public class Login_New_Activity extends BaseMVPActivity<Login_New_Activity, MyPr
             String uid = DashApplication.sp.getString(SP_String.UID, "");
             setTagAndAlias(uid+"");  // 注册极光的别名
 
+            // 开启服务 接收消息通知 并更改UI
+            boolean serviceRunning = MyUtils.isServiceRunning(Login_New_Activity.this, "com.ifeng_tech.treasuryyitong.service.MessageService");
+            LogUtils.i("jba","serviceRunning===="+serviceRunning);
+            if(serviceRunning==false){
+                Intent intent1 = new Intent(Login_New_Activity.this, MessageService.class);
+                startService(intent1);
+            }
             Intent intent = new Intent(Login_New_Activity.this, HomePageActivity.class);
             startActivity(intent);
             finish();

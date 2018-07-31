@@ -9,14 +9,14 @@ public class APIs {
 //    public static String debugApi="http://192.168.1.130/";   // 宝库易通  本地
 //    public static String debugApi1="http://192.168.1.130:4200/";
 
-//    public static String debugApi="http://192.168.1.134/";   // 宝库易通  测试
-//    public static String debugApi1="http://192.168.1.134:4200/";
+    public static String debugApi="http://192.168.1.134/";   // 宝库易通  测试
+    public static String debugApi1="http://192.168.1.134:4200/";
 
 //    public static String debugApi="http://www.baokuyt.com:8020/";   // 宝库易通  线上测试  175.25.17.52
 //    public static String debugApi1="http://www.baokuyt.com:8020/";  //  192.168.1.192:8020
 
-    public static String debugApi="http://www.baokuyt.com/";   // 宝库易通  线上正式
-    public static String debugApi1="http://www.baokuyt.com/";  // www.baokuyt.com
+//    public static String debugApi="http://www.baokuyt.com/";   // 宝库易通  线上正式
+//    public static String debugApi1="http://www.baokuyt.com/";  // www.baokuyt.com
 
     // 登陆
     public static String login="login/do";
@@ -141,6 +141,21 @@ public class APIs {
     // 实名认证  user/manage/applyIdentify 2862559976
     public static String applyIdentify="user/manage/applyIdentify";
 
+    // 帮助中心  资讯—根据板块id查询主栏目/cms/getColumns
+    public static String getColumns=APIs.debugApi+"cms/getColumns?moduleId=2";
+
+    // 帮助中心的 二级列表
+    public static String getArticleListByMainColumnId(int id){
+        String ss=APIs.debugApi+"cms/getArticleListByMainColumnId?mainColumnId="+id;
+        return ss;
+    }
+
+    // 帮助详情  http://www.baokuyt.com:8020/#/app/infodetail?id=254&index=3&mainId=147&typeAll=all
+    public static String infodetail(int erjid,int index,int mainId){
+        String ss=APIs.debugApi+"#/app/infodetail?id="+erjid+"&index="+index+"&mainId="+mainId+"&typeAll=all";
+        return ss;
+    }
+
 
     // 资讯  根据主栏目ID查询二级栏目列表  cms/getSubColumnList  id=147   get请求
     public static String getSubColumnList=APIs.debugApi+"cms/getSubColumnList?mainColumnId=147";
@@ -255,4 +270,7 @@ public class APIs {
 
     // 根据平台code查询藏品信息/   user/depots/getClientGoodsByClientCode
     public static String getClientGoodsByClientCode="user/depots/getClientGoodsByClientCode";
+
+
+
 }

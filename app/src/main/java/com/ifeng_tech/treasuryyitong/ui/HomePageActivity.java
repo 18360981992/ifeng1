@@ -1,20 +1,23 @@
 package com.ifeng_tech.treasuryyitong.ui;
 
 import android.Manifest;
-import android.content.BroadcastReceiver;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.content.LocalBroadcastManager;
+import android.support.v4.app.NotificationCompat;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -39,8 +42,10 @@ import com.ifeng_tech.treasuryyitong.fragmet.MessageFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.MyFragmet;
 import com.ifeng_tech.treasuryyitong.fragmet.WarehouseFragment;
 import com.ifeng_tech.treasuryyitong.presenter.MyPresenter;
+import com.ifeng_tech.treasuryyitong.service.MessageService;
 import com.ifeng_tech.treasuryyitong.ui.login.Login_New_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Donation_Activity;
+import com.ifeng_tech.treasuryyitong.ui.my.My_Given_list_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.Setting_Activity;
 import com.ifeng_tech.treasuryyitong.ui.my.bind_email.Bind_Email_Activity1;
 import com.ifeng_tech.treasuryyitong.ui.my.tuoguan.Collocation_Subscribe_Activity;
@@ -49,6 +54,7 @@ import com.ifeng_tech.treasuryyitong.utils.MyUtils;
 import com.ifeng_tech.treasuryyitong.utils.SP_String;
 import com.ifeng_tech.treasuryyitong.utils.SignUtils;
 import com.ifeng_tech.treasuryyitong.utils.SoundCtrol;
+import com.ifeng_tech.treasuryyitong.view.TakeCollPhoneDialog;
 import com.ifeng_tech.treasuryyitong.view.TakeCommonDialog;
 import com.jwsd.libzxing.OnQRCodeListener;
 import com.jwsd.libzxing.QRCodeManager;
@@ -82,7 +88,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     long exitTim=0;
     private boolean aBoolean;
-    private TextView xiaoxi_shumu;
+    public static TextView xiaoxi_shumu;
 
     public static boolean isForeground = false;
     private SharedPreferences sp_message;
@@ -127,7 +133,8 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         setContentView(R.layout.activity_home_page);
 
         initView();
-        registerMessageReceiver();  // 动态注册广播
+
+//        registerMessageReceiver();  // 动态注册广播
 
         setBeiJing(true,false,false,false,false,false);
 
@@ -165,6 +172,7 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
             sp_message = getSharedPreferences("ifeng_message_" + uid, MODE_PRIVATE);
             edit = sp_message.edit();
             String extras = sp_message.getString(SP_String.XIAOXI_SHUMU, "");
+            LogUtils.i("jba","homepage===="+extras);
             setExtras(extras);  // 解析推送过来的消息，并进行ui更新
         }
 
@@ -301,76 +309,11 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
                             String yewu_pass = DashApplication.sp.getString(SP_String.ISUSERYEWUPASS, "");
                             if(yewu_pass.equals("0")){
                                 if (ActivityCompat.checkSelfPermission(HomePageActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                                    ActivityCompat.requestPermissions(HomePageActivity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                                    return;
+                                    ActivityCompat.requestPermissions(HomePageActivity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, DashApplication.CAMERA);
+                                }else{
+                                    // 吊起二维码扫一扫
+                                    setShaoYiShao();
                                 }
-                                QRCodeManager.getInstance()
-                                        .with(HomePageActivity.this)
-                                        .setReqeustType(DashApplication.ERWIMA_SAOMIAO_req)
-                                        //                .setRequestCode(1001)
-                                        .scanningQRCode(new OnQRCodeListener() {
-                                            @Override
-                                            public void onCompleted(String des) {
-                                                LogUtils.i("jiba","home==="+des);
-                                                String result = null;
-                                                try {
-                                                    result = SignUtils.decode(des);
-                                                    if(result.contains(SP_String.QR_ZHUANZENG)){
-                                                        if(result.length()>20){
-                                                            String path = result.substring(0, result.indexOf("?"));
-                                                            LogUtils.i("jiba","path===="+path);
-                                                            String referralCode = result.substring(result.indexOf("=")+1, result.length());
-
-//                            LogUtils.i("jiba","referralCode===="+referralCode);
-                                                            QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
-
-                                                            if(path.equals(SP_String.QR_ZHUANZENG)){
-                                                                Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
-                                                                intent.putExtra("QR_Bean", referralCode);
-                                                                if(qr_bean.getGoodsInfo()==null||qr_bean.getGoodsInfo().getGoodsNum().equals(""))
-                                                                    intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
-
-                                                                else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
-
-                                                                startActivity(intent);
-                                                                overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
-                                                            }
-                                                        }else{
-                                                            MyUtils.setToast(des);
-                                                        }
-                                                    }else{
-                                                        MyUtils.setToast(des);
-                                                    }
-                                                } catch (Exception e) {
-                                                    e.printStackTrace();
-                                                    MyUtils.setToast(des);
-                                                }
-                                            }
-
-                                            @Override
-                                            public void onError(Throwable errorMsg) {
-                                                MyUtils.setToast("解析二维码失败");
-                                            }
-
-                                            @Override
-                                            public void onCancel() {
-                                                MyUtils.setToast("扫描任务取消了");
-                                            }
-
-                                            /**
-                                             * 当点击手动添加时回调
-                                             *
-                                             * @param requestCode
-                                             * @param resultCode
-                                             * @param data
-                                             */
-                                            @Override
-                                            public void onManual(int requestCode, int resultCode, Intent data) {
-                                                LogUtils.i("jiba","点击了手动添加了");
-                                            }
-
-
-                                        });
                             }else{
                                 // 使用自定义的dialog框
                                 final TakeCommonDialog takeCommonDialog = new TakeCommonDialog(HomePageActivity.this, R.style.dialog_setting,"请先设置业务密码！");
@@ -462,6 +405,77 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
 
     }
 
+    // 吊起二维码扫一扫
+    private void setShaoYiShao() {
+        QRCodeManager.getInstance()
+                .with(HomePageActivity.this)
+                .setReqeustType(DashApplication.ERWIMA_SAOMIAO_req)
+                //                .setRequestCode(1001)
+                .scanningQRCode(new OnQRCodeListener() {
+                    @Override
+                    public void onCompleted(String des) {
+                        LogUtils.i("jiba","home==="+des);
+                        String result = null;
+                        try {
+                            result = SignUtils.decode(des);
+                            if(result.contains(SP_String.QR_ZHUANZENG)){
+                                if(result.length()>20){
+                                    String path = result.substring(0, result.indexOf("?"));
+                                    LogUtils.i("jiba","path===="+path);
+                                    String referralCode = result.substring(result.indexOf("=")+1, result.length());
+
+//                            LogUtils.i("jiba","referralCode===="+referralCode);
+                                    QR_Bean qr_bean = new Gson().fromJson(referralCode, QR_Bean.class);
+
+                                    if(path.equals(SP_String.QR_ZHUANZENG)){
+                                        Intent intent = new Intent(HomePageActivity.this, Donation_Activity.class);
+                                        intent.putExtra("QR_Bean", referralCode);
+                                        if(qr_bean.getGoodsInfo()==null||qr_bean.getGoodsInfo().getGoodsNum().equals(""))
+                                            intent.putExtra("type","1");  // 表示从扫描二维码跳入转赠  1 == 输入框可输入
+
+                                        else  intent.putExtra("type","2");  // 表示从扫描二维码跳入转赠  2 == 输入框不可输入
+
+                                        startActivity(intent);
+                                        overridePendingTransition(R.anim.slide_in_kuai, R.anim.slide_out_kuai);
+                                    }
+                                }else{
+                                    MyUtils.setToast(des);
+                                }
+                            }else{
+                                MyUtils.setToast(des);
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                            MyUtils.setToast(des);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable errorMsg) {
+                        MyUtils.setToast("解析二维码失败");
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        MyUtils.setToast("扫描任务取消了");
+                    }
+
+                    /**
+                     * 当点击手动添加时回调
+                     *
+                     * @param requestCode
+                     * @param resultCode
+                     * @param data
+                     */
+                    @Override
+                    public void onManual(int requestCode, int resultCode, Intent data) {
+                        LogUtils.i("jiba","点击了手动添加了");
+                    }
+
+
+                });
+    }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -470,6 +484,39 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
         QRCodeManager.getInstance().with(this).onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==DashApplication.CollPhone){  // 打电话权限
+            if (grantResults[0]!=-1){  // 设置成功
+                // 使用自定义的dialog框  拨打电话
+                setCollPhone();
+            }else {
+                return;
+            }
+        }
+
+        if(requestCode==DashApplication.CAMERA){  // 吊起相机权限
+            if(grantResults[0]!=-1&&grantResults[1]!=-1){
+                setShaoYiShao();
+            }else{
+                return;
+            }
+        }
+    }
+
+    // 使用自定义的dialog框  拨打电话  这个方法是为了回调个人中心的客服电话
+    private void setCollPhone() {
+        final TakeCollPhoneDialog takeCollPhoneDialog = new TakeCollPhoneDialog(this, R.style.dialog_setting);
+        MyUtils.getPuTongDiaLog(this,takeCollPhoneDialog);
+        takeCollPhoneDialog.setTakeCollPhoneDialog_JieKou(new TakeCollPhoneDialog.TakeCollPhoneDialog_JieKou() {
+            @Override
+            public void chuan() {
+                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + SP_String.baoku_kefu));
+                startActivity(intent);
+            }
+        });
+    }
     @Override
     protected void onPause() {
 //        isForeground = false;
@@ -480,76 +527,106 @@ public class HomePageActivity extends BaseMVPActivity<HomePageActivity,MyPresent
     protected void onDestroy() {
 //        LocalBroadcastManager.getInstance(this).unregisterReceiver(mMessageReceiver);
         super.onDestroy();
+        i=0;
     }
 
 
-    //for receive customer msg from jpush server
-    private MessageReceiver mMessageReceiver;
-    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
-    public static final String KEY_TITLE = "title";
-    public static final String KEY_MESSAGE = "message";
-    public static final String KEY_EXTRAS = "extras";
+//    //for receive customer msg from jpush server
+//    private MessageReceiver mMessageReceiver;
+//    public static final String MESSAGE_RECEIVED_ACTION = "com.example.jpushdemo.MESSAGE_RECEIVED_ACTION";
+//    public static final String KEY_TITLE = "title";
+//    public static final String KEY_MESSAGE = "message";
+//    public static final String KEY_EXTRAS = "extras";
+//
+//    public void registerMessageReceiver() {
+//        mMessageReceiver = new MessageReceiver();
+//        IntentFilter filter = new IntentFilter();
+//        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
+//        filter.addAction(MESSAGE_RECEIVED_ACTION);
+//        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
+//    }
+//
+//    public class MessageReceiver extends BroadcastReceiver {
+//
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            try {
+//                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
+//                    String messge = intent.getStringExtra(KEY_MESSAGE);
+//                    String extras = intent.getStringExtra(KEY_EXTRAS);
+//                    StringBuilder showMsg = new StringBuilder();
+//                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
+//                    if (extras!=null) {
+//                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
+//                    }
+//                    LogUtils.i("jba","===="+showMsg.toString());
+//
+//                    edit.putString(SP_String.XIAOXI_SHUMU,extras).commit();
+//                    MediaPlayer mediaPlayer = new MediaPlayer();//这个我定义了一个成员函数
+//
+//                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//                    SoundCtrol.playSound(HomePageActivity.this,mediaPlayer);
+//                    setExtras(extras);  // 解析推送过来的消息，并进行ui更新
+//                }
+//            } catch (Exception e){
+//            }
+//        }
+//    }
 
-    public void registerMessageReceiver() {
-        mMessageReceiver = new MessageReceiver();
-        IntentFilter filter = new IntentFilter();
-        filter.setPriority(IntentFilter.SYSTEM_HIGH_PRIORITY);
-        filter.addAction(MESSAGE_RECEIVED_ACTION);
-        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver, filter);
-    }
-
-    public class MessageReceiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            try {
-                if (MESSAGE_RECEIVED_ACTION.equals(intent.getAction())) {
-                    String messge = intent.getStringExtra(KEY_MESSAGE);
-                    String extras = intent.getStringExtra(KEY_EXTRAS);
-                    StringBuilder showMsg = new StringBuilder();
-                    showMsg.append(KEY_MESSAGE + " : " + messge + "\n");
-                    if (extras!=null) {
-                        showMsg.append(KEY_EXTRAS + " : " + extras + "\n");
-                    }
-                    LogUtils.i("jba","===="+showMsg.toString());
-
-                    edit.putString(SP_String.XIAOXI_SHUMU,extras).commit();
-                    MediaPlayer mediaPlayer = new MediaPlayer();//这个我定义了一个成员函数
-
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    SoundCtrol.playSound(HomePageActivity.this,mediaPlayer);
-                    setExtras(extras);  // 解析推送过来的消息，并进行ui更新
-                }
-            } catch (Exception e){
-            }
-        }
-    }
-
+    int i=0;
     private void setExtras(String extras) {
         if(!extras.equals("")&&extras!=null){
             JPush_Bean jPush_bean = new Gson().fromJson(extras, JPush_Bean.class);
             int jNum=jPush_bean.getSafeNum()+jPush_bean.getGoldSum()+jPush_bean.getSysNum();
-
-            LogUtils.i("jba","jNum===="+jNum);
+            LogUtils.i("jba","homepage===jNum===="+jNum);
             if(jNum>0){
                 xiaoxi_shumu.setText(""+jNum);
                 xiaoxi_shumu.setVisibility(View.VISIBLE);
                 if(jPush_bean.getSysNum()>0){
                     MessageFragmet.message_xitong_shumu.setText(jPush_bean.getSysNum()+"");
                     MessageFragmet.message_xitong_shumu.setVisibility(View.VISIBLE);
+                }else{
+                    MessageFragmet.message_xitong_shumu.setVisibility(View.GONE);
                 }
 
                 if(jPush_bean.getGoldSum()>0){
                     MessageFragmet.message_congzhi_shumu.setText(jPush_bean.getGoldSum()+"");
                     MessageFragmet.message_congzhi_shumu.setVisibility(View.VISIBLE);
+                }else{
+                    MessageFragmet.message_congzhi_shumu.setVisibility(View.GONE);
                 }
 
                 if(jPush_bean.getSafeNum()>0){
                     MessageFragmet.message_anquan_shumu.setText(jPush_bean.getSafeNum()+"");
                     MessageFragmet.message_anquan_shumu.setVisibility(View.VISIBLE);
+                }else{
+                    MessageFragmet.message_anquan_shumu.setVisibility(View.GONE);
+                }
+                if(!jPush_bean.getMsg().equals("")&&jPush_bean.getSysNum()>0){
+                    NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                    PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, My_Given_list_Activity.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(HomePageActivity.this);
+                    builder.setContentTitle("宝库易通")
+                            .setContentText(jPush_bean.getMsg())
+                            .setSmallIcon(R.drawable.logo)
+                            .setTicker("您有一条新的消息，请注意查收!")//通知首次出现在通知栏，带上升动画效果的
+                            .setAutoCancel(true)//设置这个标志当用户单击面板就可以让通知将自动取消
+                            .setContentIntent(pendingIntent);//设置通知栏点击意图
+                    builder.setDefaults(Notification.DEFAULT_SOUND| Notification.DEFAULT_VIBRATE);
+                    if(!MessageService.list.contains(MessageService.i)){
+                        manager.notify(MessageService.i,builder.build());
+                    }
+                }else{
+                    MediaPlayer mediaPlayer = new MediaPlayer();//这个我定义了一个成员函数
+
+                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                    SoundCtrol.playSound(HomePageActivity.this,mediaPlayer);
                 }
             }else{
                 xiaoxi_shumu.setVisibility(View.GONE);
+                MessageFragmet.message_xitong_shumu.setVisibility(View.GONE);
+                MessageFragmet.message_congzhi_shumu.setVisibility(View.GONE);
+                MessageFragmet.message_anquan_shumu.setVisibility(View.GONE);
             }
         }
 

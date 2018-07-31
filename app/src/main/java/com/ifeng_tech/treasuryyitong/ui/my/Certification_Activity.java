@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.view.View;
@@ -94,6 +95,8 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
     private String shouji;
     String frontUrl="";
     String backUrl="";
+    public int xiangce_biaoshi;
+    public int xiangji_biaoshi;
 
     @Override
     public MyPresenter<Certification_Activity> initPresenter() {
@@ -245,30 +248,59 @@ public class Certification_Activity extends BaseMVPActivity<Certification_Activi
         setBuyerJieKou(new BuyerJieKou() {
             @Override
             public void xiangce(ImageView img, int XIANGCE) {
+                xiangce_biaoshi = XIANGCE;
                 // 6.0权限适配
                 if (ActivityCompat.checkSelfPermission(Certification_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-                    return;
+                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, DashApplication.WRITE_EXTERNAL_STORAGE);
+                }else{
+                    // 启动相册
+                    Intent intent = new Intent(Intent.ACTION_PICK);
+                    intent.setType("image/*");
+                    startActivityForResult(intent, XIANGCE);
                 }
-                // 启动相册
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, XIANGCE);
+
             }
 
             @Override
             public void xiangji(ImageView img, int XIANGJI) {
 
+                xiangji_biaoshi = XIANGJI;
                 // 6.0权限适配
                 if (ActivityCompat.checkSelfPermission(Certification_Activity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-                    return;
+                    ActivityCompat.requestPermissions(Certification_Activity.this,new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE}, DashApplication.CAMERA);
+                }else{
+                    // 启动相机
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent,XIANGJI);
                 }
-                // 启动相机
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(intent,XIANGJI);
+
             }
         });
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode==DashApplication.WRITE_EXTERNAL_STORAGE){
+            if(grantResults[0]!=-1){
+                // 启动相册
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, xiangce_biaoshi);
+            }else{
+                return;
+            }
+        }
+
+        if(requestCode==DashApplication.CAMERA){  // 吊起相机权限
+            if(grantResults[0]!=-1&&grantResults[1]!=-1){
+                // 启动相机
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,xiangji_biaoshi);
+            }else{
+                return;
+            }
+        }
     }
 
     @Override
